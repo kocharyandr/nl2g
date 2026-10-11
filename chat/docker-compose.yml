@@ -1,0 +1,10 @@
+services:
+  chat:
+    build: .
+    container_name: chart-agent-chat
+    ports:
+      - "7861:7861"
+    env_file:
+      - .env
+    volumes:
+      - ./:/app
