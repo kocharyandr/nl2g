@@ -1,0 +1,16 @@
+services:
+  sql-agent:
+    build: .
+    container_name: sql_agent
+    env_file: .env
+    ports:
+      - "8500:8500"
+    volumes:
+      # Read-only mounts: the service must never be able to modify the source
+      # data, and the profile cache is generated ahead of time.
+      - ${DB_HOST_DIR:-./data}:/data:ro
+      - ${PROFILES_HOST_DIR:-./profiles}:/profiles:ro
+    extra_hosts:
+      # Role endpoints run on the host (MLX on Apple Silicon).
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
