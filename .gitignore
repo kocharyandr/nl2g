@@ -1,0 +1,27 @@
+# окружения и кэши
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+# секреты и локальная конфигурация (шаблоны — в *.example / *_template)
+.env
+langfuse/.env
+# состояние и логи
+dump.rdb
+*.log
+logs/
+**/logs/
+# веса и кэши моделей (LoRA FLUX в diffusion_service/lora остаётся)
+models/
+*.gguf
+artifacts/
+# тяжёлые артефакты прогонов: картинки и отчёты больше 5 МБ
+sql_agent/PAUQ_ГРАФИКИ_ПРОГОН/*.png
+sql_agent/МТС_ПРАВКИ/*.png
+sql_agent/ДЕМО_ЧАТЫ/*.png
+sql_agent/*_один_файл.html
+sql_agent/PAUQ_ГРАФИКИ_ПРОГОН.html
+sql_agent/ГРАФИКИ_PAUQ_ОТЧЁТ_один_файл.html
+sql_agent/МТС_ПРАВКИ.html
+sql_agent/МТС_ПРАВКИ/ПРОГРЕСС.html
