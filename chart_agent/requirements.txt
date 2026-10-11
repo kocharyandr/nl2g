@@ -1,0 +1,16 @@
+fastapi==0.116.1
+uvicorn[standard]==0.35.0
+python-multipart==0.0.20
+pydantic==2.11.7
+pydantic-settings==2.10.1
+langgraph==0.6.5
+langchain==0.3.27
+langchain-openai==0.3.32
+httpx==0.28.1
+pandas==2.3.2
+matplotlib==3.10.5
+pillow==11.3.0
+requests==2.32.5
+redis==5.2.1
+openai==1.101.0
+langfuse>=4.0.0,<5.0.0

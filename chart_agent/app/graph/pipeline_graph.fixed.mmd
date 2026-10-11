@@ -1,0 +1,51 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	pending_stage(pending_stage)
+	approve(approve)
+	plot_approval(plot_approval)
+	interaction(interaction)
+	image_input_selector(image_input_selector)
+	image_prompt_enhancer(image_prompt_enhancer)
+	image_diffusion(image_diffusion)
+	image_generation_validation(image_generation_validation)
+	data_extractor(data_extractor)
+	text_data_extractor(text_data_extractor)
+	plot_creator(plot_creator)
+	task_router(task_router)
+	error(error)
+	summarizing(summarizing)
+	end_stage(end_stage)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> pending_stage;
+	approve -.-> plot_approval;
+	data_extractor -.-> text_data_extractor;
+	end_stage --> summarizing;
+	error --> end_stage;
+	image_diffusion --> image_generation_validation;
+	image_generation_validation -.-> end_stage;
+	image_generation_validation -. &nbsp;retry&nbsp; .-> image_prompt_enhancer;
+	image_input_selector -.-> error;
+	image_input_selector -.-> image_prompt_enhancer;
+	image_prompt_enhancer --> image_diffusion;
+	pending_stage -.-> approve;
+	pending_stage -. &nbsp;to_ingress&nbsp; .-> interaction;
+	pending_stage -.-> task_router;
+	plot_approval --> end_stage;
+	task_router -. &nbsp;data_parsing&nbsp; .-> data_extractor;
+	task_router -.-> error;
+	task_router -. &nbsp;image_generation&nbsp; .-> image_input_selector;
+	text_data_extractor -.-> interaction;
+	text_data_extractor -.-> error;
+	text_data_extractor -.-> plot_creator;
+	interaction -.-> end_stage;
+	interaction -.-> task_router;
+	plot_creator --> __end__;
+	summarizing --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc

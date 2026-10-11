@@ -1,0 +1,67 @@
+services:
+  code-executor:
+    build:
+      context: ./code_executor
+      dockerfile: Dockerfile
+    container_name: chart-code-executor
+    ports:
+      - "8080:8080"
+    read_only: true
+    tmpfs:
+      - /tmp
+    networks:
+      - internal
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M
+    restart: unless-stopped
+
+  chart-agent-api:
+    build: .
+    container_name: chart-agent-api
+    ports:
+      - "8000:8000"
+      - "9911:8000"
+    env_file:
+      - .env
+    environment:
+      - CODE_EXECUTOR_URL=http://code-executor:8080
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      redis:
+        condition: service_healthy
+      code-executor:
+        condition: service_started
+    networks:
+      - internal
+      - default
+    volumes:
+      - ./app:/app/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: chart-agent-redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+networks:
+  internal:
+    driver: bridge
+    internal: true
+
+volumes:
+  redis_data:
