@@ -1,0 +1,3557 @@
+[
+  {
+    "db_id": "GeoNuclearData",
+    "question": "Which country has the most capacities of nuclear power plants?",
+    "gold_sql": "SELECT Country FROM nuclear_power_plants GROUP BY Country ORDER BY sum(Capacity) DESC LIMIT 1",
+    "status": "ok",
+    "pred_sql": "SELECT country FROM nuclear_power_plants GROUP BY country ORDER BY sum(capacity) DESC LIMIT 1",
+    "explanation": "Запрос возвращает страну с самой большой суммарной мощностью ядерных электростанций.",
+    "columns": [
+      "Country"
+    ],
+    "column_types": [
+      "string"
+    ],
+    "pred_rows": [
+      [
+        "United States"
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "nuclear_power_plants"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 15.7,
+    "gold_rows": [
+      [
+        "United States"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "GeoNuclearData",
+    "question": "Which country has the least capacities of nuclear power plants?",
+    "gold_sql": "SELECT Country FROM nuclear_power_plants GROUP BY Country ORDER BY sum(Capacity) LIMIT 1",
+    "status": "ok",
+    "pred_sql": "SELECT country FROM nuclear_power_plants GROUP BY country ORDER BY sum(capacity) ASC LIMIT 1",
+    "explanation": "Запрос возвращает страну с наименьшей суммарной емкостью ядерных электростанций.",
+    "columns": [
+      "Country"
+    ],
+    "column_types": [
+      "string"
+    ],
+    "pred_rows": [
+      [
+        "Egypt"
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "nuclear_power_plants"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 15.8,
+    "gold_rows": [
+      [
+        "Egypt"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "GeoNuclearData",
+    "question": "What are the top 3 countries which have the most nuclear power plants?",
+    "gold_sql": "SELECT Country FROM nuclear_power_plants GROUP BY Country ORDER BY sum(Name) DESC LIMIT 3",
+    "status": "ok",
+    "pred_sql": "SELECT country FROM nuclear_power_plants GROUP BY country ORDER BY count(*) DESC LIMIT 3",
+    "explanation": "Три страны с наибольшим количеством ядерных электростанций.",
+    "columns": [
+      "Country"
+    ],
+    "column_types": [
+      "string"
+    ],
+    "pred_rows": [
+      [
+        "United States"
+      ],
+      [
+        "People's Republic of China"
+      ],
+      [
+        "France"
+      ]
+    ],
+    "pred_row_count": 3,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "nuclear_power_plants"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 15.5,
+    "gold_rows": [
+      [
+        "United States"
+      ],
+      [
+        "United Kingdom of Great Britain and Northern Ireland"
+      ],
+      [
+        "United Arab Emirates"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": false
+  },
+  {
+    "db_id": "GeoNuclearData",
+    "question": "Which country has the most nuclear station?",
+    "gold_sql": "SELECT Country FROM nuclear_power_plants GROUP BY Country ORDER BY count(Name) DESC LIMIT 1",
+    "status": "ok",
+    "pred_sql": "SELECT country FROM nuclear_power_plants GROUP BY country ORDER BY count(*) DESC LIMIT 1",
+    "explanation": "Запрос возвращает страну с наибольшим количеством ядерных станций.",
+    "columns": [
+      "Country"
+    ],
+    "column_types": [
+      "string"
+    ],
+    "pred_rows": [
+      [
+        "United States"
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "nuclear_power_plants"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 15.3,
+    "gold_rows": [
+      [
+        "United States"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "GeoNuclearData",
+    "question": "Which county has the most nuclear station shut down?",
+    "gold_sql": "SELECT Country FROM nuclear_power_plants WHERE Status = \"Shutdown\" GROUP BY Country ORDER BY count(Name) DESC LIMIT 1",
+    "status": "ok",
+    "pred_sql": "SELECT country FROM nuclear_power_plants WHERE status  =  'Shutdown' GROUP BY country ORDER BY count(*) DESC LIMIT 1",
+    "explanation": "Запрос возвращает страну с наибольшим количеством закрытых ядерных станций.",
+    "columns": [
+      "Country"
+    ],
+    "column_types": [
+      "string"
+    ],
+    "pred_rows": [
+      [
+        "United States"
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "nuclear_power_plants"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 16.1,
+    "gold_rows": [
+      [
+        "United States"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "GreaterManchesterCrime",
+    "question": "What time do most of the crimes happen?",
+    "gold_sql": "SELECT CrimeTS FROM GreaterManchesterCrime GROUP BY CrimeTS ORDER BY count(*) DESC LIMIT 1",
+    "status": "ok",
+    "pred_sql": "SELECT strftime('%H', CrimeTS) AS CrimeHour ,  COUNT(*) FROM GreaterManchesterCrime GROUP BY CrimeHour ORDER BY COUNT(*) DESC LIMIT 1;",
+    "explanation": "Запрос возвращает час с наибольшим количеством преступлений.",
+    "columns": [
+      "CrimeHour",
+      "COUNT(*)"
+    ],
+    "column_types": [
+      "string",
+      "number"
+    ],
+    "pred_rows": [
+      [
+        "16",
+        249
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "GreaterManchesterCrime"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 13.9,
+    "gold_rows": [
+      [
+        "2018-08-28 06:10:46"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": false
+  },
+  {
+    "db_id": "GreaterManchesterCrime",
+    "question": "What are the most likely outcome of the police investigation if the crime happen on \"street\"?",
+    "gold_sql": "SELECT Outcome FROM GreaterManchesterCrime WHERE Location LIKE \"%Street%\" GROUP BY Outcome ORDER BY count(*) DESC LIMIT 1",
+    "status": "ok",
+    "pred_sql": "SELECT Outcome FROM GreaterManchesterCrime WHERE Location LIKE \"%Street%\" GROUP BY Outcome ORDER BY COUNT(*) DESC LIMIT 1",
+    "explanation": "Запрос возвращает наиболее вероятный исход расследования полиции для преступлений, произошедших на улице.",
+    "columns": [
+      "Outcome"
+    ],
+    "column_types": [
+      "string"
+    ],
+    "pred_rows": [
+      [
+        "Investigation complete; no suspect identified"
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "GreaterManchesterCrime"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 14.7,
+    "gold_rows": [
+      [
+        "Investigation complete; no suspect identified"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "GreaterManchesterCrime",
+    "question": "Which type of crime happen the most in Salford?",
+    "gold_sql": "SELECT Type FROM GreaterManchesterCrime WHERE LSOA LIKE \"%Salford%\" GROUP BY Type ORDER BY count(*) DESC LIMIT 1",
+    "status": "ok",
+    "pred_sql": "SELECT TYPE FROM GreaterManchesterCrime WHERE LSOA LIKE 'Salford%' GROUP BY TYPE ORDER BY COUNT(*) DESC LIMIT 1",
+    "explanation": "Запрос возвращает тип преступления, который чаще всего встречается в Сальфорде.",
+    "columns": [
+      "Type"
+    ],
+    "column_types": [
+      "string"
+    ],
+    "pred_rows": [
+      [
+        "Violence and sexual offences"
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "GreaterManchesterCrime"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 14.0,
+    "gold_rows": [
+      [
+        "Violence and sexual offences"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "GreaterManchesterCrime",
+    "question": "How many crimes are under investigation?",
+    "gold_sql": "SELECT count(*) FROM GreaterManchesterCrime WHERE Outcome = \"Under investigation\"",
+    "status": "ok",
+    "pred_sql": "SELECT count(*) FROM GreaterManchesterCrime WHERE Outcome  =  'Under investigation'",
+    "explanation": "Количество преступлений, находящихся в стадии расследования.",
+    "columns": [
+      "count(*)"
+    ],
+    "column_types": [
+      "number"
+    ],
+    "pred_rows": [
+      [
+        1466
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "GreaterManchesterCrime"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 13.2,
+    "gold_rows": [
+      [
+        1466
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "GreaterManchesterCrime",
+    "question": "How many crimes has been conducted?",
+    "gold_sql": "SELECT count(*) FROM GreaterManchesterCrime",
+    "status": "ok",
+    "pred_sql": "SELECT count(*) FROM GreaterManchesterCrime",
+    "explanation": "Запрос возвращает общее количество преступлений, зарегистрированных в Грейтер Манчестере.",
+    "columns": [
+      "count(*)"
+    ],
+    "column_types": [
+      "number"
+    ],
+    "pred_rows": [
+      [
+        5000
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "GreaterManchesterCrime"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 13.3,
+    "gold_rows": [
+      [
+        5000
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "Pesticide",
+    "question": "which foods are captured in the data set?",
+    "gold_sql": "SELECT DISTINCT commod FROM sampledata15",
+    "status": "ok",
+    "pred_sql": "SELECT DISTINCT variety FROM sampledata15",
+    "explanation": "Запрос возвращает список уникальных видов продуктов, представленных в наборе данных.",
+    "columns": [
+      "variety"
+    ],
+    "column_types": [
+      "string"
+    ],
+    "pred_rows": [
+      [
+        "Fuji"
+      ],
+      [
+        "Red Delicious"
+      ],
+      [
+        "Granny Smith"
+      ],
+      [
+        "N/A"
+      ],
+      [
+        "Gala"
+      ],
+      [
+        "Honeycrisp"
+      ],
+      [
+        "Fancy"
+      ],
+      [
+        "Fancy Gala"
+      ],
+      [
+        "Extra Fancy"
+      ],
+      [
+        "Braeburn"
+      ],
+      [
+        "Jazz"
+      ],
+      [
+        "Granny Smith EX Fanc"
+      ],
+      [
+        "Fuji EX Fancy"
+      ],
+      [
+        "Golden Delicious"
+      ],
+      [
+        "Ambrosia"
+      ],
+      [
+        "Cripps Pink"
+      ],
+      [
+        "Pink Lady"
+      ],
+      [
+        "Sciros"
+      ],
+      [
+        "Buckeye Gala"
+      ],
+      [
+        "Jonagold"
+      ]
+    ],
+    "pred_row_count": 200,
+    "truncated": true,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "sampledata15"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 19.1,
+    "gold_rows": [
+      [
+        "AP"
+      ],
+      [
+        "CB"
+      ],
+      [
+        "CH"
+      ],
+      [
+        "CS"
+      ],
+      [
+        "CU"
+      ],
+      [
+        "CZ"
+      ],
+      [
+        "GB"
+      ],
+      [
+        "GF"
+      ],
+      [
+        "GR"
+      ],
+      [
+        "LT"
+      ],
+      [
+        "NE"
+      ],
+      [
+        "OG"
+      ],
+      [
+        "PB"
+      ],
+      [
+        "PC"
+      ],
+      [
+        "PE"
+      ],
+      [
+        "PO"
+      ],
+      [
+        "SP"
+      ],
+      [
+        "ST"
+      ],
+      [
+        "TO"
+      ],
+      [
+        "WM"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": false
+  },
+  {
+    "db_id": "Pesticide",
+    "question": "how many samples have unknown countries of origin?",
+    "gold_sql": "SELECT count(*) FROM sampledata15 WHERE origin = \"3\"",
+    "status": "ok",
+    "pred_sql": "SELECT count(*) FROM sampledata15 WHERE country  =  '   ';",
+    "explanation": "Запрос возвращает количество образцов с неизвестной страной происхождения.",
+    "columns": [
+      "count(*)"
+    ],
+    "column_types": [
+      "number"
+    ],
+    "pred_rows": [
+      [
+        0
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "sampledata15"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 19.3,
+    "gold_rows": [
+      [
+        96
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": false
+  },
+  {
+    "db_id": "Pesticide",
+    "question": "Which are the top 10 commodities that have the highest residue during 2015?",
+    "gold_sql": "SELECT T2.commod FROM resultsdata15 as T2 JOIN sampledata15 as T1 ON T1.sample_pk = T2.sample_pk WHERE T1.year = 15 GROUP BY T2.commod ORDER BY sum(T2.concen) DESC LIMIT 10",
+    "status": "ok",
+    "pred_sql": "SELECT T1.commod ,  sum(T2.concen) FROM sampledata15 AS T1 JOIN resultsdata15 AS T2 ON T1.sample_pk  =  T2.sample_pk WHERE T1.year  =  \"15\" GROUP BY T1.commod ORDER BY sum(T2.concen) DESC LIMIT 10;",
+    "explanation": "Этот запрос возвращает список из десяти товаров с самыми высокими остатками в 2015 году.",
+    "columns": [
+      "commod",
+      "sum(T2.concen)"
+    ],
+    "column_types": [
+      "string",
+      "number"
+    ],
+    "pred_rows": [
+      [
+        "SP",
+        2549.201
+      ],
+      [
+        "PO",
+        1285.6504
+      ],
+      [
+        "PE",
+        865.8529
+      ],
+      [
+        "AP",
+        856.45
+      ],
+      [
+        "ST",
+        647.1699
+      ],
+      [
+        "NE",
+        542.7053
+      ],
+      [
+        "PC",
+        399.1825
+      ],
+      [
+        "GR",
+        307.9287
+      ],
+      [
+        "CZ",
+        225.2205
+      ],
+      [
+        "CH",
+        201.1041
+      ]
+    ],
+    "pred_row_count": 10,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "sampledata15",
+      "resultsdata15"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 26.6,
+    "gold_rows": [
+      [
+        "SP"
+      ],
+      [
+        "PO"
+      ],
+      [
+        "PE"
+      ],
+      [
+        "AP"
+      ],
+      [
+        "ST"
+      ],
+      [
+        "NE"
+      ],
+      [
+        "PC"
+      ],
+      [
+        "GR"
+      ],
+      [
+        "CZ"
+      ],
+      [
+        "CH"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": false
+  },
+  {
+    "db_id": "Pesticide",
+    "question": "Name some imported commodities that are not found in the US.",
+    "gold_sql": "SELECT commod FROM sampledata15 WHERE origin = 2 AND commod not in (SELECT commod FROM sampledata15 WHERE origin = 1)",
+    "status": "ok",
+    "pred_sql": "SELECT DISTINCT country ,  variety FROM sampledata15 WHERE origin != '1' AND country != 'USA';",
+    "explanation": "Запрос возвращает список стран и видов товаров, которые импортируются, но не производятся в США.",
+    "columns": [
+      "country",
+      "variety"
+    ],
+    "column_types": [
+      "string",
+      "string"
+    ],
+    "pred_rows": [
+      [
+        "260",
+        "Ambrosia"
+      ],
+      [
+        "275",
+        "Fuji"
+      ],
+      [
+        "660",
+        "N/A"
+      ],
+      [
+        "660",
+        "Envy"
+      ],
+      [
+        "660",
+        "Braeburn"
+      ],
+      [
+        "275",
+        "Ambrosia"
+      ],
+      [
+        "260",
+        "Gala"
+      ],
+      [
+        "660",
+        "Sonya/ Nevson"
+      ],
+      [
+        "275",
+        "Gala"
+      ],
+      [
+        "275",
+        "Royal Gala"
+      ],
+      [
+        "275",
+        "Cripps Pink"
+      ],
+      [
+        "660",
+        "Fuji"
+      ],
+      [
+        "480",
+        "Golden Delicious"
+      ],
+      [
+        "350",
+        "Ariane"
+      ],
+      [
+        "480",
+        "Granny Smith"
+      ],
+      [
+        "660",
+        "Lady in Red"
+      ],
+      [
+        "260",
+        "Honey Crisp"
+      ],
+      [
+        "660",
+        "Scilate"
+      ],
+      [
+        "275",
+        "Red Apples"
+      ],
+      [
+        "660",
+        "Royal Gala"
+      ]
+    ],
+    "pred_row_count": 200,
+    "truncated": true,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "sampledata15"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 19.7,
+    "gold_rows": [],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": false
+  },
+  {
+    "db_id": "Pesticide",
+    "question": "Tell me the average pesticide residue for each state in the US where food is grown.",
+    "gold_sql": "SELECT T1.growst, avg(T2.concen) FROM sampledata15 as T1 JOIN resultsdata15 as T2 ON T1.sample_pk = T2.sample_pk GROUP BY T1.growst",
+    "status": "ok",
+    "pred_sql": "SELECT T1.state ,  avg(T2.concen) FROM sampledata15 AS T1 JOIN resultsdata15 AS T2 ON T1.sample_pk  =  T2.sample_pk GROUP BY T1.state",
+    "explanation": "Запрос возвращает среднее значение остатков пестицидов для каждого штата в США, где выращивают продукты.",
+    "columns": [
+      "state",
+      "avg(T2.concen)"
+    ],
+    "column_types": [
+      "string",
+      "number"
+    ],
+    "pred_rows": [
+      [
+        "CA",
+        0.00329611511385764
+      ],
+      [
+        "CO",
+        0.0039033692187735117
+      ],
+      [
+        "FL",
+        0.004172087467556255
+      ],
+      [
+        "MD",
+        0.003334450393370947
+      ],
+      [
+        "MI",
+        0.0037124960045612793
+      ],
+      [
+        "NC",
+        0.001191471239783057
+      ],
+      [
+        "NY",
+        0.0034501609005087395
+      ],
+      [
+        "OH",
+        0.003669669285420283
+      ],
+      [
+        "TX",
+        0.0037512971180494368
+      ],
+      [
+        "WA",
+        0.0034520176048181603
+      ]
+    ],
+    "pred_row_count": 10,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "sampledata15",
+      "resultsdata15"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 25.4,
+    "gold_rows": [
+      [
+        "",
+        0.0037705806795344486
+      ],
+      [
+        "AL",
+        6.157635467980295e-05
+      ],
+      [
+        "AR",
+        0.00022058823529411763
+      ],
+      [
+        "AZ",
+        7.311320754716982e-05
+      ],
+      [
+        "CA",
+        0.0016935391861716074
+      ],
+      [
+        "CO",
+        0.0021061699258260284
+      ],
+      [
+        "FL",
+        0.00082813501668084
+      ],
+      [
+        "GA",
+        0.00048399820708202603
+      ],
+      [
+        "ID",
+        0.01117563953488372
+      ],
+      [
+        "IN",
+        0.0018923444976076554
+      ],
+      [
+        "MA",
+        0.0016211822660098523
+      ],
+      [
+        "ME",
+        0.0050591133004926105
+      ],
+      [
+        "MI",
+        0.0030811111111111113
+      ],
+      [
+        "MN",
+        0.0006577586206896552
+      ],
+      [
+        "NC",
+        0.0015661549197487788
+      ],
+      [
+        "ND",
+        0.004947263681592039
+      ],
+      [
+        "NE",
+        0.030076354679802957
+      ],
+      [
+        "NJ",
+        0.0004851815017404277
+      ],
+      [
+        "NY",
+        0.0021273308957952468
+      ],
+      [
+        "OH",
+        0.004030816473988439
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": false
+  },
+  {
+    "db_id": "StudentMathScore",
+    "question": "Which school district receive the most of federal revenue through state in Wisconsin?",
+    "gold_sql": "SELECT T1.school_district FROM FINREV_FED_17 as T1 JOIN FINREV_FED_KEY_17 as T2 ON T1.state_code = T2.state_code WHERE T2.state = \"Wisconsin\" ORDER BY T1.t_fed_rev DESC LIMIT 1",
+    "status": "ok",
+    "pred_sql": "SELECT school_district FROM finrev_fed_17 WHERE state_code  =  55 ORDER BY t_fed_rev DESC LIMIT 1",
+    "explanation": "Запрос возвращает название школого района, который получил наибольшее количество федеральных средств через штат в штате Висконсин.",
+    "columns": [
+      "school_district"
+    ],
+    "column_types": [
+      "string"
+    ],
+    "pred_rows": [],
+    "pred_row_count": 0,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "FINREV_FED_17"
+    ],
+    "critic_attempts": 3,
+    "profile_used": true,
+    "elapsed_sec": 27.9,
+    "gold_rows": [
+      [
+        "MILWAUKEE CITY SCHOOL DISTRICT"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": false
+  },
+  {
+    "db_id": "StudentMathScore",
+    "question": "What is the average Title 1 fund in Virginia?",
+    "gold_sql": "SELECT avg(T1.c14) FROM FINREV_FED_17 as T1 JOIN FINREV_FED_KEY_17 as T2 ON T1.state_code = T2.state_code WHERE T2.state = \"Virginia\"",
+    "status": "ok",
+    "pred_sql": "SELECT avg(c14) FROM finrev_fed_17 WHERE state_code  =  51",
+    "explanation": "Запрос возвращает среднее значение фонда Title 1 в штате Вирджиния.",
+    "columns": [
+      "avg(c14)"
+    ],
+    "column_types": [
+      "number"
+    ],
+    "pred_rows": [
+      [
+        712.125
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "FINREV_FED_17"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 16.8,
+    "gold_rows": [
+      [
+        2006.1278195488721
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": false
+  },
+  {
+    "db_id": "StudentMathScore",
+    "question": "What are the top 10 states that have the highest average math score and federal revenue they got through different categories?",
+    "gold_sql": "SELECT T2.state, sum(c14),sum(c25) FROM FINREV_FED_17 as T1 JOIN FINREV_FED_KEY_17 as T2 ON T1.state_code = T2.state_code JOIN NDECoreExcel_Math_Grade8 as T3 ON T2.state = T3.state GROUP BY T2.state ORDER BY T3.average_scale_score DESC LIMIT 10",
+    "status": "ok",
+    "pred_sql": "SELECT T1.state_code ,  T2.average_scale_score ,  T1.t_fed_rev ,  T1.c14 ,  T1.c25 FROM FINREV_FED_17 AS T1 JOIN NDECoreExcel_Math_Grade8 AS T2 ON T1.state_code  =  T2.state WHERE T1.yr_data  =  17 AND T2.year  =  2017 ORDER BY T2.average_scale_score DESC LIMIT 10;",
+    "explanation": "Запрос возвращает информацию о десяти штатах с самыми высокими средними баллами по математике и федеральными доходами, полученным из различных категорий.",
+    "columns": [
+      "state_code",
+      "average_scale_score",
+      "t_fed_rev",
+      "c14",
+      "c25"
+    ],
+    "column_types": [
+      "number",
+      "number",
+      "number",
+      "number",
+      "number"
+    ],
+    "pred_rows": [],
+    "pred_row_count": 0,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "FINREV_FED_17",
+      "NDECoreExcel_Math_Grade8"
+    ],
+    "critic_attempts": 3,
+    "profile_used": true,
+    "elapsed_sec": 40.3,
+    "gold_rows": [
+      [
+        "Massachusetts",
+        209491,
+        197718
+      ],
+      [
+        "Minnesota",
+        143113,
+        204785
+      ],
+      [
+        "New Hampshire",
+        41026,
+        29114
+      ],
+      [
+        "New Jersey",
+        307236,
+        344106
+      ],
+      [
+        "Virginia",
+        266815,
+        344122
+      ],
+      [
+        "Wyoming",
+        34182,
+        21524
+      ],
+      [
+        "Washington",
+        251734,
+        257793
+      ],
+      [
+        "Wisconsin",
+        210314,
+        207816
+      ],
+      [
+        "Vermont",
+        32950,
+        25400
+      ],
+      [
+        "Ohio",
+        498092,
+        432604
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": false
+  },
+  {
+    "db_id": "StudentMathScore",
+    "question": "What are the schools with highest federal revenue in each federal revenue categories and what's their state average scores?",
+    "gold_sql": "SELECT T1.school_district, max(T1.c14), T3.average_scale_score FROM FINREV_FED_17 as T1 JOIN FINREV_FED_KEY_17 as T2 ON T1.state_code = T2.state_code JOIN NDECoreExcel_Math_Grade8 as T3 ON T2.state = T3.state UNION SELECT T1.school_district, max(T1.c25), T3.average_scale_score FROM FINREV_FED_17 as T1 JOIN FINREV_FED_KEY_17 as T2 ON T1.state_code = T2.state_code JOIN NDECoreExcel_Math_Grade8 as T3 ON T2.state = T3.state",
+    "status": "ok",
+    "pred_sql": "SELECT T1.state_code ,  T1.school_district ,  T1.t_fed_rev ,  T2.average_scale_score FROM FINREV_FED_17 AS T1 JOIN NDECoreExcel_Math_Grade8 AS T2 ON T1.state_code  =  T2.state WHERE T1.yr_data  =  17 AND T2.year  =  2017 ORDER BY T1.t_fed_rev DESC LIMIT 1",
+    "explanation": "Запрос возвращает информацию о школе с самой высокой федеральной выручкой в каждом штате и ее среднем балле по математике в восьмом классе.",
+    "columns": [
+      "state_code",
+      "school_district",
+      "t_fed_rev",
+      "average_scale_score"
+    ],
+    "column_types": [
+      "number",
+      "string",
+      "number",
+      "number"
+    ],
+    "pred_rows": [],
+    "pred_row_count": 0,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "FINREV_FED_17",
+      "NDECoreExcel_Math_Grade8"
+    ],
+    "critic_attempts": 3,
+    "profile_used": true,
+    "elapsed_sec": 39.3,
+    "gold_rows": [
+      [
+        "NEW YORK CITY SCHOOL DISTRICT",
+        439209,
+        282
+      ],
+      [
+        "NEW YORK CITY SCHOOL DISTRICT",
+        956851,
+        282
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": false
+  },
+  {
+    "db_id": "StudentMathScore",
+    "question": "State with highest average math score",
+    "gold_sql": "SELECT state FROM NDECoreExcel_Math_Grade8 ORDER BY average_scale_score DESC LIMIT 1",
+    "status": "ok",
+    "pred_sql": "SELECT state FROM NDECoreExcel_Math_Grade8 ORDER BY average_scale_score DESC LIMIT 1",
+    "explanation": "Запрос возвращает название штата с самым высоким средним баллом по математике для восьмых классов.",
+    "columns": [
+      "state"
+    ],
+    "column_types": [
+      "string"
+    ],
+    "pred_rows": [
+      [
+        "Massachusetts"
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "NDECoreExcel_Math_Grade8"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 16.0,
+    "gold_rows": [
+      [
+        "Massachusetts"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "TheHistoryofBaseball",
+    "question": "Which is the most popular voting method for Hall of Fame in 2000?",
+    "gold_sql": "SELECT votedby FROM hall_of_fame WHERE yearid = \"2000\" GROUP BY votedby ORDER BY count(*) DESC LIMIT 1",
+    "status": "ok",
+    "pred_sql": "SELECT votedby FROM hall_of_fame WHERE YEARID  =  2000 GROUP BY votedby ORDER BY count(*) DESC LIMIT 1;",
+    "explanation": "Запрос возвращает наиболее популярный метод голосования для внесения в Холл Фамури в 2000 году.",
+    "columns": [
+      "votedby"
+    ],
+    "column_types": [
+      "string"
+    ],
+    "pred_rows": [
+      [
+        "BBWAA"
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "hall_of_fame"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 21.9,
+    "gold_rows": [
+      [
+        "BBWAA"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "TheHistoryofBaseball",
+    "question": "How many players weigh over 200 pounds?",
+    "gold_sql": "SELECT count(*) FROM player WHERE weight > 200",
+    "status": "ok",
+    "pred_sql": "SELECT count(*) FROM player WHERE weight  >  200;",
+    "explanation": "Количество игроков, вес которых превышает 200 фунтов.",
+    "columns": [
+      "count(*)"
+    ],
+    "column_types": [
+      "number"
+    ],
+    "pred_rows": [
+      [
+        4584
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "player"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 20.6,
+    "gold_rows": [
+      [
+        4584
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "TheHistoryofBaseball",
+    "question": "Who is the winner of Rookie of the Year in 2010?",
+    "gold_sql": "SELECT player_id FROM player_award WHERE year = 2010 AND award_id = \"Rookie of the Year\"",
+    "status": "ok",
+    "pred_sql": "SELECT T1.name_first ,  T1.name_last FROM player AS T1 JOIN player_award AS T2 ON T1.player_id  =  T2.player_id WHERE T2.award_id  =  'Rookie of the Year' AND T2.year  =  2010;",
+    "explanation": "Этот запрос возвращает имя и фамилию победителя в номинации \"Новичок года\" за 2010 год.",
+    "columns": [
+      "name_first",
+      "name_last"
+    ],
+    "column_types": [
+      "string",
+      "string"
+    ],
+    "pred_rows": [
+      [
+        "Neftali",
+        "Feliz"
+      ],
+      [
+        "Buster",
+        "Posey"
+      ]
+    ],
+    "pred_row_count": 2,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "player_award",
+      "player"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 24.9,
+    "gold_rows": [
+      [
+        "felizne01"
+      ],
+      [
+        "poseybu01"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": false
+  },
+  {
+    "db_id": "TheHistoryofBaseball",
+    "question": "Who is the highest paid player since 2010?",
+    "gold_sql": "SELECT player_id FROM salary WHERE year >= 2010 ORDER BY salary DESC LIMIT 1",
+    "status": "ok",
+    "pred_sql": "SELECT player_id FROM salary WHERE YEAR  >=  2010 ORDER BY salary DESC LIMIT 1",
+    "explanation": "Этот запрос возвращает идентификатор игрока с самой высокой зарплатой с 2010 года.",
+    "columns": [
+      "player_id"
+    ],
+    "column_types": [
+      "string"
+    ],
+    "pred_rows": [
+      [
+        "rodrial01"
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "salary"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 20.0,
+    "gold_rows": [
+      [
+        "rodrial01"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "TheHistoryofBaseball",
+    "question": "What are the salaries of players who have ever enter hall of fame?",
+    "gold_sql": "SELECT T2.salary FROM salary as T2 JOIN hall_of_fame as T1 ON T1.player_id = T2.player_id WHERE T1.inducted = \"Y\"",
+    "status": "ok",
+    "pred_sql": "SELECT DISTINCT T1.salary FROM salary AS T1 JOIN hall_of_fame AS T2 ON T1.player_id  =  T2.player_id",
+    "explanation": "Запрос возвращает уникальные зарплаты игроков, которые когда-либо вошли в зал славы.",
+    "columns": [
+      "salary"
+    ],
+    "column_types": [
+      "number"
+    ],
+    "pred_rows": [
+      [
+        550000
+      ],
+      [
+        800000
+      ],
+      [
+        1500000
+      ],
+      [
+        1625000
+      ],
+      [
+        1354167
+      ],
+      [
+        625000
+      ],
+      [
+        480000
+      ],
+      [
+        512500
+      ],
+      [
+        641667
+      ],
+      [
+        1090000
+      ],
+      [
+        560000
+      ],
+      [
+        547143
+      ],
+      [
+        1472819
+      ],
+      [
+        1000000
+      ],
+      [
+        747500
+      ],
+      [
+        140000
+      ],
+      [
+        300000
+      ],
+      [
+        370000
+      ],
+      [
+        483333
+      ],
+      [
+        779227
+      ]
+    ],
+    "pred_row_count": 200,
+    "truncated": true,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "hall_of_fame",
+      "salary"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 22.4,
+    "gold_rows": [
+      [
+        875000
+      ],
+      [
+        1132652
+      ],
+      [
+        1136262
+      ],
+      [
+        1065000
+      ],
+      [
+        525000
+      ],
+      [
+        1058894
+      ],
+      [
+        1102946
+      ],
+      [
+        60000
+      ],
+      [
+        115000
+      ],
+      [
+        1000000
+      ],
+      [
+        1075000
+      ],
+      [
+        2127333
+      ],
+      [
+        2130300
+      ],
+      [
+        2136666
+      ],
+      [
+        2250000
+      ],
+      [
+        300000
+      ],
+      [
+        600000
+      ],
+      [
+        350000
+      ],
+      [
+        750000
+      ],
+      [
+        890000
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": false
+  },
+  {
+    "db_id": "USWildFires",
+    "question": "Show all fires caused by campfires in Texas.",
+    "gold_sql": "SELECT * FROM Fires WHERE State = \"TX\" AND STAT_CAUSE_DESCR LIKE \"Campfire\"",
+    "status": "ok",
+    "pred_sql": "SELECT * FROM Fires WHERE STAT_CAUSE_DESCR  =  \"Campfire\" AND STATE  =  \"TX\"",
+    "explanation": "Запрос возвращает информацию обо всех пожарах, вызванных кострами, произошедших в штате Техас.",
+    "columns": [
+      "FIRE_YEAR",
+      "DISCOVERY_DATE",
+      "DISCOVERY_DOY",
+      "DISCOVERY_TIME",
+      "STAT_CAUSE_CODE",
+      "STAT_CAUSE_DESCR",
+      "CONT_DATE",
+      "CONT_DOY",
+      "CONT_TIME",
+      "FIRE_SIZE",
+      "FIRE_SIZE_CLASS",
+      "LATITUDE",
+      "LONGITUDE",
+      "OWNER_CODE",
+      "OWNER_DESCR",
+      "STATE",
+      "COUNTY",
+      "FIPS_CODE",
+      "FIPS_NAME"
+    ],
+    "column_types": [
+      "number",
+      "number",
+      "number",
+      "string",
+      "number",
+      "string",
+      "string",
+      "string",
+      "string",
+      "number",
+      "string",
+      "number",
+      "number",
+      "number",
+      "string",
+      "string",
+      "string",
+      "string",
+      "string"
+    ],
+    "pred_rows": [
+      [
+        2005,
+        2453441.5,
+        71,
+        "0215",
+        4.0,
+        "Campfire",
+        "2453442.5",
+        "72",
+        "1800",
+        2.0,
+        "B",
+        33.34583333,
+        -97.59583333,
+        5.0,
+        "USFS",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2005,
+        2453636.5,
+        266,
+        "1330",
+        4.0,
+        "Campfire",
+        "2453637.5",
+        "267",
+        "0800",
+        9.0,
+        "B",
+        31.11694444,
+        -95.08416667,
+        13.0,
+        "STATE OR PRIVATE",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2005,
+        2453646.5,
+        276,
+        "1400",
+        4.0,
+        "Campfire",
+        "2453646.5",
+        "276",
+        "1652",
+        3.0,
+        "B",
+        30.57111111,
+        -95.70138889,
+        5.0,
+        "USFS",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2005,
+        2453706.5,
+        336,
+        "1630",
+        4.0,
+        "Campfire",
+        "2453706.5",
+        "336",
+        "2315",
+        11.0,
+        "C",
+        31.45361111,
+        -93.77277778,
+        5.0,
+        "USFS",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2005,
+        2453708.5,
+        338,
+        "0930",
+        4.0,
+        "Campfire",
+        "2453708.5",
+        "338",
+        "1045",
+        0.1,
+        "A",
+        31.0625,
+        -95.09722222,
+        5.0,
+        "USFS",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2005,
+        2453442.5,
+        72,
+        "2000",
+        4.0,
+        "Campfire",
+        "2453443.5",
+        "73",
+        "0945",
+        2.0,
+        "B",
+        31.12666667,
+        -94.12416667,
+        5.0,
+        "USFS",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2005,
+        2453487.5,
+        117,
+        "1730",
+        4.0,
+        "Campfire",
+        "2453487.5",
+        "117",
+        "2115",
+        0.1,
+        "A",
+        31.17222222,
+        -94.30027778,
+        5.0,
+        "USFS",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2006,
+        2453805.5,
+        70,
+        "1230",
+        4.0,
+        "Campfire",
+        "2453809.5",
+        "74",
+        "1600",
+        34.0,
+        "C",
+        31.0575,
+        -95.09722222,
+        5.0,
+        "USFS",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2006,
+        2453901.5,
+        166,
+        "1230",
+        4.0,
+        "Campfire",
+        "2453901.5",
+        "166",
+        "1700",
+        12.0,
+        "C",
+        31.14666667,
+        -94.17194444,
+        5.0,
+        "USFS",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2006,
+        2454015.5,
+        280,
+        "1500",
+        4.0,
+        "Campfire",
+        "2454016.5",
+        "281",
+        "1700",
+        9.0,
+        "B",
+        31.19361111,
+        -94.86361111,
+        5.0,
+        "USFS",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2006,
+        2453820.5,
+        85,
+        "0335",
+        4.0,
+        "Campfire",
+        "2453820.5",
+        "85",
+        "0830",
+        3.0,
+        "B",
+        31.30833333,
+        -93.69166667,
+        5.0,
+        "USFS",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2007,
+        2454377.5,
+        277,
+        "1030",
+        4.0,
+        "Campfire",
+        "2454377.5",
+        "277",
+        "1041",
+        0.1,
+        "A",
+        35.88194444,
+        -100.1825,
+        5.0,
+        "USFS",
+        "TX",
+        "211",
+        "211",
+        "Hemphill"
+      ],
+      [
+        2007,
+        2454408.5,
+        308,
+        "1609",
+        4.0,
+        "Campfire",
+        "2454408.5",
+        "308",
+        "1810",
+        0.1,
+        "A",
+        31.55361111,
+        -95.15861111,
+        5.0,
+        "USFS",
+        "TX",
+        "225",
+        "225",
+        "Houston"
+      ],
+      [
+        2007,
+        2454415.5,
+        315,
+        "1500",
+        4.0,
+        "Campfire",
+        "2454415.5",
+        "315",
+        "1530",
+        0.1,
+        "A",
+        31.48138889,
+        -95.17166667,
+        5.0,
+        "USFS",
+        "TX",
+        "225",
+        "225",
+        "Houston"
+      ],
+      [
+        2008,
+        2454491.5,
+        26,
+        "1224",
+        4.0,
+        "Campfire",
+        "2454491.5",
+        "26",
+        "1730",
+        6.0,
+        "B",
+        33.42583333,
+        -97.70138889,
+        5.0,
+        "USFS",
+        "TX",
+        "497",
+        "497",
+        "Wise"
+      ],
+      [
+        2008,
+        2454549.5,
+        84,
+        "1125",
+        4.0,
+        "Campfire",
+        "2454550.5",
+        "85",
+        "0900",
+        0.5,
+        "B",
+        31.38722222,
+        -95.15416667,
+        5.0,
+        "USFS",
+        "TX",
+        "225",
+        "225",
+        "Houston"
+      ],
+      [
+        2008,
+        2454675.5,
+        210,
+        "1345",
+        4.0,
+        "Campfire",
+        "2454675.5",
+        "210",
+        "1414",
+        0.1,
+        "A",
+        33.37972222,
+        -97.58333333,
+        5.0,
+        "USFS",
+        "TX",
+        "497",
+        "497",
+        "Wise"
+      ],
+      [
+        2008,
+        2454772.5,
+        307,
+        "1900",
+        4.0,
+        "Campfire",
+        "2454772.5",
+        "307",
+        "2025",
+        4.0,
+        "B",
+        31.69722222,
+        -93.83,
+        5.0,
+        "USFS",
+        "TX",
+        "419",
+        "419",
+        "Shelby"
+      ],
+      [
+        2008,
+        2454777.5,
+        312,
+        "1700",
+        4.0,
+        "Campfire",
+        "2454782.5",
+        "317",
+        "1200",
+        33.0,
+        "C",
+        31.5625,
+        -94.0,
+        13.0,
+        "STATE OR PRIVATE",
+        "TX",
+        "419",
+        "419",
+        "Shelby"
+      ],
+      [
+        2009,
+        2454850.5,
+        19,
+        "1700",
+        4.0,
+        "Campfire",
+        "2454850.5",
+        "19",
+        "2120",
+        5.0,
+        "B",
+        30.59361111,
+        -95.32638889,
+        13.0,
+        "STATE OR PRIVATE",
+        "TX",
+        "407",
+        "407",
+        "San Jacinto"
+      ]
+    ],
+    "pred_row_count": 200,
+    "truncated": true,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "Fires"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 20.9,
+    "gold_rows": [
+      [
+        2005,
+        2453441.5,
+        71,
+        "0215",
+        4.0,
+        "Campfire",
+        "2453442.5",
+        "72",
+        "1800",
+        2.0,
+        "B",
+        33.34583333,
+        -97.59583333,
+        5.0,
+        "USFS",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2005,
+        2453636.5,
+        266,
+        "1330",
+        4.0,
+        "Campfire",
+        "2453637.5",
+        "267",
+        "0800",
+        9.0,
+        "B",
+        31.11694444,
+        -95.08416667,
+        13.0,
+        "STATE OR PRIVATE",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2005,
+        2453646.5,
+        276,
+        "1400",
+        4.0,
+        "Campfire",
+        "2453646.5",
+        "276",
+        "1652",
+        3.0,
+        "B",
+        30.57111111,
+        -95.70138889,
+        5.0,
+        "USFS",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2005,
+        2453706.5,
+        336,
+        "1630",
+        4.0,
+        "Campfire",
+        "2453706.5",
+        "336",
+        "2315",
+        11.0,
+        "C",
+        31.45361111,
+        -93.77277778,
+        5.0,
+        "USFS",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2005,
+        2453708.5,
+        338,
+        "0930",
+        4.0,
+        "Campfire",
+        "2453708.5",
+        "338",
+        "1045",
+        0.1,
+        "A",
+        31.0625,
+        -95.09722222,
+        5.0,
+        "USFS",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2005,
+        2453442.5,
+        72,
+        "2000",
+        4.0,
+        "Campfire",
+        "2453443.5",
+        "73",
+        "0945",
+        2.0,
+        "B",
+        31.12666667,
+        -94.12416667,
+        5.0,
+        "USFS",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2005,
+        2453487.5,
+        117,
+        "1730",
+        4.0,
+        "Campfire",
+        "2453487.5",
+        "117",
+        "2115",
+        0.1,
+        "A",
+        31.17222222,
+        -94.30027778,
+        5.0,
+        "USFS",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2006,
+        2453805.5,
+        70,
+        "1230",
+        4.0,
+        "Campfire",
+        "2453809.5",
+        "74",
+        "1600",
+        34.0,
+        "C",
+        31.0575,
+        -95.09722222,
+        5.0,
+        "USFS",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2006,
+        2453901.5,
+        166,
+        "1230",
+        4.0,
+        "Campfire",
+        "2453901.5",
+        "166",
+        "1700",
+        12.0,
+        "C",
+        31.14666667,
+        -94.17194444,
+        5.0,
+        "USFS",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2006,
+        2454015.5,
+        280,
+        "1500",
+        4.0,
+        "Campfire",
+        "2454016.5",
+        "281",
+        "1700",
+        9.0,
+        "B",
+        31.19361111,
+        -94.86361111,
+        5.0,
+        "USFS",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2006,
+        2453820.5,
+        85,
+        "0335",
+        4.0,
+        "Campfire",
+        "2453820.5",
+        "85",
+        "0830",
+        3.0,
+        "B",
+        31.30833333,
+        -93.69166667,
+        5.0,
+        "USFS",
+        "TX",
+        "",
+        "",
+        ""
+      ],
+      [
+        2007,
+        2454377.5,
+        277,
+        "1030",
+        4.0,
+        "Campfire",
+        "2454377.5",
+        "277",
+        "1041",
+        0.1,
+        "A",
+        35.88194444,
+        -100.1825,
+        5.0,
+        "USFS",
+        "TX",
+        "211",
+        "211",
+        "Hemphill"
+      ],
+      [
+        2007,
+        2454408.5,
+        308,
+        "1609",
+        4.0,
+        "Campfire",
+        "2454408.5",
+        "308",
+        "1810",
+        0.1,
+        "A",
+        31.55361111,
+        -95.15861111,
+        5.0,
+        "USFS",
+        "TX",
+        "225",
+        "225",
+        "Houston"
+      ],
+      [
+        2007,
+        2454415.5,
+        315,
+        "1500",
+        4.0,
+        "Campfire",
+        "2454415.5",
+        "315",
+        "1530",
+        0.1,
+        "A",
+        31.48138889,
+        -95.17166667,
+        5.0,
+        "USFS",
+        "TX",
+        "225",
+        "225",
+        "Houston"
+      ],
+      [
+        2008,
+        2454491.5,
+        26,
+        "1224",
+        4.0,
+        "Campfire",
+        "2454491.5",
+        "26",
+        "1730",
+        6.0,
+        "B",
+        33.42583333,
+        -97.70138889,
+        5.0,
+        "USFS",
+        "TX",
+        "497",
+        "497",
+        "Wise"
+      ],
+      [
+        2008,
+        2454549.5,
+        84,
+        "1125",
+        4.0,
+        "Campfire",
+        "2454550.5",
+        "85",
+        "0900",
+        0.5,
+        "B",
+        31.38722222,
+        -95.15416667,
+        5.0,
+        "USFS",
+        "TX",
+        "225",
+        "225",
+        "Houston"
+      ],
+      [
+        2008,
+        2454675.5,
+        210,
+        "1345",
+        4.0,
+        "Campfire",
+        "2454675.5",
+        "210",
+        "1414",
+        0.1,
+        "A",
+        33.37972222,
+        -97.58333333,
+        5.0,
+        "USFS",
+        "TX",
+        "497",
+        "497",
+        "Wise"
+      ],
+      [
+        2008,
+        2454772.5,
+        307,
+        "1900",
+        4.0,
+        "Campfire",
+        "2454772.5",
+        "307",
+        "2025",
+        4.0,
+        "B",
+        31.69722222,
+        -93.83,
+        5.0,
+        "USFS",
+        "TX",
+        "419",
+        "419",
+        "Shelby"
+      ],
+      [
+        2008,
+        2454777.5,
+        312,
+        "1700",
+        4.0,
+        "Campfire",
+        "2454782.5",
+        "317",
+        "1200",
+        33.0,
+        "C",
+        31.5625,
+        -94.0,
+        13.0,
+        "STATE OR PRIVATE",
+        "TX",
+        "419",
+        "419",
+        "Shelby"
+      ],
+      [
+        2009,
+        2454850.5,
+        19,
+        "1700",
+        4.0,
+        "Campfire",
+        "2454850.5",
+        "19",
+        "2120",
+        5.0,
+        "B",
+        30.59361111,
+        -95.32638889,
+        13.0,
+        "STATE OR PRIVATE",
+        "TX",
+        "407",
+        "407",
+        "San Jacinto"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "USWildFires",
+    "question": "Who was responsible for the land of the biggest fire in Oregon in 2015?",
+    "gold_sql": "SELECT OWNER_DESCR FROM FIres WHERE State = \"OR\" AND FIRE_YEAR = 2015 ORDER BY FIRE_SIZE DESC LIMIT 1",
+    "status": "ok",
+    "pred_sql": "SELECT OWNER_DESCR FROM Fires WHERE FIRE_YEAR = 2015 AND STATE = 'OR' ORDER BY FIRE_SIZE DESC LIMIT 1",
+    "explanation": "Запрос возвращает описание владельца земли, где произошел самый большой пожар в штате Орегон в 2015 году.",
+    "columns": [
+      "OWNER_DESCR"
+    ],
+    "column_types": [
+      "string"
+    ],
+    "pred_rows": [
+      [
+        "USFS"
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "Fires"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 21.8,
+    "gold_rows": [
+      [
+        "USFS"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "USWildFires",
+    "question": "Which counties in Washington had fires in 2012?",
+    "gold_sql": "SELECT COUNTY FROM Fires WHERE State = \"WA\" AND FIRE_YEAR = 2012",
+    "status": "ok",
+    "pred_sql": "SELECT DISTINCT county FROM fires WHERE state  =  'WA' AND fire_year  =  2012",
+    "explanation": "Запрос возвращает список уникальных графий штата Вашингтон, где произошли пожары в 2012 году.",
+    "columns": [
+      "COUNTY"
+    ],
+    "column_types": [
+      "string"
+    ],
+    "pred_rows": [
+      [
+        "051"
+      ],
+      [
+        "011"
+      ],
+      [
+        "059"
+      ],
+      [
+        "041"
+      ],
+      [
+        "077"
+      ],
+      [
+        "039"
+      ],
+      [
+        "073"
+      ],
+      [
+        "053"
+      ],
+      [
+        "033"
+      ],
+      [
+        "061"
+      ],
+      [
+        "057"
+      ],
+      [
+        "031"
+      ],
+      [
+        "045"
+      ],
+      [
+        "027"
+      ],
+      [
+        "013"
+      ],
+      [
+        "003"
+      ],
+      [
+        "023"
+      ],
+      [
+        "047"
+      ],
+      [
+        "037"
+      ],
+      [
+        "007"
+      ]
+    ],
+    "pred_row_count": 65,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "Fires"
+    ],
+    "critic_attempts": 2,
+    "profile_used": true,
+    "elapsed_sec": 30.7,
+    "gold_rows": [
+      [
+        "051"
+      ],
+      [
+        "051"
+      ],
+      [
+        "011"
+      ],
+      [
+        "059"
+      ],
+      [
+        "059"
+      ],
+      [
+        "059"
+      ],
+      [
+        "041"
+      ],
+      [
+        "059"
+      ],
+      [
+        "041"
+      ],
+      [
+        "041"
+      ],
+      [
+        "059"
+      ],
+      [
+        "041"
+      ],
+      [
+        "059"
+      ],
+      [
+        "059"
+      ],
+      [
+        "041"
+      ],
+      [
+        "059"
+      ],
+      [
+        "077"
+      ],
+      [
+        "041"
+      ],
+      [
+        "011"
+      ],
+      [
+        "059"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": false
+  },
+  {
+    "db_id": "USWildFires",
+    "question": "How many arson-related fires were there in 2010?",
+    "gold_sql": "SELECT count(*) FROM Fires WHERE FIRE_YEAR = 2010 AND STAT_CAUSE_DESCR LIKE \"%Arson%\"",
+    "status": "ok",
+    "pred_sql": "SELECT count(*) FROM Fires WHERE fire_year = 2010 AND STAT_CAUSE_DESCR = \"Arson\"",
+    "explanation": "Количество пожаров, вызванных поджогом, в 2010 году.",
+    "columns": [
+      "count(*)"
+    ],
+    "column_types": [
+      "number"
+    ],
+    "pred_rows": [
+      [
+        10196
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "Fires"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 20.9,
+    "gold_rows": [
+      [
+        10196
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "USWildFires",
+    "question": "How many years of data are recorded in this database?",
+    "gold_sql": "SELECT count(DISTINCT FIRE_YEAR) FROM Fires",
+    "status": "ok",
+    "pred_sql": "SELECT count(DISTINCT fire_year) FROM fires",
+    "explanation": "Запрос возвращает количество уникальных годов, за которые есть записи в базе данных.",
+    "columns": [
+      "count(DISTINCT fire_year)"
+    ],
+    "column_types": [
+      "number"
+    ],
+    "pred_rows": [
+      [
+        24
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "Fires"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 19.9,
+    "gold_rows": [
+      [
+        24
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "WhatCDHipHop",
+    "question": "what year was each specific entry released?",
+    "gold_sql": "SELECT groupName, groupYear FROM torrents",
+    "status": "ok",
+    "pred_sql": "SELECT groupYear FROM torrents",
+    "explanation": "Запрос возвращает год выпуска для каждого отдельного элемента.",
+    "columns": [
+      "groupYear"
+    ],
+    "column_types": [
+      "number"
+    ],
+    "pred_rows": [
+      [
+        1979
+      ],
+      [
+        1979
+      ],
+      [
+        1979
+      ],
+      [
+        1979
+      ],
+      [
+        1979
+      ],
+      [
+        1979
+      ],
+      [
+        1979
+      ],
+      [
+        1979
+      ],
+      [
+        1980
+      ],
+      [
+        1980
+      ],
+      [
+        1980
+      ],
+      [
+        1980
+      ],
+      [
+        1980
+      ],
+      [
+        1980
+      ],
+      [
+        1980
+      ],
+      [
+        1980
+      ],
+      [
+        1980
+      ],
+      [
+        1980
+      ],
+      [
+        1980
+      ],
+      [
+        1980
+      ]
+    ],
+    "pred_row_count": 200,
+    "truncated": true,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "torrents"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 12.0,
+    "gold_rows": [
+      [
+        "superappin&#39;",
+        1979
+      ],
+      [
+        "spiderap / a corona jam",
+        1979
+      ],
+      [
+        "rapper&#39;s delight",
+        1979
+      ],
+      [
+        "rap-o clap-o / el rap-o clap-o",
+        1979
+      ],
+      [
+        "christmas rappin&#39;",
+        1979
+      ],
+      [
+        "wack rap",
+        1979
+      ],
+      [
+        "rhymin&#39; and rappin&#39; / watch dog",
+        1979
+      ],
+      [
+        "spoonin rap",
+        1979
+      ],
+      [
+        "sugarhill gang",
+        1980
+      ],
+      [
+        "kurtis blow",
+        1980
+      ],
+      [
+        "this is a party / the &quot;micstro&quot;",
+        1980
+      ],
+      [
+        "that&#39;s the joint",
+        1980
+      ],
+      [
+        "dallas / nightlife groove",
+        1980
+      ],
+      [
+        "the breaks",
+        1980
+      ],
+      [
+        "rhythm rap rock",
+        1980
+      ],
+      [
+        "summer fun",
+        1980
+      ],
+      [
+        "for men only",
+        1980
+      ],
+      [
+        "buggs-b-skate",
+        1980
+      ],
+      [
+        "city funk",
+        1980
+      ],
+      [
+        "another one bites the dust",
+        1980
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": false
+  },
+  {
+    "db_id": "WhatCDHipHop",
+    "question": "what are the entries by each specific artist/group?",
+    "gold_sql": "SELECT groupName, artist FROM torrents",
+    "status": "ok",
+    "pred_sql": "SELECT artist ,  COUNT(*) FROM torrents GROUP BY artist;",
+    "explanation": "Запрос возвращает количество записей для каждого конкретного исполнителя или группы.",
+    "columns": [
+      "artist",
+      "COUNT(*)"
+    ],
+    "column_types": [
+      "string",
+      "number"
+    ],
+    "pred_rows": [
+      [
+        "",
+        5
+      ],
+      [
+        "!ll.martians",
+        1
+      ],
+      [
+        "!llmind",
+        3
+      ],
+      [
+        "!llmind & joell ortiz",
+        1
+      ],
+      [
+        "!llmind & skyzoo",
+        1
+      ],
+      [
+        "!llmind & symbolyc one",
+        1
+      ],
+      [
+        "!llmind & verbal kent",
+        1
+      ],
+      [
+        "\"e\"qual",
+        1
+      ],
+      [
+        "\"invictus\" mosai",
+        3
+      ],
+      [
+        "\"to\"",
+        1
+      ],
+      [
+        "\"weird al\" yankovic",
+        1
+      ],
+      [
+        "#$ & gdp",
+        1
+      ],
+      [
+        "#kipgang",
+        1
+      ],
+      [
+        "#kno-1",
+        1
+      ],
+      [
+        "#ltflow",
+        1
+      ],
+      [
+        "#massacr",
+        1
+      ],
+      [
+        "#theset",
+        1
+      ],
+      [
+        "$.99 dreams",
+        1
+      ],
+      [
+        "$1 bin & hucci",
+        1
+      ],
+      [
+        "$3.33",
+        1
+      ]
+    ],
+    "pred_row_count": 200,
+    "truncated": true,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "torrents"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 12.4,
+    "gold_rows": [
+      [
+        "superappin&#39;",
+        "grandmaster flash & the furious five"
+      ],
+      [
+        "spiderap / a corona jam",
+        "ron hunt & ronnie g & the sm crew"
+      ],
+      [
+        "rapper&#39;s delight",
+        "sugarhill gang"
+      ],
+      [
+        "rap-o clap-o / el rap-o clap-o",
+        "joe bataan"
+      ],
+      [
+        "christmas rappin&#39;",
+        "kurtis blow"
+      ],
+      [
+        "wack rap",
+        "wackies disco rock band"
+      ],
+      [
+        "rhymin&#39; and rappin&#39; / watch dog",
+        "ann winley & paulett winley & tanya winley"
+      ],
+      [
+        "spoonin rap",
+        "spoonin gee"
+      ],
+      [
+        "sugarhill gang",
+        "sugarhill gang"
+      ],
+      [
+        "kurtis blow",
+        "kurtis blow"
+      ],
+      [
+        "this is a party / the &quot;micstro&quot;",
+        "radiänce"
+      ],
+      [
+        "that&#39;s the joint",
+        "funky 4 + 1"
+      ],
+      [
+        "dallas / nightlife groove",
+        "the mexicano / b. bra"
+      ],
+      [
+        "the breaks",
+        "kurtis blow"
+      ],
+      [
+        "rhythm rap rock",
+        "count coolout"
+      ],
+      [
+        "summer fun",
+        "jackie \"small\" cochran"
+      ],
+      [
+        "for men only",
+        "millie jackson"
+      ],
+      [
+        "buggs-b-skate",
+        "phil-marilyn & marilyn"
+      ],
+      [
+        "city funk",
+        "demo-barry"
+      ],
+      [
+        "another one bites the dust",
+        "sugar daddy"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": false
+  },
+  {
+    "db_id": "WhatCDHipHop",
+    "question": "which tags exist?",
+    "gold_sql": "SELECT DISTINCT tag FROM tags",
+    "status": "ok",
+    "pred_sql": "SELECT DISTINCT tag FROM tags",
+    "explanation": "Запрос возвращает список уникальных тегов.",
+    "columns": [
+      "tag"
+    ],
+    "column_types": [
+      "string"
+    ],
+    "pred_rows": [
+      [
+        "1970s"
+      ],
+      [
+        "funk"
+      ],
+      [
+        "disco"
+      ],
+      [
+        "new.york"
+      ],
+      [
+        "united.states"
+      ],
+      [
+        "soul"
+      ],
+      [
+        "christmas"
+      ],
+      [
+        "1980s"
+      ],
+      [
+        "jazz"
+      ],
+      [
+        "instrumental"
+      ],
+      [
+        "disco.funk"
+      ],
+      [
+        "drums"
+      ],
+      [
+        "go.go"
+      ],
+      [
+        "rhythm.and.blues"
+      ],
+      [
+        "turntablism"
+      ],
+      [
+        "pop.rock"
+      ],
+      [
+        "rock"
+      ],
+      [
+        "pop"
+      ],
+      [
+        "electronic"
+      ],
+      [
+        "dance"
+      ]
+    ],
+    "pred_row_count": 200,
+    "truncated": true,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "tags"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 10.7,
+    "gold_rows": [
+      [
+        "1970s"
+      ],
+      [
+        "funk"
+      ],
+      [
+        "disco"
+      ],
+      [
+        "new.york"
+      ],
+      [
+        "united.states"
+      ],
+      [
+        "soul"
+      ],
+      [
+        "christmas"
+      ],
+      [
+        "1980s"
+      ],
+      [
+        "jazz"
+      ],
+      [
+        "instrumental"
+      ],
+      [
+        "disco.funk"
+      ],
+      [
+        "drums"
+      ],
+      [
+        "go.go"
+      ],
+      [
+        "rhythm.and.blues"
+      ],
+      [
+        "turntablism"
+      ],
+      [
+        "pop.rock"
+      ],
+      [
+        "rock"
+      ],
+      [
+        "pop"
+      ],
+      [
+        "electronic"
+      ],
+      [
+        "dance"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "WhatCDHipHop",
+    "question": "what release types are captured in this data set?",
+    "gold_sql": "SELECT DISTINCT releaseType FROM torrents",
+    "status": "ok",
+    "pred_sql": "SELECT DISTINCT releaseType FROM torrents;",
+    "explanation": "Запрос возвращает список уникальных типов релизов, представленных в данных.",
+    "columns": [
+      "releaseType"
+    ],
+    "column_types": [
+      "string"
+    ],
+    "pred_rows": [
+      [
+        "single"
+      ],
+      [
+        "album"
+      ],
+      [
+        "live album"
+      ],
+      [
+        "ep"
+      ],
+      [
+        "unknown"
+      ],
+      [
+        "soundtrack"
+      ],
+      [
+        "concert recording"
+      ],
+      [
+        "anthology"
+      ],
+      [
+        "dj mix"
+      ],
+      [
+        "compilation"
+      ],
+      [
+        "bootleg"
+      ],
+      [
+        "mixtape"
+      ],
+      [
+        "remix"
+      ],
+      [
+        "demo"
+      ],
+      [
+        "interview"
+      ]
+    ],
+    "pred_row_count": 15,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "torrents"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 12.2,
+    "gold_rows": [
+      [
+        "single"
+      ],
+      [
+        "album"
+      ],
+      [
+        "live album"
+      ],
+      [
+        "ep"
+      ],
+      [
+        "unknown"
+      ],
+      [
+        "soundtrack"
+      ],
+      [
+        "concert recording"
+      ],
+      [
+        "anthology"
+      ],
+      [
+        "dj mix"
+      ],
+      [
+        "compilation"
+      ],
+      [
+        "bootleg"
+      ],
+      [
+        "mixtape"
+      ],
+      [
+        "remix"
+      ],
+      [
+        "demo"
+      ],
+      [
+        "interview"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "WhatCDHipHop",
+    "question": "Find me top 5 most popular releases after 2000?",
+    "gold_sql": "SELECT groupName FROM torrents WHERE groupYear > 2000 ORDER BY totalSnatched DESC LIMIT 5",
+    "status": "ok",
+    "pred_sql": "SELECT artist ,  groupName FROM torrents WHERE groupYear  >  2000 ORDER BY totalSnatched DESC LIMIT 5;",
+    "explanation": "Запрос возвращает список имен исполнителей и групп для пяти самых популярных релизов после 2000 года.",
+    "columns": [
+      "artist",
+      "groupName"
+    ],
+    "column_types": [
+      "string",
+      "string"
+    ],
+    "pred_rows": [
+      [
+        "various artists",
+        "the what cd"
+      ],
+      [
+        "various artists",
+        "the what cd volume 2"
+      ],
+      [
+        "gorillaz",
+        "plastic beach"
+      ],
+      [
+        "kanye west",
+        "my beautiful dark twisted fantasy"
+      ],
+      [
+        "macklemore & ryan lewis",
+        "the heist"
+      ]
+    ],
+    "pred_row_count": 5,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "torrents"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 13.7,
+    "gold_rows": [
+      [
+        "the what cd"
+      ],
+      [
+        "the what cd volume 2"
+      ],
+      [
+        "plastic beach"
+      ],
+      [
+        "my beautiful dark twisted fantasy"
+      ],
+      [
+        "the heist"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": false
+  },
+  {
+    "db_id": "WorldSoccerDataBase",
+    "question": "What is the away team against Omiya Ardija in 2018?",
+    "gold_sql": "SELECT AwayTeam FROM football_data WHERE HomeTeam = \"Omiya Ardija\" AND Season LIKE \"%2018%\"",
+    "status": "ok",
+    "pred_sql": "SELECT AwayTeam FROM football_data WHERE Season LIKE '2018%' AND HomeTeam = 'Omiya Ardija';",
+    "explanation": "Запрос возвращает название команды, игравшей на выезде против Омия Ардия в сезоне 2018 года.",
+    "columns": [
+      "AwayTeam"
+    ],
+    "column_types": [
+      "string"
+    ],
+    "pred_rows": [
+      [
+        "Verdy"
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "football_data"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 21.8,
+    "gold_rows": [
+      [
+        "Verdy"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "WorldSoccerDataBase",
+    "question": "How many matches in Spain in 2010?",
+    "gold_sql": "SELECT count(*) FROM football_data WHERE Season LIKE \"%2010%\" AND Country = \"Spain\"",
+    "status": "ok",
+    "pred_sql": "SELECT count(*) FROM football_data WHERE country = 'Spain' AND season LIKE '2010%'",
+    "explanation": "Количество матчей в Испании в 2010 году.",
+    "columns": [
+      "count(*)"
+    ],
+    "column_types": [
+      "number"
+    ],
+    "pred_rows": [
+      [
+        842
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "football_data"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 20.7,
+    "gold_rows": [
+      [
+        1684
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": false
+  },
+  {
+    "db_id": "WorldSoccerDataBase",
+    "question": "Which matches has the highest draw opening so far?",
+    "gold_sql": "SELECT MATCH FROM betfront ORDER BY DRAW_OPENING DESC LIMIT 1",
+    "status": "ok",
+    "pred_sql": "SELECT match FROM betfront ORDER BY draw_opening DESC LIMIT 1",
+    "explanation": "Запрос возвращает название матча с самой высокой ставкой на ничью на данный момент.",
+    "columns": [
+      "MATCH"
+    ],
+    "column_types": [
+      "string"
+    ],
+    "pred_rows": [
+      [
+        "Real Madrid - Granada CF"
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "betfront"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 19.5,
+    "gold_rows": [
+      [
+        "Real Madrid - Granada CF"
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "WorldSoccerDataBase",
+    "question": "Which year has most matches?",
+    "gold_sql": "SELECT YEAR FROM betfront GROUP BY YEAR ORDER BY count(*) DESC LIMIT 1",
+    "status": "ok",
+    "pred_sql": "SELECT YEAR FROM betfront GROUP BY YEAR ORDER BY COUNT(*) DESC LIMIT 1",
+    "explanation": "Запрос возвращает год, в котором было проведено больше всего матчей.",
+    "columns": [
+      "YEAR"
+    ],
+    "column_types": [
+      "number"
+    ],
+    "pred_rows": [
+      [
+        2011
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "betfront"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 18.3,
+    "gold_rows": [
+      [
+        2011
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  },
+  {
+    "db_id": "WorldSoccerDataBase",
+    "question": "How many matches did Pinnacle have betting records?",
+    "gold_sql": "SELECT count(*) FROM football_data WHERE PSH != \"\" AND PSD != \"\" AND PSA != \"\"",
+    "status": "ok",
+    "pred_sql": "SELECT count(*) FROM football_data WHERE PSH IS NOT NULL AND PSD IS NOT NULL AND PSA IS NOT NULL;",
+    "explanation": "Запрос возвращает количество матчей, для которых у Пиннакла есть записи по коэффициентам.",
+    "columns": [
+      "count(*)"
+    ],
+    "column_types": [
+      "number"
+    ],
+    "pred_rows": [
+      [
+        60309
+      ]
+    ],
+    "pred_row_count": 1,
+    "truncated": false,
+    "error_type": null,
+    "message": null,
+    "selected_tables": [
+      "football_data"
+    ],
+    "critic_attempts": 1,
+    "profile_used": true,
+    "elapsed_sec": 21.0,
+    "gold_rows": [
+      [
+        60309
+      ]
+    ],
+    "gold_error": null,
+    "pred_exec_error": null,
+    "auto_exec_match": true
+  }
+]

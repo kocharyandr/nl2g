@@ -1,0 +1,164 @@
+{
+ "n": 100,
+ "ex_ru": 68,
+ "ex_en": 76,
+ "ci_ru": [
+  0.5833719774632081,
+  0.7633098918454312
+ ],
+ "ci_en": [
+  0.6676748127670786,
+  0.8330878873454004
+ ],
+ "both": 67,
+ "only_ru": 1,
+ "only_en": 9,
+ "neither": 23,
+ "mcnemar_p": 0.021484375,
+ "gap_pp": 8.0,
+ "gap_ci": [
+  2.0,
+  14.000000000000002
+ ],
+ "same_sql": 73,
+ "errors_ru": 0,
+ "errors_en": 2,
+ "median_sec_ru": 14,
+ "median_sec_en": 14,
+ "attempts_ru": 1.1,
+ "attempts_en": 1.06,
+ "by_feature": {
+  "агрегат": {
+   "n": 58,
+   "ru": 34,
+   "en": 39
+  },
+  "GROUP BY": {
+   "n": 37,
+   "ru": 18,
+   "en": 24
+  },
+  "JOIN": {
+   "n": 35,
+   "ru": 14,
+   "en": 21
+  },
+  "WHERE": {
+   "n": 30,
+   "ru": 19,
+   "en": 19
+  },
+  "ORDER BY": {
+   "n": 26,
+   "ru": 18,
+   "en": 20
+  },
+  "вложенный": {
+   "n": 17,
+   "ru": 10,
+   "en": 10
+  },
+  "простой SELECT": {
+   "n": 6,
+   "ru": 5,
+   "en": 5
+  }
+ },
+ "by_db": {
+  "car_1": {
+   "n": 13,
+   "ru": 3,
+   "en": 6
+  },
+  "dog_kennels": {
+   "n": 11,
+   "ru": 5,
+   "en": 6
+  },
+  "wta_1": {
+   "n": 10,
+   "ru": 6,
+   "en": 8
+  },
+  "flight_2": {
+   "n": 8,
+   "ru": 7,
+   "en": 6
+  },
+  "employee_hire_evaluation": {
+   "n": 6,
+   "ru": 5,
+   "en": 5
+  },
+  "network_1": {
+   "n": 6,
+   "ru": 2,
+   "en": 5
+  },
+  "tvshow": {
+   "n": 6,
+   "ru": 6,
+   "en": 6
+  },
+  "museum_visit": {
+   "n": 5,
+   "ru": 3,
+   "en": 3
+  },
+  "course_teach": {
+   "n": 5,
+   "ru": 5,
+   "en": 5
+  },
+  "world_1": {
+   "n": 4,
+   "ru": 4,
+   "en": 4
+  },
+  "pets_1": {
+   "n": 4,
+   "ru": 3,
+   "en": 3
+  },
+  "student_transcripts_tracking": {
+   "n": 4,
+   "ru": 2,
+   "en": 2
+  },
+  "concert_singer": {
+   "n": 4,
+   "ru": 4,
+   "en": 4
+  },
+  "poker_player": {
+   "n": 3,
+   "ru": 3,
+   "en": 3
+  },
+  "cre_Doc_Template_Mgt": {
+   "n": 3,
+   "ru": 3,
+   "en": 3
+  },
+  "voter_1": {
+   "n": 3,
+   "ru": 3,
+   "en": 3
+  },
+  "singer": {
+   "n": 3,
+   "ru": 2,
+   "en": 2
+  },
+  "battle_death": {
+   "n": 1,
+   "ru": 1,
+   "en": 1
+  },
+  "orchestra": {
+   "n": 1,
+   "ru": 1,
+   "en": 1
+  }
+ }
+}

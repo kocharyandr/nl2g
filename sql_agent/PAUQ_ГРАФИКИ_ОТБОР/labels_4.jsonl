@@ -1,0 +1,404 @@
+{"id": "TS_6179", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "возраст исполнителей по песням, листинг с сортировкой"}
+{"id": "TS_6182", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число фестивалей по категориям"}
+{"id": "TS_6183", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число фестивалей по категориям"}
+{"id": "TS_6200", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число фестивалей по результатам"}
+{"id": "TS_6201", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число фестивалей по результатам"}
+{"id": "TS_6206", "chartable": true, "chart_type": "scatter", "strength": "weak", "reason": "связь длины и высоты горок"}
+{"id": "TS_6218", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "средняя скорость по странам"}
+{"id": "TS_6223", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число капитанов по званиям"}
+{"id": "TS_6224", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число капитанов по званиям"}
+{"id": "TS_6225", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число молодых капитанов по званиям"}
+{"id": "TS_6226", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число молодых капитанов по званиям"}
+{"id": "TS_6237", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "средний и минимальный возраст по классам"}
+{"id": "TS_6238", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "средний и минимальный возраст по классам"}
+{"id": "TS_6249", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число кораблей по флагам"}
+{"id": "TS_6250", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число кораблей по флагам"}
+{"id": "TS_6301", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число матчей по соревнованиям"}
+{"id": "TS_6302", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число матчей по соревнованиям"}
+{"id": "TS_6350", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "листинг водителей с возрастом"}
+{"id": "TS_6351", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число водителей по партиям"}
+{"id": "TS_6363", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число автобусов по типу школы"}
+{"id": "TS_6382", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число компаний по аэропортам"}
+{"id": "TS_6383", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число аэропортов по странам"}
+{"id": "TS_6388", "chartable": false, "chart_type": null, "strength": null, "reason": "листинг id и реквизитов счетов"}
+{"id": "TS_6389", "chartable": false, "chart_type": null, "strength": null, "reason": "листинг id и реквизитов счетов"}
+{"id": "TS_6394", "chartable": false, "chart_type": null, "strength": null, "reason": "листинг деталей выписок и счетов"}
+{"id": "TS_6395", "chartable": false, "chart_type": null, "strength": null, "reason": "листинг деталей выписок и счетов"}
+{"id": "TS_6396", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число счетов по выпискам"}
+{"id": "TS_6397", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число счетов по выпискам"}
+{"id": "TS_6402", "chartable": false, "chart_type": null, "strength": null, "reason": "поиск деталей двух документов"}
+{"id": "TS_6403", "chartable": false, "chart_type": null, "strength": null, "reason": "поиск деталей двух документов"}
+{"id": "TS_6408", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число документов BK по проектам"}
+{"id": "TS_6409", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число документов BK по проектам"}
+{"id": "TS_6412", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число документов по проектам"}
+{"id": "TS_6413", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число документов по проектам"}
+{"id": "TS_6418", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число документов по типам"}
+{"id": "TS_6419", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число документов по типам"}
+{"id": "TS_6454", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число документов по типам бюджета"}
+{"id": "TS_6455", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число документов по типам бюджета"}
+{"id": "TS_6468", "chartable": false, "chart_type": null, "strength": null, "reason": "выборка значений реквизитов, не сравнение"}
+{"id": "TS_6469", "chartable": false, "chart_type": null, "strength": null, "reason": "выборка значений реквизитов, не сравнение"}
+{"id": "TS_6496", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "число учёных по проектам"}
+{"id": "TS_6497", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "число учёных по проектам"}
+{"id": "TS_6498", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "число учёных по крупным проектам"}
+{"id": "TS_6499", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "число учёных по крупным проектам"}
+{"id": "TS_6500", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "число проектов по учёным"}
+{"id": "TS_6501", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "число проектов по учёным"}
+{"id": "TS_6514", "chartable": false, "chart_type": null, "strength": null, "reason": "листинг учёных, проектов и часов"}
+{"id": "TS_6515", "chartable": false, "chart_type": null, "strength": null, "reason": "листинг учёных, проектов и часов"}
+{"id": "TS_6526", "chartable": true, "chart_type": "histogram", "strength": "weak", "reason": "распределение оценок 612 вин"}
+{"id": "TS_6527", "chartable": true, "chart_type": "histogram", "strength": "weak", "reason": "распределение оценок 612 вин"}
+{"id": "TS_6530", "chartable": true, "chart_type": "histogram", "strength": "weak", "reason": "распределение цен ~600 вин"}
+{"id": "TS_6531", "chartable": true, "chart_type": "histogram", "strength": "weak", "reason": "распределение цен ~600 вин"}
+{"id": "TS_6544", "chartable": true, "chart_type": "histogram", "strength": "weak", "reason": "распределение оценок белых вин"}
+{"id": "TS_6545", "chartable": true, "chart_type": "histogram", "strength": "weak", "reason": "распределение оценок белых вин"}
+{"id": "TS_6554", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "число вин по сортам винограда"}
+{"id": "TS_6555", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "число вин по сортам винограда"}
+{"id": "TS_6556", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "динамика средней цены по годам"}
+{"id": "TS_6557", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "средняя цена по годам"}
+{"id": "TS_6576", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "максимальные цена и оценка по годам"}
+{"id": "TS_6577", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "максимальные цена и оценка по годам"}
+{"id": "TS_6578", "chartable": true, "chart_type": "scatter", "strength": "weak", "reason": "64 апелласьона: связь средней цены и оценки"}
+{"id": "TS_6579", "chartable": true, "chart_type": "scatter", "strength": "weak", "reason": "64 апелласьона: связь средней цены и оценки"}
+{"id": "TS_6590", "chartable": false, "chart_type": null, "strength": null, "reason": "листинг вин, год лишь атрибут"}
+{"id": "TS_6591", "chartable": false, "chart_type": null, "strength": null, "reason": "листинг вин, год лишь атрибут"}
+{"id": "TS_6601", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "листинг станций с числом платформ"}
+{"id": "TS_6603", "chartable": true, "chart_type": "bar", "strength": "weak", "reason": "пассажиропоток пяти станций, листинг"}
+{"id": "TS_6606", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "суммы платформ и пассажиров по городам"}
+{"id": "TS_6613", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число поездов по станциям"}
+{"id": "TS_6673", "chartable": true, "chart_type": "pie", "strength": "strong", "reason": "доли клиентов по статусу"}
+{"id": "TS_6674", "chartable": true, "chart_type": "pie", "strength": "strong", "reason": "доли клиентов по статусу"}
+{"id": "TS_6697", "chartable": true, "chart_type": "pie", "strength": "strong", "reason": "доли платежей по способам оплаты"}
+{"id": "TS_6698", "chartable": true, "chart_type": "pie", "strength": "strong", "reason": "доли платежей по способам оплаты"}
+{"id": "TS_6724", "chartable": false, "chart_type": null, "strength": null, "reason": "телефоны — не мера, листинг"}
+{"id": "TS_6725", "chartable": false, "chart_type": null, "strength": null, "reason": "телефоны — не мера, листинг"}
+{"id": "TS_6726", "chartable": false, "chart_type": null, "strength": null, "reason": "только список id"}
+{"id": "TS_6727", "chartable": false, "chart_type": null, "strength": null, "reason": "только список id"}
+{"id": "TS_6736", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число преподавателей по зданиям"}
+{"id": "TS_6737", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число преподавателей по зданиям"}
+{"id": "TS_6742", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число преподавателей по должностям"}
+{"id": "TS_6743", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число преподавателей по должностям"}
+{"id": "TS_6744", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число по должности и полу, группированный"}
+{"id": "TS_6745", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число по должности и полу, группированный"}
+{"id": "TS_6748", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число магистров по полу"}
+{"id": "TS_6749", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число магистров по полу"}
+{"id": "TS_6756", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число студентов по наставникам"}
+{"id": "TS_6757", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число студентов по наставникам"}
+{"id": "TS_6758", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число студентов по должностям наставников"}
+{"id": "TS_6759", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число студентов по должностям наставников"}
+{"id": "TS_6762", "chartable": false, "chart_type": null, "strength": null, "reason": "только список id"}
+{"id": "TS_6763", "chartable": false, "chart_type": null, "strength": null, "reason": "только список id"}
+{"id": "TS_6764", "chartable": false, "chart_type": null, "strength": null, "reason": "только список id"}
+{"id": "TS_6765", "chartable": false, "chart_type": null, "strength": null, "reason": "только список id"}
+{"id": "TS_6772", "chartable": false, "chart_type": null, "strength": null, "reason": "только список id"}
+{"id": "TS_6773", "chartable": false, "chart_type": null, "strength": null, "reason": "только список id"}
+{"id": "TS_6774", "chartable": false, "chart_type": null, "strength": null, "reason": "только список id"}
+{"id": "TS_6775", "chartable": false, "chart_type": null, "strength": null, "reason": "только список id"}
+{"id": "TS_6780", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "число мероприятий по преподавателям"}
+{"id": "TS_6781", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "число мероприятий по преподавателям"}
+{"id": "TS_6782", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "число преподавателей по мероприятиям"}
+{"id": "TS_6783", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "число преподавателей по мероприятиям"}
+{"id": "TS_6788", "chartable": false, "chart_type": null, "strength": null, "reason": "только список id"}
+{"id": "TS_6789", "chartable": false, "chart_type": null, "strength": null, "reason": "только список id"}
+{"id": "TS_6790", "chartable": false, "chart_type": null, "strength": null, "reason": "только список id"}
+{"id": "TS_6791", "chartable": false, "chart_type": null, "strength": null, "reason": "только список id"}
+{"id": "TS_6802", "chartable": false, "chart_type": null, "strength": null, "reason": "только список id"}
+{"id": "TS_6803", "chartable": false, "chart_type": null, "strength": null, "reason": "только список id"}
+{"id": "TS_6836", "chartable": false, "chart_type": null, "strength": null, "reason": "топ без меры: в результате только id"}
+{"id": "TS_6837", "chartable": false, "chart_type": null, "strength": null, "reason": "топ без меры: в результате только id"}
+{"id": "TS_6846", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг стран по числу авиакомпаний, топ"}
+{"id": "TS_6847", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг стран по числу авиакомпаний, топ"}
+{"id": "TS_6848", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг стран по числу аэропортов, топ"}
+{"id": "TS_6849", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг стран по числу аэропортов, топ"}
+{"id": "TS_6850", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "1209 городов, осмыслен только топ рейтинга"}
+{"id": "TS_6851", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "1209 городов, осмыслен только топ рейтинга"}
+{"id": "TS_6856", "chartable": false, "chart_type": null, "strength": null, "reason": "445 городов без сортировки, нечитаемо"}
+{"id": "TS_6857", "chartable": false, "chart_type": null, "strength": null, "reason": "445 городов без сортировки, нечитаемо"}
+{"id": "TS_6864", "chartable": true, "chart_type": "histogram", "strength": "weak", "reason": "240 стран: распределение средней высоты"}
+{"id": "TS_6865", "chartable": true, "chart_type": "histogram", "strength": "weak", "reason": "240 стран: распределение средней высоты"}
+{"id": "TS_6868", "chartable": false, "chart_type": null, "strength": null, "reason": "547 пар страна-авиакомпания, слишком много"}
+{"id": "TS_6869", "chartable": false, "chart_type": null, "strength": null, "reason": "547 пар страна-авиакомпания, слишком много"}
+{"id": "TS_6918", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число заказов по товарам"}
+{"id": "TS_6919", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число заказов по товарам"}
+{"id": "TS_6920", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число заказов по товарам"}
+{"id": "TS_6921", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число заказов по товарам"}
+{"id": "TS_6934", "chartable": false, "chart_type": null, "strength": null, "reason": "номера счетов — коды, не мера"}
+{"id": "TS_6935", "chartable": false, "chart_type": null, "strength": null, "reason": "номера счетов — коды, не мера"}
+{"id": "TS_6938", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число заказов по клиентам"}
+{"id": "TS_6939", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число заказов по клиентам"}
+{"id": "TS_6969", "chartable": false, "chart_type": null, "strength": null, "reason": "листинг книг, год лишь атрибут"}
+{"id": "TS_6970", "chartable": false, "chart_type": null, "strength": null, "reason": "листинг книг, год лишь атрибут"}
+{"id": "TS_6971", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число книг по издателям"}
+{"id": "TS_6972", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число книг по издателям"}
+{"id": "TS_6975", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число книг по категориям"}
+{"id": "TS_6976", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число книг по категориям"}
+{"id": "TS_6983", "chartable": false, "chart_type": null, "strength": null, "reason": "листинг фильмов, бюджет не выводится"}
+{"id": "TS_6984", "chartable": false, "chart_type": null, "strength": null, "reason": "листинг фильмов, бюджет не выводится"}
+{"id": "TO_7131", "chartable": false, "chart_type": null, "strength": null, "reason": "одно значение для одного региона"}
+{"id": "TO_7132", "chartable": false, "chart_type": null, "strength": null, "reason": "одно значение для одного региона"}
+{"id": "TO_7285", "chartable": true, "chart_type": "histogram", "strength": "weak", "reason": "распределение плотности по 81 региону"}
+{"id": "TO_7374", "chartable": false, "chart_type": null, "strength": null, "reason": "значение для одного региона"}
+{"id": "TO_7486", "chartable": true, "chart_type": "histogram", "strength": "weak", "reason": "распределение высот наивысших точек"}
+{"id": "TO_7520", "chartable": true, "chart_type": "histogram", "strength": "weak", "reason": "распределение площадей 81 региона"}
+{"id": "TO_7531", "chartable": false, "chart_type": null, "strength": null, "reason": "значение для одного региона"}
+{"id": "TO_7537", "chartable": false, "chart_type": null, "strength": null, "reason": "значение для одного региона"}
+{"id": "TO_7563", "chartable": false, "chart_type": null, "strength": null, "reason": "значение для одного региона"}
+{"id": "TO_7586", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг авторов по числу статей"}
+{"id": "TO_7587", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг авторов по числу статей"}
+{"id": "TO_7588", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг авторов по числу статей"}
+{"id": "TO_7589", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг авторов по числу статей"}
+{"id": "TO_7590", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "перечень авторов с числом статей"}
+{"id": "TO_7591", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг авторов по числу статей"}
+{"id": "TO_7592", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг авторов по числу статей"}
+{"id": "TO_7593", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг авторов по числу статей"}
+{"id": "TO_7594", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг авторов по числу статей"}
+{"id": "TO_7595", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг авторов по числу статей"}
+{"id": "TO_7596", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг авторов по числу статей"}
+{"id": "TO_7605", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7606", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7607", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7608", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7609", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7610", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7611", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7612", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7613", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7676", "chartable": false, "chart_type": null, "strength": null, "reason": "список id ключевых фраз, не мера"}
+{"id": "TO_7677", "chartable": false, "chart_type": null, "strength": null, "reason": "список id ключевых фраз, не мера"}
+{"id": "TO_7678", "chartable": false, "chart_type": null, "strength": null, "reason": "список id ключевых фраз, не мера"}
+{"id": "TO_7679", "chartable": false, "chart_type": null, "strength": null, "reason": "список id ключевых фраз, не мера"}
+{"id": "TO_7680", "chartable": false, "chart_type": null, "strength": null, "reason": "список id ключевых фраз, не мера"}
+{"id": "TO_7681", "chartable": false, "chart_type": null, "strength": null, "reason": "список id ключевых фраз, не мера"}
+{"id": "TO_7682", "chartable": false, "chart_type": null, "strength": null, "reason": "список id ключевых фраз, не мера"}
+{"id": "TO_7683", "chartable": false, "chart_type": null, "strength": null, "reason": "список id ключевых фраз, не мера"}
+{"id": "TO_7684", "chartable": false, "chart_type": null, "strength": null, "reason": "список id ключевых фраз, не мера"}
+{"id": "TO_7685", "chartable": false, "chart_type": null, "strength": null, "reason": "список id ключевых фраз, не мера"}
+{"id": "TO_7686", "chartable": false, "chart_type": null, "strength": null, "reason": "список id ключевых фраз, не мера"}
+{"id": "TO_7687", "chartable": false, "chart_type": null, "strength": null, "reason": "список id ключевых фраз, не мера"}
+{"id": "TO_7688", "chartable": false, "chart_type": null, "strength": null, "reason": "список id ключевых фраз, не мера"}
+{"id": "TO_7718", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7719", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7720", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7721", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7722", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7723", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7724", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7725", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7726", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7727", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7728", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7729", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7730", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7731", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7732", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7733", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7734", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7735", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7736", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7737", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7738", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7739", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7740", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7741", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7742", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7743", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7744", "chartable": false, "chart_type": null, "strength": null, "reason": "id ключевых фраз с годом, не мера"}
+{"id": "TO_7745", "chartable": false, "chart_type": null, "strength": null, "reason": "листинг тем одного автора с годом"}
+{"id": "TO_7746", "chartable": false, "chart_type": null, "strength": null, "reason": "листинг тем одного автора с годом"}
+{"id": "TO_7747", "chartable": false, "chart_type": null, "strength": null, "reason": "листинг тем одного автора с годом"}
+{"id": "TO_7748", "chartable": false, "chart_type": null, "strength": null, "reason": "id статей одного автора, не мера"}
+{"id": "TO_7749", "chartable": false, "chart_type": null, "strength": null, "reason": "id статей одного автора, не мера"}
+{"id": "TO_7750", "chartable": false, "chart_type": null, "strength": null, "reason": "id статей одного автора, не мера"}
+{"id": "TO_7751", "chartable": false, "chart_type": null, "strength": null, "reason": "id статей одного автора, не мера"}
+{"id": "TO_7752", "chartable": false, "chart_type": null, "strength": null, "reason": "id статей одного автора, не мера"}
+{"id": "TO_7753", "chartable": false, "chart_type": null, "strength": null, "reason": "id статей одного автора, не мера"}
+{"id": "TO_7766", "chartable": false, "chart_type": null, "strength": null, "reason": "пары id автора и статьи, не мера"}
+{"id": "TO_7767", "chartable": false, "chart_type": null, "strength": null, "reason": "пары id автора и статьи, не мера"}
+{"id": "TO_7768", "chartable": false, "chart_type": null, "strength": null, "reason": "пары id автора и статьи, не мера"}
+{"id": "TO_7769", "chartable": false, "chart_type": null, "strength": null, "reason": "пары id автора и статьи, не мера"}
+{"id": "TO_7770", "chartable": false, "chart_type": null, "strength": null, "reason": "пары id автора и статьи, не мера"}
+{"id": "TO_7771", "chartable": false, "chart_type": null, "strength": null, "reason": "пары id автора и статьи, не мера"}
+{"id": "TO_7788", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7789", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7790", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7791", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7792", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7793", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7794", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7795", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7796", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7798", "chartable": false, "chart_type": null, "strength": null, "reason": "список id ключевых фраз, не мера"}
+{"id": "TO_7799", "chartable": false, "chart_type": null, "strength": null, "reason": "список id ключевых фраз, не мера"}
+{"id": "TO_7800", "chartable": false, "chart_type": null, "strength": null, "reason": "список id ключевых фраз, не мера"}
+{"id": "TO_7801", "chartable": false, "chart_type": null, "strength": null, "reason": "список id ключевых фраз, не мера"}
+{"id": "TO_7802", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг авторов по цитированиям, топ"}
+{"id": "TO_7807", "chartable": false, "chart_type": null, "strength": null, "reason": "список id авторов, не мера"}
+{"id": "TO_7808", "chartable": false, "chart_type": null, "strength": null, "reason": "список id авторов, не мера"}
+{"id": "TO_7809", "chartable": false, "chart_type": null, "strength": null, "reason": "список id авторов, не мера"}
+{"id": "TO_7810", "chartable": false, "chart_type": null, "strength": null, "reason": "список id авторов, не мера"}
+{"id": "TO_7811", "chartable": false, "chart_type": null, "strength": null, "reason": "список id авторов, не мера"}
+{"id": "TO_7812", "chartable": false, "chart_type": null, "strength": null, "reason": "список id авторов, не мера"}
+{"id": "TO_7813", "chartable": false, "chart_type": null, "strength": null, "reason": "список id авторов, не мера"}
+{"id": "TO_7814", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7852", "chartable": false, "chart_type": null, "strength": null, "reason": "поиск первой статьи, id и год"}
+{"id": "TO_7853", "chartable": false, "chart_type": null, "strength": null, "reason": "поиск первой статьи, id и год"}
+{"id": "TO_7854", "chartable": false, "chart_type": null, "strength": null, "reason": "список id датасетов, не мера"}
+{"id": "TO_7855", "chartable": false, "chart_type": null, "strength": null, "reason": "список id датасетов, не мера"}
+{"id": "TO_7863", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "число статей nips по годам"}
+{"id": "TO_7864", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "число статей nips по годам"}
+{"id": "TO_7865", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "число статей nips по годам"}
+{"id": "TO_7866", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "число статей nips по годам"}
+{"id": "TO_7867", "chartable": false, "chart_type": null, "strength": null, "reason": "список id соавторов, не мера"}
+{"id": "TO_7868", "chartable": false, "chart_type": null, "strength": null, "reason": "список id соавторов, не мера"}
+{"id": "TO_7869", "chartable": false, "chart_type": null, "strength": null, "reason": "список id соавторов, не мера"}
+{"id": "TO_7870", "chartable": false, "chart_type": null, "strength": null, "reason": "список id соавторов, не мера"}
+{"id": "TO_7871", "chartable": false, "chart_type": null, "strength": null, "reason": "список id соавторов, не мера"}
+{"id": "TO_7872", "chartable": false, "chart_type": null, "strength": null, "reason": "список id соавторов, не мера"}
+{"id": "TO_7873", "chartable": false, "chart_type": null, "strength": null, "reason": "список id соавторов, не мера"}
+{"id": "TO_7874", "chartable": false, "chart_type": null, "strength": null, "reason": "список id соавторов, не мера"}
+{"id": "TO_7875", "chartable": false, "chart_type": null, "strength": null, "reason": "список id соавторов, не мера"}
+{"id": "TO_7876", "chartable": false, "chart_type": null, "strength": null, "reason": "список id соавторов, не мера"}
+{"id": "TO_7877", "chartable": false, "chart_type": null, "strength": null, "reason": "список id соавторов, не мера"}
+{"id": "TO_7878", "chartable": false, "chart_type": null, "strength": null, "reason": "список id соавторов, не мера"}
+{"id": "TO_7879", "chartable": false, "chart_type": null, "strength": null, "reason": "список id соавторов, не мера"}
+{"id": "TO_7880", "chartable": false, "chart_type": null, "strength": null, "reason": "список id соавторов, не мера"}
+{"id": "TO_7888", "chartable": false, "chart_type": null, "strength": null, "reason": "две статьи с годом, поиск"}
+{"id": "TO_7889", "chartable": false, "chart_type": null, "strength": null, "reason": "две статьи с годом, поиск"}
+{"id": "TO_7890", "chartable": false, "chart_type": null, "strength": null, "reason": "две статьи с годом, поиск"}
+{"id": "TO_7891", "chartable": false, "chart_type": null, "strength": null, "reason": "две статьи с годом, поиск"}
+{"id": "TO_7892", "chartable": false, "chart_type": null, "strength": null, "reason": "две статьи с годом, поиск"}
+{"id": "TO_7893", "chartable": false, "chart_type": null, "strength": null, "reason": "две статьи с годом, поиск"}
+{"id": "TO_7894", "chartable": false, "chart_type": null, "strength": null, "reason": "две статьи с годом, поиск"}
+{"id": "TO_7895", "chartable": false, "chart_type": null, "strength": null, "reason": "две статьи с годом, поиск"}
+{"id": "TO_7896", "chartable": false, "chart_type": null, "strength": null, "reason": "две статьи с годом, поиск"}
+{"id": "TO_7897", "chartable": false, "chart_type": null, "strength": null, "reason": "две статьи с годом, поиск"}
+{"id": "TO_7898", "chartable": false, "chart_type": null, "strength": null, "reason": "две статьи с годом, поиск"}
+{"id": "TO_7899", "chartable": false, "chart_type": null, "strength": null, "reason": "список лет публикаций, нет меры"}
+{"id": "TO_7900", "chartable": false, "chart_type": null, "strength": null, "reason": "список лет публикаций, нет меры"}
+{"id": "TO_7901", "chartable": false, "chart_type": null, "strength": null, "reason": "листинг трёх статей с годом"}
+{"id": "TO_7902", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "число статей автора по годам"}
+{"id": "TO_7903", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "число статей автора по годам"}
+{"id": "TO_7904", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "число статей автора по годам"}
+{"id": "TO_7911", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7912", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг авторов по числу статей"}
+{"id": "TO_7913", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг авторов по числу статей"}
+{"id": "TO_7914", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг авторов по числу статей"}
+{"id": "TO_7921", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг тем автора по частоте"}
+{"id": "TO_7923", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг статей по цитированиям"}
+{"id": "TO_7924", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "перечень статей с числом цитирований"}
+{"id": "TO_7925", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "перечень статей с числом цитирований"}
+{"id": "TO_7926", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг статей по цитированиям"}
+{"id": "TO_7927", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг статей по цитированиям"}
+{"id": "TO_7928", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг статей по цитированиям"}
+{"id": "TO_7929", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг статей по цитированиям"}
+{"id": "TO_7930", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг статей по цитированиям"}
+{"id": "TO_7931", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг статей по цитированиям"}
+{"id": "TO_7932", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг статей по цитированиям"}
+{"id": "TO_7933", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг статей по цитированиям"}
+{"id": "TO_7934", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг статей по цитированиям"}
+{"id": "TO_7946", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число статей acl по авторам"}
+{"id": "TO_7947", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число статей acl по авторам"}
+{"id": "TO_7948", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число статей acl по авторам"}
+{"id": "TO_7957", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7958", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7969", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "темы acl 2014 с числом статей"}
+{"id": "TO_7977", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7978", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7979", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7980", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7981", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7982", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7983", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7984", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7985", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7989", "chartable": false, "chart_type": null, "strength": null, "reason": "листинг авторов и id статей"}
+{"id": "TO_7990", "chartable": false, "chart_type": null, "strength": null, "reason": "листинг авторов и id статей"}
+{"id": "TO_7991", "chartable": false, "chart_type": null, "strength": null, "reason": "листинг авторов и id статей"}
+{"id": "TO_7992", "chartable": false, "chart_type": null, "strength": null, "reason": "листинг авторов и id статей"}
+{"id": "TO_7993", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_7997", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг цитирующих авторов"}
+{"id": "TO_7998", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг цитирующих авторов"}
+{"id": "TO_8003", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_8004", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_8005", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_8006", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_8007", "chartable": false, "chart_type": null, "strength": null, "reason": "три статьи с годом, листинг"}
+{"id": "TO_8024", "chartable": false, "chart_type": null, "strength": null, "reason": "список id журналов, не мера"}
+{"id": "TO_8025", "chartable": false, "chart_type": null, "strength": null, "reason": "список id журналов, не мера"}
+{"id": "TO_8035", "chartable": false, "chart_type": null, "strength": null, "reason": "список id авторов, не мера"}
+{"id": "TO_8036", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_8040", "chartable": false, "chart_type": null, "strength": null, "reason": "список id авторов, не мера"}
+{"id": "TO_8041", "chartable": false, "chart_type": null, "strength": null, "reason": "список id авторов, не мера"}
+{"id": "TO_8045", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг ключевых фраз по цитированиям"}
+{"id": "TO_8046", "chartable": false, "chart_type": null, "strength": null, "reason": "список id журналов, не мера"}
+{"id": "TO_8047", "chartable": false, "chart_type": null, "strength": null, "reason": "список id журналов, не мера"}
+{"id": "TO_8055", "chartable": false, "chart_type": null, "strength": null, "reason": "список id авторов, не мера"}
+{"id": "TO_8056", "chartable": false, "chart_type": null, "strength": null, "reason": "список id авторов, не мера"}
+{"id": "TO_8057", "chartable": false, "chart_type": null, "strength": null, "reason": "список id авторов, не мера"}
+{"id": "TO_8058", "chartable": false, "chart_type": null, "strength": null, "reason": "список id авторов, не мера"}
+{"id": "TO_8059", "chartable": false, "chart_type": null, "strength": null, "reason": "список id авторов, не мера"}
+{"id": "TO_8060", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число статей по площадкам"}
+{"id": "TO_8068", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "рейтинг авторов по числу статей"}
+{"id": "TO_8069", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "рейтинг авторов по числу статей"}
+{"id": "TO_8070", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "рейтинг авторов по числу статей"}
+{"id": "TO_8071", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "рейтинг авторов по числу статей"}
+{"id": "TO_8072", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "число статей автора по годам"}
+{"id": "TO_8073", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "число статей автора по годам"}
+{"id": "TO_8074", "chartable": false, "chart_type": null, "strength": null, "reason": "список id площадок, не мера"}
+{"id": "TO_8075", "chartable": false, "chart_type": null, "strength": null, "reason": "поиск года первой статьи"}
+{"id": "TO_8076", "chartable": false, "chart_type": null, "strength": null, "reason": "поиск года первой статьи"}
+{"id": "TO_8077", "chartable": false, "chart_type": null, "strength": null, "reason": "поиск года первой статьи"}
+{"id": "TO_8078", "chartable": false, "chart_type": null, "strength": null, "reason": "поиск года первой статьи"}
+{"id": "TO_8079", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_8080", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_8081", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_8082", "chartable": false, "chart_type": null, "strength": null, "reason": "список id площадок, не мера"}
+{"id": "TO_8083", "chartable": false, "chart_type": null, "strength": null, "reason": "список id площадок, не мера"}
+{"id": "TO_8084", "chartable": false, "chart_type": null, "strength": null, "reason": "список id площадок, не мера"}
+{"id": "TO_8085", "chartable": false, "chart_type": null, "strength": null, "reason": "список id площадок, не мера"}
+{"id": "TO_8088", "chartable": false, "chart_type": null, "strength": null, "reason": "пары id статьи и автора, не мера"}
+{"id": "TO_8090", "chartable": false, "chart_type": null, "strength": null, "reason": "список id авторов, не мера"}
+{"id": "TO_8091", "chartable": false, "chart_type": null, "strength": null, "reason": "список id авторов, не мера"}
+{"id": "TO_8092", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "рейтинг тем автора по цитированиям"}
+{"id": "TO_8093", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "темы автора с суммой цитирований"}
+{"id": "TO_8095", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_8102", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_8105", "chartable": false, "chart_type": null, "strength": null, "reason": "поиск последней площадки автора"}
+{"id": "TO_8106", "chartable": false, "chart_type": null, "strength": null, "reason": "список id ключевых фраз, не мера"}
+{"id": "TO_8112", "chartable": true, "chart_type": "bar", "strength": "weak", "reason": "две статьи с числом, мало точек"}
+{"id": "TO_8114", "chartable": false, "chart_type": null, "strength": null, "reason": "одна статья, поиск лучшей темы"}
+{"id": "TO_8121", "chartable": false, "chart_type": null, "strength": null, "reason": "список id соавторов, не мера"}
+{"id": "TO_8123", "chartable": false, "chart_type": null, "strength": null, "reason": "поиск последнего журнала автора"}
+{"id": "TO_8129", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "число статей по годам"}
+{"id": "TO_8130", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_8131", "chartable": false, "chart_type": null, "strength": null, "reason": "список id статей, числа — коды"}
+{"id": "TO_8192", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "посетители по дням недели"}
+{"id": "TO_8196", "chartable": false, "chart_type": null, "strength": null, "reason": "точечное значение для одного заведения"}
+{"id": "TO_8213", "chartable": false, "chart_type": null, "strength": null, "reason": "точечное значение для одного заведения"}
+{"id": "TO_8231", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "число рекомендаций по месяцам"}
+{"id": "TO_8318", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "число работ автора по годам"}
+{"id": "TO_8364", "chartable": false, "chart_type": null, "strength": null, "reason": "цитирования двух статей без названий"}
+{"id": "TO_8370", "chartable": false, "chart_type": null, "strength": null, "reason": "цитирования двух статей без названий"}
+{"id": "TO_8555", "chartable": false, "chart_type": null, "strength": null, "reason": "номера домов — не мера, листинг"}
+{"id": "TO_8556", "chartable": false, "chart_type": null, "strength": null, "reason": "номера домов — не мера, листинг"}
+{"id": "TO_8557", "chartable": false, "chart_type": null, "strength": null, "reason": "номера домов — не мера, листинг"}
+{"id": "TO_8563", "chartable": false, "chart_type": null, "strength": null, "reason": "номера домов — не мера, листинг"}
+{"id": "TO_8564", "chartable": false, "chart_type": null, "strength": null, "reason": "номера домов — не мера, листинг"}
+{"id": "TO_8599", "chartable": false, "chart_type": null, "strength": null, "reason": "номера домов — не мера, листинг"}
+{"id": "TO_8600", "chartable": false, "chart_type": null, "strength": null, "reason": "номера домов — не мера, листинг"}
+{"id": "TO_8601", "chartable": false, "chart_type": null, "strength": null, "reason": "номера домов — не мера, листинг"}
+{"id": "TO_8602", "chartable": false, "chart_type": null, "strength": null, "reason": "номера домов — не мера, листинг"}
+{"id": "B_0029", "chartable": false, "chart_type": null, "strength": null, "reason": "список id врачей, не мера"}
+{"id": "B_0030", "chartable": false, "chart_type": null, "strength": null, "reason": "список id врачей, не мера"}
+{"id": "T_0003", "chartable": false, "chart_type": null, "strength": null, "reason": "номера поездов — коды"}
+{"id": "T_0007", "chartable": true, "chart_type": "line", "strength": "weak", "reason": "визиты по датам, все значения по 1"}
+{"id": "T_0021", "chartable": true, "chart_type": "line", "strength": "weak", "reason": "письма по датам, все значения по 1"}
+{"id": "T_0032", "chartable": false, "chart_type": null, "strength": null, "reason": "коды классов, не мера"}
+{"id": "F_0002", "chartable": false, "chart_type": null, "strength": null, "reason": "id пилотов и самолётов, не мера"}
+{"id": "F_0015", "chartable": false, "chart_type": null, "strength": null, "reason": "точечное значение за один год"}
+{"id": "F_0016", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "доли бюджета по годам"}
+{"id": "F_0018", "chartable": false, "chart_type": null, "strength": null, "reason": "id инструкторов — коды, листинг"}
+{"id": "F_0043", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "голоса по кандидатам"}
+{"id": "F_0061", "chartable": false, "chart_type": null, "strength": null, "reason": "только id, не мера"}
+{"id": "F_0062", "chartable": false, "chart_type": null, "strength": null, "reason": "только id, не мера"}
+{"id": "L_0016", "chartable": false, "chart_type": null, "strength": null, "reason": "список сезонов, нет меры"}

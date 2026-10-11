@@ -1,0 +1,2063 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Разбор прогона NL2SQL</title>
+<style>
+:root {
+  color-scheme: light;
+  --surface:#fcfcfb; --plane:#f9f9f7; --ink:#0b0b0b; --ink2:#52514e; --muted:#898781;
+  --grid:#e1e0d9; --line:rgba(11,11,11,.10);
+  --mine:#2a78d6; --his:#eb6834; --base:#898781;
+  --ok:#0ca30c; --bad:#d03b3b; --warn:#fab219;
+  --wash:rgba(42,120,214,.08); --wash-bad:rgba(208,59,59,.08);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  color-scheme: dark;
+  --surface:#1a1a19; --plane:#0d0d0d; --ink:#fff; --ink2:#c3c2b7; --muted:#898781;
+  --grid:#2c2c2a; --line:rgba(255,255,255,.10);
+  --mine:#3987e5; --his:#d95926;
+  --wash:rgba(57,135,229,.12); --wash-bad:rgba(208,59,59,.14);
+}}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --surface:#1a1a19; --plane:#0d0d0d; --ink:#fff; --ink2:#c3c2b7; --muted:#898781;
+  --grid:#2c2c2a; --line:rgba(255,255,255,.10);
+  --mine:#3987e5; --his:#d95926;
+  --wash:rgba(57,135,229,.12); --wash-bad:rgba(208,59,59,.14);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--plane);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 80px}
+h1{font-size:28px;margin:0 0 6px;letter-spacing:-.02em}
+h2{font-size:19px;margin:34px 0 12px;letter-spacing:-.01em}
+.sub{color:var(--ink2);margin:0 0 22px;max-width:80ch}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+code{background:var(--wash);padding:1px 5px;border-radius:4px;font-size:.88em}
+pre{background:var(--surface);border:1px solid var(--line);border-radius:8px;
+  padding:10px 12px;overflow-x:auto;font-size:12.5px;line-height:1.5;margin:0;white-space:pre-wrap;word-break:break-word}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--grid);vertical-align:top}
+th{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;letter-spacing:.04em}
+.tag.mine{background:var(--wash);color:var(--mine)}
+.tag.his{background:rgba(235,104,52,.10);color:var(--his)}
+.tag.base{background:rgba(137,135,129,.14);color:var(--muted)}
+.stats{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:8px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.stat .v{font-size:30px;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat .l{font-size:12px;color:var(--ink2);margin-top:6px}
+.bar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--plane) 92%,transparent);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 0;margin-bottom:18px;
+  display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+select,button{font:inherit;font-size:13px;padding:6px 11px;border-radius:8px;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+button:hover{border-color:var(--mine)}
+button.primary{background:var(--mine);color:#fff;border-color:var(--mine)}
+.q{font-size:16px;font-weight:600;margin:0 0 4px;letter-spacing:-.01em}
+.meta{font-size:12.5px;color:var(--muted);margin-bottom:12px;display:flex;gap:14px;flex-wrap:wrap}
+.meta b{color:var(--ink2);font-weight:600}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:860px){.cols{grid-template-columns:1fr}}
+.lbl{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:5px}
+.verdicts{display:flex;gap:22px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px solid var(--grid)}
+.vgroup{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.vgroup .name{font-size:12.5px;color:var(--ink2);margin-right:2px}
+.opt{border:1px solid var(--line);background:var(--surface);border-radius:20px;padding:4px 13px;font-size:13px}
+.opt[aria-pressed="true"].yes{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt[aria-pressed="true"].no{background:var(--bad);border-color:var(--bad);color:#fff}
+.note{width:100%;margin-top:10px;font:inherit;font-size:13px;padding:7px 10px;border-radius:8px;
+  border:1px solid var(--line);background:var(--plane);color:var(--ink);resize:vertical;min-height:34px}
+.auto{font-size:12px;padding:2px 8px;border-radius:20px}
+.auto.y{background:rgba(12,163,12,.14);color:var(--ok)}
+.auto.n{background:var(--wash-bad);color:var(--bad)}
+.rows{font-size:12px;max-height:180px;overflow:auto}
+.rows td,.rows th{padding:4px 8px;font-size:12px}
+details summary{cursor:pointer;color:var(--mine);font-size:13px}
+.pill{font-size:11.5px;color:var(--muted)}
+.err{color:var(--bad);font-size:13px}
+.hint{font-size:12.5px;color:var(--muted);margin-top:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Разбор прогона NL2SQL</h1>
+<p class="sub">Прогон через сервис: 40 гольд-вопросов
+из тестовой выборки KaggleDBQA. Для каждого видно, что и какой моделью сделано, и проставляются две оценки:
+<b>точность</b> (правильный ли ответ) и <b>шаблон</b> (совпадает ли структура запроса
+с эталонной). Оценки сохраняются в браузере и выгружаются в CSV или JSON.</p>
+
+<div class="stats">
+  <div class="stat"><div class="v" id="s-ex">—</div><div class="l">точность по вашим оценкам</div></div>
+  <div class="stat"><div class="v" id="s-acc">0</div><div class="l">отмечено «верно»</div></div>
+  <div class="stat"><div class="v" id="s-accno">0</div><div class="l">отмечено «неверно»</div></div>
+  <div class="stat"><div class="v" id="s-tpl">0</div><div class="l">шаблон совпал</div></div>
+  <div class="stat"><div class="v" id="s-tplno">0</div><div class="l">шаблон не совпал</div></div>
+  <div class="stat"><div class="v" id="s-done">0</div><div class="l">размечено полностью</div></div>
+</div>
+<p class="hint">Автоматическая оценка (сравнение результатов с эталоном, как в дипломе):
+<b>22 из 40 = 55.0%</b>. Она проставлена как
+подсказка на каждой карточке, но ни на что не влияет — итог считается по вашим отметкам.</p>
+
+<h2>Что откуда</h2>
+<div class="card">
+<table>
+<thead><tr><th>Этап</th><th>Кто выполняет</th><th>Модель</th><th>Происхождение</th></tr></thead>
+<tbody>
+<tr><td>Выбор таблиц (сужение схемы)</td><td>Агент-схемотехник</td><td><code>nl2sql-schema</code> = Qwen2.5-Coder-14B + <code>schema_adapter</code></td><td><span class="tag mine">твой диплом · LoRA на Spider</span></td></tr>
+<tr><td><b>Генерация SQL</b></td><td>Агент-программист</td><td><code>nl2sql-sql</code> = Qwen2.5-Coder-14B + <code>sql_adapter</code></td><td><span class="tag mine">твой диплом · LoRA на Spider</span></td></tr>
+<tr><td>Починка SQL по ошибке движка</td><td>Агент-критик</td><td><code>nl2sql-critic</code> = Qwen2.5-Coder-14B + <code>critic_adapter</code></td><td><span class="tag mine">твой диплом · LoRA на Spider</span></td></tr>
+<tr><td>Описания таблиц и колонок в промпте</td><td>Schema Profiler (заранее)</td><td>LLM-генерация, кэш <code>BD_profiles/*.json</code></td><td><span class="tag mine">твой диплом</span></td></tr>
+<tr><td>Исполнение SQL, лимиты, валидация</td><td><code>connector</code> + <code>safety</code></td><td>—</td><td><span class="tag base">детерминированный код</span></td></tr>
+<tr><td>pandas-код (подготовка таблицы)</td><td>агент <code>data_understanding</code></td><td><code>qwen2.5-coder:14b</code>, <b>без адаптеров</b></td><td><span class="tag base">базовая модель</span></td></tr>
+<tr><td>matplotlib-код (рисование)</td><td>агент <code>plot_planner</code></td><td><code>qwen2.5-coder:14b</code>, <b>без адаптеров</b></td><td><span class="tag base">базовая модель</span></td></tr>
+<tr><td>Архитектура графиков, изоляция кода</td><td><code>chart_agent</code>, <code>code_executor</code></td><td>—</td><td><span class="tag his">диплом Матвея</span></td></tr>
+<tr><td>Визуальное улучшение графика</td><td><code>diffusion_service</code></td><td>FLUX.2 [Klein] 9B + LoRA rank 16</td><td><span class="tag his">диплом Матвея · выключено</span></td></tr>
+</tbody>
+</table>
+<p class="hint">В этом прогоне участвовали только первые пять строк: вопросы шли прямо в
+<code>sql_agent</code>, без построения графиков.</p>
+</div>
+
+<h2>Вопросы</h2>
+<div class="bar">
+  <select id="f-db"><option value="*">все базы</option><option value="GeoNuclearData">GeoNuclearData</option><option value="GreaterManchesterCrime">GreaterManchesterCrime</option><option value="Pesticide">Pesticide</option><option value="StudentMathScore">StudentMathScore</option><option value="TheHistoryofBaseball">TheHistoryofBaseball</option><option value="USWildFires">USWildFires</option><option value="WhatCDHipHop">WhatCDHipHop</option><option value="WorldSoccerDataBase">WorldSoccerDataBase</option></select>
+  <select id="f-state">
+    <option value="*">все</option>
+    <option value="unjudged">не размечено</option>
+    <option value="judged">размечено</option>
+    <option value="disagree">расхожусь с авто-оценкой</option>
+    <option value="autofail">авто-оценка «не совпало»</option>
+  </select>
+  <button id="b-csv" class="primary">Выгрузить CSV</button>
+  <button id="b-json">JSON</button>
+  <button id="b-reset">Сбросить</button>
+  <button id="b-theme">Тема</button>
+</div>
+
+<div class="card" data-id="q1">
+  <p class="q">1. Which country has the most capacities of nuclear power plants?</p>
+  <div class="meta">
+    <span><b>база</b> GeoNuclearData</span>
+    <span><b>таблицы</b> nuclear_power_plants</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>15.7с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT country FROM nuclear_power_plants GROUP BY country ORDER BY sum(capacity) DESC LIMIT 1</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT Country FROM nuclear_power_plants GROUP BY Country ORDER BY sum(Capacity) DESC LIMIT 1</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>Country</th></tr></thead><tbody><tr><td>United States</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>United States</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q2">
+  <p class="q">2. Which country has the least capacities of nuclear power plants?</p>
+  <div class="meta">
+    <span><b>база</b> GeoNuclearData</span>
+    <span><b>таблицы</b> nuclear_power_plants</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>15.8с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT country FROM nuclear_power_plants GROUP BY country ORDER BY sum(capacity) ASC LIMIT 1</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT Country FROM nuclear_power_plants GROUP BY Country ORDER BY sum(Capacity) LIMIT 1</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>Country</th></tr></thead><tbody><tr><td>Egypt</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>Egypt</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q3">
+  <p class="q">3. What are the top 3 countries which have the most nuclear power plants?</p>
+  <div class="meta">
+    <span><b>база</b> GeoNuclearData</span>
+    <span><b>таблицы</b> nuclear_power_plants</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>15.5с</b></span>
+    <span class="auto n">авто: не совпало</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT country FROM nuclear_power_plants GROUP BY country ORDER BY count(*) DESC LIMIT 3</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT Country FROM nuclear_power_plants GROUP BY Country ORDER BY sum(Name) DESC LIMIT 3</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 3</div>
+      <div class="rows"><table><thead><tr><th>Country</th></tr></thead><tbody><tr><td>United States</td></tr><tr><td>People&#x27;s Republic of China</td></tr><tr><td>France</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>United States</td></tr><tr><td>United Kingdom of Great Britain and Northern Ireland</td></tr><tr><td>United Arab Emirates</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q4">
+  <p class="q">4. Which country has the most nuclear station?</p>
+  <div class="meta">
+    <span><b>база</b> GeoNuclearData</span>
+    <span><b>таблицы</b> nuclear_power_plants</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>15.3с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT country FROM nuclear_power_plants GROUP BY country ORDER BY count(*) DESC LIMIT 1</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT Country FROM nuclear_power_plants GROUP BY Country ORDER BY count(Name) DESC LIMIT 1</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>Country</th></tr></thead><tbody><tr><td>United States</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>United States</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q5">
+  <p class="q">5. Which county has the most nuclear station shut down?</p>
+  <div class="meta">
+    <span><b>база</b> GeoNuclearData</span>
+    <span><b>таблицы</b> nuclear_power_plants</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>16.1с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT country FROM nuclear_power_plants WHERE status  =  &#x27;Shutdown&#x27; GROUP BY country ORDER BY count(*) DESC LIMIT 1</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT Country FROM nuclear_power_plants WHERE Status = &quot;Shutdown&quot; GROUP BY Country ORDER BY count(Name) DESC LIMIT 1</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>Country</th></tr></thead><tbody><tr><td>United States</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>United States</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q6">
+  <p class="q">6. What time do most of the crimes happen?</p>
+  <div class="meta">
+    <span><b>база</b> GreaterManchesterCrime</span>
+    <span><b>таблицы</b> GreaterManchesterCrime</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>13.9с</b></span>
+    <span class="auto n">авто: не совпало</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT strftime(&#x27;%H&#x27;, CrimeTS) AS CrimeHour ,  COUNT(*) FROM GreaterManchesterCrime GROUP BY CrimeHour ORDER BY COUNT(*) DESC LIMIT 1;</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT CrimeTS FROM GreaterManchesterCrime GROUP BY CrimeTS ORDER BY count(*) DESC LIMIT 1</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>CrimeHour</th><th>COUNT(*)</th></tr></thead><tbody><tr><td>16</td><td>249</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>2018-08-28 06:10:46</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q7">
+  <p class="q">7. What are the most likely outcome of the police investigation if the crime happen on &quot;street&quot;?</p>
+  <div class="meta">
+    <span><b>база</b> GreaterManchesterCrime</span>
+    <span><b>таблицы</b> GreaterManchesterCrime</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>14.7с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT Outcome FROM GreaterManchesterCrime WHERE Location LIKE &quot;%Street%&quot; GROUP BY Outcome ORDER BY COUNT(*) DESC LIMIT 1</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT Outcome FROM GreaterManchesterCrime WHERE Location LIKE &quot;%Street%&quot; GROUP BY Outcome ORDER BY count(*) DESC LIMIT 1</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>Outcome</th></tr></thead><tbody><tr><td>Investigation complete; no suspect identified</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>Investigation complete; no suspect identified</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q8">
+  <p class="q">8. Which type of crime happen the most in Salford?</p>
+  <div class="meta">
+    <span><b>база</b> GreaterManchesterCrime</span>
+    <span><b>таблицы</b> GreaterManchesterCrime</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>14.0с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT TYPE FROM GreaterManchesterCrime WHERE LSOA LIKE &#x27;Salford%&#x27; GROUP BY TYPE ORDER BY COUNT(*) DESC LIMIT 1</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT Type FROM GreaterManchesterCrime WHERE LSOA LIKE &quot;%Salford%&quot; GROUP BY Type ORDER BY count(*) DESC LIMIT 1</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>Type</th></tr></thead><tbody><tr><td>Violence and sexual offences</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>Violence and sexual offences</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q9">
+  <p class="q">9. How many crimes are under investigation?</p>
+  <div class="meta">
+    <span><b>база</b> GreaterManchesterCrime</span>
+    <span><b>таблицы</b> GreaterManchesterCrime</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>13.2с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT count(*) FROM GreaterManchesterCrime WHERE Outcome  =  &#x27;Under investigation&#x27;</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT count(*) FROM GreaterManchesterCrime WHERE Outcome = &quot;Under investigation&quot;</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>count(*)</th></tr></thead><tbody><tr><td>1466</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>1466</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q10">
+  <p class="q">10. How many crimes has been conducted?</p>
+  <div class="meta">
+    <span><b>база</b> GreaterManchesterCrime</span>
+    <span><b>таблицы</b> GreaterManchesterCrime</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>13.3с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT count(*) FROM GreaterManchesterCrime</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT count(*) FROM GreaterManchesterCrime</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>count(*)</th></tr></thead><tbody><tr><td>5000</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>5000</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q11">
+  <p class="q">11. which foods are captured in the data set?</p>
+  <div class="meta">
+    <span><b>база</b> Pesticide</span>
+    <span><b>таблицы</b> sampledata15</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>19.1с</b></span>
+    <span class="auto n">авто: не совпало</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT DISTINCT variety FROM sampledata15</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT DISTINCT commod FROM sampledata15</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 200</div>
+      <div class="rows"><table><thead><tr><th>variety</th></tr></thead><tbody><tr><td>Fuji</td></tr><tr><td>Red Delicious</td></tr><tr><td>Granny Smith</td></tr><tr><td>N/A</td></tr><tr><td>Gala</td></tr><tr><td>Honeycrisp</td></tr><tr><td>Fancy</td></tr><tr><td>Fancy Gala</td></tr><tr><td>Extra Fancy</td></tr><tr><td>Braeburn</td></tr><tr><td>Jazz</td></tr><tr><td>Granny Smith EX Fanc</td></tr></tbody></table></div><div class="pill">…показано 12 из 20</div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>AP</td></tr><tr><td>CB</td></tr><tr><td>CH</td></tr><tr><td>CS</td></tr><tr><td>CU</td></tr><tr><td>CZ</td></tr><tr><td>GB</td></tr><tr><td>GF</td></tr><tr><td>GR</td></tr><tr><td>LT</td></tr><tr><td>NE</td></tr><tr><td>OG</td></tr></tbody></table></div><div class="pill">…показано 12 из 20</div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q12">
+  <p class="q">12. how many samples have unknown countries of origin?</p>
+  <div class="meta">
+    <span><b>база</b> Pesticide</span>
+    <span><b>таблицы</b> sampledata15</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>19.3с</b></span>
+    <span class="auto n">авто: не совпало</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT count(*) FROM sampledata15 WHERE country  =  &#x27;   &#x27;;</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT count(*) FROM sampledata15 WHERE origin = &quot;3&quot;</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>count(*)</th></tr></thead><tbody><tr><td>0</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>96</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q13">
+  <p class="q">13. Which are the top 10 commodities that have the highest residue during 2015?</p>
+  <div class="meta">
+    <span><b>база</b> Pesticide</span>
+    <span><b>таблицы</b> sampledata15, resultsdata15</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>26.6с</b></span>
+    <span class="auto n">авто: не совпало</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT T1.commod ,  sum(T2.concen) FROM sampledata15 AS T1 JOIN resultsdata15 AS T2 ON T1.sample_pk  =  T2.sample_pk WHERE T1.year  =  &quot;15&quot; GROUP BY T1.commod ORDER BY sum(T2.concen) DESC LIMIT 10;</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT T2.commod FROM resultsdata15 as T2 JOIN sampledata15 as T1 ON T1.sample_pk = T2.sample_pk WHERE T1.year = 15 GROUP BY T2.commod ORDER BY sum(T2.concen) DESC LIMIT 10</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 10</div>
+      <div class="rows"><table><thead><tr><th>commod</th><th>sum(T2.concen)</th></tr></thead><tbody><tr><td>SP</td><td>2549.201</td></tr><tr><td>PO</td><td>1285.6504</td></tr><tr><td>PE</td><td>865.8529</td></tr><tr><td>AP</td><td>856.45</td></tr><tr><td>ST</td><td>647.1699</td></tr><tr><td>NE</td><td>542.7053</td></tr><tr><td>PC</td><td>399.1825</td></tr><tr><td>GR</td><td>307.9287</td></tr><tr><td>CZ</td><td>225.2205</td></tr><tr><td>CH</td><td>201.1041</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>SP</td></tr><tr><td>PO</td></tr><tr><td>PE</td></tr><tr><td>AP</td></tr><tr><td>ST</td></tr><tr><td>NE</td></tr><tr><td>PC</td></tr><tr><td>GR</td></tr><tr><td>CZ</td></tr><tr><td>CH</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q14">
+  <p class="q">14. Name some imported commodities that are not found in the US.</p>
+  <div class="meta">
+    <span><b>база</b> Pesticide</span>
+    <span><b>таблицы</b> sampledata15</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>19.7с</b></span>
+    <span class="auto n">авто: не совпало</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT DISTINCT country ,  variety FROM sampledata15 WHERE origin != &#x27;1&#x27; AND country != &#x27;USA&#x27;;</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT commod FROM sampledata15 WHERE origin = 2 AND commod not in (SELECT commod FROM sampledata15 WHERE origin = 1)</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 200</div>
+      <div class="rows"><table><thead><tr><th>country</th><th>variety</th></tr></thead><tbody><tr><td>260</td><td>Ambrosia</td></tr><tr><td>275</td><td>Fuji</td></tr><tr><td>660</td><td>N/A</td></tr><tr><td>660</td><td>Envy</td></tr><tr><td>660</td><td>Braeburn</td></tr><tr><td>275</td><td>Ambrosia</td></tr><tr><td>260</td><td>Gala</td></tr><tr><td>660</td><td>Sonya/ Nevson</td></tr><tr><td>275</td><td>Gala</td></tr><tr><td>275</td><td>Royal Gala</td></tr><tr><td>275</td><td>Cripps Pink</td></tr><tr><td>660</td><td>Fuji</td></tr></tbody></table></div><div class="pill">…показано 12 из 20</div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="pill">— пусто —</div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q15">
+  <p class="q">15. Tell me the average pesticide residue for each state in the US where food is grown.</p>
+  <div class="meta">
+    <span><b>база</b> Pesticide</span>
+    <span><b>таблицы</b> sampledata15, resultsdata15</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>25.4с</b></span>
+    <span class="auto n">авто: не совпало</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT T1.state ,  avg(T2.concen) FROM sampledata15 AS T1 JOIN resultsdata15 AS T2 ON T1.sample_pk  =  T2.sample_pk GROUP BY T1.state</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT T1.growst, avg(T2.concen) FROM sampledata15 as T1 JOIN resultsdata15 as T2 ON T1.sample_pk = T2.sample_pk GROUP BY T1.growst</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 10</div>
+      <div class="rows"><table><thead><tr><th>state</th><th>avg(T2.concen)</th></tr></thead><tbody><tr><td>CA</td><td>0.00329611511385764</td></tr><tr><td>CO</td><td>0.0039033692187735117</td></tr><tr><td>FL</td><td>0.004172087467556255</td></tr><tr><td>MD</td><td>0.003334450393370947</td></tr><tr><td>MI</td><td>0.0037124960045612793</td></tr><tr><td>NC</td><td>0.001191471239783057</td></tr><tr><td>NY</td><td>0.0034501609005087395</td></tr><tr><td>OH</td><td>0.003669669285420283</td></tr><tr><td>TX</td><td>0.0037512971180494368</td></tr><tr><td>WA</td><td>0.0034520176048181603</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th><th>кол. 2</th></tr></thead><tbody><tr><td></td><td>0.0037705806795344486</td></tr><tr><td>AL</td><td>6.157635467980295e-05</td></tr><tr><td>AR</td><td>0.00022058823529411763</td></tr><tr><td>AZ</td><td>7.311320754716982e-05</td></tr><tr><td>CA</td><td>0.0016935391861716074</td></tr><tr><td>CO</td><td>0.0021061699258260284</td></tr><tr><td>FL</td><td>0.00082813501668084</td></tr><tr><td>GA</td><td>0.00048399820708202603</td></tr><tr><td>ID</td><td>0.01117563953488372</td></tr><tr><td>IN</td><td>0.0018923444976076554</td></tr><tr><td>MA</td><td>0.0016211822660098523</td></tr><tr><td>ME</td><td>0.0050591133004926105</td></tr></tbody></table></div><div class="pill">…показано 12 из 20</div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q16">
+  <p class="q">16. Which school district receive the most of federal revenue through state in Wisconsin?</p>
+  <div class="meta">
+    <span><b>база</b> StudentMathScore</span>
+    <span><b>таблицы</b> FINREV_FED_17</span>
+    <span><b>попыток критика</b> 3</span>
+    <span><b>профиль</b> да</span>
+    <span><b>27.9с</b></span>
+    <span class="auto n">авто: не совпало</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT school_district FROM finrev_fed_17 WHERE state_code  =  55 ORDER BY t_fed_rev DESC LIMIT 1</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT T1.school_district FROM FINREV_FED_17 as T1 JOIN FINREV_FED_KEY_17 as T2 ON T1.state_code = T2.state_code WHERE T2.state = &quot;Wisconsin&quot; ORDER BY T1.t_fed_rev DESC LIMIT 1</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 0</div>
+      <div class="pill">— пусто —</div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>MILWAUKEE CITY SCHOOL DISTRICT</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q17">
+  <p class="q">17. What is the average Title 1 fund in Virginia?</p>
+  <div class="meta">
+    <span><b>база</b> StudentMathScore</span>
+    <span><b>таблицы</b> FINREV_FED_17</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>16.8с</b></span>
+    <span class="auto n">авто: не совпало</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT avg(c14) FROM finrev_fed_17 WHERE state_code  =  51</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT avg(T1.c14) FROM FINREV_FED_17 as T1 JOIN FINREV_FED_KEY_17 as T2 ON T1.state_code = T2.state_code WHERE T2.state = &quot;Virginia&quot;</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>avg(c14)</th></tr></thead><tbody><tr><td>712.125</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>2006.1278195488721</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q18">
+  <p class="q">18. What are the top 10 states that have the highest average math score and federal revenue they got through different categories?</p>
+  <div class="meta">
+    <span><b>база</b> StudentMathScore</span>
+    <span><b>таблицы</b> FINREV_FED_17, NDECoreExcel_Math_Grade8</span>
+    <span><b>попыток критика</b> 3</span>
+    <span><b>профиль</b> да</span>
+    <span><b>40.3с</b></span>
+    <span class="auto n">авто: не совпало</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT T1.state_code ,  T2.average_scale_score ,  T1.t_fed_rev ,  T1.c14 ,  T1.c25 FROM FINREV_FED_17 AS T1 JOIN NDECoreExcel_Math_Grade8 AS T2 ON T1.state_code  =  T2.state WHERE T1.yr_data  =  17 AND T2.year  =  2017 ORDER BY T2.average_scale_score DESC LIMIT 10;</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT T2.state, sum(c14),sum(c25) FROM FINREV_FED_17 as T1 JOIN FINREV_FED_KEY_17 as T2 ON T1.state_code = T2.state_code JOIN NDECoreExcel_Math_Grade8 as T3 ON T2.state = T3.state GROUP BY T2.state ORDER BY T3.average_scale_score DESC LIMIT 10</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 0</div>
+      <div class="pill">— пусто —</div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th><th>кол. 2</th><th>кол. 3</th></tr></thead><tbody><tr><td>Massachusetts</td><td>209491</td><td>197718</td></tr><tr><td>Minnesota</td><td>143113</td><td>204785</td></tr><tr><td>New Hampshire</td><td>41026</td><td>29114</td></tr><tr><td>New Jersey</td><td>307236</td><td>344106</td></tr><tr><td>Virginia</td><td>266815</td><td>344122</td></tr><tr><td>Wyoming</td><td>34182</td><td>21524</td></tr><tr><td>Washington</td><td>251734</td><td>257793</td></tr><tr><td>Wisconsin</td><td>210314</td><td>207816</td></tr><tr><td>Vermont</td><td>32950</td><td>25400</td></tr><tr><td>Ohio</td><td>498092</td><td>432604</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q19">
+  <p class="q">19. What are the schools with highest federal revenue in each federal revenue categories and what&#x27;s their state average scores?</p>
+  <div class="meta">
+    <span><b>база</b> StudentMathScore</span>
+    <span><b>таблицы</b> FINREV_FED_17, NDECoreExcel_Math_Grade8</span>
+    <span><b>попыток критика</b> 3</span>
+    <span><b>профиль</b> да</span>
+    <span><b>39.3с</b></span>
+    <span class="auto n">авто: не совпало</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT T1.state_code ,  T1.school_district ,  T1.t_fed_rev ,  T2.average_scale_score FROM FINREV_FED_17 AS T1 JOIN NDECoreExcel_Math_Grade8 AS T2 ON T1.state_code  =  T2.state WHERE T1.yr_data  =  17 AND T2.year  =  2017 ORDER BY T1.t_fed_rev DESC LIMIT 1</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT T1.school_district, max(T1.c14), T3.average_scale_score FROM FINREV_FED_17 as T1 JOIN FINREV_FED_KEY_17 as T2 ON T1.state_code = T2.state_code JOIN NDECoreExcel_Math_Grade8 as T3 ON T2.state = T3.state UNION SELECT T1.school_district, max(T1.c25), T3.average_scale_score FROM FINREV_FED_17 as T1 JOIN FINREV_FED_KEY_17 as T2 ON T1.state_code = T2.state_code JOIN NDECoreExcel_Math_Grade8 as T3 ON T2.state = T3.state</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 0</div>
+      <div class="pill">— пусто —</div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th><th>кол. 2</th><th>кол. 3</th></tr></thead><tbody><tr><td>NEW YORK CITY SCHOOL DISTRICT</td><td>439209</td><td>282</td></tr><tr><td>NEW YORK CITY SCHOOL DISTRICT</td><td>956851</td><td>282</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q20">
+  <p class="q">20. State with highest average math score</p>
+  <div class="meta">
+    <span><b>база</b> StudentMathScore</span>
+    <span><b>таблицы</b> NDECoreExcel_Math_Grade8</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>16.0с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT state FROM NDECoreExcel_Math_Grade8 ORDER BY average_scale_score DESC LIMIT 1</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT state FROM NDECoreExcel_Math_Grade8 ORDER BY average_scale_score DESC LIMIT 1</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>state</th></tr></thead><tbody><tr><td>Massachusetts</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>Massachusetts</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q21">
+  <p class="q">21. Which is the most popular voting method for Hall of Fame in 2000?</p>
+  <div class="meta">
+    <span><b>база</b> TheHistoryofBaseball</span>
+    <span><b>таблицы</b> hall_of_fame</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>21.9с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT votedby FROM hall_of_fame WHERE YEARID  =  2000 GROUP BY votedby ORDER BY count(*) DESC LIMIT 1;</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT votedby FROM hall_of_fame WHERE yearid = &quot;2000&quot; GROUP BY votedby ORDER BY count(*) DESC LIMIT 1</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>votedby</th></tr></thead><tbody><tr><td>BBWAA</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>BBWAA</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q22">
+  <p class="q">22. How many players weigh over 200 pounds?</p>
+  <div class="meta">
+    <span><b>база</b> TheHistoryofBaseball</span>
+    <span><b>таблицы</b> player</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>20.6с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT count(*) FROM player WHERE weight  &gt;  200;</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT count(*) FROM player WHERE weight &gt; 200</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>count(*)</th></tr></thead><tbody><tr><td>4584</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>4584</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q23">
+  <p class="q">23. Who is the winner of Rookie of the Year in 2010?</p>
+  <div class="meta">
+    <span><b>база</b> TheHistoryofBaseball</span>
+    <span><b>таблицы</b> player_award, player</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>24.9с</b></span>
+    <span class="auto n">авто: не совпало</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT T1.name_first ,  T1.name_last FROM player AS T1 JOIN player_award AS T2 ON T1.player_id  =  T2.player_id WHERE T2.award_id  =  &#x27;Rookie of the Year&#x27; AND T2.year  =  2010;</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT player_id FROM player_award WHERE year = 2010 AND award_id = &quot;Rookie of the Year&quot;</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 2</div>
+      <div class="rows"><table><thead><tr><th>name_first</th><th>name_last</th></tr></thead><tbody><tr><td>Neftali</td><td>Feliz</td></tr><tr><td>Buster</td><td>Posey</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>felizne01</td></tr><tr><td>poseybu01</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q24">
+  <p class="q">24. Who is the highest paid player since 2010?</p>
+  <div class="meta">
+    <span><b>база</b> TheHistoryofBaseball</span>
+    <span><b>таблицы</b> salary</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>20.0с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT player_id FROM salary WHERE YEAR  &gt;=  2010 ORDER BY salary DESC LIMIT 1</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT player_id FROM salary WHERE year &gt;= 2010 ORDER BY salary DESC LIMIT 1</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>player_id</th></tr></thead><tbody><tr><td>rodrial01</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>rodrial01</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q25">
+  <p class="q">25. What are the salaries of players who have ever enter hall of fame?</p>
+  <div class="meta">
+    <span><b>база</b> TheHistoryofBaseball</span>
+    <span><b>таблицы</b> hall_of_fame, salary</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>22.4с</b></span>
+    <span class="auto n">авто: не совпало</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT DISTINCT T1.salary FROM salary AS T1 JOIN hall_of_fame AS T2 ON T1.player_id  =  T2.player_id</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT T2.salary FROM salary as T2 JOIN hall_of_fame as T1 ON T1.player_id = T2.player_id WHERE T1.inducted = &quot;Y&quot;</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 200</div>
+      <div class="rows"><table><thead><tr><th>salary</th></tr></thead><tbody><tr><td>550000</td></tr><tr><td>800000</td></tr><tr><td>1500000</td></tr><tr><td>1625000</td></tr><tr><td>1354167</td></tr><tr><td>625000</td></tr><tr><td>480000</td></tr><tr><td>512500</td></tr><tr><td>641667</td></tr><tr><td>1090000</td></tr><tr><td>560000</td></tr><tr><td>547143</td></tr></tbody></table></div><div class="pill">…показано 12 из 20</div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>875000</td></tr><tr><td>1132652</td></tr><tr><td>1136262</td></tr><tr><td>1065000</td></tr><tr><td>525000</td></tr><tr><td>1058894</td></tr><tr><td>1102946</td></tr><tr><td>60000</td></tr><tr><td>115000</td></tr><tr><td>1000000</td></tr><tr><td>1075000</td></tr><tr><td>2127333</td></tr></tbody></table></div><div class="pill">…показано 12 из 20</div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q26">
+  <p class="q">26. Show all fires caused by campfires in Texas.</p>
+  <div class="meta">
+    <span><b>база</b> USWildFires</span>
+    <span><b>таблицы</b> Fires</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>20.9с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT * FROM Fires WHERE STAT_CAUSE_DESCR  =  &quot;Campfire&quot; AND STATE  =  &quot;TX&quot;</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT * FROM Fires WHERE State = &quot;TX&quot; AND STAT_CAUSE_DESCR LIKE &quot;Campfire&quot;</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 200</div>
+      <div class="rows"><table><thead><tr><th>FIRE_YEAR</th><th>DISCOVERY_DATE</th><th>DISCOVERY_DOY</th><th>DISCOVERY_TIME</th><th>STAT_CAUSE_CODE</th><th>STAT_CAUSE_DESCR</th><th>CONT_DATE</th><th>CONT_DOY</th><th>CONT_TIME</th><th>FIRE_SIZE</th><th>FIRE_SIZE_CLASS</th><th>LATITUDE</th><th>LONGITUDE</th><th>OWNER_CODE</th><th>OWNER_DESCR</th><th>STATE</th><th>COUNTY</th><th>FIPS_CODE</th><th>FIPS_NAME</th></tr></thead><tbody><tr><td>2005</td><td>2453441.5</td><td>71</td><td>0215</td><td>4.0</td><td>Campfire</td><td>2453442.5</td><td>72</td><td>1800</td><td>2.0</td><td>B</td><td>33.34583333</td><td>-97.59583333</td><td>5.0</td><td>USFS</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2005</td><td>2453636.5</td><td>266</td><td>1330</td><td>4.0</td><td>Campfire</td><td>2453637.5</td><td>267</td><td>0800</td><td>9.0</td><td>B</td><td>31.11694444</td><td>-95.08416667</td><td>13.0</td><td>STATE OR PRIVATE</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2005</td><td>2453646.5</td><td>276</td><td>1400</td><td>4.0</td><td>Campfire</td><td>2453646.5</td><td>276</td><td>1652</td><td>3.0</td><td>B</td><td>30.57111111</td><td>-95.70138889</td><td>5.0</td><td>USFS</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2005</td><td>2453706.5</td><td>336</td><td>1630</td><td>4.0</td><td>Campfire</td><td>2453706.5</td><td>336</td><td>2315</td><td>11.0</td><td>C</td><td>31.45361111</td><td>-93.77277778</td><td>5.0</td><td>USFS</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2005</td><td>2453708.5</td><td>338</td><td>0930</td><td>4.0</td><td>Campfire</td><td>2453708.5</td><td>338</td><td>1045</td><td>0.1</td><td>A</td><td>31.0625</td><td>-95.09722222</td><td>5.0</td><td>USFS</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2005</td><td>2453442.5</td><td>72</td><td>2000</td><td>4.0</td><td>Campfire</td><td>2453443.5</td><td>73</td><td>0945</td><td>2.0</td><td>B</td><td>31.12666667</td><td>-94.12416667</td><td>5.0</td><td>USFS</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2005</td><td>2453487.5</td><td>117</td><td>1730</td><td>4.0</td><td>Campfire</td><td>2453487.5</td><td>117</td><td>2115</td><td>0.1</td><td>A</td><td>31.17222222</td><td>-94.30027778</td><td>5.0</td><td>USFS</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2006</td><td>2453805.5</td><td>70</td><td>1230</td><td>4.0</td><td>Campfire</td><td>2453809.5</td><td>74</td><td>1600</td><td>34.0</td><td>C</td><td>31.0575</td><td>-95.09722222</td><td>5.0</td><td>USFS</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2006</td><td>2453901.5</td><td>166</td><td>1230</td><td>4.0</td><td>Campfire</td><td>2453901.5</td><td>166</td><td>1700</td><td>12.0</td><td>C</td><td>31.14666667</td><td>-94.17194444</td><td>5.0</td><td>USFS</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2006</td><td>2454015.5</td><td>280</td><td>1500</td><td>4.0</td><td>Campfire</td><td>2454016.5</td><td>281</td><td>1700</td><td>9.0</td><td>B</td><td>31.19361111</td><td>-94.86361111</td><td>5.0</td><td>USFS</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2006</td><td>2453820.5</td><td>85</td><td>0335</td><td>4.0</td><td>Campfire</td><td>2453820.5</td><td>85</td><td>0830</td><td>3.0</td><td>B</td><td>31.30833333</td><td>-93.69166667</td><td>5.0</td><td>USFS</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2007</td><td>2454377.5</td><td>277</td><td>1030</td><td>4.0</td><td>Campfire</td><td>2454377.5</td><td>277</td><td>1041</td><td>0.1</td><td>A</td><td>35.88194444</td><td>-100.1825</td><td>5.0</td><td>USFS</td><td>TX</td><td>211</td><td>211</td><td>Hemphill</td></tr></tbody></table></div><div class="pill">…показано 12 из 20</div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th><th>кол. 2</th><th>кол. 3</th><th>кол. 4</th><th>кол. 5</th><th>кол. 6</th><th>кол. 7</th><th>кол. 8</th><th>кол. 9</th><th>кол. 10</th><th>кол. 11</th><th>кол. 12</th><th>кол. 13</th><th>кол. 14</th><th>кол. 15</th><th>кол. 16</th><th>кол. 17</th><th>кол. 18</th><th>кол. 19</th></tr></thead><tbody><tr><td>2005</td><td>2453441.5</td><td>71</td><td>0215</td><td>4.0</td><td>Campfire</td><td>2453442.5</td><td>72</td><td>1800</td><td>2.0</td><td>B</td><td>33.34583333</td><td>-97.59583333</td><td>5.0</td><td>USFS</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2005</td><td>2453636.5</td><td>266</td><td>1330</td><td>4.0</td><td>Campfire</td><td>2453637.5</td><td>267</td><td>0800</td><td>9.0</td><td>B</td><td>31.11694444</td><td>-95.08416667</td><td>13.0</td><td>STATE OR PRIVATE</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2005</td><td>2453646.5</td><td>276</td><td>1400</td><td>4.0</td><td>Campfire</td><td>2453646.5</td><td>276</td><td>1652</td><td>3.0</td><td>B</td><td>30.57111111</td><td>-95.70138889</td><td>5.0</td><td>USFS</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2005</td><td>2453706.5</td><td>336</td><td>1630</td><td>4.0</td><td>Campfire</td><td>2453706.5</td><td>336</td><td>2315</td><td>11.0</td><td>C</td><td>31.45361111</td><td>-93.77277778</td><td>5.0</td><td>USFS</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2005</td><td>2453708.5</td><td>338</td><td>0930</td><td>4.0</td><td>Campfire</td><td>2453708.5</td><td>338</td><td>1045</td><td>0.1</td><td>A</td><td>31.0625</td><td>-95.09722222</td><td>5.0</td><td>USFS</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2005</td><td>2453442.5</td><td>72</td><td>2000</td><td>4.0</td><td>Campfire</td><td>2453443.5</td><td>73</td><td>0945</td><td>2.0</td><td>B</td><td>31.12666667</td><td>-94.12416667</td><td>5.0</td><td>USFS</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2005</td><td>2453487.5</td><td>117</td><td>1730</td><td>4.0</td><td>Campfire</td><td>2453487.5</td><td>117</td><td>2115</td><td>0.1</td><td>A</td><td>31.17222222</td><td>-94.30027778</td><td>5.0</td><td>USFS</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2006</td><td>2453805.5</td><td>70</td><td>1230</td><td>4.0</td><td>Campfire</td><td>2453809.5</td><td>74</td><td>1600</td><td>34.0</td><td>C</td><td>31.0575</td><td>-95.09722222</td><td>5.0</td><td>USFS</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2006</td><td>2453901.5</td><td>166</td><td>1230</td><td>4.0</td><td>Campfire</td><td>2453901.5</td><td>166</td><td>1700</td><td>12.0</td><td>C</td><td>31.14666667</td><td>-94.17194444</td><td>5.0</td><td>USFS</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2006</td><td>2454015.5</td><td>280</td><td>1500</td><td>4.0</td><td>Campfire</td><td>2454016.5</td><td>281</td><td>1700</td><td>9.0</td><td>B</td><td>31.19361111</td><td>-94.86361111</td><td>5.0</td><td>USFS</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2006</td><td>2453820.5</td><td>85</td><td>0335</td><td>4.0</td><td>Campfire</td><td>2453820.5</td><td>85</td><td>0830</td><td>3.0</td><td>B</td><td>31.30833333</td><td>-93.69166667</td><td>5.0</td><td>USFS</td><td>TX</td><td></td><td></td><td></td></tr><tr><td>2007</td><td>2454377.5</td><td>277</td><td>1030</td><td>4.0</td><td>Campfire</td><td>2454377.5</td><td>277</td><td>1041</td><td>0.1</td><td>A</td><td>35.88194444</td><td>-100.1825</td><td>5.0</td><td>USFS</td><td>TX</td><td>211</td><td>211</td><td>Hemphill</td></tr></tbody></table></div><div class="pill">…показано 12 из 20</div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q27">
+  <p class="q">27. Who was responsible for the land of the biggest fire in Oregon in 2015?</p>
+  <div class="meta">
+    <span><b>база</b> USWildFires</span>
+    <span><b>таблицы</b> Fires</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>21.8с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT OWNER_DESCR FROM Fires WHERE FIRE_YEAR = 2015 AND STATE = &#x27;OR&#x27; ORDER BY FIRE_SIZE DESC LIMIT 1</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT OWNER_DESCR FROM FIres WHERE State = &quot;OR&quot; AND FIRE_YEAR = 2015 ORDER BY FIRE_SIZE DESC LIMIT 1</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>OWNER_DESCR</th></tr></thead><tbody><tr><td>USFS</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>USFS</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q28">
+  <p class="q">28. Which counties in Washington had fires in 2012?</p>
+  <div class="meta">
+    <span><b>база</b> USWildFires</span>
+    <span><b>таблицы</b> Fires</span>
+    <span><b>попыток критика</b> 2</span>
+    <span><b>профиль</b> да</span>
+    <span><b>30.7с</b></span>
+    <span class="auto n">авто: не совпало</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT DISTINCT county FROM fires WHERE state  =  &#x27;WA&#x27; AND fire_year  =  2012</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT COUNTY FROM Fires WHERE State = &quot;WA&quot; AND FIRE_YEAR = 2012</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 65</div>
+      <div class="rows"><table><thead><tr><th>COUNTY</th></tr></thead><tbody><tr><td>051</td></tr><tr><td>011</td></tr><tr><td>059</td></tr><tr><td>041</td></tr><tr><td>077</td></tr><tr><td>039</td></tr><tr><td>073</td></tr><tr><td>053</td></tr><tr><td>033</td></tr><tr><td>061</td></tr><tr><td>057</td></tr><tr><td>031</td></tr></tbody></table></div><div class="pill">…показано 12 из 20</div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>051</td></tr><tr><td>051</td></tr><tr><td>011</td></tr><tr><td>059</td></tr><tr><td>059</td></tr><tr><td>059</td></tr><tr><td>041</td></tr><tr><td>059</td></tr><tr><td>041</td></tr><tr><td>041</td></tr><tr><td>059</td></tr><tr><td>041</td></tr></tbody></table></div><div class="pill">…показано 12 из 20</div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q29">
+  <p class="q">29. How many arson-related fires were there in 2010?</p>
+  <div class="meta">
+    <span><b>база</b> USWildFires</span>
+    <span><b>таблицы</b> Fires</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>20.9с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT count(*) FROM Fires WHERE fire_year = 2010 AND STAT_CAUSE_DESCR = &quot;Arson&quot;</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT count(*) FROM Fires WHERE FIRE_YEAR = 2010 AND STAT_CAUSE_DESCR LIKE &quot;%Arson%&quot;</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>count(*)</th></tr></thead><tbody><tr><td>10196</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>10196</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q30">
+  <p class="q">30. How many years of data are recorded in this database?</p>
+  <div class="meta">
+    <span><b>база</b> USWildFires</span>
+    <span><b>таблицы</b> Fires</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>19.9с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT count(DISTINCT fire_year) FROM fires</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT count(DISTINCT FIRE_YEAR) FROM Fires</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>count(DISTINCT fire_year)</th></tr></thead><tbody><tr><td>24</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>24</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q31">
+  <p class="q">31. what year was each specific entry released?</p>
+  <div class="meta">
+    <span><b>база</b> WhatCDHipHop</span>
+    <span><b>таблицы</b> torrents</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>12.0с</b></span>
+    <span class="auto n">авто: не совпало</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT groupYear FROM torrents</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT groupName, groupYear FROM torrents</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 200</div>
+      <div class="rows"><table><thead><tr><th>groupYear</th></tr></thead><tbody><tr><td>1979</td></tr><tr><td>1979</td></tr><tr><td>1979</td></tr><tr><td>1979</td></tr><tr><td>1979</td></tr><tr><td>1979</td></tr><tr><td>1979</td></tr><tr><td>1979</td></tr><tr><td>1980</td></tr><tr><td>1980</td></tr><tr><td>1980</td></tr><tr><td>1980</td></tr></tbody></table></div><div class="pill">…показано 12 из 20</div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th><th>кол. 2</th></tr></thead><tbody><tr><td>superappin&amp;#39;</td><td>1979</td></tr><tr><td>spiderap / a corona jam</td><td>1979</td></tr><tr><td>rapper&amp;#39;s delight</td><td>1979</td></tr><tr><td>rap-o clap-o / el rap-o clap-o</td><td>1979</td></tr><tr><td>christmas rappin&amp;#39;</td><td>1979</td></tr><tr><td>wack rap</td><td>1979</td></tr><tr><td>rhymin&amp;#39; and rappin&amp;#39; / watch dog</td><td>1979</td></tr><tr><td>spoonin rap</td><td>1979</td></tr><tr><td>sugarhill gang</td><td>1980</td></tr><tr><td>kurtis blow</td><td>1980</td></tr><tr><td>this is a party / the &amp;quot;micstro&amp;quot;</td><td>1980</td></tr><tr><td>that&amp;#39;s the joint</td><td>1980</td></tr></tbody></table></div><div class="pill">…показано 12 из 20</div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q32">
+  <p class="q">32. what are the entries by each specific artist/group?</p>
+  <div class="meta">
+    <span><b>база</b> WhatCDHipHop</span>
+    <span><b>таблицы</b> torrents</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>12.4с</b></span>
+    <span class="auto n">авто: не совпало</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT artist ,  COUNT(*) FROM torrents GROUP BY artist;</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT groupName, artist FROM torrents</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 200</div>
+      <div class="rows"><table><thead><tr><th>artist</th><th>COUNT(*)</th></tr></thead><tbody><tr><td></td><td>5</td></tr><tr><td>!ll.martians</td><td>1</td></tr><tr><td>!llmind</td><td>3</td></tr><tr><td>!llmind &amp; joell ortiz</td><td>1</td></tr><tr><td>!llmind &amp; skyzoo</td><td>1</td></tr><tr><td>!llmind &amp; symbolyc one</td><td>1</td></tr><tr><td>!llmind &amp; verbal kent</td><td>1</td></tr><tr><td>&quot;e&quot;qual</td><td>1</td></tr><tr><td>&quot;invictus&quot; mosai</td><td>3</td></tr><tr><td>&quot;to&quot;</td><td>1</td></tr><tr><td>&quot;weird al&quot; yankovic</td><td>1</td></tr><tr><td>#$ &amp; gdp</td><td>1</td></tr></tbody></table></div><div class="pill">…показано 12 из 20</div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th><th>кол. 2</th></tr></thead><tbody><tr><td>superappin&amp;#39;</td><td>grandmaster flash &amp; the furious five</td></tr><tr><td>spiderap / a corona jam</td><td>ron hunt &amp; ronnie g &amp; the sm crew</td></tr><tr><td>rapper&amp;#39;s delight</td><td>sugarhill gang</td></tr><tr><td>rap-o clap-o / el rap-o clap-o</td><td>joe bataan</td></tr><tr><td>christmas rappin&amp;#39;</td><td>kurtis blow</td></tr><tr><td>wack rap</td><td>wackies disco rock band</td></tr><tr><td>rhymin&amp;#39; and rappin&amp;#39; / watch dog</td><td>ann winley &amp; paulett winley &amp; tanya winley</td></tr><tr><td>spoonin rap</td><td>spoonin gee</td></tr><tr><td>sugarhill gang</td><td>sugarhill gang</td></tr><tr><td>kurtis blow</td><td>kurtis blow</td></tr><tr><td>this is a party / the &amp;quot;micstro&amp;quot;</td><td>radiänce</td></tr><tr><td>that&amp;#39;s the joint</td><td>funky 4 + 1</td></tr></tbody></table></div><div class="pill">…показано 12 из 20</div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q33">
+  <p class="q">33. which tags exist?</p>
+  <div class="meta">
+    <span><b>база</b> WhatCDHipHop</span>
+    <span><b>таблицы</b> tags</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>10.7с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT DISTINCT tag FROM tags</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT DISTINCT tag FROM tags</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 200</div>
+      <div class="rows"><table><thead><tr><th>tag</th></tr></thead><tbody><tr><td>1970s</td></tr><tr><td>funk</td></tr><tr><td>disco</td></tr><tr><td>new.york</td></tr><tr><td>united.states</td></tr><tr><td>soul</td></tr><tr><td>christmas</td></tr><tr><td>1980s</td></tr><tr><td>jazz</td></tr><tr><td>instrumental</td></tr><tr><td>disco.funk</td></tr><tr><td>drums</td></tr></tbody></table></div><div class="pill">…показано 12 из 20</div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>1970s</td></tr><tr><td>funk</td></tr><tr><td>disco</td></tr><tr><td>new.york</td></tr><tr><td>united.states</td></tr><tr><td>soul</td></tr><tr><td>christmas</td></tr><tr><td>1980s</td></tr><tr><td>jazz</td></tr><tr><td>instrumental</td></tr><tr><td>disco.funk</td></tr><tr><td>drums</td></tr></tbody></table></div><div class="pill">…показано 12 из 20</div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q34">
+  <p class="q">34. what release types are captured in this data set?</p>
+  <div class="meta">
+    <span><b>база</b> WhatCDHipHop</span>
+    <span><b>таблицы</b> torrents</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>12.2с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT DISTINCT releaseType FROM torrents;</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT DISTINCT releaseType FROM torrents</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 15</div>
+      <div class="rows"><table><thead><tr><th>releaseType</th></tr></thead><tbody><tr><td>single</td></tr><tr><td>album</td></tr><tr><td>live album</td></tr><tr><td>ep</td></tr><tr><td>unknown</td></tr><tr><td>soundtrack</td></tr><tr><td>concert recording</td></tr><tr><td>anthology</td></tr><tr><td>dj mix</td></tr><tr><td>compilation</td></tr><tr><td>bootleg</td></tr><tr><td>mixtape</td></tr></tbody></table></div><div class="pill">…показано 12 из 15</div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>single</td></tr><tr><td>album</td></tr><tr><td>live album</td></tr><tr><td>ep</td></tr><tr><td>unknown</td></tr><tr><td>soundtrack</td></tr><tr><td>concert recording</td></tr><tr><td>anthology</td></tr><tr><td>dj mix</td></tr><tr><td>compilation</td></tr><tr><td>bootleg</td></tr><tr><td>mixtape</td></tr></tbody></table></div><div class="pill">…показано 12 из 15</div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q35">
+  <p class="q">35. Find me top 5 most popular releases after 2000?</p>
+  <div class="meta">
+    <span><b>база</b> WhatCDHipHop</span>
+    <span><b>таблицы</b> torrents</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>13.7с</b></span>
+    <span class="auto n">авто: не совпало</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT artist ,  groupName FROM torrents WHERE groupYear  &gt;  2000 ORDER BY totalSnatched DESC LIMIT 5;</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT groupName FROM torrents WHERE groupYear &gt; 2000 ORDER BY totalSnatched DESC LIMIT 5</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 5</div>
+      <div class="rows"><table><thead><tr><th>artist</th><th>groupName</th></tr></thead><tbody><tr><td>various artists</td><td>the what cd</td></tr><tr><td>various artists</td><td>the what cd volume 2</td></tr><tr><td>gorillaz</td><td>plastic beach</td></tr><tr><td>kanye west</td><td>my beautiful dark twisted fantasy</td></tr><tr><td>macklemore &amp; ryan lewis</td><td>the heist</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>the what cd</td></tr><tr><td>the what cd volume 2</td></tr><tr><td>plastic beach</td></tr><tr><td>my beautiful dark twisted fantasy</td></tr><tr><td>the heist</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q36">
+  <p class="q">36. What is the away team against Omiya Ardija in 2018?</p>
+  <div class="meta">
+    <span><b>база</b> WorldSoccerDataBase</span>
+    <span><b>таблицы</b> football_data</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>21.8с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT AwayTeam FROM football_data WHERE Season LIKE &#x27;2018%&#x27; AND HomeTeam = &#x27;Omiya Ardija&#x27;;</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT AwayTeam FROM football_data WHERE HomeTeam = &quot;Omiya Ardija&quot; AND Season LIKE &quot;%2018%&quot;</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>AwayTeam</th></tr></thead><tbody><tr><td>Verdy</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>Verdy</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q37">
+  <p class="q">37. How many matches in Spain in 2010?</p>
+  <div class="meta">
+    <span><b>база</b> WorldSoccerDataBase</span>
+    <span><b>таблицы</b> football_data</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>20.7с</b></span>
+    <span class="auto n">авто: не совпало</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT count(*) FROM football_data WHERE country = &#x27;Spain&#x27; AND season LIKE &#x27;2010%&#x27;</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT count(*) FROM football_data WHERE Season LIKE &quot;%2010%&quot; AND Country = &quot;Spain&quot;</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>count(*)</th></tr></thead><tbody><tr><td>842</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>1684</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q38">
+  <p class="q">38. Which matches has the highest draw opening so far?</p>
+  <div class="meta">
+    <span><b>база</b> WorldSoccerDataBase</span>
+    <span><b>таблицы</b> betfront</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>19.5с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT match FROM betfront ORDER BY draw_opening DESC LIMIT 1</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT MATCH FROM betfront ORDER BY DRAW_OPENING DESC LIMIT 1</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>MATCH</th></tr></thead><tbody><tr><td>Real Madrid - Granada CF</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>Real Madrid - Granada CF</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q39">
+  <p class="q">39. Which year has most matches?</p>
+  <div class="meta">
+    <span><b>база</b> WorldSoccerDataBase</span>
+    <span><b>таблицы</b> betfront</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>18.3с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT YEAR FROM betfront GROUP BY YEAR ORDER BY COUNT(*) DESC LIMIT 1</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT YEAR FROM betfront GROUP BY YEAR ORDER BY count(*) DESC LIMIT 1</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>YEAR</th></tr></thead><tbody><tr><td>2011</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>2011</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div>
+<div class="card" data-id="q40">
+  <p class="q">40. How many matches did Pinnacle have betting records?</p>
+  <div class="meta">
+    <span><b>база</b> WorldSoccerDataBase</span>
+    <span><b>таблицы</b> football_data</span>
+    <span><b>попыток критика</b> 1</span>
+    <span><b>профиль</b> да</span>
+    <span><b>21.0с</b></span>
+    <span class="auto y">авто: совпало с эталоном</span>
+  </div>
+  
+  <div class="cols">
+    <div>
+      <div class="lbl">SQL от модели · nl2sql-sql</div>
+      <pre>SELECT count(*) FROM football_data WHERE PSH IS NOT NULL AND PSD IS NOT NULL AND PSA IS NOT NULL;</pre>
+    </div>
+    <div>
+      <div class="lbl">Эталонный SQL из выборки</div>
+      <pre>SELECT count(*) FROM football_data WHERE PSH != &quot;&quot; AND PSD != &quot;&quot; AND PSA != &quot;&quot;</pre>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <div class="lbl">Результат модели · строк: 1</div>
+      <div class="rows"><table><thead><tr><th>count(*)</th></tr></thead><tbody><tr><td>60309</td></tr></tbody></table></div>
+    </div>
+    <div>
+      <div class="lbl">Результат эталона</div>
+      <div class="rows"><table><thead><tr><th>кол. 1</th></tr></thead><tbody><tr><td>60309</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div class="verdicts">
+    <div class="vgroup">
+      <span class="name">Точность:</span>
+      <button class="opt yes" data-field="accuracy" data-value="yes" aria-pressed="false">верно</button>
+      <button class="opt no"  data-field="accuracy" data-value="no"  aria-pressed="false">неверно</button>
+    </div>
+    <div class="vgroup">
+      <span class="name">Шаблон запроса:</span>
+      <button class="opt yes" data-field="template" data-value="yes" aria-pressed="false">соответствует</button>
+      <button class="opt no"  data-field="template" data-value="no"  aria-pressed="false">не соответствует</button>
+    </div>
+  </div>
+  <textarea class="note" placeholder="Замечание (необязательно)"></textarea>
+</div><script>const DATA = [{"id": "q1", "db": "GeoNuclearData", "question": "Which country has the most capacities of nuclear power plants?", "gold_sql": "SELECT Country FROM nuclear_power_plants GROUP BY Country ORDER BY sum(Capacity) DESC LIMIT 1", "pred_sql": "SELECT country FROM nuclear_power_plants GROUP BY country ORDER BY sum(capacity) DESC LIMIT 1", "auto": true, "attempts": 1, "elapsed": 15.7}, {"id": "q2", "db": "GeoNuclearData", "question": "Which country has the least capacities of nuclear power plants?", "gold_sql": "SELECT Country FROM nuclear_power_plants GROUP BY Country ORDER BY sum(Capacity) LIMIT 1", "pred_sql": "SELECT country FROM nuclear_power_plants GROUP BY country ORDER BY sum(capacity) ASC LIMIT 1", "auto": true, "attempts": 1, "elapsed": 15.8}, {"id": "q3", "db": "GeoNuclearData", "question": "What are the top 3 countries which have the most nuclear power plants?", "gold_sql": "SELECT Country FROM nuclear_power_plants GROUP BY Country ORDER BY sum(Name) DESC LIMIT 3", "pred_sql": "SELECT country FROM nuclear_power_plants GROUP BY country ORDER BY count(*) DESC LIMIT 3", "auto": false, "attempts": 1, "elapsed": 15.5}, {"id": "q4", "db": "GeoNuclearData", "question": "Which country has the most nuclear station?", "gold_sql": "SELECT Country FROM nuclear_power_plants GROUP BY Country ORDER BY count(Name) DESC LIMIT 1", "pred_sql": "SELECT country FROM nuclear_power_plants GROUP BY country ORDER BY count(*) DESC LIMIT 1", "auto": true, "attempts": 1, "elapsed": 15.3}, {"id": "q5", "db": "GeoNuclearData", "question": "Which county has the most nuclear station shut down?", "gold_sql": "SELECT Country FROM nuclear_power_plants WHERE Status = \"Shutdown\" GROUP BY Country ORDER BY count(Name) DESC LIMIT 1", "pred_sql": "SELECT country FROM nuclear_power_plants WHERE status  =  'Shutdown' GROUP BY country ORDER BY count(*) DESC LIMIT 1", "auto": true, "attempts": 1, "elapsed": 16.1}, {"id": "q6", "db": "GreaterManchesterCrime", "question": "What time do most of the crimes happen?", "gold_sql": "SELECT CrimeTS FROM GreaterManchesterCrime GROUP BY CrimeTS ORDER BY count(*) DESC LIMIT 1", "pred_sql": "SELECT strftime('%H', CrimeTS) AS CrimeHour ,  COUNT(*) FROM GreaterManchesterCrime GROUP BY CrimeHour ORDER BY COUNT(*) DESC LIMIT 1;", "auto": false, "attempts": 1, "elapsed": 13.9}, {"id": "q7", "db": "GreaterManchesterCrime", "question": "What are the most likely outcome of the police investigation if the crime happen on \"street\"?", "gold_sql": "SELECT Outcome FROM GreaterManchesterCrime WHERE Location LIKE \"%Street%\" GROUP BY Outcome ORDER BY count(*) DESC LIMIT 1", "pred_sql": "SELECT Outcome FROM GreaterManchesterCrime WHERE Location LIKE \"%Street%\" GROUP BY Outcome ORDER BY COUNT(*) DESC LIMIT 1", "auto": true, "attempts": 1, "elapsed": 14.7}, {"id": "q8", "db": "GreaterManchesterCrime", "question": "Which type of crime happen the most in Salford?", "gold_sql": "SELECT Type FROM GreaterManchesterCrime WHERE LSOA LIKE \"%Salford%\" GROUP BY Type ORDER BY count(*) DESC LIMIT 1", "pred_sql": "SELECT TYPE FROM GreaterManchesterCrime WHERE LSOA LIKE 'Salford%' GROUP BY TYPE ORDER BY COUNT(*) DESC LIMIT 1", "auto": true, "attempts": 1, "elapsed": 14.0}, {"id": "q9", "db": "GreaterManchesterCrime", "question": "How many crimes are under investigation?", "gold_sql": "SELECT count(*) FROM GreaterManchesterCrime WHERE Outcome = \"Under investigation\"", "pred_sql": "SELECT count(*) FROM GreaterManchesterCrime WHERE Outcome  =  'Under investigation'", "auto": true, "attempts": 1, "elapsed": 13.2}, {"id": "q10", "db": "GreaterManchesterCrime", "question": "How many crimes has been conducted?", "gold_sql": "SELECT count(*) FROM GreaterManchesterCrime", "pred_sql": "SELECT count(*) FROM GreaterManchesterCrime", "auto": true, "attempts": 1, "elapsed": 13.3}, {"id": "q11", "db": "Pesticide", "question": "which foods are captured in the data set?", "gold_sql": "SELECT DISTINCT commod FROM sampledata15", "pred_sql": "SELECT DISTINCT variety FROM sampledata15", "auto": false, "attempts": 1, "elapsed": 19.1}, {"id": "q12", "db": "Pesticide", "question": "how many samples have unknown countries of origin?", "gold_sql": "SELECT count(*) FROM sampledata15 WHERE origin = \"3\"", "pred_sql": "SELECT count(*) FROM sampledata15 WHERE country  =  '   ';", "auto": false, "attempts": 1, "elapsed": 19.3}, {"id": "q13", "db": "Pesticide", "question": "Which are the top 10 commodities that have the highest residue during 2015?", "gold_sql": "SELECT T2.commod FROM resultsdata15 as T2 JOIN sampledata15 as T1 ON T1.sample_pk = T2.sample_pk WHERE T1.year = 15 GROUP BY T2.commod ORDER BY sum(T2.concen) DESC LIMIT 10", "pred_sql": "SELECT T1.commod ,  sum(T2.concen) FROM sampledata15 AS T1 JOIN resultsdata15 AS T2 ON T1.sample_pk  =  T2.sample_pk WHERE T1.year  =  \"15\" GROUP BY T1.commod ORDER BY sum(T2.concen) DESC LIMIT 10;", "auto": false, "attempts": 1, "elapsed": 26.6}, {"id": "q14", "db": "Pesticide", "question": "Name some imported commodities that are not found in the US.", "gold_sql": "SELECT commod FROM sampledata15 WHERE origin = 2 AND commod not in (SELECT commod FROM sampledata15 WHERE origin = 1)", "pred_sql": "SELECT DISTINCT country ,  variety FROM sampledata15 WHERE origin != '1' AND country != 'USA';", "auto": false, "attempts": 1, "elapsed": 19.7}, {"id": "q15", "db": "Pesticide", "question": "Tell me the average pesticide residue for each state in the US where food is grown.", "gold_sql": "SELECT T1.growst, avg(T2.concen) FROM sampledata15 as T1 JOIN resultsdata15 as T2 ON T1.sample_pk = T2.sample_pk GROUP BY T1.growst", "pred_sql": "SELECT T1.state ,  avg(T2.concen) FROM sampledata15 AS T1 JOIN resultsdata15 AS T2 ON T1.sample_pk  =  T2.sample_pk GROUP BY T1.state", "auto": false, "attempts": 1, "elapsed": 25.4}, {"id": "q16", "db": "StudentMathScore", "question": "Which school district receive the most of federal revenue through state in Wisconsin?", "gold_sql": "SELECT T1.school_district FROM FINREV_FED_17 as T1 JOIN FINREV_FED_KEY_17 as T2 ON T1.state_code = T2.state_code WHERE T2.state = \"Wisconsin\" ORDER BY T1.t_fed_rev DESC LIMIT 1", "pred_sql": "SELECT school_district FROM finrev_fed_17 WHERE state_code  =  55 ORDER BY t_fed_rev DESC LIMIT 1", "auto": false, "attempts": 3, "elapsed": 27.9}, {"id": "q17", "db": "StudentMathScore", "question": "What is the average Title 1 fund in Virginia?", "gold_sql": "SELECT avg(T1.c14) FROM FINREV_FED_17 as T1 JOIN FINREV_FED_KEY_17 as T2 ON T1.state_code = T2.state_code WHERE T2.state = \"Virginia\"", "pred_sql": "SELECT avg(c14) FROM finrev_fed_17 WHERE state_code  =  51", "auto": false, "attempts": 1, "elapsed": 16.8}, {"id": "q18", "db": "StudentMathScore", "question": "What are the top 10 states that have the highest average math score and federal revenue they got through different categories?", "gold_sql": "SELECT T2.state, sum(c14),sum(c25) FROM FINREV_FED_17 as T1 JOIN FINREV_FED_KEY_17 as T2 ON T1.state_code = T2.state_code JOIN NDECoreExcel_Math_Grade8 as T3 ON T2.state = T3.state GROUP BY T2.state ORDER BY T3.average_scale_score DESC LIMIT 10", "pred_sql": "SELECT T1.state_code ,  T2.average_scale_score ,  T1.t_fed_rev ,  T1.c14 ,  T1.c25 FROM FINREV_FED_17 AS T1 JOIN NDECoreExcel_Math_Grade8 AS T2 ON T1.state_code  =  T2.state WHERE T1.yr_data  =  17 AND T2.year  =  2017 ORDER BY T2.average_scale_score DESC LIMIT 10;", "auto": false, "attempts": 3, "elapsed": 40.3}, {"id": "q19", "db": "StudentMathScore", "question": "What are the schools with highest federal revenue in each federal revenue categories and what's their state average scores?", "gold_sql": "SELECT T1.school_district, max(T1.c14), T3.average_scale_score FROM FINREV_FED_17 as T1 JOIN FINREV_FED_KEY_17 as T2 ON T1.state_code = T2.state_code JOIN NDECoreExcel_Math_Grade8 as T3 ON T2.state = T3.state UNION SELECT T1.school_district, max(T1.c25), T3.average_scale_score FROM FINREV_FED_17 as T1 JOIN FINREV_FED_KEY_17 as T2 ON T1.state_code = T2.state_code JOIN NDECoreExcel_Math_Grade8 as T3 ON T2.state = T3.state", "pred_sql": "SELECT T1.state_code ,  T1.school_district ,  T1.t_fed_rev ,  T2.average_scale_score FROM FINREV_FED_17 AS T1 JOIN NDECoreExcel_Math_Grade8 AS T2 ON T1.state_code  =  T2.state WHERE T1.yr_data  =  17 AND T2.year  =  2017 ORDER BY T1.t_fed_rev DESC LIMIT 1", "auto": false, "attempts": 3, "elapsed": 39.3}, {"id": "q20", "db": "StudentMathScore", "question": "State with highest average math score", "gold_sql": "SELECT state FROM NDECoreExcel_Math_Grade8 ORDER BY average_scale_score DESC LIMIT 1", "pred_sql": "SELECT state FROM NDECoreExcel_Math_Grade8 ORDER BY average_scale_score DESC LIMIT 1", "auto": true, "attempts": 1, "elapsed": 16.0}, {"id": "q21", "db": "TheHistoryofBaseball", "question": "Which is the most popular voting method for Hall of Fame in 2000?", "gold_sql": "SELECT votedby FROM hall_of_fame WHERE yearid = \"2000\" GROUP BY votedby ORDER BY count(*) DESC LIMIT 1", "pred_sql": "SELECT votedby FROM hall_of_fame WHERE YEARID  =  2000 GROUP BY votedby ORDER BY count(*) DESC LIMIT 1;", "auto": true, "attempts": 1, "elapsed": 21.9}, {"id": "q22", "db": "TheHistoryofBaseball", "question": "How many players weigh over 200 pounds?", "gold_sql": "SELECT count(*) FROM player WHERE weight > 200", "pred_sql": "SELECT count(*) FROM player WHERE weight  >  200;", "auto": true, "attempts": 1, "elapsed": 20.6}, {"id": "q23", "db": "TheHistoryofBaseball", "question": "Who is the winner of Rookie of the Year in 2010?", "gold_sql": "SELECT player_id FROM player_award WHERE year = 2010 AND award_id = \"Rookie of the Year\"", "pred_sql": "SELECT T1.name_first ,  T1.name_last FROM player AS T1 JOIN player_award AS T2 ON T1.player_id  =  T2.player_id WHERE T2.award_id  =  'Rookie of the Year' AND T2.year  =  2010;", "auto": false, "attempts": 1, "elapsed": 24.9}, {"id": "q24", "db": "TheHistoryofBaseball", "question": "Who is the highest paid player since 2010?", "gold_sql": "SELECT player_id FROM salary WHERE year >= 2010 ORDER BY salary DESC LIMIT 1", "pred_sql": "SELECT player_id FROM salary WHERE YEAR  >=  2010 ORDER BY salary DESC LIMIT 1", "auto": true, "attempts": 1, "elapsed": 20.0}, {"id": "q25", "db": "TheHistoryofBaseball", "question": "What are the salaries of players who have ever enter hall of fame?", "gold_sql": "SELECT T2.salary FROM salary as T2 JOIN hall_of_fame as T1 ON T1.player_id = T2.player_id WHERE T1.inducted = \"Y\"", "pred_sql": "SELECT DISTINCT T1.salary FROM salary AS T1 JOIN hall_of_fame AS T2 ON T1.player_id  =  T2.player_id", "auto": false, "attempts": 1, "elapsed": 22.4}, {"id": "q26", "db": "USWildFires", "question": "Show all fires caused by campfires in Texas.", "gold_sql": "SELECT * FROM Fires WHERE State = \"TX\" AND STAT_CAUSE_DESCR LIKE \"Campfire\"", "pred_sql": "SELECT * FROM Fires WHERE STAT_CAUSE_DESCR  =  \"Campfire\" AND STATE  =  \"TX\"", "auto": true, "attempts": 1, "elapsed": 20.9}, {"id": "q27", "db": "USWildFires", "question": "Who was responsible for the land of the biggest fire in Oregon in 2015?", "gold_sql": "SELECT OWNER_DESCR FROM FIres WHERE State = \"OR\" AND FIRE_YEAR = 2015 ORDER BY FIRE_SIZE DESC LIMIT 1", "pred_sql": "SELECT OWNER_DESCR FROM Fires WHERE FIRE_YEAR = 2015 AND STATE = 'OR' ORDER BY FIRE_SIZE DESC LIMIT 1", "auto": true, "attempts": 1, "elapsed": 21.8}, {"id": "q28", "db": "USWildFires", "question": "Which counties in Washington had fires in 2012?", "gold_sql": "SELECT COUNTY FROM Fires WHERE State = \"WA\" AND FIRE_YEAR = 2012", "pred_sql": "SELECT DISTINCT county FROM fires WHERE state  =  'WA' AND fire_year  =  2012", "auto": false, "attempts": 2, "elapsed": 30.7}, {"id": "q29", "db": "USWildFires", "question": "How many arson-related fires were there in 2010?", "gold_sql": "SELECT count(*) FROM Fires WHERE FIRE_YEAR = 2010 AND STAT_CAUSE_DESCR LIKE \"%Arson%\"", "pred_sql": "SELECT count(*) FROM Fires WHERE fire_year = 2010 AND STAT_CAUSE_DESCR = \"Arson\"", "auto": true, "attempts": 1, "elapsed": 20.9}, {"id": "q30", "db": "USWildFires", "question": "How many years of data are recorded in this database?", "gold_sql": "SELECT count(DISTINCT FIRE_YEAR) FROM Fires", "pred_sql": "SELECT count(DISTINCT fire_year) FROM fires", "auto": true, "attempts": 1, "elapsed": 19.9}, {"id": "q31", "db": "WhatCDHipHop", "question": "what year was each specific entry released?", "gold_sql": "SELECT groupName, groupYear FROM torrents", "pred_sql": "SELECT groupYear FROM torrents", "auto": false, "attempts": 1, "elapsed": 12.0}, {"id": "q32", "db": "WhatCDHipHop", "question": "what are the entries by each specific artist/group?", "gold_sql": "SELECT groupName, artist FROM torrents", "pred_sql": "SELECT artist ,  COUNT(*) FROM torrents GROUP BY artist;", "auto": false, "attempts": 1, "elapsed": 12.4}, {"id": "q33", "db": "WhatCDHipHop", "question": "which tags exist?", "gold_sql": "SELECT DISTINCT tag FROM tags", "pred_sql": "SELECT DISTINCT tag FROM tags", "auto": true, "attempts": 1, "elapsed": 10.7}, {"id": "q34", "db": "WhatCDHipHop", "question": "what release types are captured in this data set?", "gold_sql": "SELECT DISTINCT releaseType FROM torrents", "pred_sql": "SELECT DISTINCT releaseType FROM torrents;", "auto": true, "attempts": 1, "elapsed": 12.2}, {"id": "q35", "db": "WhatCDHipHop", "question": "Find me top 5 most popular releases after 2000?", "gold_sql": "SELECT groupName FROM torrents WHERE groupYear > 2000 ORDER BY totalSnatched DESC LIMIT 5", "pred_sql": "SELECT artist ,  groupName FROM torrents WHERE groupYear  >  2000 ORDER BY totalSnatched DESC LIMIT 5;", "auto": false, "attempts": 1, "elapsed": 13.7}, {"id": "q36", "db": "WorldSoccerDataBase", "question": "What is the away team against Omiya Ardija in 2018?", "gold_sql": "SELECT AwayTeam FROM football_data WHERE HomeTeam = \"Omiya Ardija\" AND Season LIKE \"%2018%\"", "pred_sql": "SELECT AwayTeam FROM football_data WHERE Season LIKE '2018%' AND HomeTeam = 'Omiya Ardija';", "auto": true, "attempts": 1, "elapsed": 21.8}, {"id": "q37", "db": "WorldSoccerDataBase", "question": "How many matches in Spain in 2010?", "gold_sql": "SELECT count(*) FROM football_data WHERE Season LIKE \"%2010%\" AND Country = \"Spain\"", "pred_sql": "SELECT count(*) FROM football_data WHERE country = 'Spain' AND season LIKE '2010%'", "auto": false, "attempts": 1, "elapsed": 20.7}, {"id": "q38", "db": "WorldSoccerDataBase", "question": "Which matches has the highest draw opening so far?", "gold_sql": "SELECT MATCH FROM betfront ORDER BY DRAW_OPENING DESC LIMIT 1", "pred_sql": "SELECT match FROM betfront ORDER BY draw_opening DESC LIMIT 1", "auto": true, "attempts": 1, "elapsed": 19.5}, {"id": "q39", "db": "WorldSoccerDataBase", "question": "Which year has most matches?", "gold_sql": "SELECT YEAR FROM betfront GROUP BY YEAR ORDER BY count(*) DESC LIMIT 1", "pred_sql": "SELECT YEAR FROM betfront GROUP BY YEAR ORDER BY COUNT(*) DESC LIMIT 1", "auto": true, "attempts": 1, "elapsed": 18.3}, {"id": "q40", "db": "WorldSoccerDataBase", "question": "How many matches did Pinnacle have betting records?", "gold_sql": "SELECT count(*) FROM football_data WHERE PSH != \"\" AND PSD != \"\" AND PSA != \"\"", "pred_sql": "SELECT count(*) FROM football_data WHERE PSH IS NOT NULL AND PSD IS NOT NULL AND PSA IS NOT NULL;", "auto": true, "attempts": 1, "elapsed": 21.0}];</script>
+</div>
+<script>
+const KEY = "nl2sql-review-v1";
+let marks = {};
+try { marks = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { marks = {}; }
+
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(marks)); } catch(e){} render(); }
+
+function setMark(id, field, value){
+  marks[id] = marks[id] || {};
+  marks[id][field] = marks[id][field] === value ? null : value;
+  save();
+}
+function setNote(id, text){
+  marks[id] = marks[id] || {};
+  marks[id].note = text;
+  try { localStorage.setItem(KEY, JSON.stringify(marks)); } catch(e){}
+}
+
+function render(){
+  let acc = 0, accNo = 0, tpl = 0, tplNo = 0, done = 0;
+  DATA.forEach(function(item){
+    const m = marks[item.id] || {};
+    if (m.accuracy === "yes") acc++;
+    if (m.accuracy === "no") accNo++;
+    if (m.template === "yes") tpl++;
+    if (m.template === "no") tplNo++;
+    if (m.accuracy && m.template) done++;
+
+    document.querySelectorAll('[data-id="'+item.id+'"] .opt').forEach(function(btn){
+      btn.setAttribute("aria-pressed", String(m[btn.dataset.field] === btn.dataset.value));
+    });
+    const note = document.querySelector('[data-id="'+item.id+'"] .note');
+    if (note && document.activeElement !== note) note.value = m.note || "";
+  });
+
+  document.getElementById("s-acc").textContent = acc;
+  document.getElementById("s-accno").textContent = accNo;
+  document.getElementById("s-tpl").textContent = tpl;
+  document.getElementById("s-tplno").textContent = tplNo;
+  document.getElementById("s-done").textContent = done + " / " + DATA.length;
+  const judged = acc + accNo;
+  document.getElementById("s-ex").textContent =
+    judged ? (acc / judged * 100).toFixed(1) + "%" : "—";
+  applyFilter();
+}
+
+function applyFilter(){
+  const db = document.getElementById("f-db").value;
+  const st = document.getElementById("f-state").value;
+  DATA.forEach(function(item){
+    const el = document.querySelector('[data-id="'+item.id+'"]');
+    if (!el) return;
+    const m = marks[item.id] || {};
+    let ok = (db === "*" || item.db === db);
+    if (ok && st === "unjudged") ok = !(m.accuracy && m.template);
+    if (ok && st === "judged")   ok = !!(m.accuracy && m.template);
+    if (ok && st === "disagree") ok = m.accuracy && (m.accuracy === "yes") !== item.auto;
+    if (ok && st === "autofail") ok = !item.auto;
+    el.style.display = ok ? "" : "none";
+  });
+}
+
+function download(name, text, mime){
+  const blob = new Blob([text], {type: mime});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function exportCsv(){
+  const head = ["id","db","question","gold_sql","pred_sql","auto_exec_match",
+                "accuracy","template","note","critic_attempts","elapsed_sec"];
+  const esc = function(v){ return '"' + String(v === null || v === undefined ? "" : v).replace(/"/g,'""') + '"'; };
+  const lines = [head.join(",")];
+  DATA.forEach(function(i){
+    const m = marks[i.id] || {};
+    lines.push([i.id,i.db,i.question,i.gold_sql,i.pred_sql,i.auto,
+                m.accuracy||"",m.template||"",m.note||"",i.attempts,i.elapsed].map(esc).join(","));
+  });
+  download("nl2sql-review.csv", "\uFEFF" + lines.join("\n"), "text/csv;charset=utf-8");
+}
+
+function exportJson(){
+  const out = DATA.map(function(i){
+    const m = marks[i.id] || {};
+    return Object.assign({}, i, {accuracy: m.accuracy||null, template: m.template||null, note: m.note||""});
+  });
+  download("nl2sql-review.json", JSON.stringify(out, null, 2), "application/json");
+}
+
+function resetMarks(){
+  if (!confirm("Стереть все проставленные оценки?")) return;
+  marks = {}; save();
+}
+
+document.addEventListener("click", function(e){
+  const btn = e.target.closest(".opt");
+  if (btn) setMark(btn.closest("[data-id]").dataset.id, btn.dataset.field, btn.dataset.value);
+});
+document.addEventListener("input", function(e){
+  if (e.target.classList.contains("note"))
+    setNote(e.target.closest("[data-id]").dataset.id, e.target.value);
+});
+document.getElementById("f-db").addEventListener("change", applyFilter);
+document.getElementById("f-state").addEventListener("change", applyFilter);
+document.getElementById("b-csv").addEventListener("click", exportCsv);
+document.getElementById("b-json").addEventListener("click", exportJson);
+document.getElementById("b-reset").addEventListener("click", resetMarks);
+document.getElementById("b-theme").addEventListener("click", function(){
+  const root = document.documentElement;
+  const dark = root.getAttribute("data-theme") === "dark" ||
+    (!root.hasAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
+  root.setAttribute("data-theme", dark ? "light" : "dark");
+});
+
+render();
+</script>
+</body>
+</html>

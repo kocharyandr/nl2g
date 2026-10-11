@@ -1,0 +1,57 @@
+пар: 100
+EX ru: 68/100 = 68.0%  (95% ДИ 58–76%)
+EX en: 76/100 = 76.0%  (95% ДИ 67–83%)
+оба верно 67 · только ru 1 · только en 9 · оба неверно 23
+разрыв en−ru: 8.0 п.п. (бутстреп 95% ДИ 2.0…14.0), Макнемар p = 0.021
+одинаковый SQL ru/en: 73/100; отказов/ошибок сервиса ru 0, en 2
+медиана времени ru 14 с, en 14 с; попыток критика ru 1.10, en 1.06
+
+по конструкциям gold-SQL (EX ru / en):
+  агрегат          n=58  ru  58.6%  en  67.2%
+  GROUP BY         n=37  ru  48.6%  en  64.9%
+  JOIN             n=35  ru  40.0%  en  60.0%
+  WHERE            n=30  ru  63.3%  en  63.3%
+  ORDER BY         n=26  ru  69.2%  en  76.9%
+  вложенный        n=17  ru  58.8%  en  58.8%
+  простой SELECT   n=6   ru  83.3%  en  83.3%
+
+по базам (EX ru / en):
+  car_1                    n=13  ru 3/13  en 6/13
+  dog_kennels              n=11  ru 5/11  en 6/11
+  wta_1                    n=10  ru 6/10  en 8/10
+  flight_2                 n=8   ru 7/8  en 6/8
+  employee_hire_evaluation n=6   ru 5/6  en 5/6
+  network_1                n=6   ru 2/6  en 5/6
+  tvshow                   n=6   ru 6/6  en 6/6
+  museum_visit             n=5   ru 3/5  en 3/5
+  course_teach             n=5   ru 5/5  en 5/5
+  world_1                  n=4   ru 4/4  en 4/4
+  pets_1                   n=4   ru 3/4  en 3/4
+  student_transcripts_tracking n=4   ru 2/4  en 2/4
+  concert_singer           n=4   ru 4/4  en 4/4
+  poker_player             n=3   ru 3/3  en 3/3
+  cre_Doc_Template_Mgt     n=3   ru 3/3  en 3/3
+  voter_1                  n=3   ru 3/3  en 3/3
+  singer                   n=3   ru 2/3  en 2/3
+  battle_death             n=1   ru 1/1  en 1/1
+  orchestra                n=1   ru 1/1  en 1/1
+
+только на русском неверно:
+  [D_1000] dog_kennels: Как зовут каждого специалиста и как он описывает проведенное лечение?
+      ru: SELECT T1.first_name ,  T1.last_name ,  T3.treatment_type_description FROM Professionals AS T1 JOIN Treatments AS T2 ON 
+  [D_0907] network_1: Как зовут старшеклассника, у которого больше всего лайков?
+      ru: SELECT T1.name FROM Highschooler AS T1 JOIN Likes AS T2 ON T1.id  =  T2.liked_id WHERE T1.grade  =  12 GROUP BY T2.liked
+  [D_0141] car_1: Какое максимальное ускорение для всех цилиндров?
+      ru: SELECT max(accelerate) FROM cars_data
+  [D_0468] wta_1: найти имена проигравшего и победителя, сыгравшего в матче с наибольшим количеством минут.
+      ru: SELECT T1.loser_name ,  T1.winner_name FROM MATCHES AS T1 JOIN players AS T2 ON T1.loser_id  =  T2.player_id JOIN player
+  [D_0906] network_1: Как зовут старшеклассников, у которых есть лайки, и сколько лайков у каждого?
+      ru: SELECT T1.name ,  count(*) FROM Highschooler AS T1 JOIN Likes AS T2 ON T1.id  =  T2.student_id WHERE T1.grade  =  12 GRO
+  [D_0112] car_1: С каким ускорением разгоняется модель amc hornet sportabout (sw)?
+      ru: SELECT T2.Accelerate FROM car_names AS T1 JOIN cars_data AS T2 ON T1.MakeId  =  T2.Id WHERE T1.Model  =  "amc hornet spo
+  [D_0107] car_1: Как называется каждый континент и сколько производителей автомобилей на каждом из них?
+      ru: SELECT T1.Continent ,  COUNT(*) FROM countries AS T1 JOIN car_makers AS T2 ON T1.CountryId  =  T2.Country GROUP BY T1.Co
+  [D_0889] network_1: Покажи имена старшеклассников, у которых есть как минимум 3 друга.
+      ru: SELECT T1.name FROM Highschooler AS T1 JOIN Friend AS T2 ON T1.id  =  T2.student_id WHERE T1.grade  =  12 GROUP BY T1.id
+  [D_0470] wta_1: Найдите средний рейтинг каждого игрока и его имя.
+      ru: SELECT avg(T2.ranking) ,  T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id = T2.player_id GROUP BY T

@@ -1,0 +1,404 @@
+{"id": "D_0003", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "Список певцов с возрастом, можно сравнить возраст"}
+{"id": "D_0004", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "Список певцов с возрастом, можно сравнить возраст"}
+{"id": "D_0011", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Количество певцов по странам"}
+{"id": "D_0012", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Количество певцов по странам"}
+{"id": "D_0023", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число концертов по стадионам"}
+{"id": "D_0024", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число концертов по стадионам"}
+{"id": "D_0034", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число певцов на каждом концерте"}
+{"id": "D_0035", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число певцов на каждом концерте"}
+{"id": "D_0036", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число концертов у каждого певца"}
+{"id": "D_0037", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число концертов у каждого певца"}
+{"id": "D_0050", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Максимальный вес по типам питомцев"}
+{"id": "D_0051", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Максимальный вес по типам питомцев"}
+{"id": "D_0062", "chartable": false, "chart_type": null, "strength": null, "reason": "Список студентов, специальность — код"}
+{"id": "D_0063", "chartable": false, "chart_type": null, "strength": null, "reason": "Список студентов, специальность — код"}
+{"id": "D_0064", "chartable": false, "chart_type": null, "strength": null, "reason": "Только идентификаторы студентов"}
+{"id": "D_0065", "chartable": false, "chart_type": null, "strength": null, "reason": "Только идентификаторы студентов"}
+{"id": "D_0066", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень учеников с деталями, не сравнение"}
+{"id": "D_0067", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень учеников с деталями, не сравнение"}
+{"id": "D_0070", "chartable": false, "chart_type": null, "strength": null, "reason": "Идентификаторы питомцев, поиск деталей"}
+{"id": "D_0071", "chartable": false, "chart_type": null, "strength": null, "reason": "Идентификаторы питомцев, поиск деталей"}
+{"id": "D_0072", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Средний и максимальный возраст по типам"}
+{"id": "D_0073", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Средний и максимальный возраст по типам"}
+{"id": "D_0074", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Средний вес по типам питомцев"}
+{"id": "D_0075", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Средний вес по типам питомцев"}
+{"id": "D_0076", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень учеников с возрастом"}
+{"id": "D_0077", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень учеников с возрастом"}
+{"id": "D_0078", "chartable": false, "chart_type": null, "strength": null, "reason": "Только идентификаторы питомцев"}
+{"id": "D_0079", "chartable": false, "chart_type": null, "strength": null, "reason": "Только идентификаторы питомцев"}
+{"id": "D_0080", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число питомцев на каждого студента"}
+{"id": "D_0081", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число питомцев на каждого студента"}
+{"id": "D_0090", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число стран по континентам"}
+{"id": "D_0091", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число стран по континентам"}
+{"id": "D_0094", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Число моделей по производителям"}
+{"id": "D_0095", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Число моделей по производителям"}
+{"id": "D_0102", "chartable": false, "chart_type": null, "strength": null, "reason": "Список машин, год — атрибут"}
+{"id": "D_0103", "chartable": false, "chart_type": null, "strength": null, "reason": "Список машин, год — атрибут"}
+{"id": "D_0106", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число производителей по континентам"}
+{"id": "D_0107", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число производителей по континентам"}
+{"id": "D_0110", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Число моделей по производителям"}
+{"id": "D_0111", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Число моделей по производителям"}
+{"id": "D_0122", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень производителей и моделей"}
+{"id": "D_0123", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень производителей и моделей"}
+{"id": "D_0124", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень стран, id не мера"}
+{"id": "D_0125", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень стран, id не мера"}
+{"id": "D_0128", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "Динамика среднего веса по годам"}
+{"id": "D_0129", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "Динамика среднего веса по годам"}
+{"id": "D_0140", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Максимальное ускорение по числу цилиндров"}
+{"id": "D_0141", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Максимальное ускорение по числу цилиндров"}
+{"id": "D_0154", "chartable": false, "chart_type": null, "strength": null, "reason": "Только перечень годов"}
+{"id": "D_0155", "chartable": false, "chart_type": null, "strength": null, "reason": "Только перечень годов"}
+{"id": "D_0162", "chartable": false, "chart_type": null, "strength": null, "reason": "Вопрос про одно число"}
+{"id": "D_0163", "chartable": false, "chart_type": null, "strength": null, "reason": "Вопрос про одно число"}
+{"id": "D_0168", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень машин, id не мера"}
+{"id": "D_0169", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень машин, id не мера"}
+{"id": "D_0178", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень стран с id"}
+{"id": "D_0179", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень стран с id"}
+{"id": "D_0246", "chartable": false, "chart_type": null, "strength": null, "reason": "Номера рейсов — коды"}
+{"id": "D_0247", "chartable": false, "chart_type": null, "strength": null, "reason": "Номера рейсов — коды"}
+{"id": "D_0248", "chartable": false, "chart_type": null, "strength": null, "reason": "Номера рейсов — коды"}
+{"id": "D_0249", "chartable": false, "chart_type": null, "strength": null, "reason": "Номера рейсов — коды"}
+{"id": "D_0250", "chartable": false, "chart_type": null, "strength": null, "reason": "Номера рейсов — коды"}
+{"id": "D_0251", "chartable": false, "chart_type": null, "strength": null, "reason": "Номера рейсов — коды"}
+{"id": "D_0254", "chartable": false, "chart_type": null, "strength": null, "reason": "Номера рейсов — коды"}
+{"id": "D_0255", "chartable": false, "chart_type": null, "strength": null, "reason": "Номера рейсов — коды"}
+{"id": "D_0264", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число сотрудников по городам"}
+{"id": "D_0265", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число сотрудников по городам"}
+{"id": "D_0268", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число магазинов по местам"}
+{"id": "D_0269", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число магазинов по местам"}
+{"id": "D_0288", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число сотрудников по магазинам"}
+{"id": "D_0289", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число сотрудников по магазинам"}
+{"id": "D_0292", "chartable": false, "chart_type": null, "strength": null, "reason": "Полная таблица найма, числа — идентификаторы"}
+{"id": "D_0293", "chartable": false, "chart_type": null, "strength": null, "reason": "Полная таблица найма, числа — идентификаторы"}
+{"id": "D_0310", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число документов по шаблонам"}
+{"id": "D_0311", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число документов по шаблонам"}
+{"id": "D_0320", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень шаблонов, номер версии — атрибут"}
+{"id": "D_0321", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень шаблонов, номер версии — атрибут"}
+{"id": "D_0328", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень шаблонов с фильтром по версии"}
+{"id": "D_0329", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень шаблонов с фильтром по версии"}
+{"id": "D_0330", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число шаблонов по типам"}
+{"id": "D_0331", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число шаблонов по типам"}
+{"id": "D_0342", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число документов по типам шаблонов"}
+{"id": "D_0343", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число документов по типам шаблонов"}
+{"id": "D_0368", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число абзацев по документам"}
+{"id": "D_0369", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число абзацев по документам"}
+{"id": "D_0370", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Число абзацев по документам"}
+{"id": "D_0371", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Число абзацев по документам"}
+{"id": "D_0386", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "Список учителей с возрастом"}
+{"id": "D_0387", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "Список учителей с возрастом"}
+{"id": "D_0394", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число учителей по городам"}
+{"id": "D_0395", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число учителей по городам"}
+{"id": "D_0406", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число курсов у каждого учителя"}
+{"id": "D_0407", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число курсов у каждого учителя"}
+{"id": "D_0415", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень трёх посетителей с деталями"}
+{"id": "D_0420", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень посетителей, поиск деталей"}
+{"id": "D_0470", "chartable": true, "chart_type": "histogram", "strength": "weak", "reason": "Распределение среднего рейтинга по 1580 игрокам"}
+{"id": "D_0471", "chartable": true, "chart_type": "histogram", "strength": "weak", "reason": "Распределение среднего рейтинга по 1580 игрокам"}
+{"id": "D_0472", "chartable": true, "chart_type": "histogram", "strength": "weak", "reason": "Распределение суммы очков по 1580 игрокам"}
+{"id": "D_0473", "chartable": true, "chart_type": "histogram", "strength": "weak", "reason": "Распределение суммы очков по 1580 игрокам"}
+{"id": "D_0474", "chartable": false, "chart_type": null, "strength": null, "reason": "155 стран без ранжирования, нечитаемо"}
+{"id": "D_0475", "chartable": false, "chart_type": null, "strength": null, "reason": "155 стран без ранжирования, нечитаемо"}
+{"id": "D_0480", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "Динамика числа туров по датам"}
+{"id": "D_0481", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "Динамика числа туров по датам"}
+{"id": "D_0482", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "Число матчей по годам"}
+{"id": "D_0483", "chartable": true, "chart_type": "line", "strength": "strong", "reason": "Число матчей по годам"}
+{"id": "D_0484", "chartable": false, "chart_type": null, "strength": null, "reason": "Поиск трёх победителей, ранг — атрибут"}
+{"id": "D_0485", "chartable": false, "chart_type": null, "strength": null, "reason": "Поиск трёх победителей, ранг — атрибут"}
+{"id": "D_0490", "chartable": true, "chart_type": "pie", "strength": "strong", "reason": "Доли игроков по типу руки"}
+{"id": "D_0491", "chartable": true, "chart_type": "pie", "strength": "strong", "reason": "Доли игроков по типу руки"}
+{"id": "D_0497", "chartable": false, "chart_type": null, "strength": null, "reason": "Детали нескольких инцидентов, не сравнение"}
+{"id": "D_0608", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число телеканалов по языкам"}
+{"id": "D_0609", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число телеканалов по языкам"}
+{"id": "D_0616", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Топ-3 эпизода по рейтингу"}
+{"id": "D_0617", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Топ-3 эпизода по рейтингу"}
+{"id": "D_0628", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число мультфильмов по режиссёрам"}
+{"id": "D_0629", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число мультфильмов по режиссёрам"}
+{"id": "D_0650", "chartable": true, "chart_type": "bar", "strength": "weak", "reason": "Список заработков без подписей категорий"}
+{"id": "D_0651", "chartable": true, "chart_type": "bar", "strength": "weak", "reason": "Список заработков без подписей категорий"}
+{"id": "D_0652", "chartable": true, "chart_type": "scatter", "strength": "weak", "reason": "Два числовых атрибута игроков, мало точек"}
+{"id": "D_0653", "chartable": true, "chart_type": "scatter", "strength": "weak", "reason": "Два числовых атрибута игроков, мало точек"}
+{"id": "D_0674", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число людей по национальностям"}
+{"id": "D_0675", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число людей по национальностям"}
+{"id": "D_0689", "chartable": false, "chart_type": null, "strength": null, "reason": "Номера участников — коды, перечень"}
+{"id": "D_0690", "chartable": false, "chart_type": null, "strength": null, "reason": "Телефоны и id — не меры"}
+{"id": "D_0793", "chartable": false, "chart_type": null, "strength": null, "reason": "150 стран без ранжирования, нечитаемо"}
+{"id": "D_0794", "chartable": false, "chart_type": null, "strength": null, "reason": "150 стран без ранжирования, нечитаемо"}
+{"id": "D_0795", "chartable": false, "chart_type": null, "strength": null, "reason": "539 районов, слишком много категорий"}
+{"id": "D_0796", "chartable": false, "chart_type": null, "strength": null, "reason": "539 районов, слишком много категорий"}
+{"id": "D_0797", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Население по формам правления"}
+{"id": "D_0798", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Население по формам правления"}
+{"id": "D_0799", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Население и продолжительность жизни по континентам"}
+{"id": "D_0800", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Население и продолжительность жизни по континентам"}
+{"id": "D_0801", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Топ-5 стран по площади"}
+{"id": "D_0802", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Топ-5 стран по площади"}
+{"id": "D_0817", "chartable": false, "chart_type": null, "strength": null, "reason": "237 стран, по сути перечень языков"}
+{"id": "D_0818", "chartable": false, "chart_type": null, "strength": null, "reason": "237 стран, по сути перечень языков"}
+{"id": "D_0849", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Число оркестров по звукозаписывающим компаниям"}
+{"id": "D_0850", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Число оркестров по звукозаписывающим компаниям"}
+{"id": "D_0865", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень учеников, класс — атрибут"}
+{"id": "D_0866", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень учеников, класс — атрибут"}
+{"id": "D_0867", "chartable": true, "chart_type": "histogram", "strength": "weak", "reason": "Распределение классов учеников"}
+{"id": "D_0868", "chartable": true, "chart_type": "histogram", "strength": "weak", "reason": "Распределение классов учеников"}
+{"id": "D_0877", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число учеников по классам"}
+{"id": "D_0878", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число учеников по классам"}
+{"id": "D_0881", "chartable": false, "chart_type": null, "strength": null, "reason": "Только перечень классов"}
+{"id": "D_0882", "chartable": false, "chart_type": null, "strength": null, "reason": "Только перечень классов"}
+{"id": "D_0883", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число друзей у каждого студента"}
+{"id": "D_0884", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число друзей у каждого студента"}
+{"id": "D_0885", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число друзей у каждого ученика"}
+{"id": "D_0886", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число друзей у каждого ученика"}
+{"id": "D_0903", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число лайков по студентам"}
+{"id": "D_0904", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число лайков по студентам"}
+{"id": "D_0905", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число лайков по ученикам"}
+{"id": "D_0906", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число лайков по ученикам"}
+{"id": "D_0949", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "Перечень процедур со стоимостью"}
+{"id": "D_0950", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "Перечень процедур со стоимостью"}
+{"id": "D_0985", "chartable": false, "chart_type": null, "strength": null, "reason": "Детали нескольких собак, поиск"}
+{"id": "D_0986", "chartable": false, "chart_type": null, "strength": null, "reason": "Детали нескольких собак, поиск"}
+{"id": "D_0991", "chartable": true, "chart_type": "bar", "strength": "weak", "reason": "Суммы по трём типам начислений"}
+{"id": "D_0992", "chartable": true, "chart_type": "bar", "strength": "weak", "reason": "Суммы по трём типам начислений"}
+{"id": "D_1005", "chartable": false, "chart_type": null, "strength": null, "reason": "Год рождения — атрибут, перечень"}
+{"id": "D_1006", "chartable": false, "chart_type": null, "strength": null, "reason": "Год рождения — атрибут, перечень"}
+{"id": "D_1013", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число певцов по гражданству"}
+{"id": "D_1014", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число певцов по гражданству"}
+{"id": "D_1017", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Максимальный капитал по гражданству"}
+{"id": "D_1018", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Максимальный капитал по гражданству"}
+{"id": "D_1025", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Сумма продаж по певцам"}
+{"id": "D_1026", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Сумма продаж по певцам"}
+{"id": "F_0032", "chartable": false, "chart_type": null, "strength": null, "reason": "Даты и id турниров — поиск"}
+{"id": "F_0044", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Сравнение количества побед сторон"}
+{"id": "F_0048", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Потопленные суда по локациям"}
+{"id": "F_0050", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число побед по командирам"}
+{"id": "F_0051", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Потери по типам кораблей"}
+{"id": "F_0052", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Потери по расположению кораблей"}
+{"id": "TS_0002", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "Список руководителей с возрастом"}
+{"id": "TS_0003", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "Перечень отделов с бюджетом"}
+{"id": "TS_0010", "chartable": true, "chart_type": "bar", "strength": "weak", "reason": "Численность сотрудников выбранных отделов"}
+{"id": "TS_0013", "chartable": false, "chart_type": null, "strength": null, "reason": "Пять возрастов без подписей"}
+{"id": "TS_0019", "chartable": true, "chart_type": "bar", "strength": "weak", "reason": "Отсортированный список значений без подписей"}
+{"id": "TS_0020", "chartable": true, "chart_type": "bar", "strength": "weak", "reason": "Отсортированный список значений без подписей"}
+{"id": "TS_0035", "chartable": false, "chart_type": null, "strength": null, "reason": "Год — атрибут, перечень городов"}
+{"id": "TS_0036", "chartable": false, "chart_type": null, "strength": null, "reason": "Год — атрибут, перечень городов"}
+{"id": "TS_0043", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Среднее население по статусам"}
+{"id": "TS_0044", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Среднее население по статусам"}
+{"id": "TS_0080", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число курсов по студентам"}
+{"id": "TS_0081", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число курсов по студентам"}
+{"id": "TS_0082", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число студентов по курсам"}
+{"id": "TS_0083", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число студентов по курсам"}
+{"id": "TS_0114", "chartable": false, "chart_type": null, "strength": null, "reason": "Широта — координата, сравнение бессмысленно"}
+{"id": "TS_0115", "chartable": false, "chart_type": null, "strength": null, "reason": "Широта — координата, сравнение бессмысленно"}
+{"id": "TS_0124", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Средняя температура по индексам"}
+{"id": "TS_0125", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Средняя температура по индексам"}
+{"id": "TS_0146", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень значений облачности, без меры"}
+{"id": "TS_0147", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень значений облачности, без меры"}
+{"id": "TS_0154", "chartable": false, "chart_type": null, "strength": null, "reason": "Даты и индексы — перечень"}
+{"id": "TS_0155", "chartable": false, "chart_type": null, "strength": null, "reason": "Даты и индексы — перечень"}
+{"id": "TS_0158", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число ветреных дней по индексам"}
+{"id": "TS_0159", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число ветреных дней по индексам"}
+{"id": "TS_0160", "chartable": false, "chart_type": null, "strength": null, "reason": "Поиск дней и индексов"}
+{"id": "TS_0161", "chartable": false, "chart_type": null, "strength": null, "reason": "Поиск дней и индексов"}
+{"id": "TS_0176", "chartable": false, "chart_type": null, "strength": null, "reason": "Детали трёх дней, поиск"}
+{"id": "TS_0177", "chartable": false, "chart_type": null, "strength": null, "reason": "Детали трёх дней, поиск"}
+{"id": "TS_0178", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число станций по городам"}
+{"id": "TS_0179", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число станций по городам"}
+{"id": "TS_0182", "chartable": false, "chart_type": null, "strength": null, "reason": "Только почтовые индексы"}
+{"id": "TS_0183", "chartable": false, "chart_type": null, "strength": null, "reason": "Только почтовые индексы"}
+{"id": "TS_0188", "chartable": true, "chart_type": "bar", "strength": "weak", "reason": "Топ-3 поездки по длительности, подписи — id"}
+{"id": "TS_0189", "chartable": true, "chart_type": "bar", "strength": "weak", "reason": "Топ-3 поездки по длительности, подписи — id"}
+{"id": "TS_0190", "chartable": true, "chart_type": "scatter", "strength": "weak", "reason": "Долгота против средней длительности по станциям"}
+{"id": "TS_0191", "chartable": true, "chart_type": "scatter", "strength": "weak", "reason": "Долгота против средней длительности по станциям"}
+{"id": "TS_0192", "chartable": true, "chart_type": "scatter", "strength": "weak", "reason": "Широта против минимальной длительности по станциям"}
+{"id": "TS_0193", "chartable": true, "chart_type": "scatter", "strength": "weak", "reason": "Широта против минимальной длительности по станциям"}
+{"id": "TS_0196", "chartable": false, "chart_type": null, "strength": null, "reason": "Только почтовые индексы"}
+{"id": "TS_0197", "chartable": false, "chart_type": null, "strength": null, "reason": "Только почтовые индексы"}
+{"id": "TS_0218", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "Перечень книг с числом выпусков"}
+{"id": "TS_0227", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число произведений по издателям"}
+{"id": "TS_0234", "chartable": false, "chart_type": null, "strength": null, "reason": "Две цены без подписей, поиск"}
+{"id": "TS_0257", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число актёров по мюзиклам"}
+{"id": "TS_0258", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число актёров по мюзиклам"}
+{"id": "TS_0261", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число номинаций по номинантам"}
+{"id": "TS_0262", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число номинаций по номинантам"}
+{"id": "TS_0279", "chartable": true, "chart_type": "bar", "strength": "weak", "reason": "Число подписчиков без подписей пользователей"}
+{"id": "TS_0290", "chartable": false, "chart_type": null, "strength": null, "reason": "Только id пользователей"}
+{"id": "TS_0293", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Рейтинг пользователей по подписчикам"}
+{"id": "TS_0296", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число твитов по пользователям"}
+{"id": "TS_0297", "chartable": false, "chart_type": null, "strength": null, "reason": "partition id — не мера"}
+{"id": "TS_0298", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число твитов активных пользователей"}
+{"id": "TS_0308", "chartable": false, "chart_type": null, "strength": null, "reason": "Номер уровня — код, поиск"}
+{"id": "TS_0309", "chartable": false, "chart_type": null, "strength": null, "reason": "Номер уровня — код, поиск"}
+{"id": "TS_0336", "chartable": false, "chart_type": null, "strength": null, "reason": "Поиск нескольких товаров с атрибутом"}
+{"id": "TS_0337", "chartable": false, "chart_type": null, "strength": null, "reason": "Поиск нескольких товаров с атрибутом"}
+{"id": "TS_0346", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "Перечень самолётов с дальностью"}
+{"id": "TS_0347", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "Перечень самолётов с дальностью"}
+{"id": "TS_0348", "chartable": false, "chart_type": null, "strength": null, "reason": "Только id самолётов"}
+{"id": "TS_0349", "chartable": false, "chart_type": null, "strength": null, "reason": "Только id самолётов"}
+{"id": "TS_0364", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "Список сотрудников с зарплатой"}
+{"id": "TS_0365", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "Список сотрудников с зарплатой"}
+{"id": "TS_0366", "chartable": false, "chart_type": null, "strength": null, "reason": "Только id сотрудников"}
+{"id": "TS_0367", "chartable": false, "chart_type": null, "strength": null, "reason": "Только id сотрудников"}
+{"id": "TS_0384", "chartable": false, "chart_type": null, "strength": null, "reason": "Номер рейса — код, перечень"}
+{"id": "TS_0385", "chartable": false, "chart_type": null, "strength": null, "reason": "Номер рейса — код, перечень"}
+{"id": "TS_0392", "chartable": false, "chart_type": null, "strength": null, "reason": "Номера рейсов — коды"}
+{"id": "TS_0393", "chartable": false, "chart_type": null, "strength": null, "reason": "Номера рейсов — коды"}
+{"id": "TS_0400", "chartable": false, "chart_type": null, "strength": null, "reason": "Номера рейсов — коды"}
+{"id": "TS_0401", "chartable": false, "chart_type": null, "strength": null, "reason": "Номера рейсов — коды"}
+{"id": "TS_0404", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число рейсов по пунктам отправления"}
+{"id": "TS_0405", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число рейсов по пунктам отправления"}
+{"id": "TS_0406", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число рейсов по направлениям"}
+{"id": "TS_0407", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число рейсов по направлениям"}
+{"id": "TS_0414", "chartable": false, "chart_type": null, "strength": null, "reason": "Номера рейсов — коды"}
+{"id": "TS_0415", "chartable": false, "chart_type": null, "strength": null, "reason": "Номера рейсов — коды"}
+{"id": "TS_0416", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число рейсов по самолётам"}
+{"id": "TS_0417", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число рейсов по самолётам"}
+{"id": "TS_0422", "chartable": false, "chart_type": null, "strength": null, "reason": "Только id сотрудников"}
+{"id": "TS_0423", "chartable": false, "chart_type": null, "strength": null, "reason": "Только id сотрудников"}
+{"id": "TS_0454", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число аллергий по типам"}
+{"id": "TS_0455", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число аллергий по типам"}
+{"id": "TS_0466", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень кодов специальностей"}
+{"id": "TS_0467", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень кодов специальностей"}
+{"id": "TS_0470", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень студенток с деталями"}
+{"id": "TS_0471", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень студенток с деталями"}
+{"id": "TS_0472", "chartable": false, "chart_type": null, "strength": null, "reason": "Только id студентов"}
+{"id": "TS_0473", "chartable": false, "chart_type": null, "strength": null, "reason": "Только id студентов"}
+{"id": "TS_0476", "chartable": false, "chart_type": null, "strength": null, "reason": "Только id студентов"}
+{"id": "TS_0477", "chartable": false, "chart_type": null, "strength": null, "reason": "Только id студентов"}
+{"id": "TS_0490", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число студентов по специальностям"}
+{"id": "TS_0491", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число студентов по специальностям"}
+{"id": "TS_0494", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Распределение учеников по возрасту"}
+{"id": "TS_0495", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Распределение учеников по возрасту"}
+{"id": "TS_0496", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Средний возраст по полу"}
+{"id": "TS_0497", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Средний возраст по полу"}
+{"id": "TS_0498", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число студентов по городам"}
+{"id": "TS_0499", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число студентов по городам"}
+{"id": "TS_0500", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число студентов по наставникам"}
+{"id": "TS_0501", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число студентов по наставникам"}
+{"id": "TS_0506", "chartable": false, "chart_type": null, "strength": null, "reason": "Только id студентов"}
+{"id": "TS_0507", "chartable": false, "chart_type": null, "strength": null, "reason": "Только id студентов"}
+{"id": "TS_0508", "chartable": false, "chart_type": null, "strength": null, "reason": "Только id студентов"}
+{"id": "TS_0509", "chartable": false, "chart_type": null, "strength": null, "reason": "Только id студентов"}
+{"id": "TS_0516", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Число студентов по аллергиям"}
+{"id": "TS_0517", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Число студентов по аллергиям"}
+{"id": "TS_0518", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число студентов по типам аллергии"}
+{"id": "TS_0519", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число студентов по типам аллергии"}
+{"id": "TS_0536", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень студентов, специальность — код"}
+{"id": "TS_0537", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень студентов, специальность — код"}
+{"id": "TS_0538", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Топ-5 стран по числу счетов"}
+{"id": "TS_0539", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Топ-5 стран по числу счетов"}
+{"id": "TS_0540", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Топ-8 стран по сумме счетов"}
+{"id": "TS_0541", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Топ-8 стран по сумме счетов"}
+{"id": "TS_0542", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Топ-10 стран по среднему счёту"}
+{"id": "TS_0543", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Топ-10 стран по среднему счёту"}
+{"id": "TS_0546", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Топ-10 клиентов по числу заказов"}
+{"id": "TS_0547", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Топ-10 клиентов по числу заказов"}
+{"id": "TS_0548", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Топ-10 клиентов по объёму продаж"}
+{"id": "TS_0549", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Топ-10 клиентов по объёму продаж"}
+{"id": "TS_0550", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Топ-5 жанров по числу треков"}
+{"id": "TS_0551", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Топ-5 жанров по числу треков"}
+{"id": "TS_0648", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Число треков по жанрам"}
+{"id": "TS_0649", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Число треков по жанрам"}
+{"id": "TS_0652", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "Список редакторов с возрастом"}
+{"id": "TS_0656", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Распределение редакторов по возрасту"}
+{"id": "TS_0661", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень редакторов с темами журналов"}
+{"id": "TS_0663", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число советов у каждого редактора"}
+{"id": "TS_0666", "chartable": true, "chart_type": "bar", "strength": "weak", "reason": "Перечень журналов с продажами"}
+{"id": "TS_0670", "chartable": false, "chart_type": null, "strength": null, "reason": "Только идентификаторы и имена"}
+{"id": "TS_0671", "chartable": false, "chart_type": null, "strength": null, "reason": "Только идентификаторы и имена"}
+{"id": "TS_0678", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число учётных записей по клиентам"}
+{"id": "TS_0679", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число учётных записей по клиентам"}
+{"id": "TS_0700", "chartable": false, "chart_type": null, "strength": null, "reason": "Идентификаторы и номера карт — не меры"}
+{"id": "TS_0701", "chartable": false, "chart_type": null, "strength": null, "reason": "Идентификаторы и номера карт — не меры"}
+{"id": "TS_0712", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число карт по клиентам"}
+{"id": "TS_0713", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число карт по клиентам"}
+{"id": "TS_0720", "chartable": true, "chart_type": "pie", "strength": "strong", "reason": "Доли карт по типам"}
+{"id": "TS_0721", "chartable": true, "chart_type": "pie", "strength": "strong", "reason": "Доли карт по типам"}
+{"id": "TS_0726", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число клиентов по типам карт"}
+{"id": "TS_0727", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число клиентов по типам карт"}
+{"id": "TS_0740", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число транзакций по типам карт"}
+{"id": "TS_0741", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число транзакций по типам карт"}
+{"id": "TS_0742", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число транзакций по типам"}
+{"id": "TS_0743", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число транзакций по типам"}
+{"id": "TS_0746", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число транзакций по аккаунтам"}
+{"id": "TS_0747", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число транзакций по аккаунтам"}
+{"id": "TS_0752", "chartable": true, "chart_type": "bar", "strength": "weak", "reason": "Три трассы с вместимостью"}
+{"id": "TS_0753", "chartable": true, "chart_type": "bar", "strength": "weak", "reason": "Три трассы с вместимостью"}
+{"id": "TS_0758", "chartable": false, "chart_type": null, "strength": null, "reason": "Год открытия — атрибут, перечень трасс"}
+{"id": "TS_0759", "chartable": false, "chart_type": null, "strength": null, "reason": "Год открытия — атрибут, перечень трасс"}
+{"id": "TS_0768", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число гонок по классам"}
+{"id": "TS_0769", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число гонок по классам"}
+{"id": "TS_0780", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число гонок по трассам"}
+{"id": "TS_0781", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число гонок по трассам"}
+{"id": "TS_0791", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число членов по адресам"}
+{"id": "TS_0794", "chartable": true, "chart_type": "scatter", "strength": "weak", "reason": "Время покупки против возраста участников"}
+{"id": "TS_0803", "chartable": true, "chart_type": "bar", "strength": "weak", "reason": "Штат четырёх магазинов"}
+{"id": "TS_0834", "chartable": false, "chart_type": null, "strength": null, "reason": "348 альбомов, слишком много категорий"}
+{"id": "TS_0835", "chartable": false, "chart_type": null, "strength": null, "reason": "348 альбомов, слишком много категорий"}
+{"id": "TS_0840", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень альбомов с id"}
+{"id": "TS_0841", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень альбомов с id"}
+{"id": "TS_0870", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень сотрудников с id"}
+{"id": "TS_0871", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень сотрудников с id"}
+{"id": "TS_0876", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень артистов с id"}
+{"id": "TS_0877", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень артистов с id"}
+{"id": "TS_0886", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень различных цен без категорий"}
+{"id": "TS_0887", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень различных цен без категорий"}
+{"id": "TS_0976", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Число лекарств по торговым наименованиям"}
+{"id": "TS_0977", "chartable": true, "chart_type": "barh", "strength": "strong", "reason": "Число лекарств по торговым наименованиям"}
+{"id": "TS_1002", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число учащихся по типу принадлежности"}
+{"id": "TS_1003", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число учащихся по типу принадлежности"}
+{"id": "TS_1014", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число университетов по типу принадлежности"}
+{"id": "TS_1015", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число университетов по типу принадлежности"}
+{"id": "TS_1016", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число учащихся по типу принадлежности"}
+{"id": "TS_1017", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число учащихся по типу принадлежности"}
+{"id": "TS_1020", "chartable": false, "chart_type": null, "strength": null, "reason": "Полная таблица, смешанные атрибуты"}
+{"id": "TS_1021", "chartable": false, "chart_type": null, "strength": null, "reason": "Полная таблица, смешанные атрибуты"}
+{"id": "TS_1043", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число телефонов по типам аккредитации"}
+{"id": "TS_1044", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число телефонов по типам аккредитации"}
+{"id": "TS_1046", "chartable": false, "chart_type": null, "strength": null, "reason": "Подробности моделей, полная таблица"}
+{"id": "TS_1065", "chartable": false, "chart_type": null, "strength": null, "reason": "Номер драфта — код, два игрока"}
+{"id": "TS_1066", "chartable": false, "chart_type": null, "strength": null, "reason": "Номер драфта — код, два игрока"}
+{"id": "TS_1073", "chartable": false, "chart_type": null, "strength": null, "reason": "Сезон — атрибут, перечень игроков"}
+{"id": "TS_1074", "chartable": false, "chart_type": null, "strength": null, "reason": "Сезон — атрибут, перечень игроков"}
+{"id": "TS_1083", "chartable": false, "chart_type": null, "strength": null, "reason": "Сезон — атрибут, перечень игроков"}
+{"id": "TS_1084", "chartable": false, "chart_type": null, "strength": null, "reason": "Сезон — атрибут, перечень игроков"}
+{"id": "TS_1091", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число игроков по позициям"}
+{"id": "TS_1092", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число игроков по позициям"}
+{"id": "TS_1093", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число игроков по странам"}
+{"id": "TS_1094", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число игроков по странам"}
+{"id": "TS_1131", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "Перечень альпинистов с высотой гор"}
+{"id": "TS_1132", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "Перечень альпинистов с высотой гор"}
+{"id": "TS_1139", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число альпинистов по странам"}
+{"id": "TS_1140", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число альпинистов по странам"}
+{"id": "TS_1152", "chartable": true, "chart_type": "bar", "strength": "weak", "reason": "Отсортированные оценки без подписей"}
+{"id": "TS_1153", "chartable": true, "chart_type": "scatter", "strength": "weak", "reason": "Рывок против толчка, мало точек"}
+{"id": "TS_1161", "chartable": false, "chart_type": null, "strength": null, "reason": "Два значения роста, поиск"}
+{"id": "TS_1164", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число людей по местам рождения"}
+{"id": "TS_1167", "chartable": true, "chart_type": "scatter", "strength": "weak", "reason": "Рост против веса людей"}
+{"id": "TS_1168", "chartable": false, "chart_type": null, "strength": null, "reason": "Полная таблица культуристов с id"}
+{"id": "TS_1172", "chartable": false, "chart_type": null, "strength": null, "reason": "Несколько значений веса, поиск"}
+{"id": "TS_1176", "chartable": true, "chart_type": "bar", "strength": "weak", "reason": "Отсортированные голоса без подписей"}
+{"id": "TS_1177", "chartable": true, "chart_type": "line", "strength": "weak", "reason": "Процент голосов по датам выборов"}
+{"id": "TS_1188", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число кандидатов по партиям"}
+{"id": "TS_1211", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "Перечень квартир с числом комнат"}
+{"id": "TS_1212", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "Перечень квартир с числом комнат"}
+{"id": "TS_1249", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число бронирований по статусам"}
+{"id": "TS_1250", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число бронирований по статусам"}
+{"id": "TS_1255", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число квартир по типам"}
+{"id": "TS_1256", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число квартир по типам"}
+{"id": "TS_1265", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Макс. и мин. комнат по типам"}
+{"id": "TS_1266", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Макс. и мин. комнат по типам"}
+{"id": "TS_1267", "chartable": true, "chart_type": "pie", "strength": "strong", "reason": "Доли гостей по полу"}
+{"id": "TS_1268", "chartable": true, "chart_type": "pie", "strength": "strong", "reason": "Доли гостей по полу"}
+{"id": "TS_1277", "chartable": false, "chart_type": null, "strength": null, "reason": "Сезон — атрибут, перечень игр"}
+{"id": "TS_1279", "chartable": false, "chart_type": null, "strength": null, "reason": "Несколько значений без подписей"}
+{"id": "TS_1285", "chartable": false, "chart_type": null, "strength": null, "reason": "Поиск сезона и стадиона"}
+{"id": "TS_1290", "chartable": true, "chart_type": "bar", "strength": "weak", "reason": "Посещаемость нескольких стадионов"}
+{"id": "TS_1292", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число игр по стадионам"}
+{"id": "TS_1302", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Средний рейтинг по ведущей ноге"}
+{"id": "TS_1303", "chartable": true, "chart_type": "pie", "strength": "strong", "reason": "Доли игроков по ведущей ноге"}
+{"id": "TS_1311", "chartable": false, "chart_type": null, "strength": null, "reason": "Несколько значений посещаемости без подписей"}
+{"id": "TS_1314", "chartable": true, "chart_type": "bar", "strength": "strong", "reason": "Число спектаклей по локациям"}
+{"id": "TS_1329", "chartable": false, "chart_type": null, "strength": null, "reason": "Номер комнаты — код, перечень"}
+{"id": "TS_1330", "chartable": false, "chart_type": null, "strength": null, "reason": "Номер комнаты — код, перечень"}
+{"id": "TS_1345", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень курсов с атрибутами"}
+{"id": "TS_1346", "chartable": false, "chart_type": null, "strength": null, "reason": "Перечень курсов с атрибутами"}
+{"id": "TS_1359", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "Перечень отделов с бюджетом"}
+{"id": "TS_1360", "chartable": true, "chart_type": "barh", "strength": "weak", "reason": "Перечень отделов с бюджетом"}

@@ -1,0 +1,1052 @@
+{
+ "1": {
+  "A": 1,
+  "P": 1,
+  "AP": 1,
+  "adherence": {
+   "E1_requested_edit_visible": {
+    "evidence": "The bars are now red.",
+    "reason": "The bars are visibly changed to red.",
+    "passed": true
+   },
+   "E2_correct_target_elements": {
+    "evidence": "All bars are red.",
+    "reason": "The edit was applied to all bars.",
+    "passed": true
+   },
+   "E3_edit_completeness": {
+    "evidence": "All bars are red.",
+    "reason": "The edit was applied to all bars.",
+    "passed": true
+   },
+   "E4_edit_specificity_no_unrequested_edit": {
+    "evidence": "No other changes are visible.",
+    "reason": "No other changes are visible.",
+    "passed": true
+   },
+   "E5_visual_integration_and_cleanliness": {
+    "evidence": "The chart is clean and coherent.",
+    "reason": "The chart is visually clean and coherent.",
+    "passed": true
+   }
+  },
+  "preservation": {
+   "P1_element_count_and_presence": {
+    "evidence": "All data elements are preserved.",
+    "reason": "All bars and population values are present.",
+    "passed": true
+   },
+   "P2_spatial_layout_preservation": {
+    "evidence": "Relative arrangement and order preserved.",
+    "reason": "Bars are in the same order and positions.",
+    "passed": true
+   },
+   "P3_scale_proportion_and_quantitative_relations": {
+    "evidence": "Relative sizes and proportions preserved.",
+    "reason": "Bar heights and population values are consistent.",
+    "passed": true
+   },
+   "P4_visual_encoding_and_series_identity": {
+    "evidence": "Data-to-visual mapping preserved.",
+    "reason": "Bar colors and population values are consistent.",
+    "passed": true
+   },
+   "P5_no_extra_artifacts_or_corruption": {
+    "evidence": "No extra artifacts or corruption.",
+    "reason": "No additional elements or distortions.",
+    "passed": true
+   }
+  },
+  "fact_checks": [
+   {
+    "id": "F1",
+    "fact": "Китай имеет самое большое население.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Population values and ranking preserved."
+   },
+   {
+    "id": "F2",
+    "fact": "Индия занимает второе место по численности населения.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Population values and ranking preserved."
+   },
+   {
+    "id": "F3",
+    "fact": "США занимают третье место по численности населения.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Population values and ranking preserved."
+   },
+   {
+    "id": "F4",
+    "fact": "Индонезия занимает четвертое место по численности населения.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Population values and ranking preserved."
+   },
+   {
+    "id": "F5",
+    "fact": "Бразилия занимает пятое место по численности населения.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Population values and ranking preserved."
+   },
+   {
+    "id": "F6",
+    "fact": "Пакистан занимает шестое место по численности населения.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Population values and ranking preserved."
+   },
+   {
+    "id": "F7",
+    "fact": "Российская Федерация занимает седьмое место по численности населения.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Population values and ranking preserved."
+   },
+   {
+    "id": "F8",
+    "fact": "Бангладеш занимает восьмое место по численности населения.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Population values and ranking preserved."
+   },
+   {
+    "id": "F9",
+    "fact": "Япония занимает девятое место по численности населения.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Population values and ranking preserved."
+   },
+   {
+    "id": "F10",
+    "fact": "Нигерия занимает десятое место по численности населения.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Population values and ranking preserved"
+   }
+  ],
+  "score": 1.0,
+  "secs": 71
+ },
+ "2": {
+  "A": 1,
+  "P": 1,
+  "AP": 1,
+  "adherence": {
+   "E1_requested_edit_visible": {
+    "evidence": "The background is red, bars and text are white.",
+    "reason": "The edit is clearly visible.",
+    "passed": true
+   },
+   "E2_correct_target_elements": {
+    "evidence": "The background, bars, and text are changed.",
+    "reason": "The edit was applied to the correct elements.",
+    "passed": true
+   },
+   "E3_edit_completeness": {
+    "evidence": "The background is red, bars and text are white.",
+    "reason": "The edit was applied to all elements.",
+    "passed": true
+   },
+   "E4_edit_specificity_no_unrequested_edit": {
+    "evidence": "No other changes are visible.",
+    "reason": "Changes are limited to the requested edit.",
+    "passed": true
+   },
+   "E5_visual_integration_and_cleanliness": {
+    "evidence": "The edit is visually clean and coherent.",
+    "reason": "The edit is artifact-free.",
+    "passed": true
+   }
+  },
+  "preservation": {
+   "P1_element_count_and_presence": {
+    "evidence": "Все континенты и их количество сохранены.",
+    "reason": "Все континенты и их количество сохранены.",
+    "passed": true
+   },
+   "P2_spatial_layout_preservation": {
+    "evidence": "Расположение столбцов и их высота сохранены.",
+    "reason": "Расположение столбцов и их высота сохранены.",
+    "passed": true
+   },
+   "P3_scale_proportion_and_quantitative_relations": {
+    "evidence": "Масштаб и пропорции сохранены.",
+    "reason": "Масштаб и пропорции сохранены.",
+    "passed": true
+   },
+   "P4_visual_encoding_and_series_identity": {
+    "evidence": "Данные корректно отображены.",
+    "reason": "Данные корректно отображены.",
+    "passed": true
+   },
+   "P5_no_extra_artifacts_or_corruption": {
+    "evidence": "Нет дополнительных артефактов или корректировок.",
+    "reason": "Нет дополнительных артефактов или корректировок.",
+    "passed": true
+   }
+  },
+  "fact_checks": [
+   {
+    "id": "F1",
+    "fact": "Африка имеет наибольшее количество стран.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Страны Африки занимают наибольшую высоту столбцов."
+   },
+   {
+    "id": "F2",
+    "fact": "Антарктида имеет меньшее количество стран, чем Африка.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Страны Антарктиды занимают меньшую высоту столбцов, чем Африки."
+   },
+   {
+    "id": "F3",
+    "fact": "Азия имеет больше стран, чем Европа.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Страны Азии занимают большую высоту столбцов, чем Европы."
+   },
+   {
+    "id": "F4",
+    "fact": "Африка имеет больше стран, чем Азия.",
+    "importance": "major",
+    "status": "not_preserved",
+    "reason": "Страны Африки занимают меньшую высоту столбцов, чем Азии."
+   },
+   {
+    "id": "F5",
+    "fact": "Африка имеет больше стран, чем Северная Америка.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Страны Африки занимают большую высоту столбцов, чем Северной Америки."
+   },
+   {
+    "id": "F6",
+    "fact": "Африка имеет больше стран, чем Южная Америка.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Страны Африки занимают большую высоту столбцов, чем Южной Америки."
+   },
+   {
+    "id": "F7",
+    "fact": "Африка имеет больше стран, чем Океания.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Страны Африки занимают большую высоту столбцов, чем Океании."
+   }
+  ],
+  "score": 1.0,
+  "secs": 56
+ },
+ "3": {
+  "A": 1,
+  "P": 1,
+  "AP": 1,
+  "adherence": {
+   "E1_requested_edit_visible": {
+    "evidence": "The largest bar is red, and the rest are white with black outlines.",
+    "reason": "The edit is clearly visible.",
+    "passed": true
+   },
+   "E2_correct_target_elements": {
+    "evidence": "The largest bar is red, and the rest are white with black outlines.",
+    "reason": "The edit was applied to the correct chart elements.",
+    "passed": true
+   },
+   "E3_edit_completeness": {
+    "evidence": "The edit was applied to all elements it should apply to.",
+    "reason": "The edit was applied to all elements.",
+    "passed": true
+   },
+   "E4_edit_specificity_no_unrequested_edit": {
+    "evidence": "No other changes are visible.",
+    "reason": "Changes are limited to the requested edit only.",
+    "passed": true
+   },
+   "E5_visual_integration_and_cleanliness": {
+    "evidence": "The edit is visually clean and coherent.",
+    "reason": "The edit is visually clean and coherent.",
+    "passed": true
+   }
+  },
+  "preservation": {
+   "P1_element_count_and_presence": {
+    "evidence": "All data elements are preserved.",
+    "reason": "All airport names and their corresponding bar heights are visible.",
+    "passed": true
+   },
+   "P2_spatial_layout_preservation": {
+    "evidence": "Relative arrangement and order preserved.",
+    "reason": "The bars maintain their original order and spacing.",
+    "passed": true
+   },
+   "P3_scale_proportion_and_quantitative_relations": {
+    "evidence": "Relative sizes and proportions preserved.",
+    "reason": "The relative heights of the bars reflect the original data.",
+    "passed": true
+   },
+   "P4_visual_encoding_and_series_identity": {
+    "evidence": "Data-to-visual mapping preserved.",
+    "reason": "The bars still represent the number of departures for each airport.",
+    "passed": true
+   },
+   "P5_no_extra_artifacts_or_corruption": {
+    "evidence": "No extra misleading content.",
+    "reason": "The chart does not contain any misleading elements.",
+    "passed": true
+   }
+  },
+  "fact_checks": [
+   {
+    "id": "F1",
+    "fact": "Municipal has the highest number of departures.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Municipal remains the tallest bar."
+   },
+   {
+    "id": "F2",
+    "fact": "Algona has the second highest number of departures.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Algona's bar is the second tallest."
+   },
+   {
+    "id": "F3",
+    "fact": "Ashley, Akron/canton Regional, and Akiak have the same number of departures.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Ashley, Akron/canton Regional, and Akiak have the same height bars."
+   },
+   {
+    "id": "F4",
+    "fact": "Anvik, Anacortes, and Altus AFB have the same number of departures.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Anvik, Anacortes, and Altus AFB have the same height bars."
+   },
+   {
+    "id": "F5",
+    "fact": "The number of departures for each airport is distinct.",
+    "importance": "minor",
+    "status": "preserved",
+    "reason": "Each airport has a distinct bar height, though some are visually similar due to the color scheme change."
+   }
+  ],
+  "score": 1.0,
+  "secs": 58
+ },
+ "4": {
+  "A": 1,
+  "P": 1,
+  "AP": 1,
+  "adherence": {
+   "E1_requested_edit_visible": {
+    "evidence": "Столбцы изображены в форме белых яиц на красном фоне.",
+    "reason": "Редактирование выполнено в соответствии с запросом.",
+    "passed": true
+   },
+   "E2_correct_target_elements": {
+    "evidence": "Изменения затронули все столбцы.",
+    "reason": "Редактирование было применено ко всем столбцам.",
+    "passed": true
+   },
+   "E3_edit_completeness": {
+    "evidence": "Столбцы полностью изображены в форме яиц.",
+    "reason": "Редактирование выполнено полностью.",
+    "passed": true
+   },
+   "E4_edit_specificity_no_unrequested_edit": {
+    "evidence": "Изменения ограничены только формой столбцов.",
+    "reason": "Нет дополнительных изменений.",
+    "passed": true
+   },
+   "E5_visual_integration_and_cleanliness": {
+    "evidence": "Изменения выглядят чисто и интегрированно.",
+    "reason": "Изменения не вызывают артефактов.",
+    "passed": true
+   }
+  },
+  "preservation": {
+   "P1_element_count_and_presence": {
+    "evidence": "All original data elements are preserved.",
+    "reason": "All original data elements are preserved.",
+    "passed": true
+   },
+   "P2_spatial_layout_preservation": {
+    "evidence": "Relative arrangement and chart layout are preserved.",
+    "reason": "Relative arrangement and chart layout are preserved.",
+    "passed": true
+   },
+   "P3_scale_proportion_and_quantitative_relations": {
+    "evidence": "Relative sizes and proportions are preserved.",
+    "reason": "Relative sizes and proportions are preserved.",
+    "passed": true
+   },
+   "P4_visual_encoding_and_series_identity": {
+    "evidence": "Data-to-visual mapping remains interpretable.",
+    "reason": "Data-to-visual mapping remains interpretable.",
+    "passed": true
+   },
+   "P5_no_extra_artifacts_or_corruption": {
+    "evidence": "No extra misleading content.",
+    "reason": "No extra misleading content.",
+    "passed": true
+   }
+  },
+  "fact_checks": [
+   {
+    "id": "F1",
+    "fact": "The bar for 4 cylinders is the tallest, indicating the highest number of models.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "The tallest bar for 4 cylinders is preserved."
+   },
+   {
+    "id": "F2",
+    "fact": "The bar for 3 cylinders is the shortest, indicating the lowest number of models.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "The shortest bar for 3 cylinders is preserved."
+   },
+   {
+    "id": "F3",
+    "fact": "The bar for 5 cylinders is the second shortest, indicating a low number of models.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "The second shortest bar for 5 cylinders is preserved."
+   },
+   {
+    "id": "F4",
+    "fact": "The bar for 6 cylinders is taller than the bar for 5 cylinders.",
+    "importance": "minor",
+    "status": "preserved",
+    "reason": "The bar for 6 cylinders is taller than the bar for 5 cylinders."
+   },
+   {
+    "id": "F5",
+    "fact": "The bar for 8 cylinders is taller than the bar for 6 cylinders.",
+    "importance": "minor",
+    "status": "preserved",
+    "reason": "The bar for 8 cylinders is taller than the bar for 6 cylinders."
+   }
+  ],
+  "score": 1.0,
+  "secs": 49
+ },
+ "5": {
+  "A": 1,
+  "P": 1,
+  "AP": 1,
+  "adherence": {
+   "E1_requested_edit_visible": {
+    "evidence": "Points are replaced with small white eggs, line is red.",
+    "reason": "The requested edit is clearly visible.",
+    "passed": true
+   },
+   "E2_correct_target_elements": {
+    "evidence": "Points and line are edited.",
+    "reason": "The edit was applied to the correct chart elements.",
+    "passed": true
+   },
+   "E3_edit_completeness": {
+    "evidence": "All points and line are edited.",
+    "reason": "The edit was applied to all elements it should apply to.",
+    "passed": true
+   },
+   "E4_edit_specificity_no_unrequested_edit": {
+    "evidence": "No other changes are visible.",
+    "reason": "Changes are limited to the requested edit only.",
+    "passed": true
+   },
+   "E5_visual_integration_and_cleanliness": {
+    "evidence": "The edit is visually clean and coherent.",
+    "reason": "The edit is visually clean, coherent, and artifact-free.",
+    "passed": true
+   }
+  },
+  "preservation": {
+   "P1_element_count_and_presence": {
+    "evidence": "All data points and the line are preserved.",
+    "reason": "All original data elements are preserved.",
+    "passed": true
+   },
+   "P2_spatial_layout_preservation": {
+    "evidence": "The relative arrangement and order of data points and the line are preserved.",
+    "reason": "The chart layout is preserved.",
+    "passed": true
+   },
+   "P3_scale_proportion_and_quantitative_relations": {
+    "evidence": "The relative sizes and proportions of the data points and the line are preserved.",
+    "reason": "The scale and quantitative relations are preserved.",
+    "passed": true
+   },
+   "P4_visual_encoding_and_series_identity": {
+    "evidence": "The data-to-visual mapping remains interpretable.",
+    "reason": "The series identity is clear.",
+    "passed": true
+   },
+   "P5_no_extra_artifacts_or_corruption": {
+    "evidence": "No extra misleading content is present.",
+    "reason": "The original chart content is not corrupted.",
+    "passed": true
+   }
+  },
+  "fact_checks": [
+   {
+    "id": "F1",
+    "fact": "The average fuel consumption (avg_MPG) increased from 1970 to 1982.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "The trend of increasing avg_MPG from 1970 to 1982 is preserved."
+   },
+   {
+    "id": "F2",
+    "fact": "The highest avg_MPG was recorded in 1980.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "The peak at 1980 is preserved."
+   },
+   {
+    "id": "F3",
+    "fact": "The avg_MPG decreased between 1974 and 1975.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "The decrease between 1974 and 1975 is preserved."
+   },
+   {
+    "id": "F4",
+    "fact": "The avg_MPG increased steadily from 1977 to 1982.",
+    "importance": "minor",
+    "status": "preserved",
+    "reason": "The steady increase from 1977 to 1982 is preserved."
+   },
+   {
+    "id": "F5",
+    "fact": "The avg_MPG was lowest in 1970.",
+    "importance": "minor",
+    "status": "preserved",
+    "reason": "The lowest avg_MPG in 1970 is preserved."
+   },
+   {
+    "id": "F6",
+    "fact": "The avg_MPG was highest in 1980.",
+    "importance": "minor",
+    "status": "preserved",
+    "reason": "The highest avg_MPG in 1980 is preserved"
+   }
+  ],
+  "score": 1.0,
+  "secs": 107
+ },
+ "6": {
+  "A": 1,
+  "P": 1,
+  "AP": 1,
+  "adherence": {
+   "E1_requested_edit_visible": {
+    "evidence": "Столбцы имеют форму купола, как верхушка яйца.",
+    "reason": "Редактирование выполнено в соответствии с запросом.",
+    "passed": true
+   },
+   "E2_correct_target_elements": {
+    "evidence": "Редактирование затронуло все столбцы.",
+    "reason": "Редактирование было применено ко всем столбцам.",
+    "passed": true
+   },
+   "E3_edit_completeness": {
+    "evidence": "Редактирование было полностью выполнено.",
+    "reason": "Все столбцы имеют форму купола.",
+    "passed": true
+   },
+   "E4_edit_specificity_no_unrequested_edit": {
+    "evidence": "Изменения ограничены только формой столбцов.",
+    "reason": "Нет дополнительных изменений.",
+    "passed": true
+   },
+   "E5_visual_integration_and_cleanliness": {
+    "evidence": "Изменения выглядят чисто и интегрированно.",
+    "reason": "Форма столбцов не создает артефактов.",
+    "passed": true
+   }
+  },
+  "preservation": {
+   "P1_element_count_and_presence": {
+    "evidence": "All data elements are preserved.",
+    "reason": "All airlines and their counts are visible.",
+    "passed": true
+   },
+   "P2_spatial_layout_preservation": {
+    "evidence": "Relative arrangement is preserved.",
+    "reason": "Airlines are in the same order and positions.",
+    "passed": true
+   },
+   "P3_scale_proportion_and_quantitative_relations": {
+    "evidence": "Relative sizes and proportions are preserved.",
+    "reason": "Counts are still at 100.0 for most airlines.",
+    "passed": true
+   },
+   "P4_visual_encoding_and_series_identity": {
+    "evidence": "Data-to-visual mapping is interpretable.",
+    "reason": "Each airline has a bar representing its count.",
+    "passed": true
+   },
+   "P5_no_extra_artifacts_or_corruption": {
+    "evidence": "No extra misleading content.",
+    "reason": "No new elements or distortions.",
+    "passed": true
+   }
+  },
+  "fact_checks": [
+   {
+    "id": "F1",
+    "fact": "Most airlines have 100.0 count.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Counts for most airlines remain at 100.0."
+   },
+   {
+    "id": "F2",
+    "fact": "Northwest Airlines has 5.0 count.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Count for Northwest Airlines is 5.0."
+   },
+   {
+    "id": "F3",
+    "fact": "Virgin America, Aeroflot, and Победа have 2.0 count.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Counts for Virgin America, Aeroflot, and Победа are 2.0."
+   },
+   {
+    "id": "F4",
+    "fact": "The chart shows the count of flights for each airline.",
+    "importance": "minor",
+    "status": "preserved",
+    "reason": "The chart still represents flight counts."
+   },
+   {
+    "id": "F5",
+    "fact": "The chart is a bar chart.",
+    "importance": "minor",
+    "status": "preserved",
+    "reason": "The chart is still a bar chart."
+   },
+   {
+    "id": "F6",
+    "fact": "The x-axis represents different airlines.",
+    "importance": "minor",
+    "status": "preserved",
+    "reason": "Airlines are still listed on the x-axis."
+   },
+   {
+    "id": "F7",
+    "fact": "The y-axis represents the count of flights.",
+    "importance": "minor",
+    "status": "preserved",
+    "reason": "The y-axis still shows the count of flights."
+   }
+  ],
+  "score": 1.0,
+  "secs": 53
+ },
+ "7": {
+  "A": 0,
+  "P": 1,
+  "AP": 0,
+  "adherence": {
+   "E1_requested_edit_visible": {
+    "evidence": "Circles replaced with white eggs with red outlines.",
+    "reason": "The edit is clearly visible.",
+    "passed": false
+   },
+   "E2_correct_target_elements": {
+    "evidence": "Circles are replaced.",
+    "reason": "The edit was applied to the correct elements.",
+    "passed": false
+   },
+   "E3_edit_completeness": {
+    "evidence": "All circles are replaced.",
+    "reason": "The edit was applied to all elements it should apply to.",
+    "passed": false
+   },
+   "E4_edit_specificity_no_unrequested_edit": {
+    "evidence": "No other changes are visible.",
+    "reason": "Changes are limited to the requested edit only.",
+    "passed": false
+   },
+   "E5_visual_integration_and_cleanliness": {
+    "evidence": "The edit is visually clean and coherent.",
+    "reason": "The edit is visually clean and coherent.",
+    "passed": false
+   }
+  },
+  "preservation": {
+   "P1_element_count_and_presence": {
+    "evidence": "All data points are preserved with the same number and arrangement.",
+    "reason": "No new data points are added.",
+    "passed": true
+   },
+   "P2_spatial_layout_preservation": {
+    "evidence": "Relative arrangement and order of data points are preserved.",
+    "reason": "Data points maintain the same spatial layout.",
+    "passed": true
+   },
+   "P3_scale_proportion_and_quantitative_relations": {
+    "evidence": "Relative sizes and proportions of data points are preserved.",
+    "reason": "Data points maintain the same relative sizes and proportions.",
+    "passed": true
+   },
+   "P4_visual_encoding_and_series_identity": {
+    "evidence": "Data-to-visual mapping remains interpretable.",
+    "reason": "Series identity is clear with the same visual encoding.",
+    "passed": true
+   },
+   "P5_no_extra_artifacts_or_corruption": {
+    "evidence": "No extra misleading content or corruption.",
+    "reason": "Original chart content is not corrupted.",
+    "passed": true
+   }
+  },
+  "fact_checks": [
+   {
+    "id": "F1",
+    "fact": "There is a negative correlation between Horsepower and MPG.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Data points maintain the same negative correlation pattern."
+   },
+   {
+    "id": "F2",
+    "fact": "The data points are scattered across the plot.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Data points are scattered in the same manner as in the original chart."
+   },
+   {
+    "id": "F3",
+    "fact": "The highest Horsepower values are associated with the lowest MPG values.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Highest Horsepower values still have the lowest MPG values."
+   },
+   {
+    "id": "F4",
+    "fact": "The lowest Horsepower values are associated with the highest MPG values.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "Lowest Horsepower values still have the highest MPG values."
+   },
+   {
+    "id": "F5",
+    "fact": "The plot has a grid background.",
+    "importance": "minor",
+    "status": "preserved",
+    "reason": "Grid background is preserved in the edited chart."
+   }
+  ],
+  "score": 0.5,
+  "secs": 52
+ },
+ "8": {
+  "A": 1,
+  "P": 1,
+  "AP": 1,
+  "adherence": {
+   "E1_requested_edit_visible": {
+    "evidence": "Столбцы изменились на белые яйца.",
+    "reason": "Столбцы стали белыми яйцами.",
+    "passed": true
+   },
+   "E2_correct_target_elements": {
+    "evidence": "Столбцы были перерисованы как яйца.",
+    "reason": "Изменение затронуло все столбцы.",
+    "passed": true
+   },
+   "E3_edit_completeness": {
+    "evidence": "Все столбцы изменились на яйца.",
+    "reason": "Изменение было применено ко всем элементам.",
+    "passed": true
+   },
+   "E4_edit_specificity_no_unrequested_edit": {
+    "evidence": "Изменение ограничено только яйцами.",
+    "reason": "Не было добавлено других изменений.",
+    "passed": true
+   },
+   "E5_visual_integration_and_cleanliness": {
+    "evidence": "Изменение выглядит чисто и интегрировано.",
+    "reason": "Яйца хорошо интегрированы в график.",
+    "passed": true
+   }
+  },
+  "preservation": {
+   "P1_element_count_and_presence": {
+    "evidence": "All data elements are preserved.",
+    "reason": "All countries are present with their respective heights.",
+    "passed": true
+   },
+   "P2_spatial_layout_preservation": {
+    "evidence": "Relative arrangement is preserved.",
+    "reason": "Countries are in the same order and positions.",
+    "passed": true
+   },
+   "P3_scale_proportion_and_quantitative_relations": {
+    "evidence": "Relative sizes are preserved.",
+    "reason": "The height of the bars reflects the number of tennis players.",
+    "passed": true
+   },
+   "P4_visual_encoding_and_series_identity": {
+    "evidence": "Data-to-visual mapping is interpretable.",
+    "reason": "The height of the bars represents the number of tennis players.",
+    "passed": true
+   },
+   "P5_no_extra_artifacts_or_corruption": {
+    "evidence": "No extra misleading content.",
+    "reason": "The chart structure and data are consistent with the original.",
+    "passed": true
+   }
+  },
+  "fact_checks": [
+   {
+    "id": "F1",
+    "fact": "USA has the highest number of tennis players.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "USA still has the largest bar."
+   },
+   {
+    "id": "F2",
+    "fact": "JPN and ESP have nearly the same number of tennis players.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "JPN and ESP bars are close in height."
+   },
+   {
+    "id": "F3",
+    "fact": "MEX has the lowest number of tennis players.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "MEX has the shortest bar."
+   },
+   {
+    "id": "F4",
+    "fact": "GER has more tennis players than FRA.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "GER bar is taller than FRA."
+   },
+   {
+    "id": "F5",
+    "fact": "RUS has fewer tennis players than AUS.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "RUS bar is shorter than AUS."
+   }
+  ],
+  "score": 1.0,
+  "secs": 73
+ },
+ "9": {
+  "A": 1,
+  "P": 0,
+  "AP": 0,
+  "adherence": {
+   "E1_requested_edit_visible": {
+    "evidence": "The chart now resembles a sliced fried egg on a red plate.",
+    "reason": "The chart visually represents a sliced fried egg.",
+    "passed": true
+   },
+   "E2_correct_target_elements": {
+    "evidence": "The chart elements are correctly transformed into a fried egg slice.",
+    "reason": "The chart elements are correctly transformed into a fried egg slice.",
+    "passed": true
+   },
+   "E3_edit_completeness": {
+    "evidence": "All chart elements are transformed into a fried egg slice.",
+    "reason": "All chart elements are transformed into a fried egg slice.",
+    "passed": true
+   },
+   "E4_edit_specificity_no_unrequested_edit": {
+    "evidence": "No other changes are visible.",
+    "reason": "No other changes are visible.",
+    "passed": true
+   },
+   "E5_visual_integration_and_cleanliness": {
+    "evidence": "The transformation is visually clean and coherent.",
+    "reason": "The transformation is visually clean and coherent.",
+    "passed": true
+   }
+  },
+  "preservation": {
+   "P1_element_count_and_presence": {
+    "evidence": "No data elements are preserved.",
+    "reason": "The chart is not a pie chart but a representation of a fried egg.",
+    "passed": false
+   },
+   "P2_spatial_layout_preservation": {
+    "evidence": "The chart layout is not preserved.",
+    "reason": "The chart is not a pie chart but a representation of a fried egg.",
+    "passed": false
+   },
+   "P3_scale_proportion_and_quantitative_relations": {
+    "evidence": "The scale and proportions are not preserved.",
+    "reason": "The chart is not a pie chart but a representation of a fried egg.",
+    "passed": false
+   },
+   "P4_visual_encoding_and_series_identity": {
+    "evidence": "The data-to-visual mapping is not interpretable.",
+    "reason": "The chart is not a pie chart but a representation of a fried egg.",
+    "passed": false
+   },
+   "P5_no_extra_artifacts_or_corruption": {
+    "evidence": "No extra artifacts are present.",
+    "reason": "The chart is not a pie chart but a representation of a fried egg.",
+    "passed": false
+   }
+  },
+  "fact_checks": [
+   {
+    "id": "F1",
+    "fact": "Africa has the largest share of countries.",
+    "importance": "major",
+    "status": "not_preserved",
+    "reason": "Africa's share is not preserved in the new chart."
+   },
+   {
+    "id": "F2",
+    "fact": "Asia has the second largest share of countries.",
+    "importance": "major",
+    "status": "not_preserved",
+    "reason": "Asia's share is not preserved in the new chart."
+   },
+   {
+    "id": "F3",
+    "fact": "Europe has a larger share than North America.",
+    "importance": "major",
+    "status": "not_preserved",
+    "reason": "Europe's share is not preserved in the new chart."
+   },
+   {
+    "id": "F4",
+    "fact": "Oceania has a smaller share than North America.",
+    "importance": "major",
+    "status": "not_preserved",
+    "reason": "Oceania's share is not preserved in the new chart."
+   },
+   {
+    "id": "F5",
+    "fact": "Other continents have the smallest share.",
+    "importance": "major",
+    "status": "not_preserved",
+    "reason": "Other continents' share is not preserved in the new chart."
+   }
+  ],
+  "score": 0.5,
+  "secs": 57
+ },
+ "10": {
+  "A": 1,
+  "P": 1,
+  "AP": 1,
+  "adherence": {
+   "E1_requested_edit_visible": {
+    "evidence": "Red studio wall and hanging eggs are visible.",
+    "reason": "The requested elements are present.",
+    "passed": true
+   },
+   "E2_correct_target_elements": {
+    "evidence": "The wall and eggs are added to the chart.",
+    "reason": "The edit targets the correct elements.",
+    "passed": true
+   },
+   "E3_edit_completeness": {
+    "evidence": "The wall and eggs are added to all data points.",
+    "reason": "The edit is applied to all elements.",
+    "passed": true
+   },
+   "E4_edit_specificity_no_unrequested_edit": {
+    "evidence": "No other changes are visible.",
+    "reason": "No unrequested edits are present.",
+    "passed": true
+   },
+   "E5_visual_integration_and_cleanliness": {
+    "evidence": "The wall and eggs are visually integrated and clean.",
+    "reason": "The edit is visually coherent and artifact-free.",
+    "passed": true
+   }
+  },
+  "preservation": {
+   "P1_element_count_and_presence": {
+    "evidence": "All data points and axes are preserved.",
+    "reason": "All original data elements are preserved.",
+    "passed": true
+   },
+   "P2_spatial_layout_preservation": {
+    "evidence": "The relative arrangement and order of data points and axes are preserved.",
+    "reason": "The chart layout is preserved.",
+    "passed": true
+   },
+   "P3_scale_proportion_and_quantitative_relations": {
+    "evidence": "The relative sizes and proportions of the chart elements are preserved.",
+    "reason": "The scale and proportions are preserved.",
+    "passed": true
+   },
+   "P4_visual_encoding_and_series_identity": {
+    "evidence": "The data-to-visual mapping remains interpretable.",
+    "reason": "The series identity is clear.",
+    "passed": true
+   },
+   "P5_no_extra_artifacts_or_corruption": {
+    "evidence": "No extra misleading content is present.",
+    "reason": "The original chart content is not corrupted.",
+    "passed": true
+   }
+  },
+  "fact_checks": [
+   {
+    "id": "F1",
+    "fact": "The number of matches increased from 2013 to 2016.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "The trend of increasing matches from 2013 to 2016 is preserved."
+   },
+   {
+    "id": "F2",
+    "fact": "The number of matches decreased from 2016 to 2017.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "The trend of decreasing matches from 2016 to 2017 is preserved."
+   },
+   {
+    "id": "F3",
+    "fact": "The highest number of matches was in 2016.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "The peak at 2016 is preserved."
+   },
+   {
+    "id": "F4",
+    "fact": "The number of matches in 2013 was the lowest.",
+    "importance": "major",
+    "status": "preserved",
+    "reason": "The lowest point at 2013 is preserved."
+   },
+   {
+    "id": "F5",
+    "fact": "The trend shows an initial increase followed by a decline.",
+    "importance": "minor",
+    "status": "preserved",
+    "reason": "The initial increase followed by a decline is preserved."
+   }
+  ],
+  "score": 1.0,
+  "secs": 51
+ }
+}

@@ -1,0 +1,1353 @@
+[
+ {
+  "id": "D_0011",
+  "split": "test",
+  "db_id": "concert_singer",
+  "question": "Показать все страны и количество певцов из каждой страны.",
+  "chart_type": "bar",
+  "gold_sql": "SELECT country ,  count(*) FROM singer GROUP BY country;",
+  "gold_rows": [
+   [
+    "France",
+    4
+   ],
+   [
+    "Netherlands",
+    1
+   ],
+   [
+    "United States",
+    1
+   ],
+   [
+    "Россия",
+    1
+   ]
+  ],
+  "gold_n": 4,
+  "session_id": "a6296bd5-f4ec-4502-914c-b6295ce6ce5a",
+  "t_chart": 52,
+  "pred_sql": "SELECT Country ,  COUNT(*) FROM singer GROUP BY Country",
+  "sql_explanation": "Запрос возвращает список всех стран и количество певцов из каждой страны.",
+  "pred_n": 4,
+  "assistant_message": "График построен (попытка 1).\nПодтвердите или отправьте правки сообщением.",
+  "stage": "plot_rendering",
+  "code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\nbars = ax.bar(labels, values, color=\"steelblue\", edgecolor=\"white\", linewidth=0.8)\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14)\nax.set_xlabel(data.get(\"x_label\", \"\")); ax.set_ylabel(data.get(\"y_label\", \"\"))\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5)\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\n# Add value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.0f}\", ha=\"center\", va=\"bottom\", fontsize=9)\n\nfig.tight_layout()",
+  "chart_png": "D_0011_chart.png",
+  "chart_attempt": 1,
+  "errors": [],
+  "points": [
+   {
+    "label": "France",
+    "x": "France",
+    "y": 4.0,
+    "series": null
+   },
+   {
+    "label": "Netherlands",
+    "x": "Netherlands",
+    "y": 1.0,
+    "series": null
+   },
+   {
+    "label": "United States",
+    "x": "United States",
+    "y": 1.0,
+    "series": null
+   },
+   {
+    "label": "Россия",
+    "x": "Россия",
+    "y": 1.0,
+    "series": null
+   }
+  ],
+  "pred_exec_error": null,
+  "sql_ex": true,
+  "outcome": "chart",
+  "chart_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 4,
+   "n_gold": 4
+  },
+  "t_style": 34,
+  "style_code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\n\n# Plot bars with MTS style\nbars = ax.bar(labels, values, color=\"#E30611\", edgecolor=\"black\", linewidth=0.8)\n\n# Add value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.1f}\", ha=\"center\", va=\"bottom\", fontsize=9, color=\"black\")\n\n# Set title and labels\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14, color=\"black\")\nax.set_xlabel(data.get(\"x_label\", \"\"), color=\"black\"); ax.set_ylabel(data.get(\"y_label\", \"\"), color=\"black\")\n\n# Add grid and remove top and right spines\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5, color=\"lightgray\")\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\n# Rotate x-axis labels if necessary\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\nfig.tight_layout()",
+  "style_png": "D_0011_mts.png",
+  "style_message": "График построен (попытка 2).\nПодтвердите или отправьте правки сообщением.",
+  "style_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 4,
+   "n_gold": 4
+  }
+ },
+ {
+  "id": "D_0012",
+  "split": "test",
+  "db_id": "concert_singer",
+  "question": "Сколько певцов от каждой страны?",
+  "chart_type": "bar",
+  "gold_sql": "SELECT country ,  count(*) FROM singer GROUP BY country;",
+  "gold_rows": [
+   [
+    "France",
+    4
+   ],
+   [
+    "Netherlands",
+    1
+   ],
+   [
+    "United States",
+    1
+   ],
+   [
+    "Россия",
+    1
+   ]
+  ],
+  "gold_n": 4,
+  "session_id": "d1920bb4-59fa-496b-9932-c93dfc342fd2",
+  "t_chart": 53,
+  "pred_sql": "SELECT country ,  count(*) FROM singer GROUP BY country",
+  "sql_explanation": "Запрос возвращает количество певцов для каждой страны.",
+  "pred_n": 4,
+  "assistant_message": "График построен (попытка 1).\nПодтвердите или отправьте правки сообщением.",
+  "stage": "plot_rendering",
+  "code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\nbars = ax.bar(labels, values, color=\"steelblue\", edgecolor=\"white\", linewidth=0.8)\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14)\nax.set_xlabel(data.get(\"x_label\", \"\")); ax.set_ylabel(data.get(\"y_label\", \"\"))\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5)\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\n# Value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.0f}\", ha=\"center\", va=\"bottom\", fontsize=9)\n\nfig.tight_layout()",
+  "chart_png": "D_0012_chart.png",
+  "chart_attempt": 1,
+  "errors": [],
+  "points": [
+   {
+    "label": "France",
+    "x": "France",
+    "y": 4.0,
+    "series": null
+   },
+   {
+    "label": "Netherlands",
+    "x": "Netherlands",
+    "y": 1.0,
+    "series": null
+   },
+   {
+    "label": "United States",
+    "x": "United States",
+    "y": 1.0,
+    "series": null
+   },
+   {
+    "label": "Россия",
+    "x": "Россия",
+    "y": 1.0,
+    "series": null
+   }
+  ],
+  "pred_exec_error": null,
+  "sql_ex": true,
+  "outcome": "chart",
+  "chart_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 4,
+   "n_gold": 4
+  },
+  "t_style": 40,
+  "style_code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\n\n# Plot bars with MTS style\nbars = ax.bar(labels, values, color=\"#E30611\", edgecolor=\"white\", linewidth=0.8)\n\n# Add value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.1f}\", ha=\"center\", va=\"bottom\", fontsize=9, color=\"black\")\n\n# Customize axes and grid\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14, color=\"black\")\nax.set_xlabel(data.get(\"x_label\", \"\"), color=\"black\"); ax.set_ylabel(data.get(\"y_label\", \"\"), color=\"black\")\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5, color=\"lightgray\")\nax.spines['top'].set_visible(False); ax.spines['right'].set_visible(False)\n\n# Rotate x-axis labels if necessary\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\nfig.tight_layout()",
+  "style_png": "D_0012_mts.png",
+  "style_message": "График построен (попытка 2).\nПодтвердите или отправьте правки сообщением.",
+  "style_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 4,
+   "n_gold": 4
+  }
+ },
+ {
+  "id": "D_0023",
+  "split": "test",
+  "db_id": "concert_singer",
+  "question": "Покажите название стадиона и количество концертов на каждом стадионе.",
+  "chart_type": "bar",
+  "gold_sql": "SELECT T2.name ,  count(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id  =  T2.stadium_id GROUP BY T1.stadium_id;",
+  "gold_rows": [
+   [
+    "Stark's Park",
+    1
+   ],
+   [
+    "Glebe Park",
+    1
+   ],
+   [
+    "Somerset Park",
+    2
+   ],
+   [
+    "Hampden Park",
+    1
+   ],
+   [
+    "Recreation Park",
+    2
+   ],
+   [
+    "Balmoor",
+    1
+   ]
+  ],
+  "gold_n": 6,
+  "session_id": "0acfb386-015a-4bd4-9f4f-d5034d186135",
+  "t_chart": 61,
+  "pred_sql": "SELECT T1.name ,  count(*) FROM stadium AS T1 JOIN concert AS T2 ON T1.stadium_id  =  T2.stadium_id GROUP BY T1.stadium_id",
+  "sql_explanation": "Запрос возвращает названия стадионов и количество проведенных на каждом из них концертов.",
+  "pred_n": 6,
+  "assistant_message": "График построен (попытка 1).\nПодтвердите или отправьте правки сообщением.",
+  "stage": "plot_rendering",
+  "code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\nbars = ax.bar(labels, values, color=\"steelblue\", edgecolor=\"white\", linewidth=0.8)\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14)\nax.set_xlabel(data.get(\"x_label\", \"\")); ax.set_ylabel(data.get(\"y_label\", \"\"))\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5)\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\n# Value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.0f}\", ha=\"center\", va=\"bottom\", fontsize=9)\n\nfig.tight_layout()",
+  "chart_png": "D_0023_chart.png",
+  "chart_attempt": 1,
+  "errors": [],
+  "points": [
+   {
+    "label": "Stark's Park",
+    "x": "Stark's Park",
+    "y": 1.0,
+    "series": null
+   },
+   {
+    "label": "Somerset Park",
+    "x": "Somerset Park",
+    "y": 2.0,
+    "series": null
+   },
+   {
+    "label": "Hampden Park",
+    "x": "Hampden Park",
+    "y": 1.0,
+    "series": null
+   },
+   {
+    "label": "Recreation Park",
+    "x": "Recreation Park",
+    "y": 2.0,
+    "series": null
+   },
+   {
+    "label": "Balmoor",
+    "x": "Balmoor",
+    "y": 1.0,
+    "series": null
+   },
+   {
+    "label": "Glebe Park",
+    "x": "Glebe Park",
+    "y": 1.0,
+    "series": null
+   }
+  ],
+  "pred_exec_error": null,
+  "sql_ex": true,
+  "outcome": "chart",
+  "chart_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 6,
+   "n_gold": 6
+  },
+  "t_style": 36,
+  "style_code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\n\n# Plot bars with MTS style\nbars = ax.bar(labels, values, color=\"#E30611\", edgecolor=\"white\", linewidth=0.8)\n\n# Add value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.1f}\", ha=\"center\", va=\"bottom\", fontsize=9, color=\"black\")\n\n# Set title and labels\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14, color=\"black\")\nax.set_xlabel(data.get(\"x_label\", \"\"), color=\"black\"); ax.set_ylabel(data.get(\"y_label\", \"\"), color=\"black\")\n\n# Add grid\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5, color=\"lightgray\")\n\n# Remove top and right spines\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\n# Rotate x-axis labels if necessary\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\nfig.tight_layout()",
+  "style_png": "D_0023_mts.png",
+  "style_message": "График построен (попытка 2).\nПодтвердите или отправьте правки сообщением.",
+  "style_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 6,
+   "n_gold": 6
+  }
+ },
+ {
+  "id": "D_0024",
+  "split": "test",
+  "db_id": "concert_singer",
+  "question": "Сколько было сыграно концертов на каждом стадионе?",
+  "chart_type": "bar",
+  "gold_sql": "SELECT T2.name ,  count(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id  =  T2.stadium_id GROUP BY T1.stadium_id;",
+  "gold_rows": [
+   [
+    "Stark's Park",
+    1
+   ],
+   [
+    "Glebe Park",
+    1
+   ],
+   [
+    "Somerset Park",
+    2
+   ],
+   [
+    "Hampden Park",
+    1
+   ],
+   [
+    "Recreation Park",
+    2
+   ],
+   [
+    "Balmoor",
+    1
+   ]
+  ],
+  "gold_n": 6,
+  "session_id": "16622362-495f-4916-841d-39819805d99a",
+  "t_chart": 55,
+  "pred_sql": "SELECT T1.name ,  count(*) FROM stadium AS T1 JOIN concert AS T2 ON T1.stadium_id  =  T2.stadium_id GROUP BY T1.stadium_id",
+  "sql_explanation": "Запрос возвращает количество проведенных концертов на каждом стадионе.",
+  "pred_n": 6,
+  "assistant_message": "График построен (попытка 1).\nПодтвердите или отправьте правки сообщением.",
+  "stage": "plot_rendering",
+  "code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\nbars = ax.bar(labels, values, color=\"steelblue\", edgecolor=\"white\", linewidth=0.8)\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14)\nax.set_xlabel(data.get(\"x_label\", \"\")); ax.set_ylabel(data.get(\"y_label\", \"\"))\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5)\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\n# Value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.0f}\", ha=\"center\", va=\"bottom\", fontsize=9)\n\nfig.tight_layout()",
+  "chart_png": "D_0024_chart.png",
+  "chart_attempt": 1,
+  "errors": [],
+  "points": [
+   {
+    "label": "Stark's Park",
+    "x": "Stark's Park",
+    "y": 1.0,
+    "series": null
+   },
+   {
+    "label": "Somerset Park",
+    "x": "Somerset Park",
+    "y": 2.0,
+    "series": null
+   },
+   {
+    "label": "Hampden Park",
+    "x": "Hampden Park",
+    "y": 1.0,
+    "series": null
+   },
+   {
+    "label": "Recreation Park",
+    "x": "Recreation Park",
+    "y": 2.0,
+    "series": null
+   },
+   {
+    "label": "Balmoor",
+    "x": "Balmoor",
+    "y": 1.0,
+    "series": null
+   },
+   {
+    "label": "Glebe Park",
+    "x": "Glebe Park",
+    "y": 1.0,
+    "series": null
+   }
+  ],
+  "pred_exec_error": null,
+  "sql_ex": true,
+  "outcome": "chart",
+  "chart_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 6,
+   "n_gold": 6
+  },
+  "t_style": 34,
+  "style_code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\n\n# Plot bars with MTS style\nbars = ax.bar(labels, values, color=\"#E30611\", edgecolor=\"white\", linewidth=0.8)\n\n# Add value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.1f}\", ha=\"center\", va=\"bottom\", fontsize=9, color=\"black\")\n\n# Set title and labels\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14, color=\"black\")\nax.set_xlabel(data.get(\"x_label\", \"\"), color=\"black\"); ax.set_ylabel(data.get(\"y_label\", \"\"), color=\"black\")\n\n# Customize grid and spines\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5, color=\"lightgray\")\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\n# Rotate x-axis labels if necessary\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\nfig.tight_layout()",
+  "style_png": "D_0024_mts.png",
+  "style_message": "График построен (попытка 2).\nПодтвердите или отправьте правки сообщением.",
+  "style_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 6,
+   "n_gold": 6
+  }
+ },
+ {
+  "id": "D_0034",
+  "split": "test",
+  "db_id": "concert_singer",
+  "question": "Укажите название и тему для всех концертов, а также количество певцов на каждом концерте.",
+  "chart_type": "bar",
+  "outcome": "transport_error",
+  "error": "HTTP Error 500: Internal Server Error",
+  "sql_ex": false,
+  "chart_ex": {
+   "ok": false
+  }
+ },
+ {
+  "id": "D_0035",
+  "split": "test",
+  "db_id": "concert_singer",
+  "question": "Какие имена певцов, темы выступлений и количество певцов на каждом концерте?",
+  "chart_type": "bar",
+  "gold_sql": "select t2.concert_name ,  t2.theme ,  count(*) from singer_in_concert as t1 join concert as t2 on t1.concert_id  =  t2.concert_id group by t2.concert_id;",
+  "gold_rows": [
+   [
+    "Auditions",
+    "Free choice",
+    3
+   ],
+   [
+    "Super bootcamp",
+    "Free choice 2",
+    2
+   ],
+   [
+    "Home Visits",
+    "Bleeding Love",
+    1
+   ],
+   [
+    "Week 1",
+    "Wide Awake",
+    1
+   ],
+   [
+    "Week 1",
+    "Happy Tonight",
+    2
+   ],
+   [
+    "Week 2",
+    "Party All Night",
+    1
+   ]
+  ],
+  "gold_n": 6,
+  "session_id": "e0908497-ead4-4cac-b3b7-529147d8485f",
+  "t_chart": 62,
+  "pred_sql": "SELECT T3.Name ,  T2.Theme ,  COUNT(*) FROM singer_in_concert AS T1 JOIN concert AS T2 ON T1.concert_ID  =  T2.concert_ID JOIN singer AS T3 ON T1.Singer_ID  =  T3.Singer_ID GROUP BY T1.concert_ID",
+  "sql_explanation": "Запрос возвращает имена певцов, темы их выступлений и количество певцов на каждом концерте.",
+  "pred_n": 6,
+  "assistant_message": "График построен (попытка 1).\nПодтвердите или отправьте правки сообщением.",
+  "stage": "plot_rendering",
+  "code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\nbars = ax.bar(labels, values, color=\"steelblue\", edgecolor=\"white\", linewidth=0.8)\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14)\nax.set_xlabel(data.get(\"x_label\", \"\")); ax.set_ylabel(data.get(\"y_label\", \"\"))\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5)\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\n# Value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.1f}\", ha=\"center\", va=\"bottom\", fontsize=9)\n\nfig.tight_layout()",
+  "chart_png": "D_0035_chart.png",
+  "chart_attempt": 1,
+  "errors": [],
+  "points": [
+   {
+    "label": "Bleeding Love",
+    "x": "Bleeding Love",
+    "y": 1.0,
+    "series": null
+   },
+   {
+    "label": "Free choice",
+    "x": "Free choice",
+    "y": 3.0,
+    "series": null
+   },
+   {
+    "label": "Free choice 2",
+    "x": "Free choice 2",
+    "y": 2.0,
+    "series": null
+   },
+   {
+    "label": "Happy Tonight",
+    "x": "Happy Tonight",
+    "y": 2.0,
+    "series": null
+   },
+   {
+    "label": "Party All Night",
+    "x": "Party All Night",
+    "y": 1.0,
+    "series": null
+   },
+   {
+    "label": "Wide Awake",
+    "x": "Wide Awake",
+    "y": 1.0,
+    "series": null
+   }
+  ],
+  "pred_exec_error": null,
+  "sql_ex": false,
+  "outcome": "chart",
+  "chart_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 6,
+   "n_gold": 6
+  },
+  "t_style": 35,
+  "style_code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\n\n# Plot bars with MTS style\nbars = ax.bar(labels, values, color=\"#E30611\", edgecolor=\"white\", linewidth=0.8)\n\n# Add value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.1f}\", ha=\"center\", va=\"bottom\", fontsize=9, color=\"black\")\n\n# Set title and labels\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14, color=\"black\")\nax.set_xlabel(data.get(\"x_label\", \"\"), color=\"black\"); ax.set_ylabel(data.get(\"y_label\", \"\"), color=\"black\")\n\n# Add grid and remove top and right spines\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5, color=\"lightgray\")\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\n# Rotate x-axis labels if necessary\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\nfig.tight_layout()",
+  "style_png": "D_0035_mts.png",
+  "style_message": "График построен (попытка 2).\nПодтвердите или отправьте правки сообщением.",
+  "style_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 6,
+   "n_gold": 6
+  }
+ },
+ {
+  "id": "D_0036",
+  "split": "test",
+  "db_id": "concert_singer",
+  "question": "Перечислите имена певцов и количество концертов для каждого певца.",
+  "chart_type": "bar",
+  "gold_sql": "SELECT T2.name ,  count(*) FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id  =  T2.singer_id GROUP BY T2.singer_id;",
+  "gold_rows": [
+   [
+    "Timbaland",
+    2
+   ],
+   [
+    "Justin Brown",
+    3
+   ],
+   [
+    "Rose White",
+    1
+   ],
+   [
+    "John Nizinik",
+    2
+   ],
+   [
+    "Tribal King",
+    2
+   ]
+  ],
+  "gold_n": 5,
+  "session_id": "e098bfb4-79d2-4bf3-8c8e-bd485182c937",
+  "t_chart": 62,
+  "pred_sql": "SELECT T3.Name ,  COUNT(*) FROM singer_in_concert AS T1 JOIN concert AS T2 ON T1.concert_ID  =  T2.concert_ID JOIN singer AS T3 ON T1.Singer_ID  =  T3.Singer_ID GROUP BY T3.Name",
+  "sql_explanation": "Запрос возвращает имена певцов и количество концертов, на которых они выступали.",
+  "pred_n": 5,
+  "assistant_message": "График построен (попытка 1).\nПодтвердите или отправьте правки сообщением.",
+  "stage": "plot_rendering",
+  "code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\nbars = ax.bar(labels, values, color=\"steelblue\", edgecolor=\"white\", linewidth=0.8)\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14)\nax.set_xlabel(data.get(\"x_label\", \"\")); ax.set_ylabel(data.get(\"y_label\", \"\"))\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5)\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\n# Value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.0f}\", ha=\"center\", va=\"bottom\", fontsize=9)\n\nfig.tight_layout()",
+  "chart_png": "D_0036_chart.png",
+  "chart_attempt": 1,
+  "errors": [],
+  "points": [
+   {
+    "label": "John Nizinik",
+    "x": "John Nizinik",
+    "y": 2.0,
+    "series": null
+   },
+   {
+    "label": "Justin Brown",
+    "x": "Justin Brown",
+    "y": 3.0,
+    "series": null
+   },
+   {
+    "label": "Rose White",
+    "x": "Rose White",
+    "y": 1.0,
+    "series": null
+   },
+   {
+    "label": "Timbaland",
+    "x": "Timbaland",
+    "y": 2.0,
+    "series": null
+   },
+   {
+    "label": "Tribal King",
+    "x": "Tribal King",
+    "y": 2.0,
+    "series": null
+   }
+  ],
+  "pred_exec_error": null,
+  "sql_ex": true,
+  "outcome": "chart",
+  "chart_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 5,
+   "n_gold": 5
+  },
+  "t_style": 33,
+  "style_code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\n\n# Plot bars with MTS style\nbars = ax.bar(labels, values, color=\"#E30611\", edgecolor=\"white\", linewidth=0.8)\n\n# Add value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.1f}\", ha=\"center\", va=\"bottom\", fontsize=9, color=\"black\")\n\n# Set title and labels\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14, color=\"black\")\nax.set_xlabel(data.get(\"x_label\", \"\"), color=\"black\"); ax.set_ylabel(data.get(\"y_label\", \"\"), color=\"black\")\n\n# Add grid and remove top and right spines\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5, color=\"lightgray\")\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\n# Rotate x-axis labels if necessary\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\nfig.tight_layout()",
+  "style_png": "D_0036_mts.png",
+  "style_message": "График построен (попытка 2).\nПодтвердите или отправьте правки сообщением.",
+  "style_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 5,
+   "n_gold": 5
+  }
+ },
+ {
+  "id": "D_0037",
+  "split": "test",
+  "db_id": "concert_singer",
+  "question": "Как зовут певцов и сколько концертов у каждого человека?",
+  "chart_type": "bar",
+  "gold_sql": "SELECT T2.name ,  count(*) FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id  =  T2.singer_id GROUP BY T2.singer_id;",
+  "gold_rows": [
+   [
+    "Timbaland",
+    2
+   ],
+   [
+    "Justin Brown",
+    3
+   ],
+   [
+    "Rose White",
+    1
+   ],
+   [
+    "John Nizinik",
+    2
+   ],
+   [
+    "Tribal King",
+    2
+   ]
+  ],
+  "gold_n": 5,
+  "session_id": "604b6b73-cac9-4349-8d61-0b1ae86eb13c",
+  "t_chart": 58,
+  "pred_sql": "SELECT T3.Name ,  COUNT(*) FROM singer_in_concert AS T1 JOIN concert AS T2 ON T1.concert_ID  =  T2.concert_ID JOIN singer AS T3 ON T1.Singer_ID  =  T3.Singer_ID GROUP BY T3.Name",
+  "sql_explanation": "Запрос возвращает имена певцов и количество концертов, на которых они выступали.",
+  "pred_n": 5,
+  "assistant_message": "График построен (попытка 1).\nПодтвердите или отправьте правки сообщением.",
+  "stage": "plot_rendering",
+  "code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\nbars = ax.bar(labels, values, color=\"steelblue\", edgecolor=\"white\", linewidth=0.8)\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14)\nax.set_xlabel(data.get(\"x_label\", \"\")); ax.set_ylabel(data.get(\"y_label\", \"\"))\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5)\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\n# Value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.1f}\", ha=\"center\", va=\"bottom\", fontsize=9)\n\nfig.tight_layout()",
+  "chart_png": "D_0037_chart.png",
+  "chart_attempt": 1,
+  "errors": [],
+  "points": [
+   {
+    "label": "John Nizinik",
+    "x": "John Nizinik",
+    "y": 2.0,
+    "series": null
+   },
+   {
+    "label": "Justin Brown",
+    "x": "Justin Brown",
+    "y": 3.0,
+    "series": null
+   },
+   {
+    "label": "Rose White",
+    "x": "Rose White",
+    "y": 1.0,
+    "series": null
+   },
+   {
+    "label": "Timbaland",
+    "x": "Timbaland",
+    "y": 2.0,
+    "series": null
+   },
+   {
+    "label": "Tribal King",
+    "x": "Tribal King",
+    "y": 2.0,
+    "series": null
+   }
+  ],
+  "pred_exec_error": null,
+  "sql_ex": true,
+  "outcome": "chart",
+  "chart_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 5,
+   "n_gold": 5
+  },
+  "t_style": 33,
+  "style_code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\n\n# Plot bars with MTS style\nbars = ax.bar(labels, values, color=\"#E30611\", edgecolor=\"white\", linewidth=0.8)\n\n# Add value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.1f}\", ha=\"center\", va=\"bottom\", fontsize=9, color=\"black\")\n\n# Set title and labels\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14, color=\"black\")\nax.set_xlabel(data.get(\"x_label\", \"\"), color=\"black\"); ax.set_ylabel(data.get(\"y_label\", \"\"), color=\"black\")\n\n# Customize grid and spines\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5, color=\"lightgray\")\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\n# Rotate x-axis labels if necessary\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\nfig.tight_layout()",
+  "style_png": "D_0037_mts.png",
+  "style_message": "График построен (попытка 2).\nПодтвердите или отправьте правки сообщением.",
+  "style_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 5,
+   "n_gold": 5
+  }
+ },
+ {
+  "id": "D_0050",
+  "split": "test",
+  "db_id": "pets_1",
+  "question": "Найдите максимальный вес для каждого типа питомца. Укажите максимальный вес и тип питомца.",
+  "chart_type": "bar",
+  "gold_sql": "SELECT max(weight) ,  petType FROM pets GROUP BY petType;",
+  "gold_rows": [
+   [
+    12.0,
+    "cat"
+   ],
+   [
+    13.4,
+    "dog"
+   ],
+   [
+    6.0,
+    "попугай"
+   ],
+   [
+    20.0,
+    "черепаха"
+   ]
+  ],
+  "gold_n": 4,
+  "session_id": "d92ae111-ca58-4fea-8c71-1ac17827783a",
+  "t_chart": 53,
+  "pred_sql": "SELECT max(weight) ,  pettype FROM pets GROUP BY pettype",
+  "sql_explanation": "Запрос возвращает максимальный вес для каждого типа питомца.",
+  "pred_n": 4,
+  "assistant_message": "График построен (попытка 1).\nПодтвердите или отправьте правки сообщением.",
+  "stage": "plot_rendering",
+  "code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\nbars = ax.bar(labels, values, color=\"steelblue\", edgecolor=\"white\", linewidth=0.8)\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14)\nax.set_xlabel(data.get(\"x_label\", \"\")); ax.set_ylabel(data.get(\"y_label\", \"\"))\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5)\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\n# Add value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.1f}\", ha=\"center\", va=\"bottom\", fontsize=9)\n\nfig.tight_layout()",
+  "chart_png": "D_0050_chart.png",
+  "chart_attempt": 1,
+  "errors": [],
+  "points": [
+   {
+    "label": "cat",
+    "x": "cat",
+    "y": 12.0,
+    "series": null
+   },
+   {
+    "label": "dog",
+    "x": "dog",
+    "y": 13.4,
+    "series": null
+   },
+   {
+    "label": "попугай",
+    "x": "попугай",
+    "y": 6.0,
+    "series": null
+   },
+   {
+    "label": "черепаха",
+    "x": "черепаха",
+    "y": 20.0,
+    "series": null
+   }
+  ],
+  "pred_exec_error": null,
+  "sql_ex": true,
+  "outcome": "chart",
+  "chart_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 4,
+   "n_gold": 4
+  },
+  "t_style": 27,
+  "style_code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\nbars = ax.bar(labels, values, color=\"steelblue\", edgecolor=\"white\", linewidth=0.8)\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14)\nax.set_xlabel(data.get(\"x_label\", \"\")); ax.set_ylabel(data.get(\"y_label\", \"\"))\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5)\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\n# Add value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.1f}\", ha=\"center\", va=\"bottom\", fontsize=9)\n\nfig.tight_layout()",
+  "style_png": null,
+  "style_message": "Не удалось обработать таблицу: Не удалось построить план по таблице. Уточните, какие колонки и агрегацию использовать.",
+  "style_ex": {
+   "ok": false
+  }
+ },
+ {
+  "id": "D_0051",
+  "split": "test",
+  "db_id": "pets_1",
+  "question": "Укажи максимальный вес и тип для каждого типа питомца.",
+  "chart_type": "bar",
+  "gold_sql": "SELECT max(weight) ,  petType FROM pets GROUP BY petType;",
+  "gold_rows": [
+   [
+    12.0,
+    "cat"
+   ],
+   [
+    13.4,
+    "dog"
+   ],
+   [
+    6.0,
+    "попугай"
+   ],
+   [
+    20.0,
+    "черепаха"
+   ]
+  ],
+  "gold_n": 4,
+  "session_id": "65599578-ad38-451f-893d-8d512b4240ba",
+  "t_chart": 52,
+  "pred_sql": "SELECT PetType ,  max(weight) FROM Pets GROUP BY PetType",
+  "sql_explanation": "Запрос возвращает максимальный вес для каждого типа питомца.",
+  "pred_n": 4,
+  "assistant_message": "График построен (попытка 1).\nПодтвердите или отправьте правки сообщением.",
+  "stage": "plot_rendering",
+  "code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\nbars = ax.bar(labels, values, color=\"steelblue\", edgecolor=\"white\", linewidth=0.8)\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14)\nax.set_xlabel(data.get(\"x_label\", \"\")); ax.set_ylabel(data.get(\"y_label\", \"\"))\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5)\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\n# Add value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.1f}\", ha=\"center\", va=\"bottom\", fontsize=9)\n\nfig.tight_layout()",
+  "chart_png": "D_0051_chart.png",
+  "chart_attempt": 1,
+  "errors": [],
+  "points": [
+   {
+    "label": "cat",
+    "x": "cat",
+    "y": 12.0,
+    "series": null
+   },
+   {
+    "label": "dog",
+    "x": "dog",
+    "y": 13.4,
+    "series": null
+   },
+   {
+    "label": "попугай",
+    "x": "попугай",
+    "y": 6.0,
+    "series": null
+   },
+   {
+    "label": "черепаха",
+    "x": "черепаха",
+    "y": 20.0,
+    "series": null
+   }
+  ],
+  "pred_exec_error": null,
+  "sql_ex": false,
+  "outcome": "chart",
+  "chart_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 4,
+   "n_gold": 4
+  },
+  "t_style": 35,
+  "style_code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\n\n# Plot bars with MTS style\nbars = ax.bar(labels, values, color=\"#E30611\", edgecolor=\"black\", linewidth=0.8)\n\n# Add value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.1f}\", ha=\"center\", va=\"bottom\", fontsize=9, color=\"black\")\n\n# Set title and labels\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14, color=\"black\")\nax.set_xlabel(data.get(\"x_label\", \"\"), color=\"black\"); ax.set_ylabel(data.get(\"y_label\", \"\"), color=\"black\")\n\n# Add grid and remove top and right spines\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5, color=\"lightgray\")\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\n# Rotate x-axis labels if necessary\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\nfig.tight_layout()",
+  "style_png": "D_0051_mts.png",
+  "style_message": "График построен (попытка 2).\nПодтвердите или отправьте правки сообщением.",
+  "style_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 4,
+   "n_gold": 4
+  }
+ },
+ {
+  "id": "D_0072",
+  "split": "test",
+  "db_id": "pets_1",
+  "question": "Найдите средний и максимальный возраст для каждого типа домашних животных.",
+  "chart_type": "bar",
+  "gold_sql": "SELECT avg(pet_age) ,  max(pet_age) ,  pettype FROM pets GROUP BY pettype;",
+  "gold_rows": [
+   [
+    3.0,
+    3,
+    "cat"
+   ],
+   [
+    1.5,
+    2,
+    "dog"
+   ],
+   [
+    3.0,
+    3,
+    "попугай"
+   ],
+   [
+    4.0,
+    4,
+    "черепаха"
+   ]
+  ],
+  "gold_n": 4,
+  "session_id": "12d67817-d52d-4f40-ac76-81973d57bf7f",
+  "t_chart": 70,
+  "pred_sql": "SELECT avg(pet_age) ,  max(pet_age) ,  pettype FROM Has_Pet AS T1 JOIN Pets AS T2 ON T1.PetID  =  T2.PetID GROUP BY pettype",
+  "sql_explanation": "Запрос возвращает средний и максимальный возраст для каждого типа домашних животных.",
+  "pred_n": 4,
+  "assistant_message": "График построен (попытка 1).\nПодтвердите или отправьте правки сообщением.",
+  "stage": "plot_rendering",
+  "code": "fig, ax = plt.subplots(figsize=(10, 5))\ncategories = data[\"categories\"]\navg_ages = data[\"avg_pet_age\"]\nmax_ages = data[\"max_pet_age\"]\n\nx = np.arange(len(categories))\nw = 0.35\n\nbars_avg = ax.bar(x, avg_ages, w, label=\"Average Age\", color=\"skyblue\", edgecolor=\"white\")\nbars_max = ax.bar(x + w, max_ages, w, label=\"Maximum Age\", color=\"orange\", edgecolor=\"white\")\n\nax.set_xticks(x + w / 2)\nax.set_xticklabels(categories)\nax.legend()\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5)\n\nif data.get(\"title\"):\n    ax.set_title(data[\"title\"], fontsize=14)\nax.set_xlabel(data.get(\"x_label\", \"Pet Type\"))\nax.set_ylabel(data.get(\"y_label\", \"Age\"))\n\nfig.tight_layout()",
+  "chart_png": "D_0072_chart.png",
+  "chart_attempt": 1,
+  "errors": [],
+  "points": [
+   {
+    "label": "cat",
+    "x": "cat",
+    "y": 3.0,
+    "series": "avg_pet_age"
+   },
+   {
+    "label": "dog",
+    "x": "dog",
+    "y": 1.8888888888888888,
+    "series": "avg_pet_age"
+   },
+   {
+    "label": "попугай",
+    "x": "попугай",
+    "y": 3.0,
+    "series": "avg_pet_age"
+   },
+   {
+    "label": "черепаха",
+    "x": "черепаха",
+    "y": 4.0,
+    "series": "avg_pet_age"
+   },
+   {
+    "label": "cat",
+    "x": "cat",
+    "y": 3.0,
+    "series": "max_pet_age"
+   },
+   {
+    "label": "dog",
+    "x": "dog",
+    "y": 2.0,
+    "series": "max_pet_age"
+   },
+   {
+    "label": "попугай",
+    "x": "попугай",
+    "y": 3.0,
+    "series": "max_pet_age"
+   },
+   {
+    "label": "черепаха",
+    "x": "черепаха",
+    "y": 4.0,
+    "series": "max_pet_age"
+   }
+  ],
+  "pred_exec_error": null,
+  "sql_ex": false,
+  "outcome": "chart",
+  "chart_ex": {
+   "ok": false,
+   "values_ok": false,
+   "labels_ok": true,
+   "n_points": 8,
+   "n_gold": 4
+  },
+  "t_style": 35,
+  "style_code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\n\n# Plot bars with MTS style\nbars = ax.bar(labels, values, color=\"#E30611\", edgecolor=\"white\", linewidth=0.8)\n\n# Add value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.1f}\", ha=\"center\", va=\"bottom\", fontsize=9, color=\"black\")\n\n# Customize plot\nax.set_xlabel(data.get(\"x_label\", \"\"), color=\"black\")\nax.set_ylabel(data.get(\"y_label\", \"\"), color=\"black\")\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5, color=\"lightgray\")\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\n# Set title if available\nif data.get(\"title\"):\n    ax.set_title(data[\"title\"], fontsize=14, color=\"black\")\n\nfig.tight_layout()",
+  "style_png": "D_0072_mts.png",
+  "style_message": "График построен (попытка 2).\nПодтвердите или отправьте правки сообщением.",
+  "style_ex": {
+   "ok": false,
+   "values_ok": false,
+   "labels_ok": true,
+   "n_points": 4,
+   "n_gold": 4
+  }
+ },
+ {
+  "id": "D_0073",
+  "split": "test",
+  "db_id": "pets_1",
+  "question": "Каков средний и максимальный возраст для каждого типа домашних животных?",
+  "chart_type": "bar",
+  "gold_sql": "SELECT avg(pet_age) ,  max(pet_age) ,  pettype FROM pets GROUP BY pettype;",
+  "gold_rows": [
+   [
+    3.0,
+    3,
+    "cat"
+   ],
+   [
+    1.5,
+    2,
+    "dog"
+   ],
+   [
+    3.0,
+    3,
+    "попугай"
+   ],
+   [
+    4.0,
+    4,
+    "черепаха"
+   ]
+  ],
+  "gold_n": 4,
+  "session_id": "7f29b10c-ad16-4b42-8811-2b77298e50af",
+  "t_chart": 69,
+  "pred_sql": "SELECT avg(pet_age) ,  max(pet_age) ,  pettype FROM Has_Pet AS T1 JOIN Pets AS T2 ON T1.PetID  =  T2.PetID GROUP BY pettype",
+  "sql_explanation": "Запрос возвращает средний и максимальный возраст для каждого типа домашних животных.",
+  "pred_n": 4,
+  "assistant_message": "График построен (попытка 1).\nПодтвердите или отправьте правки сообщением.",
+  "stage": "plot_rendering",
+  "code": "fig, ax = plt.subplots(figsize=(10, 5))\ncategories = data[\"categories\"]\navg_ages = data[\"avg_pet_age\"]\nmax_ages = data[\"max_pet_age\"]\n\nx = np.arange(len(categories))\nw = 0.4\n\nbars_avg = ax.bar(x, avg_ages, w, label=\"Average Age\", color=\"#3498db\", edgecolor=\"white\")\nbars_max = ax.bar(x + w, max_ages, w, label=\"Maximum Age\", color=\"#e74c3c\", edgecolor=\"white\")\n\nax.set_xticks(x + w / 2)\nax.set_xticklabels(categories)\nax.legend()\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5)\n\nif data.get(\"title\"):\n    ax.set_title(data[\"title\"], fontsize=14)\nax.set_xlabel(data.get(\"x_label\", \"\"))\nax.set_ylabel(data.get(\"y_label\", \"\"))\n\nfig.tight_layout()",
+  "chart_png": "D_0073_chart.png",
+  "chart_attempt": 1,
+  "errors": [],
+  "points": [
+   {
+    "label": "cat",
+    "x": "cat",
+    "y": 3.0,
+    "series": "avg_pet_age"
+   },
+   {
+    "label": "dog",
+    "x": "dog",
+    "y": 1.8888888888888888,
+    "series": "avg_pet_age"
+   },
+   {
+    "label": "попугай",
+    "x": "попугай",
+    "y": 3.0,
+    "series": "avg_pet_age"
+   },
+   {
+    "label": "черепаха",
+    "x": "черепаха",
+    "y": 4.0,
+    "series": "avg_pet_age"
+   },
+   {
+    "label": "cat",
+    "x": "cat",
+    "y": 3.0,
+    "series": "max_pet_age"
+   },
+   {
+    "label": "dog",
+    "x": "dog",
+    "y": 2.0,
+    "series": "max_pet_age"
+   },
+   {
+    "label": "попугай",
+    "x": "попугай",
+    "y": 3.0,
+    "series": "max_pet_age"
+   },
+   {
+    "label": "черепаха",
+    "x": "черепаха",
+    "y": 4.0,
+    "series": "max_pet_age"
+   }
+  ],
+  "pred_exec_error": null,
+  "sql_ex": false,
+  "outcome": "chart",
+  "chart_ex": {
+   "ok": false,
+   "values_ok": false,
+   "labels_ok": true,
+   "n_points": 8,
+   "n_gold": 4
+  },
+  "t_style": 36,
+  "style_code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\n\n# Plot bars with MTS style\nbars = ax.bar(labels, values, color=\"#E30611\", edgecolor=\"white\", linewidth=0.8)\n\n# Add value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.1f}\", ha=\"center\", va=\"bottom\", fontsize=9, color=\"black\")\n\n# Set title and labels\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14, color=\"black\")\nax.set_xlabel(data.get(\"x_label\", \"\"), color=\"black\"); ax.set_ylabel(data.get(\"y_label\", \"\"), color=\"black\")\n\n# Customize grid and spines\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5, color=\"lightgray\")\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\n# Rotate x-axis labels if necessary\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\nfig.tight_layout()",
+  "style_png": "D_0073_mts.png",
+  "style_message": "График построен (попытка 2).\nПодтвердите или отправьте правки сообщением.",
+  "style_ex": {
+   "ok": false,
+   "values_ok": false,
+   "labels_ok": true,
+   "n_points": 4,
+   "n_gold": 4
+  }
+ },
+ {
+  "id": "D_0074",
+  "split": "test",
+  "db_id": "pets_1",
+  "question": "Средний вес для каждого типа питомца.",
+  "chart_type": "bar",
+  "gold_sql": "SELECT avg(weight) ,  pettype FROM pets GROUP BY pettype;",
+  "gold_rows": [
+   [
+    12.0,
+    "cat"
+   ],
+   [
+    11.350000000000001,
+    "dog"
+   ],
+   [
+    6.0,
+    "попугай"
+   ],
+   [
+    20.0,
+    "черепаха"
+   ]
+  ],
+  "gold_n": 4,
+  "session_id": "d6baa306-d097-43ac-aab3-8f08048c9269",
+  "t_chart": 52,
+  "pred_sql": "SELECT avg(weight) ,  pettype FROM PETS GROUP BY pettype",
+  "sql_explanation": "Запрос возвращает средний вес для каждого типа питомца.",
+  "pred_n": 4,
+  "assistant_message": "График построен (попытка 1).\nПодтвердите или отправьте правки сообщением.",
+  "stage": "plot_rendering",
+  "code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\nbars = ax.bar(labels, values, color=\"steelblue\", edgecolor=\"white\", linewidth=0.8)\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14)\nax.set_xlabel(data.get(\"x_label\", \"\")); ax.set_ylabel(data.get(\"y_label\", \"\"))\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5)\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\n# Value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.1f}\", ha=\"center\", va=\"bottom\", fontsize=9)\n\nfig.tight_layout()",
+  "chart_png": "D_0074_chart.png",
+  "chart_attempt": 1,
+  "errors": [],
+  "points": [
+   {
+    "label": "cat",
+    "x": "cat",
+    "y": 12.0,
+    "series": null
+   },
+   {
+    "label": "dog",
+    "x": "dog",
+    "y": 11.35,
+    "series": null
+   },
+   {
+    "label": "попугай",
+    "x": "попугай",
+    "y": 6.0,
+    "series": null
+   },
+   {
+    "label": "черепаха",
+    "x": "черепаха",
+    "y": 20.0,
+    "series": null
+   }
+  ],
+  "pred_exec_error": null,
+  "sql_ex": true,
+  "outcome": "chart",
+  "chart_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 4,
+   "n_gold": 4
+  },
+  "t_style": 35,
+  "style_code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\n\n# Set the color for the bars\nbar_color = \"#E30611\"\n\n# Create the bar chart\nbars = ax.bar(labels, values, color=bar_color, edgecolor=\"white\", linewidth=0.8)\n\n# Set the title and labels\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14, color=\"black\")\nax.set_xlabel(data.get(\"x_label\", \"\"), color=\"black\"); ax.set_ylabel(data.get(\"y_label\", \"\"), color=\"black\")\n\n# Set the grid color and style\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5, color=\"lightgray\")\n\n# Remove the top and right spines\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\n# Add value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.1f}\", ha=\"center\", va=\"bottom\", fontsize=9, color=\"black\")\n\n# Rotate x-axis labels if they are long\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\n# Adjust layout\nfig.tight_layout()",
+  "style_png": "D_0074_mts.png",
+  "style_message": "График построен (попытка 2).\nПодтвердите или отправьте правки сообщением.",
+  "style_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 4,
+   "n_gold": 4
+  }
+ },
+ {
+  "id": "D_0075",
+  "split": "test",
+  "db_id": "pets_1",
+  "question": "Каков средний вес для каждого вида домашних животных?",
+  "chart_type": "bar",
+  "gold_sql": "SELECT avg(weight) ,  pettype FROM pets GROUP BY pettype;",
+  "gold_rows": [
+   [
+    12.0,
+    "cat"
+   ],
+   [
+    11.350000000000001,
+    "dog"
+   ],
+   [
+    6.0,
+    "попугай"
+   ],
+   [
+    20.0,
+    "черепаха"
+   ]
+  ],
+  "gold_n": 4,
+  "session_id": "dd2d51f0-c1ad-4591-ac9e-1220ab8c1f31",
+  "t_chart": 53,
+  "pred_sql": "SELECT pettype ,  avg(weight) FROM pets GROUP BY pettype",
+  "sql_explanation": "Запрос возвращает средний вес для каждого вида домашних животных.",
+  "pred_n": 4,
+  "assistant_message": "График построен (попытка 1).\nПодтвердите или отправьте правки сообщением.",
+  "stage": "plot_rendering",
+  "code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\nbars = ax.bar(labels, values, color=\"steelblue\", edgecolor=\"white\", linewidth=0.8)\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14)\nax.set_xlabel(data.get(\"x_label\", \"\")); ax.set_ylabel(data.get(\"y_label\", \"\"))\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5)\nif any(len(str(l)) > 6 for l in labels): ax.tick_params(axis=\"x\", rotation=45)\n\n# Add value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.1f}\", ha=\"center\", va=\"bottom\", fontsize=9)\n\nfig.tight_layout()",
+  "chart_png": "D_0075_chart.png",
+  "chart_attempt": 1,
+  "errors": [],
+  "points": [
+   {
+    "label": "cat",
+    "x": "cat",
+    "y": 12.0,
+    "series": null
+   },
+   {
+    "label": "dog",
+    "x": "dog",
+    "y": 11.35,
+    "series": null
+   },
+   {
+    "label": "попугай",
+    "x": "попугай",
+    "y": 6.0,
+    "series": null
+   },
+   {
+    "label": "черепаха",
+    "x": "черепаха",
+    "y": 20.0,
+    "series": null
+   }
+  ],
+  "pred_exec_error": null,
+  "sql_ex": false,
+  "outcome": "chart",
+  "chart_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 4,
+   "n_gold": 4
+  },
+  "t_style": 33,
+  "style_code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\n\n# Plot bars with MTS style\nbars = ax.bar(labels, values, color=\"#E30611\", edgecolor=\"white\", linewidth=0.8)\n\n# Add value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.1f}\", ha=\"center\", va=\"bottom\", fontsize=9, color=\"black\")\n\n# Set title and labels\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14, color=\"black\")\nax.set_xlabel(data.get(\"x_label\", \"\"), color=\"black\"); ax.set_ylabel(data.get(\"y_label\", \"\"), color=\"black\")\n\n# Add grid and remove top and right spines\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5, color=\"lightgray\")\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\n# Adjust layout\nfig.tight_layout()",
+  "style_png": "D_0075_mts.png",
+  "style_message": "График построен (попытка 2).\nПодтвердите или отправьте правки сообщением.",
+  "style_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 4,
+   "n_gold": 4
+  }
+ },
+ {
+  "id": "D_0080",
+  "split": "test",
+  "db_id": "pets_1",
+  "question": "Количество домашних животных у каждого учащегося и id учащегося.",
+  "chart_type": "bar",
+  "gold_sql": "SELECT count(*) ,  T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid GROUP BY T1.stuid;",
+  "gold_rows": [
+   [
+    8,
+    1001
+   ],
+   [
+    2,
+    1002
+   ],
+   [
+    7,
+    1030
+   ],
+   [
+    14,
+    1036
+   ],
+   [
+    7,
+    1037
+   ]
+  ],
+  "gold_n": 5,
+  "session_id": "3d6b511e-3053-42fd-9903-c10f1e804a2d",
+  "t_chart": 50,
+  "pred_sql": "SELECT count(*) ,  T1.stuid FROM Has_Pet AS T1 JOIN Student AS T2 ON T1.stuid  =  T2.stuid GROUP BY T1.stuid",
+  "sql_explanation": "Запрос возвращает количество домашних животных для каждого студента и его идентификатор.",
+  "pred_n": 5,
+  "assistant_message": "График построен (попытка 1).\nПодтвердите или отправьте правки сообщением.",
+  "stage": "plot_rendering",
+  "code": "fig, ax = plt.subplots(figsize=(8, 6))\nax.scatter(data[\"x\"], data[\"y\"], alpha=0.7, s=60, color=\"steelblue\",\n           edgecolors=\"white\", linewidths=0.5)\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14)\nax.set_xlabel(data.get(\"x_label\", \"\")); ax.set_ylabel(data.get(\"y_label\", \"\"))\nax.grid(linestyle=\"--\", alpha=0.5); fig.tight_layout()",
+  "chart_png": "D_0080_chart.png",
+  "chart_attempt": 1,
+  "errors": [],
+  "points": [
+   {
+    "label": "1001.0",
+    "x": 1001.0,
+    "y": 8.0,
+    "series": null
+   },
+   {
+    "label": "1002.0",
+    "x": 1002.0,
+    "y": 2.0,
+    "series": null
+   },
+   {
+    "label": "1030.0",
+    "x": 1030.0,
+    "y": 7.0,
+    "series": null
+   },
+   {
+    "label": "1036.0",
+    "x": 1036.0,
+    "y": 14.0,
+    "series": null
+   },
+   {
+    "label": "1037.0",
+    "x": 1037.0,
+    "y": 7.0,
+    "series": null
+   }
+  ],
+  "pred_exec_error": null,
+  "sql_ex": true,
+  "outcome": "chart",
+  "chart_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 5,
+   "n_gold": 5
+  },
+  "t_style": 33,
+  "style_code": "fig, ax = plt.subplots(figsize=(9, 5))\nlabels = data[\"labels\"]\nvalues = data[\"values\"]\n\n# Set bar color to MTS style\nbar_color = \"#E30611\"\n\n# Plot bars\nbars = ax.bar(labels, values, color=bar_color, edgecolor=\"white\", linewidth=0.8)\n\n# Add value labels on top of bars\nfor b in bars:\n    ax.text(b.get_x() + b.get_width()/2, b.get_height() + max(values)*0.01,\n            f\"{b.get_height():,.1f}\", ha=\"center\", va=\"bottom\", fontsize=9, color=\"black\")\n\n# Set title and labels\nif data.get(\"title\"): ax.set_title(data[\"title\"], fontsize=14, color=\"black\")\nax.set_xlabel(data.get(\"x_label\", \"\"), color=\"black\"); ax.set_ylabel(data.get(\"y_label\", \"\"), color=\"black\")\n\n# Set grid and remove top and right spines\nax.grid(axis=\"y\", linestyle=\"--\", alpha=0.5, color=\"lightgray\")\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\n\n# Set tick parameters\nax.tick_params(axis='both', colors='black')\n\nfig.tight_layout()",
+  "style_png": "D_0080_mts.png",
+  "style_message": "График построен (попытка 2).\nПодтвердите или отправьте правки сообщением.",
+  "style_ex": {
+   "ok": true,
+   "values_ok": true,
+   "labels_ok": true,
+   "n_points": 5,
+   "n_gold": 5
+  }
+ }
+]

@@ -1,0 +1,9045 @@
+[
+ {
+  "id": "D_0413",
+  "db_id": "museum_visit",
+  "gold_sql": "SELECT name FROM visitor WHERE Level_of_membership  >  4 ORDER BY Level_of_membership DESC;",
+  "question_ru": "Показать имена посетителей, чей уровень членства выше 4, и отсортировать результаты по уровню от высокого к низкому.",
+  "question_en": "Find the names of the visitors whose membership level is higher than 4, and order the results by the level from high to low.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Gonzalo Higuaín "
+   ],
+   [
+    "Fernando Gago"
+   ],
+   [
+    "Guti Midfielder"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.Name FROM visitor AS T1 JOIN visit AS T2 ON T1.ID  =  T2.visitor_ID WHERE T1.Level_of_membership  >  4 ORDER BY T1.Level_of_membership DESC",
+   "explanation": "Запрос возвращает имена посетителей с уровнем членства выше 4, отсортированных по уровню от высокого к низкому.",
+   "rows": [
+    [
+     "Fernando Gago"
+    ],
+    [
+     "Fernando Gago"
+    ]
+   ],
+   "row_count": 2,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "visitor",
+    "visit"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 18
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.name FROM visitor AS T1 JOIN visit AS T2 ON T1.id  =  T2.visitor_id WHERE T1.level_of_membership  >  4 ORDER BY T1.level_of_membership DESC",
+   "explanation": "Запрос возвращает имена посетителей с уровнем членства выше 4, отсортированных по уровню членства от высшего к низшему.",
+   "rows": [
+    [
+     "Fernando Gago"
+    ],
+    [
+     "Fernando Gago"
+    ]
+   ],
+   "row_count": 2,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "visitor",
+    "visit"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 15
+  }
+ },
+ {
+  "id": "D_0656",
+  "db_id": "poker_player",
+  "gold_sql": "SELECT Money_Rank FROM poker_player ORDER BY Earnings DESC LIMIT 1;",
+  "question_ru": "Какой денежный ранг у игрока в покер с самым высоким заработком?",
+  "question_en": "What is the money rank of the poker player with the highest earnings?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    58.0
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT money_rank FROM poker_player ORDER BY earnings DESC LIMIT 1",
+   "explanation": "Запрос возвращает денежный ранг игрока, который заработал больше всего в покере.",
+   "rows": [
+    [
+     58.0
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "poker_player"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 12
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT money_rank FROM poker_player ORDER BY earnings DESC LIMIT 1",
+   "explanation": "Запрос возвращает денежный ранг игрока-покера с самыми высокими заработками.",
+   "rows": [
+    [
+     58.0
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "poker_player"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 12
+  }
+ },
+ {
+  "id": "D_1000",
+  "db_id": "dog_kennels",
+  "gold_sql": "SELECT DISTINCT T1.first_name ,  T3.treatment_type_description FROM professionals AS T1 JOIN Treatments AS T2 ON T1.professional_id  =  T2.professional_id JOIN Treatment_types AS T3 ON T2.treatment_type_code  =  T3.treatment_type_code;",
+  "question_ru": "Как зовут каждого специалиста и как он описывает проведенное лечение?",
+  "question_en": "What are each professional's first name and description of the treatment they have performed?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Monte",
+    "Take for a Walk"
+   ],
+   [
+    "Domenica",
+    "Vaccination"
+   ],
+   [
+    "Vernice",
+    "Physical examination"
+   ],
+   [
+    "Karley",
+    "Vaccination"
+   ],
+   [
+    "Sigurd",
+    "Vaccination"
+   ],
+   [
+    "Sigurd",
+    "Physical examination"
+   ],
+   [
+    "Ruben",
+    "Physical examination"
+   ],
+   [
+    "Domenica",
+    "Take for a Walk"
+   ],
+   [
+    "Velva",
+    "Take for a Walk"
+   ],
+   [
+    "Danny",
+    "Vaccination"
+   ],
+   [
+    "Monte",
+    "Physical examination"
+   ],
+   [
+    "Ruben",
+    "Take for a Walk"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.first_name ,  T1.last_name ,  T3.treatment_type_description FROM Professionals AS T1 JOIN Treatments AS T2 ON T1.professional_id  =  T2.professional_id JOIN Treatment_Types AS T3 ON T2.treatment_type_code  =  T3.treatment_type_code",
+   "explanation": "Запрос возвращает имена и фамилии специалистов вместе с описаниями типов лечения, которое они проводили.",
+   "rows": [
+    [
+     "Monte",
+     "Kshlerin",
+     "Take for a Walk"
+    ],
+    [
+     "Domenica",
+     "Jacobs",
+     "Vaccination"
+    ],
+    [
+     "Vernice",
+     "Tillman",
+     "Physical examination"
+    ],
+    [
+     "Karley",
+     "Hyatt",
+     "Vaccination"
+    ],
+    [
+     "Sigurd",
+     "Frami",
+     "Vaccination"
+    ],
+    [
+     "Vernice",
+     "Tillman",
+     "Physical examination"
+    ],
+    [
+     "Sigurd",
+     "Frami",
+     "Physical examination"
+    ],
+    [
+     "Ruben",
+     "O'Reilly",
+     "Physical examination"
+    ],
+    [
+     "Domenica",
+     "Jacobs",
+     "Take for a Walk"
+    ],
+    [
+     "Velva",
+     "Hayes",
+     "Take for a Walk"
+    ],
+    [
+     "Danny",
+     "Considine",
+     "Vaccination"
+    ],
+    [
+     "Monte",
+     "Kshlerin",
+     "Physical examination"
+    ]
+   ],
+   "row_count": 15,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Treatment_Types",
+    "Professionals",
+    "Treatments"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 25
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.first_name ,  T3.treatment_type_description FROM Professionals AS T1 JOIN Treatments AS T2 ON T1.professional_id  =  T2.professional_id JOIN Treatment_Types AS T3 ON T2.treatment_type_code  =  T3.treatment_type_code",
+   "explanation": "Запрос возвращает список имен профессионалов и описаний оказанных ими процедур.",
+   "rows": [
+    [
+     "Monte",
+     "Take for a Walk"
+    ],
+    [
+     "Domenica",
+     "Vaccination"
+    ],
+    [
+     "Vernice",
+     "Physical examination"
+    ],
+    [
+     "Karley",
+     "Vaccination"
+    ],
+    [
+     "Sigurd",
+     "Vaccination"
+    ],
+    [
+     "Vernice",
+     "Physical examination"
+    ],
+    [
+     "Sigurd",
+     "Physical examination"
+    ],
+    [
+     "Ruben",
+     "Physical examination"
+    ],
+    [
+     "Domenica",
+     "Take for a Walk"
+    ],
+    [
+     "Velva",
+     "Take for a Walk"
+    ],
+    [
+     "Danny",
+     "Vaccination"
+    ],
+    [
+     "Monte",
+     "Physical examination"
+    ]
+   ],
+   "row_count": 15,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Treatment_Types",
+    "Professionals",
+    "Treatments"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 24
+  }
+ },
+ {
+  "id": "D_0248",
+  "db_id": "flight_2",
+  "gold_sql": "SELECT FlightNo FROM FLIGHTS WHERE SourceAirport  =  \"APG\";",
+  "question_ru": "Какие номера рейсов вылетают из аэропорта «APG»?",
+  "question_en": "What are flight numbers of flights departing from Airport \"APG\"?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    1172
+   ],
+   [
+    28
+   ],
+   [
+    743
+   ],
+   [
+    382
+   ],
+   [
+    1377
+   ],
+   [
+    1275
+   ],
+   [
+    478
+   ],
+   [
+    143
+   ],
+   [
+    29
+   ],
+   [
+    101
+   ],
+   [
+    489
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT FlightNo FROM flights WHERE SourceAirport  =  'APG'",
+   "explanation": "Запрос возвращает номера рейсов, вылетающих из аэропорта «APG».",
+   "rows": [
+    [
+     1172
+    ],
+    [
+     28
+    ],
+    [
+     743
+    ],
+    [
+     382
+    ],
+    [
+     1377
+    ],
+    [
+     1275
+    ],
+    [
+     478
+    ],
+    [
+     143
+    ],
+    [
+     29
+    ],
+    [
+     101
+    ],
+    [
+     489
+    ]
+   ],
+   "row_count": 11,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "flights"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 12
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT FlightNo FROM flights WHERE SourceAirport  =  \"APG\"",
+   "explanation": "Запрос возвращает номера рейсов, вылетающих из аэропорта \"APG\".",
+   "rows": [
+    [
+     1172
+    ],
+    [
+     28
+    ],
+    [
+     743
+    ],
+    [
+     382
+    ],
+    [
+     1377
+    ],
+    [
+     1275
+    ],
+    [
+     478
+    ],
+    [
+     143
+    ],
+    [
+     29
+    ],
+    [
+     101
+    ],
+    [
+     489
+    ]
+   ],
+   "row_count": 11,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "flights"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 11
+  }
+ },
+ {
+  "id": "D_0802",
+  "db_id": "world_1",
+  "gold_sql": "SELECT Name ,  SurfaceArea FROM country ORDER BY SurfaceArea DESC LIMIT 5;",
+  "question_ru": "Отображать имена и площади 5 крупнейших стран.",
+  "question_en": "Return the names and surface areas of the 5 largest countries.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Russian Federation",
+    17075400.0
+   ],
+   [
+    "Antarctica",
+    13120000.0
+   ],
+   [
+    "Canada",
+    9970610.0
+   ],
+   [
+    "China",
+    9572900.0
+   ],
+   [
+    "United States",
+    9363520.0
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT name ,  surfacearea FROM country ORDER BY surfacearea DESC LIMIT 5",
+   "explanation": "Запрос возвращает имена и площади 5 крупнейших стран.",
+   "rows": [
+    [
+     "Russian Federation",
+     17075400.0
+    ],
+    [
+     "Antarctica",
+     13120000.0
+    ],
+    [
+     "Canada",
+     9970610.0
+    ],
+    [
+     "China",
+     9572900.0
+    ],
+    [
+     "United States",
+     9363520.0
+    ]
+   ],
+   "row_count": 5,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "country"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 16
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT name ,  surfacearea FROM country ORDER BY surfacearea DESC LIMIT 5",
+   "explanation": "Запрос возвращает названия и площади поверхности пяти крупнейших стран.",
+   "rows": [
+    [
+     "Russian Federation",
+     17075400.0
+    ],
+    [
+     "Antarctica",
+     13120000.0
+    ],
+    [
+     "Canada",
+     9970610.0
+    ],
+    [
+     "China",
+     9572900.0
+    ],
+    [
+     "United States",
+     9363520.0
+    ]
+   ],
+   "row_count": 5,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "country"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 15
+  }
+ },
+ {
+  "id": "D_0121",
+  "db_id": "car_1",
+  "gold_sql": "select min(weight) from cars_data where cylinders  =  8 and year  =  1974;",
+  "question_ru": "Какой минимальный вес у автомобиля с 8 цилиндрами 1974 года выпуска?",
+  "question_en": "What is the minimum weight of the car with 8 cylinders produced in 1974 ?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    4141
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT min(weight) FROM cars_data WHERE cylinders  =  8 AND YEAR  =  1974",
+   "explanation": "Запрос возвращает минимальный вес автомобиля с 8 цилиндрами, выпущенного в 1974 году.",
+   "rows": [
+    [
+     4141
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "cars_data"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 15
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT min(weight) FROM cars_data WHERE cylinders  =  8 AND YEAR  =  1974",
+   "explanation": "Запрос возвращает минимальный вес автомобиля с 8 цилиндрами, выпущенного в 1974 году.",
+   "rows": [
+    [
+     4141
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "cars_data"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  }
+ },
+ {
+  "id": "D_0072",
+  "db_id": "pets_1",
+  "gold_sql": "SELECT avg(pet_age) ,  max(pet_age) ,  pettype FROM pets GROUP BY pettype;",
+  "question_ru": "Найдите средний и максимальный возраст для каждого типа домашних животных.",
+  "question_en": "Find the average and maximum age for each type of pet.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    3.0,
+    3,
+    "cat"
+   ],
+   [
+    1.5,
+    2,
+    "dog"
+   ],
+   [
+    3.0,
+    3,
+    "попугай"
+   ],
+   [
+    4.0,
+    4,
+    "черепаха"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT avg(pet_age) ,  max(pet_age) ,  pettype FROM Has_Pet AS T1 JOIN Pets AS T2 ON T1.PetID  =  T2.PetID GROUP BY pettype",
+   "explanation": "Запрос возвращает средний и максимальный возраст для каждого типа домашних животных.",
+   "rows": [
+    [
+     3.0,
+     3,
+     "cat"
+    ],
+    [
+     1.8888888888888888,
+     2,
+     "dog"
+    ],
+    [
+     3.0,
+     3,
+     "попугай"
+    ],
+    [
+     4.0,
+     4,
+     "черепаха"
+    ]
+   ],
+   "row_count": 4,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Has_Pet",
+    "Pets"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT avg(pet_age) ,  max(pet_age) ,  pettype FROM Has_Pet AS T1 JOIN Pets AS T2 ON T1.PetID  =  T2.PetID GROUP BY pettype",
+   "explanation": "Запрос возвращает средний и максимальный возраст для каждого вида питомца.",
+   "rows": [
+    [
+     3.0,
+     3,
+     "cat"
+    ],
+    [
+     1.8888888888888888,
+     2,
+     "dog"
+    ],
+    [
+     3.0,
+     3,
+     "попугай"
+    ],
+    [
+     4.0,
+     4,
+     "черепаха"
+    ]
+   ],
+   "row_count": 4,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Has_Pet",
+    "Pets"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  }
+ },
+ {
+  "id": "D_0270",
+  "db_id": "employee_hire_evaluation",
+  "gold_sql": "SELECT manager_name ,  district FROM shop ORDER BY number_products DESC LIMIT 1;",
+  "question_ru": "Найдите имя менеджера и район магазина, в котором больше всего товаров.",
+  "question_en": "Find the manager name and district of the shop whose number of products is the largest.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Ilkka Mäkelä",
+    "Lahden Stadion"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT manager_name ,  district FROM shop ORDER BY number_products DESC LIMIT 1",
+   "explanation": "Запрос возвращает имя менеджера и район магазина с наибольшим количеством товаров.",
+   "rows": [
+    [
+     "Ilkka Mäkelä",
+     "Lahden Stadion"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "shop"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT manager_name ,  district FROM shop ORDER BY number_products DESC LIMIT 1",
+   "explanation": "Запрос возвращает имя менеджера и район магазина с наибольшим количеством товаров.",
+   "rows": [
+    [
+     "Ilkka Mäkelä",
+     "Lahden Stadion"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "shop"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_0525",
+  "db_id": "student_transcripts_tracking",
+  "gold_sql": "SELECT section_name ,  section_description FROM Sections;",
+  "question_ru": "Какие названия и описания у всех разделов?",
+  "question_en": "What are the names and descriptions for all the sections?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "a",
+    "non"
+   ],
+   [
+    "b",
+    "voluptatem"
+   ],
+   [
+    "c",
+    "qui"
+   ],
+   [
+    "d",
+    "voluptas"
+   ],
+   [
+    "e",
+    "ex"
+   ],
+   [
+    "f",
+    "doloremque"
+   ],
+   [
+    "g",
+    "provident"
+   ],
+   [
+    "h",
+    "et"
+   ],
+   [
+    "j",
+    "quis"
+   ],
+   [
+    "k",
+    "nesciunt"
+   ],
+   [
+    "l",
+    "ad"
+   ],
+   [
+    "o",
+    "et"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT section_name ,  section_description FROM SECTIONS",
+   "explanation": "Запрос возвращает названия и описания всех разделов.",
+   "rows": [
+    [
+     "a",
+     "non"
+    ],
+    [
+     "b",
+     "voluptatem"
+    ],
+    [
+     "c",
+     "qui"
+    ],
+    [
+     "d",
+     "voluptas"
+    ],
+    [
+     "e",
+     "ex"
+    ],
+    [
+     "f",
+     "doloremque"
+    ],
+    [
+     "g",
+     "provident"
+    ],
+    [
+     "h",
+     "et"
+    ],
+    [
+     "j",
+     "quis"
+    ],
+    [
+     "k",
+     "nesciunt"
+    ],
+    [
+     "l",
+     "ad"
+    ],
+    [
+     "o",
+     "et"
+    ]
+   ],
+   "row_count": 15,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Sections"
+   ],
+   "attempts": 2,
+   "message": null,
+   "sec": 25
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT section_name ,  section_description FROM SECTIONS",
+   "explanation": "Запрос возвращает названия и описания всех разделов.",
+   "rows": [
+    [
+     "a",
+     "non"
+    ],
+    [
+     "b",
+     "voluptatem"
+    ],
+    [
+     "c",
+     "qui"
+    ],
+    [
+     "d",
+     "voluptas"
+    ],
+    [
+     "e",
+     "ex"
+    ],
+    [
+     "f",
+     "doloremque"
+    ],
+    [
+     "g",
+     "provident"
+    ],
+    [
+     "h",
+     "et"
+    ],
+    [
+     "j",
+     "quis"
+    ],
+    [
+     "k",
+     "nesciunt"
+    ],
+    [
+     "l",
+     "ad"
+    ],
+    [
+     "o",
+     "et"
+    ]
+   ],
+   "row_count": 15,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Sections"
+   ],
+   "attempts": 2,
+   "message": null,
+   "sec": 24
+  }
+ },
+ {
+  "id": "D_0204",
+  "db_id": "flight_2",
+  "gold_sql": "SELECT count(*) FROM FLIGHTS WHERE SourceAirport  =  \"APG\";",
+  "question_ru": "Сколько рейсов отправляется из APG?",
+  "question_en": "How many flights depart from 'APG'?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    11
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT count(*) FROM flights WHERE SourceAirport  =  'APG'",
+   "explanation": "'Этот запрос возвращает количество рейсов, отправляющихся из аэропорта APG.'",
+   "rows": [
+    [
+     11
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "flights"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 11
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT count(*) FROM flights WHERE sourceairport  =  'APG'",
+   "explanation": "Запрос возвращает количество рейсов, вылетающих из аэропорта с кодом 'APG'.",
+   "rows": [
+    [
+     11
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "flights"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 11
+  }
+ },
+ {
+  "id": "D_0238",
+  "db_id": "flight_2",
+  "gold_sql": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  \"APG\" INTERSECT SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  \"CVO\";",
+  "question_ru": "Найдите все авиакомпании, у которых есть рейсы из обоих аэропортов \"APG\" и \"CVO\".",
+  "question_en": "Find all airlines that have flights from both airports 'APG' and 'CVO'.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "AirTran Airways"
+   ],
+   [
+    "Allegiant Air"
+   ],
+   [
+    "Delta Airlines"
+   ],
+   [
+    "Northwest Airlines"
+   ],
+   [
+    "Southwest Airlines"
+   ],
+   [
+    "US Airways"
+   ],
+   [
+    "United Airlines"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.Airline FROM airlines AS T1 JOIN flights AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  \"APG\" INTERSECT SELECT T1.Airline FROM airlines AS T1 JOIN flights AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  \"CVO\"",
+   "explanation": "Запрос возвращает список авиакомпаний, которые обслуживают рейсы как из аэропорта \"APG\", так и из аэропорта \"CVO\".",
+   "rows": [
+    [
+     "AirTran Airways"
+    ],
+    [
+     "Allegiant Air"
+    ],
+    [
+     "Delta Airlines"
+    ],
+    [
+     "Northwest Airlines"
+    ],
+    [
+     "Southwest Airlines"
+    ],
+    [
+     "US Airways"
+    ],
+    [
+     "United Airlines"
+    ]
+   ],
+   "row_count": 7,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "airlines",
+    "flights"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 17
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.Airline FROM airlines AS T1 JOIN flights AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  'APG' INTERSECT SELECT T1.Airline FROM airlines AS T1 JOIN flights AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  'CVO'",
+   "explanation": "Запрос возвращает названия авиакомпаний, которые обслуживают как аэропорт 'APG', так и аэропорт 'CVO'.",
+   "rows": [
+    [
+     "AirTran Airways"
+    ],
+    [
+     "Allegiant Air"
+    ],
+    [
+     "Delta Airlines"
+    ],
+    [
+     "Northwest Airlines"
+    ],
+    [
+     "Southwest Airlines"
+    ],
+    [
+     "US Airways"
+    ],
+    [
+     "United Airlines"
+    ]
+   ],
+   "row_count": 7,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "airlines",
+    "flights"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 16
+  }
+ },
+ {
+  "id": "D_0311",
+  "db_id": "cre_Doc_Template_Mgt",
+  "gold_sql": "SELECT template_id ,  count(*) FROM Documents GROUP BY template_id;",
+  "question_ru": "Какие id различных шаблонов используются для документов и сколько раз каждый из них использовался?",
+  "question_en": "What are all different template ids used for documents, and how many times were each of them used?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    1,
+    1
+   ],
+   [
+    4,
+    1
+   ],
+   [
+    6,
+    1
+   ],
+   [
+    7,
+    1
+   ],
+   [
+    8,
+    1
+   ],
+   [
+    10,
+    1
+   ],
+   [
+    11,
+    2
+   ],
+   [
+    14,
+    2
+   ],
+   [
+    20,
+    1
+   ],
+   [
+    21,
+    2
+   ],
+   [
+    22,
+    2
+   ],
+   [
+    23,
+    1
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT template_id ,  count(*) FROM Documents GROUP BY template_id",
+   "explanation": "Запрос возвращает идентификаторы различных шаблонов документов и количество их использований.",
+   "rows": [
+    [
+     1,
+     1
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     10,
+     1
+    ],
+    [
+     11,
+     2
+    ],
+    [
+     14,
+     2
+    ],
+    [
+     20,
+     1
+    ],
+    [
+     21,
+     2
+    ],
+    [
+     22,
+     2
+    ],
+    [
+     23,
+     1
+    ]
+   ],
+   "row_count": 14,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Documents"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT template_id ,  count(*) FROM Documents GROUP BY template_id",
+   "explanation": "Запрос возвращает список всех используемых идентификаторов шаблонов документов и количество их использований.",
+   "rows": [
+    [
+     1,
+     1
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     10,
+     1
+    ],
+    [
+     11,
+     2
+    ],
+    [
+     14,
+     2
+    ],
+    [
+     20,
+     1
+    ],
+    [
+     21,
+     2
+    ],
+    [
+     22,
+     2
+    ],
+    [
+     23,
+     1
+    ]
+   ],
+   "row_count": 14,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Documents"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_0907",
+  "db_id": "network_1",
+  "gold_sql": "SELECT T2.name FROM Likes AS T1 JOIN Highschooler AS T2 ON T1.student_id  =  T2.id GROUP BY T1.student_id ORDER BY count(*) DESC LIMIT 1;",
+  "question_ru": "Как зовут старшеклассника, у которого больше всего лайков?",
+  "question_en": "What is the name of the high schooler who has the greatest number of likes?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Лев"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.name FROM Highschooler AS T1 JOIN Likes AS T2 ON T1.id  =  T2.liked_id WHERE T1.grade  =  12 GROUP BY T2.liked_id ORDER BY count(*) DESC LIMIT 1",
+   "explanation": "Запрос возвращает имя старшеклассника, который получил больше всего лайков.",
+   "rows": [
+    [
+     "Kyle"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Highschooler",
+    "Likes"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT t1.name FROM highschooler AS t1 JOIN likes AS t2 ON t1.id  =  t2.student_id GROUP BY t2.student_id ORDER BY count(*) DESC LIMIT 1",
+   "explanation": "Запрос возвращает имя старшеклассника с наибольшим количеством лайков.",
+   "rows": [
+    [
+     "Лев"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Highschooler",
+    "Likes"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_0921",
+  "db_id": "dog_kennels",
+  "gold_sql": "SELECT avg(age) FROM Dogs WHERE dog_id IN ( SELECT dog_id FROM Treatments );",
+  "question_ru": "Каков средний возраст собак, прошедших какое-либо лечение?",
+  "question_en": "What is the average age of the dogs who have gone through any treatments?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    5.111111111111111
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT avg(T1.age) FROM dogs AS T1 JOIN treatments AS T2 ON T1.dog_id  =  T2.dog_id",
+   "explanation": "Запрос возвращает средний возраст собак, которые получали какое-либо лечение.",
+   "rows": [
+    [
+     5.466666666666667
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Dogs",
+    "Treatments"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 23
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT avg(T1.age) FROM dogs AS T1 JOIN treatments AS T2 ON T1.dog_id  =  T2.dog_id",
+   "explanation": "Запрос возвращает средний возраст собак, прошедших любые процедуры.",
+   "rows": [
+    [
+     5.466666666666667
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Dogs",
+    "Treatments"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 23
+  }
+ },
+ {
+  "id": "D_0076",
+  "db_id": "pets_1",
+  "gold_sql": "SELECT DISTINCT T1.fname ,  T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid;",
+  "question_ru": "Имя и возраст учеников, у которых есть домашнее животное.",
+  "question_en": "Find the first name and age of students who have a pet.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Linda",
+    18
+   ],
+   [
+    "Tracy",
+    19
+   ],
+   [
+    "Lisa",
+    21
+   ],
+   [
+    "Петр",
+    19
+   ],
+   [
+    "Лиза",
+    20
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT fname ,  age FROM Student WHERE StuID IN (SELECT StuID FROM Has_Pet)",
+   "explanation": "Запрос возвращает имена и возраст учеников, которые имеют домашнее животное.",
+   "rows": [
+    [
+     "Linda",
+     18
+    ],
+    [
+     "Tracy",
+     19
+    ],
+    [
+     "Lisa",
+     21
+    ],
+    [
+     "Петр",
+     19
+    ],
+    [
+     "Лиза",
+     20
+    ]
+   ],
+   "row_count": 5,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Student",
+    "Has_Pet"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT fname ,  age FROM Student WHERE StuID IN (SELECT StuID FROM Has_Pet)",
+   "explanation": "Запрос возвращает имена и возраст студентов, которые имеют питомца.",
+   "rows": [
+    [
+     "Linda",
+     18
+    ],
+    [
+     "Tracy",
+     19
+    ],
+    [
+     "Lisa",
+     21
+    ],
+    [
+     "Петр",
+     19
+    ],
+    [
+     "Лиза",
+     20
+    ]
+   ],
+   "row_count": 5,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Student",
+    "Has_Pet"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_0334",
+  "db_id": "cre_Doc_Template_Mgt",
+  "gold_sql": "SELECT template_type_code FROM Templates GROUP BY template_type_code HAVING count(*)  <  3;",
+  "question_ru": "Показать все коды типов шаблонов с менее чем тремя шаблонами.",
+  "question_en": "Show all template type codes with less than three templates.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "CV"
+   ],
+   [
+    "INFO"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT template_type_code FROM templates GROUP BY template_type_code HAVING count(*)  <  3",
+   "explanation": "Запрос возвращает все коды типов шаблонов, которые имеют меньше трёх шаблонов.",
+   "rows": [
+    [
+     "CV"
+    ],
+    [
+     "INFO"
+    ]
+   ],
+   "row_count": 2,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Templates"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT template_type_code FROM templates GROUP BY template_type_code HAVING count(*)  <  3",
+   "explanation": "Запрос возвращает коды типов шаблонов, которые используются менее чем в трех шаблонах.",
+   "rows": [
+    [
+     "CV"
+    ],
+    [
+     "INFO"
+    ]
+   ],
+   "row_count": 2,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Templates"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  }
+ },
+ {
+  "id": "D_0236",
+  "db_id": "flight_2",
+  "gold_sql": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline WHERE T2.DestAirport  =  \"AHD\";",
+  "question_ru": "Какие авиакомпании имеют рейсы, прибывающие в аэропорт AHD?",
+  "question_en": "What are airlines that have flights arriving at airport 'AHD'?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Delta Airlines"
+   ],
+   [
+    "Northwest Airlines"
+   ],
+   [
+    "AirTran Airways"
+   ],
+   [
+    "Virgin America"
+   ],
+   [
+    "JetBlue Airways"
+   ],
+   [
+    "Frontier Airlines"
+   ],
+   [
+    "United Airlines"
+   ],
+   [
+    "United Airlines"
+   ],
+   [
+    "United Airlines"
+   ],
+   [
+    "US Airways"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.Airline FROM airlines AS T1 JOIN flights AS T2 ON T1.uid  =  T2.Airline WHERE T2.DestAirport  =  'AHD'",
+   "explanation": "Запрос возвращает список авиакомпаний, которые совершают рейсы, прибывающие в аэропорт AHD.",
+   "rows": [
+    [
+     "Delta Airlines"
+    ],
+    [
+     "Northwest Airlines"
+    ],
+    [
+     "AirTran Airways"
+    ],
+    [
+     "Virgin America"
+    ],
+    [
+     "JetBlue Airways"
+    ],
+    [
+     "Frontier Airlines"
+    ],
+    [
+     "United Airlines"
+    ],
+    [
+     "United Airlines"
+    ],
+    [
+     "United Airlines"
+    ],
+    [
+     "US Airways"
+    ]
+   ],
+   "row_count": 10,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "airlines",
+    "flights"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.Airline FROM airlines AS T1 JOIN flights AS T2 ON T1.uid  =  T2.Airline WHERE T2.DestAirport  =  'AHD'",
+   "explanation": "Запрос возвращает названия авиакомпаний, у которых есть рейсы, прибывающие в аэропорт 'AHD'.",
+   "rows": [
+    [
+     "Delta Airlines"
+    ],
+    [
+     "Northwest Airlines"
+    ],
+    [
+     "AirTran Airways"
+    ],
+    [
+     "Virgin America"
+    ],
+    [
+     "JetBlue Airways"
+    ],
+    [
+     "Frontier Airlines"
+    ],
+    [
+     "United Airlines"
+    ],
+    [
+     "United Airlines"
+    ],
+    [
+     "United Airlines"
+    ],
+    [
+     "US Airways"
+    ]
+   ],
+   "row_count": 10,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "airlines",
+    "flights"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  }
+ },
+ {
+  "id": "D_0993",
+  "db_id": "dog_kennels",
+  "gold_sql": "SELECT max(charge_amount) FROM Charges;",
+  "question_ru": "Сколько стоит самый дорогой тип начисления?",
+  "question_en": "How much does the most expensive charge type costs?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    640
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT charge_type ,  charge_amount FROM charges ORDER BY charge_amount DESC LIMIT 1",
+   "explanation": "Запрос возвращает тип начисления и его стоимость для самого дорогого начисления.",
+   "rows": [
+    [
+     "Health Check",
+     640
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Charges"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 18
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT charge_type ,  max(charge_amount) FROM charges",
+   "explanation": "Запрос возвращает тип заряда с самой высокой стоимостью.",
+   "rows": [
+    [
+     "Health Check",
+     640
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Charges"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 18
+  }
+ },
+ {
+  "id": "B_0019",
+  "db_id": "world_1",
+  "gold_sql": "SELECT Percentage FROM countrylanguage WHERE IsOfficial = 'T' AND CountryCode = 'KAZ'",
+  "question_ru": "Каков процент людей, говорящих на официальном языке в KAZ?",
+  "question_en": "What is the percentage of people speaking offical language in KAZ?",
+  "gold_error": null,
+  "gold_rows": [],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT percentage FROM countrylanguage WHERE countrycode  =  'KAZ' AND isofficial  =  'T'",
+   "explanation": "Запрос возвращает процент людей, говорящих на официальном языке в Казахстане.",
+   "rows": [],
+   "row_count": 0,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "country",
+    "countrylanguage"
+   ],
+   "attempts": 3,
+   "message": null,
+   "sec": 28
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT percentage FROM countrylanguage WHERE countrycode  =  'KAZ' AND isofficial  =  'T'",
+   "explanation": "Запрос возвращает процент людей, говорящих официальным языком в Казахстане.",
+   "rows": [],
+   "row_count": 0,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "country",
+    "countrylanguage"
+   ],
+   "attempts": 3,
+   "message": null,
+   "sec": 27
+  }
+ },
+ {
+  "id": "D_0410",
+  "db_id": "course_teach",
+  "gold_sql": "SELECT Name FROM teacher WHERE Teacher_id NOT IN (SELECT Teacher_id FROM course_arrange);",
+  "question_ru": "Перечисли имена учителей, не назначенных для преподавания курсов.",
+  "question_en": "List the names of teachers who have not been arranged to teach courses.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "John Deloor"
+   ],
+   [
+    "Сергей Васянин"
+   ],
+   [
+    "Николай Андреев"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT Name FROM teacher WHERE Teacher_ID NOT IN (SELECT Teacher_ID FROM course_arrange)",
+   "explanation": "Запрос возвращает имена учителей, которые не были назначены для преподавания курсов.",
+   "rows": [
+    [
+     "John Deloor"
+    ],
+    [
+     "Сергей Васянин"
+    ],
+    [
+     "Николай Андреев"
+    ]
+   ],
+   "row_count": 3,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "course",
+    "teacher",
+    "course_arrange"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT Name FROM teacher WHERE Teacher_ID NOT IN (SELECT Teacher_ID FROM course_arrange)",
+   "explanation": "Запрос возвращает имена преподавателей, которые не были назначены для проведения курсов.",
+   "rows": [
+    [
+     "John Deloor"
+    ],
+    [
+     "Сергей Васянин"
+    ],
+    [
+     "Николай Андреев"
+    ]
+   ],
+   "row_count": 3,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "course",
+    "teacher",
+    "course_arrange"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_0478",
+  "db_id": "wta_1",
+  "gold_sql": "SELECT country_code FROM players GROUP BY country_code HAVING count(*)  >  50;",
+  "question_ru": "Найти коды стран, в которых больше 50 игроков.",
+  "question_en": "Find the codes of countries that have more than 50 players.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "ALG"
+   ],
+   [
+    "ARG"
+   ],
+   [
+    "AUS"
+   ],
+   [
+    "AUT"
+   ],
+   [
+    "BEL"
+   ],
+   [
+    "BIH"
+   ],
+   [
+    "BLR"
+   ],
+   [
+    "BOL"
+   ],
+   [
+    "BRA"
+   ],
+   [
+    "BUL"
+   ],
+   [
+    "CAN"
+   ],
+   [
+    "CHI"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT country_code FROM players GROUP BY country_code HAVING count(*)  >  50",
+   "explanation": "Запрос возвращает коды стран, где более 50 игроков.",
+   "rows": [
+    [
+     "ALG"
+    ],
+    [
+     "ARG"
+    ],
+    [
+     "AUS"
+    ],
+    [
+     "AUT"
+    ],
+    [
+     "BEL"
+    ],
+    [
+     "BIH"
+    ],
+    [
+     "BLR"
+    ],
+    [
+     "BOL"
+    ],
+    [
+     "BRA"
+    ],
+    [
+     "BUL"
+    ],
+    [
+     "CAN"
+    ],
+    [
+     "CHI"
+    ]
+   ],
+   "row_count": 65,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "players"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 15
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT country_code FROM players GROUP BY country_code HAVING count(*)  >  50",
+   "explanation": "Запрос возвращает коды стран, где более 50 игроков.",
+   "rows": [
+    [
+     "ALG"
+    ],
+    [
+     "ARG"
+    ],
+    [
+     "AUS"
+    ],
+    [
+     "AUT"
+    ],
+    [
+     "BEL"
+    ],
+    [
+     "BIH"
+    ],
+    [
+     "BLR"
+    ],
+    [
+     "BOL"
+    ],
+    [
+     "BRA"
+    ],
+    [
+     "BUL"
+    ],
+    [
+     "CAN"
+    ],
+    [
+     "CHI"
+    ]
+   ],
+   "row_count": 65,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "players"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 15
+  }
+ },
+ {
+  "id": "D_0733",
+  "db_id": "world_1",
+  "gold_sql": "SELECT count(DISTINCT LANGUAGE) FROM countrylanguage;",
+  "question_ru": "На скольких уникальных языках говорят в мире?",
+  "question_en": "How many unique languages are spoken in the world?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    462
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT count(DISTINCT Language) FROM countrylanguage",
+   "explanation": "Запрос возвращает количество уникальных языков, используемых в разных странах.",
+   "rows": [
+    [
+     462
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "country",
+    "countrylanguage"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 16
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT count(DISTINCT Language) FROM countrylanguage",
+   "explanation": "Запрос возвращает количество уникальных языков, используемых в мире.",
+   "rows": [
+    [
+     462
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "country",
+    "countrylanguage"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 16
+  }
+ },
+ {
+  "id": "D_0141",
+  "db_id": "car_1",
+  "gold_sql": "SELECT max(Accelerate) ,  Cylinders FROM CARS_DATA GROUP BY Cylinders;",
+  "question_ru": "Какое максимальное ускорение для всех цилиндров?",
+  "question_en": "What is the maximum accelerate for all the different cylinders?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    13.5,
+    3
+   ],
+   [
+    24.8,
+    4
+   ],
+   [
+    20.1,
+    5
+   ],
+   [
+    21.0,
+    6
+   ],
+   [
+    22.2,
+    8
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT max(accelerate) FROM cars_data",
+   "explanation": "Запрос возвращает максимальное значение ускорения для всех автомобилей в таблице.",
+   "rows": [
+    [
+     24.8
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "cars_data"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT max(accelerate) ,  cylinders FROM cars_data GROUP BY cylinders",
+   "explanation": "Запрос возвращает максимальное значение ускорения для каждой группы автомобилей с одинаковым количеством цилиндров.",
+   "rows": [
+    [
+     13.5,
+     3
+    ],
+    [
+     24.8,
+     4
+    ],
+    [
+     20.1,
+     5
+    ],
+    [
+     21.0,
+     6
+    ],
+    [
+     22.2,
+     8
+    ]
+   ],
+   "row_count": 5,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "cars_data"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  }
+ },
+ {
+  "id": "D_0393",
+  "db_id": "course_teach",
+  "gold_sql": "SELECT Hometown FROM teacher ORDER BY Age ASC LIMIT 1;",
+  "question_ru": "Откуда самый молодой учитель?",
+  "question_en": "Where is the youngest teacher from?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Farnworth Municipal Borough"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT Hometown FROM teacher ORDER BY Age ASC LIMIT 1",
+   "explanation": "Место рождения самого молодого учителя.",
+   "rows": [
+    [
+     "Farnworth Municipal Borough"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "teacher"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 11
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT Hometown FROM teacher ORDER BY Age ASC LIMIT 1",
+   "explanation": "Запрос возвращает город, в котором родился самый молодой учитель.",
+   "rows": [
+    [
+     "Farnworth Municipal Borough"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "teacher"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 11
+  }
+ },
+ {
+  "id": "D_0291",
+  "db_id": "employee_hire_evaluation",
+  "gold_sql": "SELECT sum(bonus) FROM evaluation;",
+  "question_ru": "Найдите общую сумму бонуса, полученного во всех оценках.",
+  "question_en": "Find the total amount of bonus given in all the evaluations.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    19500.0
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT sum(Bonus) FROM evaluation",
+   "explanation": "Запрос возвращает общую сумму бонусов, полученных во всех оценках.",
+   "rows": [
+    [
+     19500.0
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "evaluation"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 12
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT sum(Bonus) FROM evaluation",
+   "explanation": "Запрос возвращает общую сумму бонусов, выданных во всех оценках.",
+   "rows": [
+    [
+     19500.0
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "evaluation"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 12
+  }
+ },
+ {
+  "id": "D_0243",
+  "db_id": "flight_2",
+  "gold_sql": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline GROUP BY T1.Airline HAVING count(*)  >  10;",
+  "question_ru": "У каких авиакомпаний есть не менее 10 рейсов?",
+  "question_en": "Which airlines have at least 10 flights?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "AirTran Airways"
+   ],
+   [
+    "Allegiant Air"
+   ],
+   [
+    "American Airlines"
+   ],
+   [
+    "Continental Airlines"
+   ],
+   [
+    "Delta Airlines"
+   ],
+   [
+    "Frontier Airlines"
+   ],
+   [
+    "JetBlue Airways"
+   ],
+   [
+    "Northwest Airlines"
+   ],
+   [
+    "Southwest Airlines"
+   ],
+   [
+    "US Airways"
+   ],
+   [
+    "United Airlines"
+   ],
+   [
+    "Virgin America"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.Airline FROM airlines AS T1 JOIN flights AS T2 ON T1.uid  =  T2.Airline GROUP BY T2.Airline HAVING count(*)  >=  10",
+   "explanation": "Запрос возвращает список авиакомпаний, у которых есть не менее 10 рейсов.",
+   "rows": [
+    [
+     "United Airlines"
+    ],
+    [
+     "US Airways"
+    ],
+    [
+     "Delta Airlines"
+    ],
+    [
+     "Southwest Airlines"
+    ],
+    [
+     "American Airlines"
+    ],
+    [
+     "Northwest Airlines"
+    ],
+    [
+     "Continental Airlines"
+    ],
+    [
+     "JetBlue Airways"
+    ],
+    [
+     "Frontier Airlines"
+    ],
+    [
+     "AirTran Airways"
+    ],
+    [
+     "Allegiant Air"
+    ],
+    [
+     "Virgin America"
+    ]
+   ],
+   "row_count": 12,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "airlines",
+    "flights"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.Airline FROM airlines AS T1 JOIN flights AS T2 ON T1.uid  =  T2.Airline GROUP BY T2.Airline HAVING count(*)  >=  10",
+   "explanation": "Запрос возвращает названия авиакомпаний, у которых есть как минимум 10 рейсов.",
+   "rows": [
+    [
+     "United Airlines"
+    ],
+    [
+     "US Airways"
+    ],
+    [
+     "Delta Airlines"
+    ],
+    [
+     "Southwest Airlines"
+    ],
+    [
+     "American Airlines"
+    ],
+    [
+     "Northwest Airlines"
+    ],
+    [
+     "Continental Airlines"
+    ],
+    [
+     "JetBlue Airways"
+    ],
+    [
+     "Frontier Airlines"
+    ],
+    [
+     "AirTran Airways"
+    ],
+    [
+     "Allegiant Air"
+    ],
+    [
+     "Virgin America"
+    ]
+   ],
+   "row_count": 12,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "airlines",
+    "flights"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_0088",
+  "db_id": "car_1",
+  "gold_sql": "SELECT count(*) FROM CONTINENTS;",
+  "question_ru": "Сколько всего континентов?",
+  "question_en": "How many continents are there?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    6
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT count(*) FROM continents",
+   "explanation": "Запрос возвращает количество континентов.",
+   "rows": [
+    [
+     6
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "continents"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 12
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT count(*) FROM continents",
+   "explanation": "Запрос возвращает количество континентов.",
+   "rows": [
+    [
+     6
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "continents"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 12
+  }
+ },
+ {
+  "id": "D_0976",
+  "db_id": "dog_kennels",
+  "gold_sql": "SELECT count(*) FROM Dogs WHERE age  <  ( SELECT avg(age) FROM Dogs );",
+  "question_ru": "Подсчитайте количество собак возраста ниже среднего.",
+  "question_en": "Count the number of dogs of an age below the average.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    2
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT count(*) FROM dogs WHERE age  <  (SELECT avg(age) FROM dogs)",
+   "explanation": "Запрос возвращает количество собак, чей возраст меньше среднего.",
+   "rows": [
+    [
+     2
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Dogs"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 20
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT count(*) FROM dogs WHERE age  <  (SELECT avg(age) FROM dogs)",
+   "explanation": "Запрос возвращает количество собак моложе среднего возраста.",
+   "rows": [
+    [
+     2
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Dogs"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 20
+  }
+ },
+ {
+  "id": "D_0105",
+  "db_id": "car_1",
+  "gold_sql": "SELECT DISTINCT T1.model FROM MODEL_LIST AS T1 JOIN CAR_NAMES AS T2 ON T1.model  =  T2.model JOIN CARS_DATA AS T3 ON T2.MakeId  =  T3.id WHERE T3.year  >  1980;",
+  "question_ru": "Какие существуют модели автомобилей, выпущенных после 1980 года?",
+  "question_en": "What are the different models for the cards produced after 1980?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "plymouth"
+   ],
+   [
+    "buick"
+   ],
+   [
+    "dodge"
+   ],
+   [
+    "chevrolet"
+   ],
+   [
+    "toyota"
+   ],
+   [
+    "honda"
+   ],
+   [
+    "subaru"
+   ],
+   [
+    "datsun"
+   ],
+   [
+    "mazda"
+   ],
+   [
+    "ford"
+   ],
+   [
+    "volkswagen"
+   ],
+   [
+    "renault"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.Make FROM car_names AS T1 JOIN cars_data AS T2 ON T1.MakeId  =  T2.Id WHERE T2.Year  >  1980",
+   "explanation": "Запрос возвращает список марок автомобилей, выпущенных после 1980 года.",
+   "rows": [
+    [
+     "plymouth reliant"
+    ],
+    [
+     "buick skylark"
+    ],
+    [
+     "dodge aries wagon (sw)"
+    ],
+    [
+     "chevrolet citation"
+    ],
+    [
+     "plymouth reliant"
+    ],
+    [
+     "toyota starlet"
+    ],
+    [
+     "plymouth champ"
+    ],
+    [
+     "honda civic 1300"
+    ],
+    [
+     "subaru"
+    ],
+    [
+     "datsun 210 mpg"
+    ],
+    [
+     "toyota tercel"
+    ],
+    [
+     "mazda glc 4"
+    ]
+   ],
+   "row_count": 61,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "car_names",
+    "cars_data"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 17
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT DISTINCT T1.Model FROM model_list AS T1 JOIN cars_data AS T2 ON T1.ModelId  =  T2.Id WHERE T2.Year  >  1980",
+   "explanation": "Запрос возвращает список уникальных моделей автомобилей, выпущенных после 1980 года.",
+   "rows": [],
+   "row_count": 0,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "model_list",
+    "cars_data"
+   ],
+   "attempts": 3,
+   "message": null,
+   "sec": 26
+  }
+ },
+ {
+  "id": "D_0920",
+  "db_id": "dog_kennels",
+  "gold_sql": "SELECT state FROM Owners INTERSECT SELECT state FROM Professionals;",
+  "question_ru": "Найдите штаты, в которых живут и хозяева, и специалисты.",
+  "question_en": "Find the states where both owners and professionals live.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Indiana"
+   ],
+   [
+    "Mississippi"
+   ],
+   [
+    "Wisconsin"
+   ],
+   [
+    "Воронежская область"
+   ],
+   [
+    "Московская область"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT state FROM owners INTERSECT SELECT state FROM professionals",
+   "explanation": "Запрос возвращает список штатов, где живут как хозяева, так и специалисты.",
+   "rows": [
+    [
+     "Indiana"
+    ],
+    [
+     "Mississippi"
+    ],
+    [
+     "Wisconsin"
+    ],
+    [
+     "Воронежская область"
+    ],
+    [
+     "Московская область"
+    ]
+   ],
+   "row_count": 5,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Owners",
+    "Professionals"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 22
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT state FROM owners INTERSECT SELECT state FROM professionals",
+   "explanation": "Запрос возвращает список штатов, где живут как владельцы, так и профессионалы.",
+   "rows": [
+    [
+     "Indiana"
+    ],
+    [
+     "Mississippi"
+    ],
+    [
+     "Wisconsin"
+    ],
+    [
+     "Воронежская область"
+    ],
+    [
+     "Московская область"
+    ]
+   ],
+   "row_count": 5,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Owners",
+    "Professionals"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 21
+  }
+ },
+ {
+  "id": "D_0631",
+  "db_id": "tvshow",
+  "gold_sql": "select production_code ,  channel from cartoon order by original_air_date desc limit 1;",
+  "question_ru": "Какой производственный код и канал у последнего мультфильма?",
+  "question_en": "What is the produdction code and channel of the most recent cartoon ?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    102.0,
+    "701"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT production_code ,  channel FROM Cartoon ORDER BY original_air_date DESC LIMIT 1",
+   "explanation": "Запрос возвращает производственный код и канал последнего мультфильма.",
+   "rows": [
+    [
+     102.0,
+     "701"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Cartoon"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT production_code ,  channel FROM Cartoon ORDER BY original_air_date DESC LIMIT 1",
+   "explanation": "Запрос возвращает код производства и канал для самого последнего сериала.",
+   "rows": [
+    [
+     102.0,
+     "701"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Cartoon"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_0697",
+  "db_id": "voter_1",
+  "gold_sql": "SELECT count(*) FROM votes WHERE state  =  'NY' OR state  =  'CA';",
+  "question_ru": "Каково количество голосов от штата Нью-Йорк или Калифорния?",
+  "question_en": "What are the number of votes from state 'NY' or 'CA'?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    2
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT count(*) FROM VOTES WHERE state  =  'NY' OR state  =  'CA'",
+   "explanation": "Запрос возвращает количество голосов из штатов Нью-Йорк и Калифорния.",
+   "rows": [
+    [
+     2
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "VOTES"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT count(*) FROM VOTES WHERE state  =  'NY' OR state  =  'CA'",
+   "explanation": "Запрос возвращает количество голосов из штатов Нью-Йорк и Калифорния.",
+   "rows": [
+    [
+     2
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "VOTES"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_0632",
+  "db_id": "tvshow",
+  "gold_sql": "SELECT package_option ,  series_name FROM TV_Channel WHERE hight_definition_TV  =  \"yes\";",
+  "question_ru": "Найти пакет предложений и название сериалов телеканала, на котором есть видео высокой четкости.",
+  "question_en": "Find the package choice and series name of the TV channel that has high definition TV.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Sky Famiglia",
+    "Пятница"
+   ],
+   [
+    "Sky Famiglia + Sky HD",
+    "MTV Live HD"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT Package_Option ,  series_name FROM TV_Channel WHERE Hight_definition_TV  =  'yes'",
+   "explanation": "Запрос возвращает пакеты предложений и названия сериалов, которые транслируются на телеканалах с высоким разрешением.",
+   "rows": [
+    [
+     "Sky Famiglia",
+     "Пятница"
+    ],
+    [
+     "Sky Famiglia + Sky HD",
+     "MTV Live HD"
+    ]
+   ],
+   "row_count": 2,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "TV_Channel"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 15
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT Package_Option ,  series_name FROM TV_Channel WHERE Hight_definition_TV  =  'yes'",
+   "explanation": "Запрос возвращает варианты пакетов и названия серий для телеканалов, которые предлагают высокое разрешение.",
+   "rows": [
+    [
+     "Sky Famiglia",
+     "Пятница"
+    ],
+    [
+     "Sky Famiglia + Sky HD",
+     "MTV Live HD"
+    ]
+   ],
+   "row_count": 2,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "TV_Channel"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 15
+  }
+ },
+ {
+  "id": "D_0482",
+  "db_id": "wta_1",
+  "gold_sql": "SELECT count(*) ,  YEAR FROM matches GROUP BY YEAR;",
+  "question_ru": "Найдите количество матчей за каждый год.",
+  "question_en": "Find the number of matches happened in each year.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    12,
+    2013
+   ],
+   [
+    158,
+    2016
+   ],
+   [
+    129,
+    2017
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT YEAR ,  COUNT(*) FROM MATCHES GROUP BY YEAR",
+   "explanation": "Запрос возвращает количество матчей для каждого года.",
+   "rows": [
+    [
+     2013,
+     12
+    ],
+    [
+     2016,
+     158
+    ],
+    [
+     2017,
+     129
+    ]
+   ],
+   "row_count": 3,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "matches"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 17
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT YEAR ,  COUNT(*) FROM MATCHES GROUP BY YEAR",
+   "explanation": "Запрос возвращает количество матчей, которое состоялось в каждом году.",
+   "rows": [
+    [
+     2013,
+     12
+    ],
+    [
+     2016,
+     158
+    ],
+    [
+     2017,
+     129
+    ]
+   ],
+   "row_count": 3,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "matches"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 17
+  }
+ },
+ {
+  "id": "D_0407",
+  "db_id": "course_teach",
+  "gold_sql": "SELECT T2.Name ,  COUNT(*) FROM course_arrange AS T1 JOIN teacher AS T2 ON T1.Teacher_ID  =  T2.Teacher_ID GROUP BY T2.Name;",
+  "question_ru": "Как зовут учителей и сколько курсов они преподают?",
+  "question_en": "What are the names of the teachers and how many courses do they teach?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Anne Walker",
+    2
+   ],
+   [
+    "Gustaaf Deloor",
+    1
+   ],
+   [
+    "Joseph Huts",
+    1
+   ],
+   [
+    "Kearsley Brown",
+    1
+   ],
+   [
+    "Lucy Wong",
+    1
+   ],
+   [
+    "Vicente Carretero",
+    1
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T2.Name ,  COUNT(*) FROM course_arrange AS T1 JOIN teacher AS T2 ON T1.teacher_id  =  T2.teacher_id GROUP BY T1.teacher_id",
+   "explanation": "Запрос возвращает имена учителей и количество курсов, которые они преподают.",
+   "rows": [
+    [
+     "Joseph Huts",
+     1
+    ],
+    [
+     "Gustaaf Deloor",
+     1
+    ],
+    [
+     "Vicente Carretero",
+     1
+    ],
+    [
+     "Kearsley Brown",
+     1
+    ],
+    [
+     "Anne Walker",
+     2
+    ],
+    [
+     "Lucy Wong",
+     1
+    ]
+   ],
+   "row_count": 6,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "course",
+    "teacher",
+    "course_arrange"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T2.Name ,  COUNT(*) FROM course_arrange AS T1 JOIN teacher AS T2 ON T1.teacher_id  =  T2.teacher_id GROUP BY T1.teacher_id",
+   "explanation": "Запрос возвращает имена преподавателей и количество курсов, которые они ведут.",
+   "rows": [
+    [
+     "Joseph Huts",
+     1
+    ],
+    [
+     "Gustaaf Deloor",
+     1
+    ],
+    [
+     "Vicente Carretero",
+     1
+    ],
+    [
+     "Kearsley Brown",
+     1
+    ],
+    [
+     "Anne Walker",
+     2
+    ],
+    [
+     "Lucy Wong",
+     1
+    ]
+   ],
+   "row_count": 6,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "course",
+    "teacher",
+    "course_arrange"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  }
+ },
+ {
+  "id": "D_0549",
+  "db_id": "student_transcripts_tracking",
+  "gold_sql": "SELECT  T1.course_name FROM Courses AS T1 JOIN Student_Enrolment_Courses AS T2 ON T1.course_id  =  T2.course_id GROUP BY T1.course_name ORDER BY count(*) DESC LIMIT 1;",
+  "question_ru": "Как называется курс, в котором обучается больше всего студентов?",
+  "question_en": "What is the name of the course with the most students enrolled?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "rs"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.course_name FROM courses AS T1 JOIN student_enrolment_courses AS T2 ON T1.course_id = T2.course_id GROUP BY T2.course_id ORDER BY count(*) DESC LIMIT 1",
+   "explanation": "Запрос возвращает название курса, на котором обучается наибольшее количество студентов.",
+   "rows": [
+    [
+     "pl"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Courses",
+    "Student_Enrolment",
+    "Student_Enrolment_Courses"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 21
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.course_name FROM courses AS T1 JOIN student_enrolment_courses AS T2 ON T1.course_id = T2.course_id GROUP BY T2.course_id ORDER BY count(*) DESC LIMIT 1",
+   "explanation": "Запрос возвращает название курса с наибольшим количеством записавшихся студентов.",
+   "rows": [
+    [
+     "pl"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Courses",
+    "Student_Enrolment",
+    "Student_Enrolment_Courses"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 21
+  }
+ },
+ {
+  "id": "D_0178",
+  "db_id": "car_1",
+  "gold_sql": "SELECT T1.countryId ,  T1.CountryName FROM Countries AS T1 JOIN CAR_MAKERS AS T2 ON T1.CountryId  =  T2.Country GROUP BY T1.countryId HAVING count(*)  >  3 UNION SELECT T1.countryId ,  T1.CountryName FROM Countries AS T1 JOIN CAR_MAKERS AS T2 ON T1.CountryId  =  T2.Country JOIN MODEL_LIST AS T3 ON T2.Id  =  T3.Maker WHERE T3.Model  =  'fiat';",
+  "question_ru": "Каковы id и названия стран, в которых имеется более 3 производителей автомобилей или которые производят модель «Fiat»?",
+  "question_en": "What are the id and names of the countries which have more than 3 car makers or produce the 'fiat' model?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    1,
+    "usa"
+   ],
+   [
+    2,
+    "germany"
+   ],
+   [
+    4,
+    "japan"
+   ],
+   [
+    5,
+    "italy"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.CountryId ,  T1.CountryName FROM countries AS T1 JOIN car_makers AS T2 ON T1.CountryId  =  T2.Country WHERE T2.Maker  =  'Fiat' UNION SELECT countryid ,  countryname FROM countries GROUP BY countryid HAVING count(*)  >  3",
+   "explanation": "Запрос возвращает идентификаторы и названия стран, где есть более трех производителей автомобилей или есть производитель Fiat.",
+   "rows": [],
+   "row_count": 0,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "countries",
+    "car_makers"
+   ],
+   "attempts": 3,
+   "message": null,
+   "sec": 31
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.CountryId ,  T1.CountryName FROM countries AS T1 JOIN car_makers AS T2 ON T1.CountryId  =  T2.Country WHERE T2.id IN ( SELECT maker FROM model_list WHERE model  =  'fiat' ) UNION SELECT countryid ,  countryname FROM countries GROUP BY countryid HAVING count(*)  >  3",
+   "explanation": "Запрос возвращает идентификаторы и названия стран, которые имеют более трех производителей автомобилей или производят модель 'fiat'.",
+   "rows": [
+    [
+     5,
+     "italy"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "countries",
+    "car_makers",
+    "model_list"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 18
+  }
+ },
+ {
+  "id": "D_0881",
+  "db_id": "network_1",
+  "gold_sql": "SELECT grade FROM Highschooler GROUP BY grade HAVING count(*)  >=  4;",
+  "question_ru": "Покажи все классы, в которых учится не менее 4 учеников.",
+  "question_en": "Show me all grades that have at least 4 students.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    9
+   ],
+   [
+    10
+   ],
+   [
+    11
+   ],
+   [
+    12
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT grade FROM Highschooler GROUP BY grade HAVING count(*)  >=  4",
+   "explanation": "Запрос возвращает список классов, в которых учится четыре или более ученика.",
+   "rows": [
+    [
+     9
+    ],
+    [
+     10
+    ],
+    [
+     11
+    ],
+    [
+     12
+    ]
+   ],
+   "row_count": 4,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Highschooler"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 11
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT grade FROM highschooler GROUP BY grade HAVING count(*)  >=  4",
+   "explanation": "Запрос возвращает список классов, в которых учится четыре или более ученика.",
+   "rows": [
+    [
+     9
+    ],
+    [
+     10
+    ],
+    [
+     11
+    ],
+    [
+     12
+    ]
+   ],
+   "row_count": 4,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Highschooler"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 11
+  }
+ },
+ {
+  "id": "D_1026",
+  "db_id": "singer",
+  "gold_sql": "SELECT T1.Name ,  sum(T2.Sales) FROM singer AS T1 JOIN song AS T2 ON T1.Singer_ID  =  T2.Singer_ID GROUP BY T1.Name;",
+  "question_ru": "Каков общий объем продаж песен каждого певца?",
+  "question_en": "For each singer name, what is the total sales for their songs?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Christy Walton",
+    651421.0
+   ],
+   [
+    "Gina Rinehart",
+    292000.0
+   ],
+   [
+    "Iris Fontbona",
+    335000.0
+   ],
+   [
+    "Jacqueline Mars",
+    275000.0
+   ],
+   [
+    "Liliane Bettencourt",
+    1646407.0
+   ],
+   [
+    "Susanne Klatten",
+    261000.0
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT sum(T2.Sales) ,  T1.Name FROM singer AS T1 JOIN song AS T2 ON T1.Singer_ID  =  T2.Singer_ID GROUP BY T1.Name",
+   "explanation": "Запрос возвращает общий объем продаж песен для каждого певца.",
+   "rows": [
+    [
+     651421.0,
+     "Christy Walton"
+    ],
+    [
+     292000.0,
+     "Gina Rinehart"
+    ],
+    [
+     335000.0,
+     "Iris Fontbona"
+    ],
+    [
+     275000.0,
+     "Jacqueline Mars"
+    ],
+    [
+     1646407.0,
+     "Liliane Bettencourt"
+    ],
+    [
+     261000.0,
+     "Susanne Klatten"
+    ]
+   ],
+   "row_count": 6,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "singer",
+    "song"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT sum(T2.Sales) ,  T1.Name FROM singer AS T1 JOIN song AS T2 ON T1.Singer_ID  =  T2.Singer_ID GROUP BY T1.Name",
+   "explanation": "Запрос возвращает общий доход от песен для каждого исполнителя.",
+   "rows": [
+    [
+     651421.0,
+     "Christy Walton"
+    ],
+    [
+     292000.0,
+     "Gina Rinehart"
+    ],
+    [
+     335000.0,
+     "Iris Fontbona"
+    ],
+    [
+     275000.0,
+     "Jacqueline Mars"
+    ],
+    [
+     1646407.0,
+     "Liliane Bettencourt"
+    ],
+    [
+     261000.0,
+     "Susanne Klatten"
+    ]
+   ],
+   "row_count": 6,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "singer",
+    "song"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_0423",
+  "db_id": "museum_visit",
+  "gold_sql": "SELECT name FROM museum WHERE Museum_ID NOT IN (SELECT museum_id FROM visit);",
+  "question_ru": "Как называется музей, в котором еще не было ни одного посетителя?",
+  "question_en": "What is the name of the museum that had no visitor yet?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Jefferson Development Museum"
+   ],
+   [
+    "RiverPark Museum"
+   ],
+   [
+    "Place Tower Museum"
+   ],
+   [
+    "Central City District Residential Museum"
+   ],
+   [
+    "Пушкинский"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT name FROM museum WHERE museum_id NOT IN (SELECT museum_id FROM visit)",
+   "explanation": "Этот запрос возвращает название музея, в котором еще не было ни одного посетителя.",
+   "rows": [
+    [
+     "Jefferson Development Museum"
+    ],
+    [
+     "RiverPark Museum"
+    ],
+    [
+     "Place Tower Museum"
+    ],
+    [
+     "Central City District Residential Museum"
+    ],
+    [
+     "Пушкинский"
+    ]
+   ],
+   "row_count": 5,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "museum",
+    "visit"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 12
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT name FROM museum WHERE museum_id NOT IN (SELECT museum_id FROM visit)",
+   "explanation": "Запрос возвращает названия музеев, в которые еще ни один посетитель не приходил.",
+   "rows": [
+    [
+     "Jefferson Development Museum"
+    ],
+    [
+     "RiverPark Museum"
+    ],
+    [
+     "Place Tower Museum"
+    ],
+    [
+     "Central City District Residential Museum"
+    ],
+    [
+     "Пушкинский"
+    ]
+   ],
+   "row_count": 5,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "museum",
+    "visit"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 12
+  }
+ },
+ {
+  "id": "D_0019",
+  "db_id": "concert_singer",
+  "gold_sql": "SELECT name ,  capacity FROM stadium ORDER BY average DESC LIMIT 1;",
+  "question_ru": "Название и вместимость стадиона с самой высокой средней посещаемостью?",
+  "question_en": "What is the name and capacity for the stadium with highest average attendance?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Stark's Park",
+    10104
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT name ,  capacity FROM stadium ORDER BY average DESC LIMIT 1",
+   "explanation": "Название и вместимость стадиона с самой высокой средней посещаемостью.",
+   "rows": [
+    [
+     "Stark's Park",
+     10104
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "stadium"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT name ,  capacity FROM stadium ORDER BY average DESC LIMIT 1",
+   "explanation": "Запрос возвращает название и вместимость самого вместительного стадиона.",
+   "rows": [
+    [
+     "Stark's Park",
+     10104
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "stadium"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 12
+  }
+ },
+ {
+  "id": "D_0953",
+  "db_id": "dog_kennels",
+  "gold_sql": "SELECT T1.first_name ,  T2.name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id  =  T2.owner_id;",
+  "question_ru": "Перечислите пары имени владельца и клички собаки.",
+  "question_en": "List pairs of the owner's first name and the dogs's name.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Jaclyn",
+    "Kacey"
+   ],
+   [
+    "Gay",
+    "Hipolito"
+   ],
+   [
+    "Nora",
+    "Mavis"
+   ],
+   [
+    "Rachelle",
+    "Houston"
+   ],
+   [
+    "Emelie",
+    "Jeffrey"
+   ],
+   [
+    "Johann",
+    "Merritt"
+   ],
+   [
+    "Jaclyn",
+    "Narciso"
+   ],
+   [
+    "Rachelle",
+    "George"
+   ],
+   [
+    "Melisa",
+    "Bessie"
+   ],
+   [
+    "Kade",
+    "Troy"
+   ],
+   [
+    "Cindy",
+    "Betty"
+   ],
+   [
+    "Orlando",
+    "Holden"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.first_name ,  T2.name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id  =  T2.owner_id",
+   "explanation": "Запрос возвращает список пар, состоящих из имени владельца и клички его собаки.",
+   "rows": [
+    [
+     "Jaclyn",
+     "Kacey"
+    ],
+    [
+     "Gay",
+     "Hipolito"
+    ],
+    [
+     "Nora",
+     "Mavis"
+    ],
+    [
+     "Rachelle",
+     "Houston"
+    ],
+    [
+     "Emelie",
+     "Jeffrey"
+    ],
+    [
+     "Johann",
+     "Merritt"
+    ],
+    [
+     "Jaclyn",
+     "Narciso"
+    ],
+    [
+     "Rachelle",
+     "George"
+    ],
+    [
+     "Melisa",
+     "Bessie"
+    ],
+    [
+     "Kade",
+     "Troy"
+    ],
+    [
+     "Cindy",
+     "Betty"
+    ],
+    [
+     "Orlando",
+     "Holden"
+    ]
+   ],
+   "row_count": 16,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Owners",
+    "Dogs"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 23
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.first_name ,  T2.name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id  =  T2.owner_id",
+   "explanation": "Запрос возвращает список пар, состоящих из имени владельца и имени его собаки.",
+   "rows": [
+    [
+     "Jaclyn",
+     "Kacey"
+    ],
+    [
+     "Gay",
+     "Hipolito"
+    ],
+    [
+     "Nora",
+     "Mavis"
+    ],
+    [
+     "Rachelle",
+     "Houston"
+    ],
+    [
+     "Emelie",
+     "Jeffrey"
+    ],
+    [
+     "Johann",
+     "Merritt"
+    ],
+    [
+     "Jaclyn",
+     "Narciso"
+    ],
+    [
+     "Rachelle",
+     "George"
+    ],
+    [
+     "Melisa",
+     "Bessie"
+    ],
+    [
+     "Kade",
+     "Troy"
+    ],
+    [
+     "Cindy",
+     "Betty"
+    ],
+    [
+     "Orlando",
+     "Holden"
+    ]
+   ],
+   "row_count": 16,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Owners",
+    "Dogs"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 23
+  }
+ },
+ {
+  "id": "D_0524",
+  "db_id": "student_transcripts_tracking",
+  "gold_sql": "SELECT section_name ,  section_description FROM Sections;",
+  "question_ru": "Названия и описания всех разделов",
+  "question_en": "What are the names and descriptions of all the sections?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "a",
+    "non"
+   ],
+   [
+    "b",
+    "voluptatem"
+   ],
+   [
+    "c",
+    "qui"
+   ],
+   [
+    "d",
+    "voluptas"
+   ],
+   [
+    "e",
+    "ex"
+   ],
+   [
+    "f",
+    "doloremque"
+   ],
+   [
+    "g",
+    "provident"
+   ],
+   [
+    "h",
+    "et"
+   ],
+   [
+    "j",
+    "quis"
+   ],
+   [
+    "k",
+    "nesciunt"
+   ],
+   [
+    "l",
+    "ad"
+   ],
+   [
+    "o",
+    "et"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT section_name ,  section_description FROM SECTIONS",
+   "explanation": "Запрос возвращает названия и описания всех разделов.",
+   "rows": [
+    [
+     "a",
+     "non"
+    ],
+    [
+     "b",
+     "voluptatem"
+    ],
+    [
+     "c",
+     "qui"
+    ],
+    [
+     "d",
+     "voluptas"
+    ],
+    [
+     "e",
+     "ex"
+    ],
+    [
+     "f",
+     "doloremque"
+    ],
+    [
+     "g",
+     "provident"
+    ],
+    [
+     "h",
+     "et"
+    ],
+    [
+     "j",
+     "quis"
+    ],
+    [
+     "k",
+     "nesciunt"
+    ],
+    [
+     "l",
+     "ad"
+    ],
+    [
+     "o",
+     "et"
+    ]
+   ],
+   "row_count": 15,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Sections"
+   ],
+   "attempts": 2,
+   "message": null,
+   "sec": 24
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT section_name ,  section_description FROM SECTIONS",
+   "explanation": "Запрос возвращает названия и описания всех разделов.",
+   "rows": [
+    [
+     "a",
+     "non"
+    ],
+    [
+     "b",
+     "voluptatem"
+    ],
+    [
+     "c",
+     "qui"
+    ],
+    [
+     "d",
+     "voluptas"
+    ],
+    [
+     "e",
+     "ex"
+    ],
+    [
+     "f",
+     "doloremque"
+    ],
+    [
+     "g",
+     "provident"
+    ],
+    [
+     "h",
+     "et"
+    ],
+    [
+     "j",
+     "quis"
+    ],
+    [
+     "k",
+     "nesciunt"
+    ],
+    [
+     "l",
+     "ad"
+    ],
+    [
+     "o",
+     "et"
+    ]
+   ],
+   "row_count": 15,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Sections"
+   ],
+   "attempts": 2,
+   "message": null,
+   "sec": 23
+  }
+ },
+ {
+  "id": "D_0267",
+  "db_id": "employee_hire_evaluation",
+  "gold_sql": "SELECT city FROM employee WHERE age  <  30 GROUP BY city HAVING count(*)  >  1;",
+  "question_ru": "Найдите города, в которых работает более одного сотрудника младше 30 лет.",
+  "question_en": "Find the cities that have more than one employee under age 30.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Bath"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT city FROM Employee WHERE age  <  30 GROUP BY city HAVING count(*)  >  1",
+   "explanation": "Запрос возвращает список городов, где более одного сотрудника младше 30 лет.",
+   "rows": [
+    [
+     "Bath"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "employee"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT city FROM Employee WHERE age  <  30 GROUP BY city HAVING count(*)  >  1",
+   "explanation": "Запрос возвращает список городов, где работает более одного сотрудника моложе 30 лет.",
+   "rows": [
+    [
+     "Bath"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "employee"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_0033",
+  "db_id": "concert_singer",
+  "gold_sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id  =  T2.stadium_id WHERE T1.year  =  2014;",
+  "question_ru": "Как называются все стадионы, на которых не было концертов в 2014 году?",
+  "question_en": "What are the names of all stadiums that did not have a concert in 2014?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Balmoor"
+   ],
+   [
+    "Bayview Stadium"
+   ],
+   [
+    "Forthbank Stadium"
+   ],
+   [
+    "Gayfield Park"
+   ],
+   [
+    "Hampden Park"
+   ],
+   [
+    "Лужники"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert WHERE YEAR  =  2014)",
+   "explanation": "Этот запрос возвращает названия всех стадионов, на которых не проходили концерты в 2014 году.",
+   "rows": [
+    [
+     "Bayview Stadium"
+    ],
+    [
+     "Hampden Park"
+    ],
+    [
+     "Forthbank Stadium"
+    ],
+    [
+     "Gayfield Park"
+    ],
+    [
+     "Balmoor"
+    ],
+    [
+     "Лужники"
+    ]
+   ],
+   "row_count": 6,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "stadium",
+    "concert"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 15
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert WHERE YEAR  =  2014)",
+   "explanation": "Запрос возвращает названия всех стадионов, на которых не проходило концертов в 2014 году.",
+   "rows": [
+    [
+     "Bayview Stadium"
+    ],
+    [
+     "Hampden Park"
+    ],
+    [
+     "Forthbank Stadium"
+    ],
+    [
+     "Gayfield Park"
+    ],
+    [
+     "Balmoor"
+    ],
+    [
+     "Лужники"
+    ]
+   ],
+   "row_count": 6,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "stadium",
+    "concert"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  }
+ },
+ {
+  "id": "D_0177",
+  "db_id": "car_1",
+  "gold_sql": "SELECT T1.Id ,  T1.Maker FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id  =  T2.Maker GROUP BY T1.Id HAVING count(*)  >=  2 INTERSECT SELECT T1.Id ,  T1.Maker FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id  =  T2.Maker JOIN CAR_NAMES AS T3 ON T2.model  =  T3.model GROUP BY T1.Id HAVING count(*)  >  3;",
+  "question_ru": "Каковы id и марки машин всех автопроизводителей, которые производят как минимум 2 модели и более 3 автомобилей?",
+  "question_en": "What are the ids and makers of all car makers that produce at least 2 models and make more than 3 cars?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    2,
+    "volkswagen"
+   ],
+   [
+    4,
+    "gm"
+   ],
+   [
+    5,
+    "ford"
+   ],
+   [
+    6,
+    "chrysler"
+   ],
+   [
+    8,
+    "nissan"
+   ],
+   [
+    19,
+    "toyota"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.maker ,  T2.make FROM model_list AS T1 JOIN car_names AS T2 ON T1.model  =  T2.model GROUP BY T1.maker HAVING count(*)  >=  2 INTERSECT SELECT T1.maker ,  T2.make FROM model_list AS T1 JOIN car_names AS T2 ON T1.model  =  T2.model GROUP BY T1.maker HAVING count(*)  >  3",
+   "explanation": "Запрос возвращает марки и модели автомобилей, производимые как минимум двумя, так и более тремя моделями.",
+   "rows": [
+    [
+     1,
+     "amc rebel sst"
+    ],
+    [
+     2,
+     "volkswagen 1131 deluxe sedan"
+    ],
+    [
+     4,
+     "chevrolet chevelle malibu"
+    ],
+    [
+     5,
+     "ford torino"
+    ],
+    [
+     6,
+     "plymouth satellite"
+    ],
+    [
+     8,
+     "datsun pl510"
+    ],
+    [
+     9,
+     "fiat 124b"
+    ],
+    [
+     11,
+     "honda civic"
+    ],
+    [
+     12,
+     "mazda rx2 coupe"
+    ],
+    [
+     14,
+     "opel 1900"
+    ],
+    [
+     15,
+     "peugeot 504"
+    ],
+    [
+     16,
+     "renault 12 (sw)"
+    ]
+   ],
+   "row_count": 16,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "model_list",
+    "car_names"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 19
+  },
+  "en": {
+   "status": "error",
+   "sql": "",
+   "explanation": "",
+   "rows": [],
+   "row_count": 0,
+   "exec_error": "нет SQL",
+   "exec_match": false,
+   "tables": [],
+   "attempts": null,
+   "message": "SELECTs to the left and right of INTERSECT do not have the same number of result columns",
+   "sec": 24
+  }
+ },
+ {
+  "id": "D_0231",
+  "db_id": "flight_2",
+  "gold_sql": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline GROUP BY T1.Airline ORDER BY count(*) DESC LIMIT 1;",
+  "question_ru": "Какая авиакомпания обслуживает больше всего рейсов?",
+  "question_en": "What airline serves the most flights?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Virgin America"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.Airline FROM airlines AS T1 JOIN flights AS T2 ON T1.uid  =  T2.Airline GROUP BY T2.Airline ORDER BY count(*) DESC LIMIT 1",
+   "explanation": "Запрос возвращает название авиакомпании, которая обслуживает наибольшее количество рейсов.",
+   "rows": [
+    [
+     "United Airlines"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "airlines",
+    "flights"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.Airline FROM airlines AS T1 JOIN flights AS T2 ON T1.uid  =  T2.Airline GROUP BY T2.Airline ORDER BY count(*) DESC LIMIT 1",
+   "explanation": "Запрос возвращает название авиакомпании, выполняющей наибольшее количество рейсов.",
+   "rows": [
+    [
+     "United Airlines"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "airlines",
+    "flights"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_0689",
+  "db_id": "voter_1",
+  "gold_sql": "SELECT contestant_number ,  contestant_name FROM contestants ORDER BY contestant_name DESC;",
+  "question_ru": "Перечислить номера и имена участников в порядке убывания имен участников.",
+  "question_en": "List the contestant numbers and names, ordered by contestant name descending.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    12,
+    "Павел Нестеров"
+   ],
+   [
+    13,
+    "Матвей Гончаров"
+   ],
+   [
+    14,
+    "Арина Филиппова"
+   ],
+   [
+    2,
+    "Tabatha Gehling"
+   ],
+   [
+    8,
+    "Nita Coster"
+   ],
+   [
+    11,
+    "Loraine NygrenTania Mattioli"
+   ],
+   [
+    9,
+    "Kurt Walser"
+   ],
+   [
+    3,
+    "Kelly Clauss"
+   ],
+   [
+    6,
+    "Jessie Eichman"
+   ],
+   [
+    4,
+    "Jessie Alloway"
+   ],
+   [
+    10,
+    "Ericka Dieter"
+   ],
+   [
+    1,
+    "Edwina Burnam"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT contestant_number ,  contestant_name FROM CONTESTANTS ORDER BY contestant_name DESC",
+   "explanation": "Запрос возвращает список номеров и имен участников, отсортированных по именам в алфавитном порядке от Z до A.",
+   "rows": [
+    [
+     12,
+     "Павел Нестеров"
+    ],
+    [
+     13,
+     "Матвей Гончаров"
+    ],
+    [
+     14,
+     "Арина Филиппова"
+    ],
+    [
+     2,
+     "Tabatha Gehling"
+    ],
+    [
+     8,
+     "Nita Coster"
+    ],
+    [
+     11,
+     "Loraine NygrenTania Mattioli"
+    ],
+    [
+     9,
+     "Kurt Walser"
+    ],
+    [
+     3,
+     "Kelly Clauss"
+    ],
+    [
+     6,
+     "Jessie Eichman"
+    ],
+    [
+     4,
+     "Jessie Alloway"
+    ],
+    [
+     10,
+     "Ericka Dieter"
+    ],
+    [
+     1,
+     "Edwina Burnam"
+    ]
+   ],
+   "row_count": 14,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "CONTESTANTS"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT contestant_number ,  contestant_name FROM CONTESTANTS ORDER BY contestant_name DESC",
+   "explanation": "Запрос возвращает список номеров и имен участников, отсортированных по имени участника в порядке убывания.",
+   "rows": [
+    [
+     12,
+     "Павел Нестеров"
+    ],
+    [
+     13,
+     "Матвей Гончаров"
+    ],
+    [
+     14,
+     "Арина Филиппова"
+    ],
+    [
+     2,
+     "Tabatha Gehling"
+    ],
+    [
+     8,
+     "Nita Coster"
+    ],
+    [
+     11,
+     "Loraine NygrenTania Mattioli"
+    ],
+    [
+     9,
+     "Kurt Walser"
+    ],
+    [
+     3,
+     "Kelly Clauss"
+    ],
+    [
+     6,
+     "Jessie Eichman"
+    ],
+    [
+     4,
+     "Jessie Alloway"
+    ],
+    [
+     10,
+     "Ericka Dieter"
+    ],
+    [
+     1,
+     "Edwina Burnam"
+    ]
+   ],
+   "row_count": 14,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "CONTESTANTS"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 12
+  }
+ },
+ {
+  "id": "D_0496",
+  "db_id": "battle_death",
+  "gold_sql": "SELECT avg(injured) FROM death;",
+  "question_ru": "Каково среднее количество травм, причиненных каждый раз?",
+  "question_en": "What is the average number of injuries caused each time?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    1.8
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT avg(injured) FROM death",
+   "explanation": "Запрос возвращает среднее количество пострадавших от травм.",
+   "rows": [
+    [
+     1.8
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "death"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 11
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT avg(injured) FROM death",
+   "explanation": "Запрос возвращает среднее количество пострадавших от каждого инцидента.",
+   "rows": [
+    [
+     1.8
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "death"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 12
+  }
+ },
+ {
+  "id": "D_0694",
+  "db_id": "voter_1",
+  "gold_sql": "SELECT DISTINCT state ,  created FROM votes;",
+  "question_ru": "Каковы различные штаты и время оформления всех голосов?",
+  "question_en": "What are the distinct states and create time of all votes?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "NJ",
+    "2018-03-09 19:03:21"
+   ],
+   [
+    "NY",
+    "2018-03-09 19:03:36"
+   ],
+   [
+    "CA",
+    "2018-03-09 19:03:39"
+   ],
+   [
+    "NJ",
+    "2018-03-09 19:03:40"
+   ],
+   [
+    "ME",
+    "2022-04-18 13:57:55"
+   ],
+   [
+    "ME",
+    "2022-04-18 14:03:06"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT DISTINCT state ,  created FROM VOTES",
+   "explanation": "Запрос возвращает список уникальных штатов и соответствующих им временных меток оформления голосов.",
+   "rows": [
+    [
+     "NJ",
+     "2018-03-09 19:03:21"
+    ],
+    [
+     "NY",
+     "2018-03-09 19:03:36"
+    ],
+    [
+     "CA",
+     "2018-03-09 19:03:39"
+    ],
+    [
+     "NJ",
+     "2018-03-09 19:03:40"
+    ],
+    [
+     "ME",
+     "2022-04-18 13:57:55"
+    ],
+    [
+     "ME",
+     "2022-04-18 14:03:06"
+    ]
+   ],
+   "row_count": 6,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "VOTES"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 12
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT DISTINCT state ,  created FROM VOTES",
+   "explanation": "Запрос возвращает уникальные сочетания состояния и времени создания для всех записей в таблице голосов.",
+   "rows": [
+    [
+     "NJ",
+     "2018-03-09 19:03:21"
+    ],
+    [
+     "NY",
+     "2018-03-09 19:03:36"
+    ],
+    [
+     "CA",
+     "2018-03-09 19:03:39"
+    ],
+    [
+     "NJ",
+     "2018-03-09 19:03:40"
+    ],
+    [
+     "ME",
+     "2022-04-18 13:57:55"
+    ],
+    [
+     "ME",
+     "2022-04-18 14:03:06"
+    ]
+   ],
+   "row_count": 6,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "VOTES"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 12
+  }
+ },
+ {
+  "id": "D_0597",
+  "db_id": "tvshow",
+  "gold_sql": "SELECT Country ,  count(*) FROM TV_Channel GROUP BY Country ORDER BY count(*) DESC LIMIT 1;",
+  "question_ru": "В какой стране больше всего телеканалов и сколько их?",
+  "question_en": "What is the country with the most number of TV Channels and how many does it have?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Italy",
+    12
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT country ,  count(*) FROM TV_Channel GROUP BY country ORDER BY count(*) DESC LIMIT 1",
+   "explanation": "Запрос возвращает название страны с наибольшим количеством телеканалов и их количество.",
+   "rows": [
+    [
+     "Italy",
+     12
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "TV_Channel"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT country ,  count(*) FROM TV_Channel GROUP BY country ORDER BY count(*) DESC LIMIT 1",
+   "explanation": "Запрос возвращает страну с наибольшим количеством телеканалов и их количество.",
+   "rows": [
+    [
+     "Italy",
+     12
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "TV_Channel"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  }
+ },
+ {
+  "id": "D_0961",
+  "db_id": "dog_kennels",
+  "gold_sql": "SELECT T1.last_name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id  =  T2.owner_id WHERE T2.age  =  ( SELECT max(age) FROM Dogs );",
+  "question_ru": "Укажите фамилию владельца самой молодой собаки.",
+  "question_en": "List the last name of the owner owning the youngest dog.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Feil"
+   ],
+   [
+    "Fisher"
+   ],
+   [
+    "Rippin"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.last_name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id = T2.owner_id ORDER BY T2.age LIMIT 1",
+   "explanation": "Запрос возвращает фамилию владельца самой молодой собаки.",
+   "rows": [
+    [
+     "Nicolas"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Owners",
+    "Dogs"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 23
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.last_name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id = T2.owner_id ORDER BY T2.age LIMIT 1",
+   "explanation": "Запрос возвращает фамилию владельца, у которого самая молодая собака.",
+   "rows": [
+    [
+     "Nicolas"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Owners",
+    "Dogs"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 24
+  }
+ },
+ {
+  "id": "D_0675",
+  "db_id": "poker_player",
+  "gold_sql": "SELECT Nationality ,  COUNT(*) FROM people GROUP BY Nationality;",
+  "question_ru": "Сколько людей каждой национальности?",
+  "question_en": "How many people are there of each nationality?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Bulgaria",
+    1
+   ],
+   [
+    "Russia",
+    6
+   ],
+   [
+    "Украина",
+    1
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT Nationality ,  COUNT(*) FROM people GROUP BY Nationality",
+   "explanation": "Запрос возвращает количество людей для каждой национальности.",
+   "rows": [
+    [
+     "Bulgaria",
+     1
+    ],
+    [
+     "Russia",
+     6
+    ],
+    [
+     "Украина",
+     1
+    ]
+   ],
+   "row_count": 3,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "people"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 11
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT Nationality ,  COUNT(*) FROM people GROUP BY Nationality",
+   "explanation": "Запрос возвращает количество людей для каждой национальности.",
+   "rows": [
+    [
+     "Bulgaria",
+     1
+    ],
+    [
+     "Russia",
+     6
+    ],
+    [
+     "Украина",
+     1
+    ]
+   ],
+   "row_count": 3,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "people"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 11
+  }
+ },
+ {
+  "id": "D_0425",
+  "db_id": "museum_visit",
+  "gold_sql": "SELECT avg(num_of_ticket) ,  max(num_of_ticket) FROM visit;",
+  "question_ru": "Каково среднее и максимальное количество билетов, купленных за все посещения?",
+  "question_en": "What are the average and maximum number of tickets bought in all visits?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    10.5,
+    24
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT avg(num_of_ticket) ,  max(num_of_ticket) FROM visit",
+   "explanation": "Запрос возвращает среднее и максимальное количество билетов, купленных за все посещения.",
+   "rows": [
+    [
+     10.5,
+     24
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "visit"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 12
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT avg(num_of_ticket) ,  max(num_of_ticket) FROM visit",
+   "explanation": "Запрос возвращает среднее и максимальное количество купленных билетов по всем посещениям.",
+   "rows": [
+    [
+     10.5,
+     24
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "visit"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 12
+  }
+ },
+ {
+  "id": "D_0998",
+  "db_id": "dog_kennels",
+  "gold_sql": "SELECT DISTINCT breed_code ,  size_code FROM dogs;",
+  "question_ru": "Найдите различные сочетания типов породы и размера для собак.",
+  "question_en": "Find the distinct breed type and size type combinations for dogs.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "ESK",
+    "LGE"
+   ],
+   [
+    "BUL",
+    "LGE"
+   ],
+   [
+    "BUL",
+    "MED"
+   ],
+   [
+    "HUS",
+    "MED"
+   ],
+   [
+    "ESK",
+    "SML"
+   ],
+   [
+    "HUS",
+    "SML"
+   ],
+   [
+    "ESK",
+    "MED"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT DISTINCT T1.breed_name ,  T2.size_description FROM Breeds AS T1 JOIN Sizes AS T2 JOIN Dogs AS T3 ON T1.breed_code  =  T3.breed_code AND T2.size_code  =  T3.size_code",
+   "explanation": "Запрос возвращает уникальные сочетания названий пород и размеров для собак.",
+   "rows": [
+    [
+     "Eskimo",
+     "Large"
+    ],
+    [
+     "Bulldog",
+     "Large"
+    ],
+    [
+     "Bulldog",
+     "Medium"
+    ],
+    [
+     "Husky",
+     "Medium"
+    ],
+    [
+     "Eskimo",
+     "Small"
+    ],
+    [
+     "Husky",
+     "Small"
+    ],
+    [
+     "Eskimo",
+     "Medium"
+    ]
+   ],
+   "row_count": 7,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Breeds",
+    "Sizes",
+    "Dogs"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 23
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT DISTINCT T1.breed_name ,  T2.size_description FROM Breeds AS T1 JOIN Sizes AS T2 JOIN Dogs AS T3 ON T1.breed_code  =  T3.breed_code AND T2.size_code  =  T3.size_code",
+   "explanation": "Запрос возвращает уникальные сочетания породы и размера для собак.",
+   "rows": [
+    [
+     "Eskimo",
+     "Large"
+    ],
+    [
+     "Bulldog",
+     "Large"
+    ],
+    [
+     "Bulldog",
+     "Medium"
+    ],
+    [
+     "Husky",
+     "Medium"
+    ],
+    [
+     "Eskimo",
+     "Small"
+    ],
+    [
+     "Husky",
+     "Small"
+    ],
+    [
+     "Eskimo",
+     "Medium"
+    ]
+   ],
+   "row_count": 7,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Breeds",
+    "Sizes",
+    "Dogs"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 23
+  }
+ },
+ {
+  "id": "D_0268",
+  "db_id": "employee_hire_evaluation",
+  "gold_sql": "SELECT count(*) ,  LOCATION FROM shop GROUP BY LOCATION;",
+  "question_ru": "Найдите количество магазинов в каждом месте.",
+  "question_en": "Find the number of shops in each location.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    1,
+    "Espoo"
+   ],
+   [
+    2,
+    "Helsinki"
+   ],
+   [
+    1,
+    "Jakobstad"
+   ],
+   [
+    1,
+    "Kotka"
+   ],
+   [
+    1,
+    "Kuopio"
+   ],
+   [
+    1,
+    "Lahti"
+   ],
+   [
+    1,
+    "Mariehamn"
+   ],
+   [
+    1,
+    "Turku"
+   ],
+   [
+    1,
+    "Valkeakoski"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT LOCATION ,  count(*) FROM shop GROUP BY LOCATION",
+   "explanation": "Запрос возвращает количество магазинов для каждого места.",
+   "rows": [
+    [
+     "Espoo",
+     1
+    ],
+    [
+     "Helsinki",
+     2
+    ],
+    [
+     "Jakobstad",
+     1
+    ],
+    [
+     "Kotka",
+     1
+    ],
+    [
+     "Kuopio",
+     1
+    ],
+    [
+     "Lahti",
+     1
+    ],
+    [
+     "Mariehamn",
+     1
+    ],
+    [
+     "Turku",
+     1
+    ],
+    [
+     "Valkeakoski",
+     1
+    ]
+   ],
+   "row_count": 9,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "shop"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 12
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT LOCATION ,  count(*) FROM shop GROUP BY LOCATION",
+   "explanation": "Запрос возвращает количество магазинов в каждом месте.",
+   "rows": [
+    [
+     "Espoo",
+     1
+    ],
+    [
+     "Helsinki",
+     2
+    ],
+    [
+     "Jakobstad",
+     1
+    ],
+    [
+     "Kotka",
+     1
+    ],
+    [
+     "Kuopio",
+     1
+    ],
+    [
+     "Lahti",
+     1
+    ],
+    [
+     "Mariehamn",
+     1
+    ],
+    [
+     "Turku",
+     1
+    ],
+    [
+     "Valkeakoski",
+     1
+    ]
+   ],
+   "row_count": 9,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "shop"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 12
+  }
+ },
+ {
+  "id": "D_0446",
+  "db_id": "wta_1",
+  "gold_sql": "SELECT tourney_name FROM matches GROUP BY tourney_name HAVING count(*)  >  10;",
+  "question_ru": "Найди название турнира, в котором больше 10 матчей.",
+  "question_en": "Find the name of tourney that has more than 10 matches.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Australian Open"
+   ],
+   [
+    "Cincinnati"
+   ],
+   [
+    "French Open"
+   ],
+   [
+    "Indian Wells"
+   ],
+   [
+    "Miami"
+   ],
+   [
+    "Singapore"
+   ],
+   [
+    "Us Open"
+   ],
+   [
+    "WTA Championships"
+   ],
+   [
+    "Wimbledon"
+   ],
+   [
+    "Чемпионат по фрисби"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT tourney_name FROM matches GROUP BY tourney_name HAVING count(*)  >  10;",
+   "explanation": "Запрос возвращает названия турниров, в которых было сыграно более 10 матчей.",
+   "rows": [
+    [
+     "Australian Open"
+    ],
+    [
+     "Cincinnati"
+    ],
+    [
+     "French Open"
+    ],
+    [
+     "Indian Wells"
+    ],
+    [
+     "Miami"
+    ],
+    [
+     "Singapore"
+    ],
+    [
+     "Us Open"
+    ],
+    [
+     "WTA Championships"
+    ],
+    [
+     "Wimbledon"
+    ],
+    [
+     "Чемпионат по фрисби"
+    ]
+   ],
+   "row_count": 10,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "matches"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 20
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT tourney_name FROM matches GROUP BY tourney_name HAVING count(*)  >  10;",
+   "explanation": "Запрос возвращает названия турниров, в которых проводилось более 10 матчей.",
+   "rows": [
+    [
+     "Australian Open"
+    ],
+    [
+     "Cincinnati"
+    ],
+    [
+     "French Open"
+    ],
+    [
+     "Indian Wells"
+    ],
+    [
+     "Miami"
+    ],
+    [
+     "Singapore"
+    ],
+    [
+     "Us Open"
+    ],
+    [
+     "WTA Championships"
+    ],
+    [
+     "Wimbledon"
+    ],
+    [
+     "Чемпионат по фрисби"
+    ]
+   ],
+   "row_count": 10,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "matches"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 19
+  }
+ },
+ {
+  "id": "D_0224",
+  "db_id": "flight_2",
+  "gold_sql": "SELECT T1.City FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode  =  T2.SourceAirport GROUP BY T1.City ORDER BY count(*) DESC LIMIT 1;",
+  "question_ru": "Из какого города вылетает больше всего рейсов?",
+  "question_en": "Which city has most number of departing flights?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Albany"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.city FROM airports AS T1 JOIN flights AS T2 ON T1.airportcode  =  T2.sourceairport GROUP BY T1.city ORDER BY count(*) DESC LIMIT 1",
+   "explanation": "Запрос возвращает город, из которого вылетает больше всего рейсов.",
+   "rows": [
+    [
+     "Albany"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "airports",
+    "flights"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.city FROM airports AS T1 JOIN flights AS T2 ON T1.airportcode  =  T2.sourceairport GROUP BY T1.city ORDER BY count(*) DESC LIMIT 1",
+   "explanation": "Запрос возвращает название города с наибольшим количеством вылетающих рейсов.",
+   "rows": [
+    [
+     "Albany"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "airports",
+    "flights"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_0734",
+  "db_id": "world_1",
+  "gold_sql": "SELECT count(DISTINCT LANGUAGE) FROM countrylanguage;",
+  "question_ru": "Какое количество различных языков используется в мире?",
+  "question_en": "What is the number of distinct languages used around the world?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    462
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT count(DISTINCT Language) FROM countrylanguage",
+   "explanation": "Запрос возвращает количество различных языков, используемых в мире.",
+   "rows": [
+    [
+     462
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "country",
+    "countrylanguage"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 16
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT count(DISTINCT Language) FROM countrylanguage",
+   "explanation": "Запрос возвращает количество уникальных языков, используемых в разных странах.",
+   "rows": [
+    [
+     462
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "country",
+    "countrylanguage"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 16
+  }
+ },
+ {
+  "id": "D_0284",
+  "db_id": "employee_hire_evaluation",
+  "gold_sql": "SELECT t2.name FROM hiring AS t1 JOIN shop AS t2 ON t1.shop_id  =  t2.shop_id GROUP BY t1.shop_id ORDER BY count(*) DESC LIMIT 1;",
+  "question_ru": "Как называется магазин, в котором работает больше всего сотрудников?",
+  "question_en": "What is the name of the shop that is hiring the largest number of employees?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "FC Haka"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.name FROM shop AS T1 JOIN hiring AS T2 ON T1.shop_id  =  T2.shop_id GROUP BY T1.shop_id ORDER BY count(*) DESC LIMIT 1",
+   "explanation": "Запрос возвращает название магазина, где работает больше всего сотрудников.",
+   "rows": [
+    [
+     "FC Haka"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "shop",
+    "hiring"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.name FROM shop AS T1 JOIN hiring AS T2 ON T1.shop_id  =  T2.shop_id GROUP BY T1.shop_id ORDER BY count(*) DESC LIMIT 1",
+   "explanation": "Запрос возвращает название магазина, который нанимает наибольшее количество сотрудников.",
+   "rows": [
+    [
+     "FC Haka"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "shop",
+    "hiring"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  }
+ },
+ {
+  "id": "D_0316",
+  "db_id": "cre_Doc_Template_Mgt",
+  "gold_sql": "SELECT template_id FROM Templates EXCEPT SELECT template_id FROM Documents;",
+  "question_ru": "Показать id для всех шаблонов, которые не используются ни в одном документе.",
+  "question_en": "Show ids for all templates not used by any document.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    2
+   ],
+   [
+    9
+   ],
+   [
+    15
+   ],
+   [
+    16
+   ],
+   [
+    18
+   ],
+   [
+    19
+   ],
+   [
+    26
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT template_id FROM templates EXCEPT SELECT template_id FROM documents",
+   "explanation": "Запрос возвращает идентификаторы всех шаблонов, которые не были использованы ни в одном документе.",
+   "rows": [
+    [
+     2
+    ],
+    [
+     9
+    ],
+    [
+     15
+    ],
+    [
+     16
+    ],
+    [
+     18
+    ],
+    [
+     19
+    ],
+    [
+     26
+    ]
+   ],
+   "row_count": 7,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Templates",
+    "Documents"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT template_id FROM templates EXCEPT SELECT template_id FROM documents",
+   "explanation": "Запрос возвращает идентификаторы всех шаблонов, которые не используются ни одним документом.",
+   "rows": [
+    [
+     2
+    ],
+    [
+     9
+    ],
+    [
+     15
+    ],
+    [
+     16
+    ],
+    [
+     18
+    ],
+    [
+     19
+    ],
+    [
+     26
+    ]
+   ],
+   "row_count": 7,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Templates",
+    "Documents"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  }
+ },
+ {
+  "id": "D_0991",
+  "db_id": "dog_kennels",
+  "gold_sql": "SELECT charge_type ,  charge_amount FROM Charges;",
+  "question_ru": "Сколько стоит каждый тип начисления? Укажите тип и сумму оплаты.",
+  "question_en": "How much does each charge type costs? List both charge type and amount.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Daily Accommodation",
+    98
+   ],
+   [
+    "Drugs",
+    322
+   ],
+   [
+    "Health Check",
+    640
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT charge_type ,  charge_amount FROM Charges",
+   "explanation": "Запрос возвращает типы начислений и соответствующие суммы оплаты.",
+   "rows": [
+    [
+     "Daily Accommodation",
+     98
+    ],
+    [
+     "Drugs",
+     322
+    ],
+    [
+     "Health Check",
+     640
+    ]
+   ],
+   "row_count": 3,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Charges"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 18
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT charge_type ,  charge_amount FROM Charges",
+   "explanation": "Запрос возвращает список типов начислений и соответствующих им сумм.",
+   "rows": [
+    [
+     "Daily Accommodation",
+     98
+    ],
+    [
+     "Drugs",
+     322
+    ],
+    [
+     "Health Check",
+     640
+    ]
+   ],
+   "row_count": 3,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Charges"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 18
+  }
+ },
+ {
+  "id": "D_0882",
+  "db_id": "network_1",
+  "gold_sql": "SELECT grade FROM Highschooler GROUP BY grade HAVING count(*)  >=  4;",
+  "question_ru": "В каких классах учатся 4 или более старшеклассников?",
+  "question_en": "Which grades have 4 or more high schoolers?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    9
+   ],
+   [
+    10
+   ],
+   [
+    11
+   ],
+   [
+    12
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT grade FROM highschooler GROUP BY grade HAVING count(*)  >=  4",
+   "explanation": "Запрос возвращает классы, в которых учатся четыре или более старшеклассника.",
+   "rows": [
+    [
+     9
+    ],
+    [
+     10
+    ],
+    [
+     11
+    ],
+    [
+     12
+    ]
+   ],
+   "row_count": 4,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Highschooler"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 11
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT grade FROM highschooler GROUP BY grade HAVING count(*)  >=  4",
+   "explanation": "Запрос возвращает список классов, в которых учатся 4 или более ученика.",
+   "rows": [
+    [
+     9
+    ],
+    [
+     10
+    ],
+    [
+     11
+    ],
+    [
+     12
+    ]
+   ],
+   "row_count": 4,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Highschooler"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 11
+  }
+ },
+ {
+  "id": "D_0179",
+  "db_id": "car_1",
+  "gold_sql": "select t1.countryid ,  t1.countryname from countries as t1 join car_makers as t2 on t1.countryid  =  t2.country group by t1.countryid having count(*)  >  3 union select t1.countryid ,  t1.countryname from countries as t1 join car_makers as t2 on t1.countryid  =  t2.country join model_list as t3 on t2.id  =  t3.maker where t3.model  =  'fiat';",
+  "question_ru": "Каковы id и названия всех стран, в которых либо более трех производителей автомобилей, либо производятся модели Fiat?",
+  "question_en": "What are the ids and names of all countries that either have more than 3 car makers or produce fiat model ?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    1,
+    "usa"
+   ],
+   [
+    2,
+    "germany"
+   ],
+   [
+    4,
+    "japan"
+   ],
+   [
+    5,
+    "italy"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.CountryId ,  T1.CountryName FROM countries AS T1 JOIN car_makers AS T2 ON T1.CountryId  =  T2.Country JOIN model_list AS T3 ON T2.id  =  T3.Maker WHERE T3.Model  =  'fiat' UNION SELECT countryid ,  countryname FROM countries GROUP BY countryid HAVING count(*)  >  3",
+   "explanation": "Запрос возвращает идентификаторы и названия стран, где либо производится более трех автомобилей, либо есть модели Fiat.",
+   "rows": [
+    [
+     5,
+     "italy"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "countries",
+    "car_makers",
+    "model_list"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 18
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.CountryId ,  T1.CountryName FROM countries AS T1 JOIN car_makers AS T2 ON T1.CountryId  =  T2.Country WHERE T2.Maker  >  3 UNION SELECT T1.CountryId ,  T1.CountryName FROM countries AS T1 JOIN car_makers AS T2 ON T1.CountryId  =  T2.Country JOIN model_list AS T3 ON T2.id  =  T3.Maker WHERE T3.Model  =  'fiat'",
+   "explanation": "Запрос возвращает идентификаторы и названия всех стран, которые имеют более трех производителей автомобилей или производят модель Fiat.",
+   "rows": [
+    [
+     1,
+     "usa"
+    ],
+    [
+     2,
+     "germany"
+    ],
+    [
+     3,
+     "france"
+    ],
+    [
+     4,
+     "japan"
+    ],
+    [
+     5,
+     "italy"
+    ],
+    [
+     6,
+     "sweden"
+    ],
+    [
+     7,
+     "uk"
+    ],
+    [
+     8,
+     "korea"
+    ],
+    [
+     9,
+     "russia"
+    ],
+    [
+     16,
+     "Китай"
+    ],
+    [
+     17,
+     "Чехия"
+    ],
+    [
+     18,
+     "Аргентина"
+    ]
+   ],
+   "row_count": 12,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "countries",
+    "car_makers",
+    "model_list"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 19
+  }
+ },
+ {
+  "id": "D_0531",
+  "db_id": "student_transcripts_tracking",
+  "gold_sql": "SELECT T1.semester_name ,  T1.semester_id FROM Semesters AS T1 JOIN Student_Enrolment AS T2 ON T1.semester_id  =  T2.semester_id GROUP BY T1.semester_id ORDER BY count(*) DESC LIMIT 1;",
+  "question_ru": "Какое название и id для каждого семестра имеет тот, на который зарегистрировано больше всего студентов?",
+  "question_en": "For each semester, what is the name and id of the one with the most students registered?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "summer 2010",
+    2
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.semester_id ,  T1.semester_name FROM Semesters AS T1 JOIN Student_Enrolment AS T2 ON T1.semester_id  =  T2.semester_id GROUP BY T1.semester_id ORDER BY count(*) DESC LIMIT 1",
+   "explanation": "Запрос возвращает название и идентификатор семестра, на который зарегистрировано больше всего студентов.",
+   "rows": [
+    [
+     2,
+     "summer 2010"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Semesters",
+    "Student_Enrolment"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 22
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.semester_id ,  T1.semester_name FROM semesters AS T1 JOIN student_enrolment AS T2 ON T1.semester_id  =  T2.semester_id GROUP BY T1.semester_id ORDER BY count(*) DESC LIMIT 1",
+   "explanation": "Запрос возвращает название и идентификатор семестра с наибольшим количеством зарегистрированных студентов.",
+   "rows": [
+    [
+     2,
+     "summer 2010"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Semesters",
+    "Student_Enrolment"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 22
+  }
+ },
+ {
+  "id": "D_0614",
+  "db_id": "tvshow",
+  "gold_sql": "SELECT Episode FROM TV_series ORDER BY rating;",
+  "question_ru": "Список эпизодов всех сериалов, отсортированных по рейтингу.",
+  "question_en": "List the Episode of all TV series sorted by rating.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "The Hanged Man"
+   ],
+   [
+    "Double Down"
+   ],
+   [
+    "Home By Another Way"
+   ],
+   [
+    "Keepers"
+   ],
+   [
+    "Emily"
+   ],
+   [
+    "Blowback"
+   ],
+   [
+    "The Legend of Dylan McCleen"
+   ],
+   [
+    "Winterland"
+   ],
+   [
+    "The Year of the Rabbit"
+   ],
+   [
+    "Любовь всей жизни"
+   ],
+   [
+    "Game Three"
+   ],
+   [
+    "Friendly Skies"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT Episode FROM TV_series ORDER BY Rating",
+   "explanation": "Этот запрос возвращает список эпизодов всех сериалов, отсортированных по их рейтингу.",
+   "rows": [
+    [
+     "The Hanged Man"
+    ],
+    [
+     "Double Down"
+    ],
+    [
+     "Home By Another Way"
+    ],
+    [
+     "Keepers"
+    ],
+    [
+     "Emily"
+    ],
+    [
+     "Blowback"
+    ],
+    [
+     "The Legend of Dylan McCleen"
+    ],
+    [
+     "Winterland"
+    ],
+    [
+     "The Year of the Rabbit"
+    ],
+    [
+     "Любовь всей жизни"
+    ],
+    [
+     "Game Three"
+    ],
+    [
+     "Friendly Skies"
+    ]
+   ],
+   "row_count": 13,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "TV_series"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT Episode FROM TV_series ORDER BY Rating",
+   "explanation": "Запрос возвращает список эпизодов всех телесериалов, отсортированных по рейтингу.",
+   "rows": [
+    [
+     "The Hanged Man"
+    ],
+    [
+     "Double Down"
+    ],
+    [
+     "Home By Another Way"
+    ],
+    [
+     "Keepers"
+    ],
+    [
+     "Emily"
+    ],
+    [
+     "Blowback"
+    ],
+    [
+     "The Legend of Dylan McCleen"
+    ],
+    [
+     "Winterland"
+    ],
+    [
+     "The Year of the Rabbit"
+    ],
+    [
+     "Любовь всей жизни"
+    ],
+    [
+     "Game Three"
+    ],
+    [
+     "Friendly Skies"
+    ]
+   ],
+   "row_count": 13,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "TV_series"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_1002",
+  "db_id": "singer",
+  "gold_sql": "SELECT count(*) FROM singer;",
+  "question_ru": "Сколько певцов?",
+  "question_en": "What is the count of singers?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    9
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT count(*) FROM singer",
+   "explanation": "Количество певцов.",
+   "rows": [
+    [
+     9
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "singer"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 10
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT count(*) FROM singer",
+   "explanation": "Запрос возвращает количество исполнителей.",
+   "rows": [
+    [
+     9
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "singer"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 10
+  }
+ },
+ {
+  "id": "D_0468",
+  "db_id": "wta_1",
+  "gold_sql": "SELECT winner_name ,  loser_name FROM matches ORDER BY minutes DESC LIMIT 1;",
+  "question_ru": "найти имена проигравшего и победителя, сыгравшего в матче с наибольшим количеством минут.",
+  "question_en": "find the names of loser and winner who played in the match with greatest number of minutes.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Petra Kvitova",
+    "Angelique Kerber"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.loser_name ,  T1.winner_name FROM MATCHES AS T1 JOIN players AS T2 ON T1.loser_id  =  T2.player_id JOIN players AS T3 ON T1.winner_id  =  T3.player_id ORDER BY T1.minutes DESC LIMIT 1",
+   "explanation": "Запрос возвращает имена проигравшего и победителя, сыгравшего в матче с наибольшим количеством минут.",
+   "rows": [
+    [
+     "Angelique Kerber",
+     "Petra Kvitova"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "matches"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 21
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.winner_name ,  T1.loser_name FROM MATCHES AS T1 JOIN players AS T2 ON T1.winner_id  =  T2.player_id JOIN players AS T3 ON T1.loser_id  =  T3.player_id ORDER BY T1.minutes DESC LIMIT 1",
+   "explanation": "Запрос возвращает имена победителя и проигравшего в матче, который длится больше всего времени.",
+   "rows": [
+    [
+     "Petra Kvitova",
+     "Angelique Kerber"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "matches"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 20
+  }
+ },
+ {
+  "id": "D_0207",
+  "db_id": "flight_2",
+  "gold_sql": "SELECT count(*) FROM FLIGHTS WHERE DestAirport  =  \"ATO\";",
+  "question_ru": "Подсчитайте количество рейсов в АТО.",
+  "question_en": "Count the number of flights into ATO.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    7
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT count(*) FROM flights WHERE destairport  =  'ATO'",
+   "explanation": "Запрос возвращает количество рейсов, которые прилетели в аэропорт АТО.",
+   "rows": [
+    [
+     7
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "flights"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 11
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT count(*) FROM flights AS T1 JOIN airports AS T2 ON T1.DestAirport  =  T2.AirportCode WHERE T2.AirportName  =  \"ATO\"",
+   "explanation": "Запрос возвращает количество рейсов, прилетевших в аэропорт ATO.",
+   "rows": [
+    [
+     0
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "airports",
+    "flights"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_0048",
+  "db_id": "pets_1",
+  "gold_sql": "SELECT weight FROM pets ORDER BY pet_age LIMIT 1;",
+  "question_ru": "Найдите вес самой молодой собаки.",
+  "question_en": "Find the weight of the youngest dog.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    9.3
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT weight FROM pets WHERE pettype  =  'dog' ORDER BY pet_age LIMIT 1",
+   "explanation": "Запрос возвращает вес самой молодой собаки.",
+   "rows": [
+    [
+     9.3
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Pets"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 11
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT weight FROM pets WHERE pettype  =  'dog' ORDER BY pet_age LIMIT 1",
+   "explanation": "Запрос возвращает вес самого молодого собаки.",
+   "rows": [
+    [
+     9.3
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Pets"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 11
+  }
+ },
+ {
+  "id": "D_0440",
+  "db_id": "wta_1",
+  "gold_sql": "SELECT min(loser_rank) FROM matches;",
+  "question_ru": "Самый высокий рейтинг проигравших во всех матчах.",
+  "question_en": "Find the highest rank of losers in all matches.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    1
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT max(T1.ranking) FROM rankings AS T1 JOIN matches AS T2 ON T1.player_id  =  T2.loser_id",
+   "explanation": "Запрос возвращает максимальный рейтинг игрока, который проиграл во всех матчах.",
+   "rows": [
+    [
+     1315
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "matches",
+    "rankings"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 19
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT max(loser_rank) FROM matches",
+   "explanation": "Запрос возвращает максимальный ранг проигравших в матчах.",
+   "rows": [
+    [
+     112
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "matches"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 17
+  }
+ },
+ {
+  "id": "D_0167",
+  "db_id": "car_1",
+  "gold_sql": "SELECT T1.Model FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId  =  T2.Id WHERE T2.Cylinders  =  4 ORDER BY T2.horsepower DESC LIMIT 1;",
+  "question_ru": "Какая модель из всех 4-цилиндровых автомобилей имеет наибольшую мощность?",
+  "question_en": "For all of the 4 cylinder cars, which model has the most horsepower?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "ford"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.Model FROM model_list AS T1 JOIN cars_data AS T2 ON T1.ModelId = T2.Id WHERE T2.Cylinders = 4 ORDER BY T2.Horsepower DESC LIMIT 1",
+   "explanation": "Запрос возвращает модель четырехцилиндрового автомобиля с наибольшей мощностью.",
+   "rows": [
+    [
+     "oldsmobile"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "model_list",
+    "cars_data"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 16
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.Model FROM model_list AS T1 JOIN cars_data AS T2 ON T1.ModelId  =  T2.Id WHERE T2.Cylinders  =  4 ORDER BY T2.Horsepower DESC LIMIT 1",
+   "explanation": "Запрос возвращает модель четырехцилиндрового автомобиля с наибольшей мощностью.",
+   "rows": [
+    [
+     "oldsmobile"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "model_list",
+    "cars_data"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 15
+  }
+ },
+ {
+  "id": "D_0878",
+  "db_id": "network_1",
+  "gold_sql": "SELECT grade ,  count(*) FROM Highschooler GROUP BY grade;",
+  "question_ru": "Сколько старшеклассников в каждом классе?",
+  "question_en": "How many high schoolers are in each grade?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    9,
+    5
+   ],
+   [
+    10,
+    5
+   ],
+   [
+    11,
+    4
+   ],
+   [
+    12,
+    4
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT count(*) ,  grade FROM highschooler GROUP BY grade",
+   "explanation": "Запрос возвращает количество старшеклассников в каждом классе.",
+   "rows": [
+    [
+     5,
+     9
+    ],
+    [
+     5,
+     10
+    ],
+    [
+     4,
+     11
+    ],
+    [
+     4,
+     12
+    ]
+   ],
+   "row_count": 4,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Highschooler"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 11
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT count(*) ,  grade FROM highschooler GROUP BY grade",
+   "explanation": "Запрос возвращает количество учеников в каждом классе.",
+   "rows": [
+    [
+     5,
+     9
+    ],
+    [
+     5,
+     10
+    ],
+    [
+     4,
+     11
+    ],
+    [
+     4,
+     12
+    ]
+   ],
+   "row_count": 4,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Highschooler"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 10
+  }
+ },
+ {
+  "id": "D_0151",
+  "db_id": "car_1",
+  "gold_sql": "SELECT T1.FullName ,  T1.Id FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id  =  T2.Maker GROUP BY T1.Id HAVING count(*)  >  3;",
+  "question_ru": "Как называются и какие id у всех производителей, выпускающих более трех моделей?",
+  "question_en": "What are the names and ids of all makers with more than 3 models?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "General Motors",
+    4
+   ],
+   [
+    "Chrysler",
+    6
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.id ,  T1.maker FROM car_makers AS T1 JOIN model_list AS T2 ON T1.id  =  T2.maker GROUP BY T1.id HAVING count(*)  >  3",
+   "explanation": "Запрос возвращает имена и идентификаторы производителей автомобилей, которые выпускают более трех моделей.",
+   "rows": [
+    [
+     4,
+     "gm"
+    ],
+    [
+     6,
+     "chrysler"
+    ]
+   ],
+   "row_count": 2,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "car_makers",
+    "model_list"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 16
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.id ,  T1.maker FROM car_makers AS T1 JOIN model_list AS T2 ON T1.id  =  T2.maker GROUP BY T1.id HAVING count(*)  >  3",
+   "explanation": "Запрос возвращает идентификаторы и названия производителей автомобилей, у которых более трёх моделей.",
+   "rows": [
+    [
+     4,
+     "gm"
+    ],
+    [
+     6,
+     "chrysler"
+    ]
+   ],
+   "row_count": 2,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "car_makers",
+    "model_list"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 16
+  }
+ },
+ {
+  "id": "D_0010",
+  "db_id": "concert_singer",
+  "gold_sql": "SELECT DISTINCT country FROM singer WHERE age  >  20;",
+  "question_ru": "Из каких стран есть певцы старше 20 лет?",
+  "question_en": "What are  the different countries with singers above age 20?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Netherlands"
+   ],
+   [
+    "United States"
+   ],
+   [
+    "France"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT DISTINCT Country FROM singer WHERE Age  >  20",
+   "explanation": "Запрос возвращает список уникальных стран, в которых есть певцы старше 20 лет.",
+   "rows": [
+    [
+     "Netherlands"
+    ],
+    [
+     "United States"
+    ],
+    [
+     "France"
+    ]
+   ],
+   "row_count": 3,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "singer"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT DISTINCT Country FROM singer WHERE Age  >  20",
+   "explanation": "Запрос возвращает список уникальных стран, где есть исполнители старше 20 лет.",
+   "rows": [
+    [
+     "Netherlands"
+    ],
+    [
+     "United States"
+    ],
+    [
+     "France"
+    ]
+   ],
+   "row_count": 3,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "singer"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_0593",
+  "db_id": "tvshow",
+  "gold_sql": "SELECT title ,  Directed_by FROM Cartoon ORDER BY Original_air_date;",
+  "question_ru": "Названия и режиссеры всех мультфильмов, сортированных по дате выхода в эфир",
+  "question_en": "What is the name and directors of all the cartoons that are ordered by air date?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Invasion of the Secret Santas!",
+    "Brandon Vietti"
+   ],
+   [
+    "Evil Under the Sea!",
+    "Michael Chang"
+   ],
+   [
+    "Return of the Fearsome Fangs!",
+    "Brandon Vietti"
+   ],
+   [
+    "Deep Cover for Batman!",
+    "Michael Chang"
+   ],
+   [
+    "The Eyes of Despero!",
+    "Ben Jones"
+   ],
+   [
+    "Dawn of the Dead Man!",
+    "Ben Jones"
+   ],
+   [
+    "Смешарики",
+    "Александр Невский"
+   ],
+   [
+    "Day of the Dark Knight!",
+    "Ben Jones"
+   ],
+   [
+    "Fall of the Blue Beetle!",
+    "Brandon Vietti"
+   ],
+   [
+    "Максимальное ускорение",
+    "Николай Лебедев"
+   ],
+   [
+    "Journey to the Center of the Bat!",
+    "Michael Chang"
+   ],
+   [
+    "Черные Смешарики",
+    "Федор Бондарчук"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT title ,  directed_by FROM Cartoon ORDER BY original_air_date",
+   "explanation": "Запрос возвращает названия и режиссеров всех мультфильмов, отсортированных по дате их выхода в эфир.",
+   "rows": [
+    [
+     "Invasion of the Secret Santas!",
+     "Brandon Vietti"
+    ],
+    [
+     "Evil Under the Sea!",
+     "Michael Chang"
+    ],
+    [
+     "Return of the Fearsome Fangs!",
+     "Brandon Vietti"
+    ],
+    [
+     "Deep Cover for Batman!",
+     "Michael Chang"
+    ],
+    [
+     "The Eyes of Despero!",
+     "Ben Jones"
+    ],
+    [
+     "Dawn of the Dead Man!",
+     "Ben Jones"
+    ],
+    [
+     "Смешарики",
+     "Александр Невский"
+    ],
+    [
+     "Day of the Dark Knight!",
+     "Ben Jones"
+    ],
+    [
+     "Fall of the Blue Beetle!",
+     "Brandon Vietti"
+    ],
+    [
+     "Максимальное ускорение",
+     "Николай Лебедев"
+    ],
+    [
+     "Journey to the Center of the Bat!",
+     "Michael Chang"
+    ],
+    [
+     "Черные Смешарики",
+     "Федор Бондарчук"
+    ]
+   ],
+   "row_count": 16,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Cartoon"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 15
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT title ,  directed_by FROM Cartoon ORDER BY original_air_date",
+   "explanation": "Запрос возвращает названия и режиссеров всех мультфильмов, отсортированных по дате их трансляции.",
+   "rows": [
+    [
+     "Invasion of the Secret Santas!",
+     "Brandon Vietti"
+    ],
+    [
+     "Evil Under the Sea!",
+     "Michael Chang"
+    ],
+    [
+     "Return of the Fearsome Fangs!",
+     "Brandon Vietti"
+    ],
+    [
+     "Deep Cover for Batman!",
+     "Michael Chang"
+    ],
+    [
+     "The Eyes of Despero!",
+     "Ben Jones"
+    ],
+    [
+     "Dawn of the Dead Man!",
+     "Ben Jones"
+    ],
+    [
+     "Смешарики",
+     "Александр Невский"
+    ],
+    [
+     "Day of the Dark Knight!",
+     "Ben Jones"
+    ],
+    [
+     "Fall of the Blue Beetle!",
+     "Brandon Vietti"
+    ],
+    [
+     "Максимальное ускорение",
+     "Николай Лебедев"
+    ],
+    [
+     "Journey to the Center of the Bat!",
+     "Michael Chang"
+    ],
+    [
+     "Черные Смешарики",
+     "Федор Бондарчук"
+    ]
+   ],
+   "row_count": 16,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Cartoon"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  }
+ },
+ {
+  "id": "D_0456",
+  "db_id": "wta_1",
+  "gold_sql": "SELECT first_name ,  last_name FROM players ORDER BY birth_date;",
+  "question_ru": "Отображать имена и фамилии всех игроков в порядке даты рождения.",
+  "question_en": "List the first and last name of all players in the order of birth date.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Thelma",
+    "Long"
+   ],
+   [
+    "Pauline",
+    "Addie"
+   ],
+   [
+    "Milly",
+    "Vagn Nielsen"
+   ],
+   [
+    "Vera",
+    "Johansen"
+   ],
+   [
+    "Reiko",
+    "Miyagi"
+   ],
+   [
+    "Louise",
+    "Brown"
+   ],
+   [
+    "Gertrude",
+    "Moran"
+   ],
+   [
+    "Zsuzsa",
+    "Kormoczy"
+   ],
+   [
+    "Peggy",
+    "Brixhe"
+   ],
+   [
+    "Betty",
+    "Pratt"
+   ],
+   [
+    "Doris",
+    "Hart"
+   ],
+   [
+    "Dorothy",
+    "Knode"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT first_name ,  last_name FROM players ORDER BY birth_date",
+   "explanation": "Запрос возвращает имена и фамилии всех игроков, отсортированных по дате рождения.",
+   "rows": [
+    [
+     "Thelma",
+     "Long"
+    ],
+    [
+     "Pauline",
+     "Addie"
+    ],
+    [
+     "Milly",
+     "Vagn Nielsen"
+    ],
+    [
+     "Vera",
+     "Johansen"
+    ],
+    [
+     "Reiko",
+     "Miyagi"
+    ],
+    [
+     "Louise",
+     "Brown"
+    ],
+    [
+     "Gertrude",
+     "Moran"
+    ],
+    [
+     "Zsuzsa",
+     "Kormoczy"
+    ],
+    [
+     "Peggy",
+     "Brixhe"
+    ],
+    [
+     "Betty",
+     "Pratt"
+    ],
+    [
+     "Doris",
+     "Hart"
+    ],
+    [
+     "Dorothy",
+     "Knode"
+    ]
+   ],
+   "row_count": 200,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "players"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 16
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT first_name ,  last_name FROM players ORDER BY birth_date",
+   "explanation": "Запрос возвращает список имен и фамилий всех игроков, отсортированных по дате рождения.",
+   "rows": [
+    [
+     "Thelma",
+     "Long"
+    ],
+    [
+     "Pauline",
+     "Addie"
+    ],
+    [
+     "Milly",
+     "Vagn Nielsen"
+    ],
+    [
+     "Vera",
+     "Johansen"
+    ],
+    [
+     "Reiko",
+     "Miyagi"
+    ],
+    [
+     "Louise",
+     "Brown"
+    ],
+    [
+     "Gertrude",
+     "Moran"
+    ],
+    [
+     "Zsuzsa",
+     "Kormoczy"
+    ],
+    [
+     "Peggy",
+     "Brixhe"
+    ],
+    [
+     "Betty",
+     "Pratt"
+    ],
+    [
+     "Doris",
+     "Hart"
+    ],
+    [
+     "Dorothy",
+     "Knode"
+    ]
+   ],
+   "row_count": 200,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "players"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 15
+  }
+ },
+ {
+  "id": "D_0124",
+  "db_id": "car_1",
+  "gold_sql": "SELECT T1.CountryName ,  T1.CountryId FROM COUNTRIES AS T1 JOIN CAR_MAKERS AS T2 ON T1.CountryId  =  T2.Country GROUP BY T1.CountryId HAVING count(*)  >=  1;",
+  "question_ru": "В каких странах есть хотя бы один производитель автомобилей? Показать название и id.",
+  "question_en": "What are the countries having at least one car maker? List name and id.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "usa",
+    1
+   ],
+   [
+    "germany",
+    2
+   ],
+   [
+    "france",
+    3
+   ],
+   [
+    "japan",
+    4
+   ],
+   [
+    "italy",
+    5
+   ],
+   [
+    "sweden",
+    6
+   ],
+   [
+    "uk",
+    7
+   ],
+   [
+    "korea",
+    8
+   ],
+   [
+    "russia",
+    9
+   ],
+   [
+    "Китай",
+    16
+   ],
+   [
+    "Чехия",
+    17
+   ],
+   [
+    "Аргентина",
+    18
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.CountryName ,  T1.CountryId FROM countries AS T1 JOIN car_makers AS T2 ON T1.CountryId  =  T2.Country",
+   "explanation": "Запрос возвращает названия и идентификаторы стран, где есть хотя бы один производитель автомобилей.",
+   "rows": [
+    [
+     "usa",
+     1
+    ],
+    [
+     "germany",
+     2
+    ],
+    [
+     "germany",
+     2
+    ],
+    [
+     "usa",
+     1
+    ],
+    [
+     "usa",
+     1
+    ],
+    [
+     "usa",
+     1
+    ],
+    [
+     "france",
+     3
+    ],
+    [
+     "japan",
+     4
+    ],
+    [
+     "italy",
+     5
+    ],
+    [
+     "japan",
+     4
+    ],
+    [
+     "japan",
+     4
+    ],
+    [
+     "germany",
+     2
+    ]
+   ],
+   "row_count": 28,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "countries",
+    "car_makers"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 15
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.CountryName ,  T1.CountryId FROM countries AS T1 JOIN car_makers AS T2 ON T1.CountryId  =  T2.Country",
+   "explanation": "Запрос возвращает названия и идентификаторы стран, где есть хотя бы один производитель автомобилей.",
+   "rows": [
+    [
+     "usa",
+     1
+    ],
+    [
+     "germany",
+     2
+    ],
+    [
+     "germany",
+     2
+    ],
+    [
+     "usa",
+     1
+    ],
+    [
+     "usa",
+     1
+    ],
+    [
+     "usa",
+     1
+    ],
+    [
+     "france",
+     3
+    ],
+    [
+     "japan",
+     4
+    ],
+    [
+     "italy",
+     5
+    ],
+    [
+     "japan",
+     4
+    ],
+    [
+     "japan",
+     4
+    ],
+    [
+     "germany",
+     2
+    ]
+   ],
+   "row_count": 28,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "countries",
+    "car_makers"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 15
+  }
+ },
+ {
+  "id": "D_0411",
+  "db_id": "course_teach",
+  "gold_sql": "SELECT Name FROM teacher WHERE Teacher_id NOT IN (SELECT Teacher_id FROM course_arrange);",
+  "question_ru": "Как зовут учителей, которые не ведут курсы?",
+  "question_en": "What are the names of the teachers whose courses have not been arranged?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "John Deloor"
+   ],
+   [
+    "Сергей Васянин"
+   ],
+   [
+    "Николай Андреев"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT Name FROM teacher WHERE Teacher_ID NOT IN (SELECT Teacher_ID FROM course_arrange)",
+   "explanation": "Запрос возвращает имена учителей, которые не ведут никаких курсов.",
+   "rows": [
+    [
+     "John Deloor"
+    ],
+    [
+     "Сергей Васянин"
+    ],
+    [
+     "Николай Андреев"
+    ]
+   ],
+   "row_count": 3,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "course",
+    "teacher",
+    "course_arrange"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT Name FROM teacher WHERE Teacher_ID NOT IN (SELECT Teacher_ID FROM course_arrange)",
+   "explanation": "Запрос возвращает имена преподавателей, чьи курсы еще не были расставлены.",
+   "rows": [
+    [
+     "John Deloor"
+    ],
+    [
+     "Сергей Васянин"
+    ],
+    [
+     "Николай Андреев"
+    ]
+   ],
+   "row_count": 3,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "course",
+    "teacher",
+    "course_arrange"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_0858",
+  "db_id": "orchestra",
+  "gold_sql": "SELECT Record_Company FROM orchestra WHERE Year_of_Founded  <  2003 INTERSECT SELECT Record_Company FROM orchestra WHERE Year_of_Founded  >  2003;",
+  "question_ru": "Какие звукозаписывающие компании используются как оркестрами, основанными до 2003 года, так и оркестрами, основанными после 2003 года?",
+  "question_en": "What are the record companies that are used by both orchestras founded before 2003 and those founded after 2003?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Decca Records"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT record_company FROM orchestra WHERE year_of_founded  <  2003 INTERSECT SELECT record_company FROM orchestra WHERE year_of_founded  >  2003",
+   "explanation": "Этот запрос возвращает названия звукозаписывающих компаний, которые работают с оркестрами, основанными как до, так и после 2003 года.",
+   "rows": [
+    [
+     "Decca Records"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "orchestra"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 17
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT record_company FROM orchestra WHERE year_of_founded  <  2003 INTERSECT SELECT record_company FROM orchestra WHERE year_of_founded  >  2003",
+   "explanation": "Запрос возвращает названия компаний-записей, которые используются как оркестрами, основанными до 2003 года, так и после 2003 года.",
+   "rows": [
+    [
+     "Decca Records"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "orchestra"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 16
+  }
+ },
+ {
+  "id": "D_0906",
+  "db_id": "network_1",
+  "gold_sql": "SELECT T2.name ,  count(*) FROM Likes AS T1 JOIN Highschooler AS T2 ON T1.student_id  =  T2.id GROUP BY T1.student_id;",
+  "question_ru": "Как зовут старшеклассников, у которых есть лайки, и сколько лайков у каждого?",
+  "question_en": "What are the names of high schoolers who have likes, and how many likes does each have?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Лев",
+    4
+   ],
+   [
+    "Владимир",
+    1
+   ],
+   [
+    "John",
+    1
+   ],
+   [
+    "Alexis",
+    1
+   ],
+   [
+    "Austin",
+    1
+   ],
+   [
+    "Jessica",
+    1
+   ],
+   [
+    "Brittany",
+    1
+   ],
+   [
+    "Gabriel",
+    1
+   ],
+   [
+    "Cassandra",
+    1
+   ],
+   [
+    "Andrew",
+    1
+   ],
+   [
+    "Gabriel",
+    1
+   ],
+   [
+    "Kyle",
+    1
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.name ,  count(*) FROM Highschooler AS T1 JOIN Likes AS T2 ON T1.id  =  T2.student_id WHERE T1.grade  =  12 GROUP BY T1.id",
+   "explanation": "Запрос возвращает имена старшеклассников и количество лайков, которые они получили.",
+   "rows": [
+    [
+     "John",
+     1
+    ],
+    [
+     "Kyle",
+     1
+    ]
+   ],
+   "row_count": 2,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Highschooler",
+    "Likes"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 15
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.name ,  count(*) FROM Highschooler AS T1 JOIN Likes AS T2 ON T1.id  =  T2.student_id GROUP BY T2.student_id",
+   "explanation": "Запрос возвращает имена старшеклассников и количество лайков, которые они получили.",
+   "rows": [
+    [
+     "Лев",
+     4
+    ],
+    [
+     "Владимир",
+     1
+    ],
+    [
+     "John",
+     1
+    ],
+    [
+     "Alexis",
+     1
+    ],
+    [
+     "Austin",
+     1
+    ],
+    [
+     "Jessica",
+     1
+    ],
+    [
+     "Brittany",
+     1
+    ],
+    [
+     "Gabriel",
+     1
+    ],
+    [
+     "Cassandra",
+     1
+    ],
+    [
+     "Andrew",
+     1
+    ],
+    [
+     "Gabriel",
+     1
+    ],
+    [
+     "Kyle",
+     1
+    ]
+   ],
+   "row_count": 12,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Highschooler",
+    "Likes"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_0417",
+  "db_id": "museum_visit",
+  "gold_sql": "SELECT avg(num_of_staff) FROM museum WHERE open_year  <  2009;",
+  "question_ru": "Найдите среднее количество сотрудников, работающих в музеях, которые были открыты до 2009 года.",
+  "question_en": "Find the average number of staff working for the museums that were open before 2009.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    27.25
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT avg(num_of_staff) FROM museum WHERE open_year  <  2009",
+   "explanation": "Запрос возвращает среднее количество сотрудников в музеях, открытых до 2009 года.",
+   "rows": [
+    [
+     27.25
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "museum"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 12
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT avg(num_of_staff) FROM museum WHERE open_year  <  2009",
+   "explanation": "Запрос возвращает среднее количество сотрудников в музеях, которые открылись до 2009 года.",
+   "rows": [
+    [
+     27.25
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "museum"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_0112",
+  "db_id": "car_1",
+  "gold_sql": "SELECT T1.Accelerate FROM CARS_DATA AS T1 JOIN CAR_NAMES AS T2 ON T1.Id  =  T2.MakeId WHERE T2.Make  =  'amc hornet sportabout (sw)';",
+  "question_ru": "С каким ускорением разгоняется модель amc hornet sportabout (sw)?",
+  "question_en": "What is the accelerate of the car make amc hornet sportabout (sw)?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    13.5
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T2.Accelerate FROM car_names AS T1 JOIN cars_data AS T2 ON T1.MakeId  =  T2.Id WHERE T1.Model  =  \"amc hornet sportabout (sw)\"",
+   "explanation": "Запрос возвращает ускорение модели amc hornet sportabout (sw).",
+   "rows": [],
+   "row_count": 0,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "car_names",
+    "cars_data"
+   ],
+   "attempts": 3,
+   "message": null,
+   "sec": 26
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T2.Accelerate FROM car_names AS T1 JOIN cars_data AS T2 ON T1.MakeId  =  T2.Id WHERE T1.Make  =  \"amc hornet sportabout (sw)\"",
+   "explanation": "Запрос возвращает ускорение автомобиля марки AMC Hornet Sportabout (SW).",
+   "rows": [
+    [
+     13.5
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "car_names",
+    "cars_data"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 15
+  }
+ },
+ {
+  "id": "D_0152",
+  "db_id": "car_1",
+  "gold_sql": "SELECT DISTINCT T2.Model FROM CAR_NAMES AS T1 JOIN MODEL_LIST AS T2 ON T1.Model  =  T2.Model JOIN CAR_MAKERS AS T3 ON T2.Maker  =  T3.Id JOIN CARS_DATA AS T4 ON T1.MakeId  =  T4.Id WHERE T3.FullName  =  'General Motors' OR T4.weight  >  3500;",
+  "question_ru": "Какие разные модели выпускает производитель с полным названием General Motors или которые весят более 3500?",
+  "question_en": "Which distinctive models are produced by maker with the full name General Motors or weighing more than 3500?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "chevrolet"
+   ],
+   [
+    "buick"
+   ],
+   [
+    "ford"
+   ],
+   [
+    "plymouth"
+   ],
+   [
+    "pontiac"
+   ],
+   [
+    "amc"
+   ],
+   [
+    "dodge"
+   ],
+   [
+    "hi"
+   ],
+   [
+    "mercury"
+   ],
+   [
+    "oldsmobile"
+   ],
+   [
+    "chrysler"
+   ],
+   [
+    "mercedes-benz"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT DISTINCT T2.Model FROM car_makers AS T1 JOIN model_list AS T2 ON T1.Id  =  T2.Maker JOIN cars_data AS T3 ON T2.ModelId  =  T3.Id WHERE T1.FullName  =  'General Motors' OR T3.Weight  >  3500",
+   "explanation": "Запрос возвращает список уникальных моделей автомобилей, выпускаемых производителем General Motors или имеющих массу более 3500 кг.",
+   "rows": [
+    [
+     "amc"
+    ],
+    [
+     "audi"
+    ],
+    [
+     "buick"
+    ],
+    [
+     "cadillac"
+    ],
+    [
+     "capri"
+    ],
+    [
+     "chevrolet"
+    ],
+    [
+     "chrysler"
+    ],
+    [
+     "citroen"
+    ],
+    [
+     "datsun"
+    ],
+    [
+     "fiat"
+    ],
+    [
+     "ford"
+    ],
+    [
+     "hi"
+    ]
+   ],
+   "row_count": 22,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "car_makers",
+    "model_list",
+    "cars_data"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 19
+  },
+  "en": {
+   "status": "error",
+   "sql": "",
+   "explanation": "",
+   "rows": [],
+   "row_count": 0,
+   "exec_error": "нет SQL",
+   "exec_match": false,
+   "tables": [],
+   "attempts": null,
+   "message": "no such column: T3.Model",
+   "sec": 27
+  }
+ },
+ {
+  "id": "D_0386",
+  "db_id": "course_teach",
+  "gold_sql": "SELECT Age ,  Hometown FROM teacher;",
+  "question_ru": "Какого возраста и из какого города учителя?",
+  "question_en": "What are the age and hometown of teachers?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "32",
+    "Blackrod Urban District"
+   ],
+   [
+    "29",
+    "Bolton County Borough"
+   ],
+   [
+    "26",
+    "Farnworth Municipal Borough"
+   ],
+   [
+    "33",
+    "Horwich Urban District"
+   ],
+   [
+    "45",
+    "Kearsley Urban District"
+   ],
+   [
+    "41",
+    "Little Lever Urban District"
+   ],
+   [
+    "39",
+    "Turton Urban District"
+   ],
+   [
+    "50",
+    "Абакан"
+   ],
+   [
+    "35",
+    "Абакан"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT Age ,  Hometown FROM teacher",
+   "explanation": "Запрос возвращает возраст и город проживания учителя.",
+   "rows": [
+    [
+     "32",
+     "Blackrod Urban District"
+    ],
+    [
+     "29",
+     "Bolton County Borough"
+    ],
+    [
+     "26",
+     "Farnworth Municipal Borough"
+    ],
+    [
+     "33",
+     "Horwich Urban District"
+    ],
+    [
+     "45",
+     "Kearsley Urban District"
+    ],
+    [
+     "41",
+     "Little Lever Urban District"
+    ],
+    [
+     "39",
+     "Turton Urban District"
+    ],
+    [
+     "50",
+     "Абакан"
+    ],
+    [
+     "35",
+     "Абакан"
+    ]
+   ],
+   "row_count": 9,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "teacher"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 11
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT Age ,  Hometown FROM teacher",
+   "explanation": "Запрос возвращает возраст и родной город преподавателей.",
+   "rows": [
+    [
+     "32",
+     "Blackrod Urban District"
+    ],
+    [
+     "29",
+     "Bolton County Borough"
+    ],
+    [
+     "26",
+     "Farnworth Municipal Borough"
+    ],
+    [
+     "33",
+     "Horwich Urban District"
+    ],
+    [
+     "45",
+     "Kearsley Urban District"
+    ],
+    [
+     "41",
+     "Little Lever Urban District"
+    ],
+    [
+     "39",
+     "Turton Urban District"
+    ],
+    [
+     "50",
+     "Абакан"
+    ],
+    [
+     "35",
+     "Абакан"
+    ]
+   ],
+   "row_count": 9,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "teacher"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 10
+  }
+ },
+ {
+  "id": "D_0431",
+  "db_id": "wta_1",
+  "gold_sql": "SELECT count(*) FROM players;",
+  "question_ru": "Сколько всего там игроков?",
+  "question_en": "How many players are there?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    20665
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT count(*) FROM players",
+   "explanation": "Этот запрос возвращает общее количество игроков.",
+   "rows": [
+    [
+     20665
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "players"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT count(*) FROM players",
+   "explanation": "Запрос возвращает общее количество игроков.",
+   "rows": [
+    [
+     20665
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "players"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 15
+  }
+ },
+ {
+  "id": "D_0273",
+  "db_id": "employee_hire_evaluation",
+  "gold_sql": "SELECT min(Number_products) ,  max(Number_products) FROM shop;",
+  "question_ru": "Какое минимальное и максимальное количество товаров во всех магазинах?",
+  "question_en": "What are the minimum and maximum number of products across all the shops?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    1600,
+    15000
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT min(Number_products) ,  max(Number_products) FROM shop",
+   "explanation": "Запрос возвращает минимальное и максимальное количество товаров, представленных во всех магазинах.",
+   "rows": [
+    [
+     1600,
+     15000
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "shop"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT min(Number_products) ,  max(Number_products) FROM shop",
+   "explanation": "Запрос возвращает минимальное и максимальное количество продуктов в магазинах.",
+   "rows": [
+    [
+     1600,
+     15000
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "shop"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_0665",
+  "db_id": "poker_player",
+  "gold_sql": "SELECT T1.Name FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID  =  T2.People_ID ORDER BY T2.Final_Table_Made;",
+  "question_ru": "Как зовутся игроки в покер в порядке возрастания по количеству проведенных ими финальных столов?",
+  "question_en": "What are the names of poker players, ordered ascending by the number of final tables they have made?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Teodor Salparov"
+   ],
+   [
+    "Maksim Botin"
+   ],
+   [
+    "Yevgeni Sivozhelez"
+   ],
+   [
+    "Semen Poltavskiy"
+   ],
+   [
+    "Aleksey Ostapenko"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T2.Name FROM poker_player AS T1 JOIN people AS T2 ON T1.People_ID  =  T2.People_ID ORDER BY T1.Final_Table_Made ASC",
+   "explanation": "Запрос возвращает имена игроков покера в порядке возрастания количества финальных столов, на которых они участвовали.",
+   "rows": [
+    [
+     "Teodor Salparov"
+    ],
+    [
+     "Maksim Botin"
+    ],
+    [
+     "Yevgeni Sivozhelez"
+    ],
+    [
+     "Semen Poltavskiy"
+    ],
+    [
+     "Aleksey Ostapenko"
+    ]
+   ],
+   "row_count": 5,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "poker_player",
+    "people"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 16
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T2.Name FROM poker_player AS T1 JOIN people AS T2 ON T1.People_ID  =  T2.People_ID ORDER BY T1.Final_Table_Made ASC",
+   "explanation": "Запрос возвращает имена игроков покера, отсортированных по возрастанию количества финальных столиков, на которых они участвовали.",
+   "rows": [
+    [
+     "Teodor Salparov"
+    ],
+    [
+     "Maksim Botin"
+    ],
+    [
+     "Yevgeni Sivozhelez"
+    ],
+    [
+     "Semen Poltavskiy"
+    ],
+    [
+     "Aleksey Ostapenko"
+    ]
+   ],
+   "row_count": 5,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "poker_player",
+    "people"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 15
+  }
+ },
+ {
+  "id": "D_0464",
+  "db_id": "wta_1",
+  "gold_sql": "SELECT winner_name ,  winner_rank_points FROM matches GROUP BY winner_name ORDER BY count(*) DESC LIMIT 1;",
+  "question_ru": "Отображать имя и количество очков победителя, который выигрывал больше всего раз.",
+  "question_en": "Find the name and rank points of the winner who won the most times.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Angelique Kerber",
+    3715
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.winner_name ,  T1.winner_rank_points FROM matches AS T1 JOIN players AS T2 ON T1.winner_id  =  T2.player_id GROUP BY T1.winner_id ORDER BY COUNT(*) DESC LIMIT 1",
+   "explanation": "Запрос возвращает имя и количество очков победителя, который выигрывал больше всего раз.",
+   "rows": [
+    [
+     "Angelique Kerber",
+     3715
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "matches"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 20
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.winner_name ,  T1.winner_rank_points FROM matches AS T1 JOIN players AS T2 ON T1.winner_id  =  T2.player_id GROUP BY T1.winner_id ORDER BY COUNT(*) DESC LIMIT 1",
+   "explanation": "Запрос возвращает имя и очки рейтинга победителя, который выиграл больше всего раз.",
+   "rows": [
+    [
+     "Angelique Kerber",
+     3715
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "players",
+    "matches"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 20
+  }
+ },
+ {
+  "id": "D_0430",
+  "db_id": "wta_1",
+  "gold_sql": "SELECT count(*) FROM players;",
+  "question_ru": "Найдите общее количество игроков.",
+  "question_en": "Find the total number of players.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    20665
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT count(*) FROM players",
+   "explanation": "Запрос возвращает общее количество игроков.",
+   "rows": [
+    [
+     20665
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "players"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT count(*) FROM players",
+   "explanation": "Запрос возвращает общее количество игроков.",
+   "rows": [
+    [
+     20665
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "players"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  }
+ },
+ {
+  "id": "D_0107",
+  "db_id": "car_1",
+  "gold_sql": "SELECT T1.Continent ,  count(*) FROM CONTINENTS AS T1 JOIN COUNTRIES AS T2 ON T1.ContId  =  T2.continent JOIN car_makers AS T3 ON T2.CountryId  =  T3.Country GROUP BY T1.Continent;",
+  "question_ru": "Как называется каждый континент и сколько производителей автомобилей на каждом из них?",
+  "question_en": "What is the name of each continent and how many car makers are there in each one?",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "america",
+    4
+   ],
+   [
+    "asia",
+    8
+   ],
+   [
+    "europe",
+    13
+   ],
+   [
+    "Южная Америка",
+    3
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.Continent ,  COUNT(*) FROM countries AS T1 JOIN car_makers AS T2 ON T1.CountryId  =  T2.Country GROUP BY T1.Continent",
+   "explanation": "Запрос возвращает название каждого континента и количество производителей автомобилей на нем.",
+   "rows": [
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     13
+    ],
+    [
+     3,
+     8
+    ],
+    [
+     6,
+     3
+    ]
+   ],
+   "row_count": 4,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "countries",
+    "car_makers"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 15
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T3.Continent ,  count(*) FROM car_makers AS T1 JOIN countries AS T2 ON T1.Country  =  T2.CountryId JOIN continents AS T3 ON T2.Continent  =  T3.ContId GROUP BY T3.Continent",
+   "explanation": "Запрос возвращает название каждого континента и количество производителей автомобилей на нем.",
+   "rows": [
+    [
+     "america",
+     4
+    ],
+    [
+     "asia",
+     8
+    ],
+    [
+     "europe",
+     13
+    ],
+    [
+     "Южная Америка",
+     3
+    ]
+   ],
+   "row_count": 4,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "continents",
+    "countries",
+    "car_makers"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 16
+  }
+ },
+ {
+  "id": "D_0609",
+  "db_id": "tvshow",
+  "gold_sql": "SELECT LANGUAGE ,  count(*) FROM TV_Channel GROUP BY LANGUAGE;",
+  "question_ru": "Для каждого языка укажите количество телеканалов, которые его используют.",
+  "question_en": "For each language, list the number of TV Channels that use it.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "English",
+    3
+   ],
+   [
+    "Italian",
+    12
+   ],
+   [
+    "Албанский",
+    1
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT Language ,  COUNT(*) FROM TV_Channel GROUP BY Language",
+   "explanation": "Запрос возвращает количество телеканалов для каждого языка.",
+   "rows": [
+    [
+     "English",
+     3
+    ],
+    [
+     "Italian",
+     12
+    ],
+    [
+     "Албанский",
+     1
+    ]
+   ],
+   "row_count": 3,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "TV_Channel"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT Language ,  COUNT(*) FROM TV_Channel GROUP BY Language",
+   "explanation": "Запрос возвращает количество телеканалов для каждого языка.",
+   "rows": [
+    [
+     "English",
+     3
+    ],
+    [
+     "Italian",
+     12
+    ],
+    [
+     "Албанский",
+     1
+    ]
+   ],
+   "row_count": 3,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "TV_Channel"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_0080",
+  "db_id": "pets_1",
+  "gold_sql": "SELECT count(*) ,  T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid GROUP BY T1.stuid;",
+  "question_ru": "Количество домашних животных у каждого учащегося и id учащегося.",
+  "question_en": "Find the number of pets for each student who has any pet and student id.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    8,
+    1001
+   ],
+   [
+    2,
+    1002
+   ],
+   [
+    7,
+    1030
+   ],
+   [
+    14,
+    1036
+   ],
+   [
+    7,
+    1037
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT count(*) ,  T1.stuid FROM Has_Pet AS T1 JOIN Student AS T2 ON T1.stuid  =  T2.stuid GROUP BY T1.stuid",
+   "explanation": "Запрос возвращает количество домашних животных для каждого студента и его идентификатор.",
+   "rows": [
+    [
+     8,
+     1001
+    ],
+    [
+     2,
+     1002
+    ],
+    [
+     7,
+     1030
+    ],
+    [
+     14,
+     1036
+    ],
+    [
+     7,
+     1037
+    ]
+   ],
+   "row_count": 5,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Student",
+    "Has_Pet"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT count(*) ,  StuID FROM Has_Pet GROUP BY StuID",
+   "explanation": "Запрос возвращает количество питомцев для каждого студента, который имеет хотя бы одного питомца, а также идентификатор студента.",
+   "rows": [
+    [
+     8,
+     1001
+    ],
+    [
+     2,
+     1002
+    ],
+    [
+     7,
+     1030
+    ],
+    [
+     14,
+     1036
+    ],
+    [
+     7,
+     1037
+    ]
+   ],
+   "row_count": 5,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Has_Pet"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 12
+  }
+ },
+ {
+  "id": "D_0956",
+  "db_id": "dog_kennels",
+  "gold_sql": "SELECT T1.name ,  T2.date_of_treatment FROM Dogs AS T1 JOIN Treatments AS T2 ON T1.dog_id  =  T2.dog_id WHERE T1.breed_code  =  ( SELECT breed_code FROM Dogs GROUP BY breed_code ORDER BY count(*) ASC LIMIT 1 );",
+  "question_ru": "Какие собаки самой редкой породы? Показывать их клички и даты лечения.",
+  "question_en": "Which dogs are of the rarest breed? Show their names and treatment dates.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Holden",
+    "2018-03-23 13:52:10"
+   ],
+   [
+    "Troy",
+    "2018-03-11 04:23:15"
+   ],
+   [
+    "Troy",
+    "2018-02-28 17:09:43"
+   ],
+   [
+    "Jesus",
+    "2018-03-16 10:27:36"
+   ],
+   [
+    "Troy",
+    "2018-03-04 20:33:43"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.name ,  T3.date_of_treatment FROM dogs AS T1 JOIN treatments AS T3 ON T1.dog_id  =  T3.dog_id JOIN breeds AS T2 ON T1.breed_code  =  T2.breed_code WHERE T2.breed_name  =  (SELECT breed_name FROM breeds GROUP BY breed_name ORDER BY count(*) ASC LIMIT 1)",
+   "explanation": "Запрос возвращает клички и даты лечения собак самой редкой породы.",
+   "rows": [
+    [
+     "Hipolito",
+     "2018-03-01 04:14:46"
+    ],
+    [
+     "Evangeline",
+     "2018-03-10 11:45:58"
+    ],
+    [
+     "Hipolito",
+     "2018-03-24 22:25:58"
+    ],
+    [
+     "Evangeline",
+     "2018-03-13 12:22:58"
+    ],
+    [
+     "Narciso",
+     "2018-02-26 09:08:53"
+    ]
+   ],
+   "row_count": 5,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Breeds",
+    "Dogs",
+    "Treatments"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 26
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.name ,  T3.date_of_treatment FROM dogs AS T1 JOIN treatments AS T3 ON T1.dog_id  =  T3.dog_id JOIN breeds AS T2 ON T1.breed_code  =  T2.breed_code WHERE T2.breed_name  =  (SELECT breed_name FROM breeds GROUP BY breed_name ORDER BY count(*) ASC LIMIT 1)",
+   "explanation": "Запрос возвращает имена собак и даты их лечения для самых редких пород.",
+   "rows": [
+    [
+     "Hipolito",
+     "2018-03-01 04:14:46"
+    ],
+    [
+     "Evangeline",
+     "2018-03-10 11:45:58"
+    ],
+    [
+     "Hipolito",
+     "2018-03-24 22:25:58"
+    ],
+    [
+     "Evangeline",
+     "2018-03-13 12:22:58"
+    ],
+    [
+     "Narciso",
+     "2018-02-26 09:08:53"
+    ]
+   ],
+   "row_count": 5,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Breeds",
+    "Dogs",
+    "Treatments"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 25
+  }
+ },
+ {
+  "id": "D_0025",
+  "db_id": "concert_singer",
+  "gold_sql": "SELECT T2.name ,  T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id  =  T2.stadium_id WHERE T1.year  >=  2014 GROUP BY T2.stadium_id ORDER BY count(*) DESC LIMIT 1;",
+  "question_ru": "Укажите название и вместимость стадиона, на котором будет проведено наибольшее количество концертов в 2014 году или позже.",
+  "question_en": "Show the stadium name and capacity with most number of concerts in year 2014 or after.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Recreation Park",
+    3100
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.name ,  T1.capacity FROM stadium AS T1 JOIN concert AS T2 ON T1.stadium_id  =  T2.stadium_id WHERE T2.year  >=  2014 GROUP BY T2.stadium_id ORDER BY count(*) DESC LIMIT 1",
+   "explanation": "Запрос возвращает название и вместимость стадиона, где было проведено наибольшее количество концертов с 2014 года.",
+   "rows": [
+    [
+     "Recreation Park",
+     3100
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "stadium",
+    "concert"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 18
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.name ,  T1.capacity FROM stadium AS T1 JOIN concert AS T2 ON T1.stadium_id  =  T2.stadium_id WHERE T2.year  >=  2014 GROUP BY T1.stadium_id ORDER BY count(*) DESC LIMIT 1",
+   "explanation": "Запрос возвращает название и вместимость стадиона, где прошло больше всего концертов с 2014 года.",
+   "rows": [
+    [
+     "Recreation Park",
+     3100
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "stadium",
+    "concert"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 16
+  }
+ },
+ {
+  "id": "D_0428",
+  "db_id": "museum_visit",
+  "gold_sql": "SELECT count(*) FROM visitor WHERE id NOT IN (SELECT t2.visitor_id FROM museum AS t1 JOIN visit AS t2 ON t1.Museum_ID  =  t2.Museum_ID WHERE t1.open_year  >  2010);",
+  "question_ru": "Найдите количество посетителей, которые не посещали ни один музей, открытый после 2010 года.",
+  "question_en": "Find the number of visitors who did not visit any museum opened after 2010.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    3
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT count(*) FROM visit WHERE museum_id NOT IN (SELECT museum_id FROM museum WHERE open_year  >  2010)",
+   "explanation": "Запрос возвращает количество посетителей, которые не посещали ни один музей, открытый после 2010 года.",
+   "rows": [
+    [
+     2
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "museum",
+    "visit"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT count(DISTINCT visitor_ID) FROM visit WHERE museum_ID NOT IN (SELECT museum_ID FROM museum WHERE open_year  >  2010)",
+   "explanation": "Запрос возвращает количество посетителей, которые не посещали ни одно из музеев, открытых после 2010 года.",
+   "rows": [
+    [
+     2
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "museum",
+    "visit"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  }
+ },
+ {
+  "id": "D_0889",
+  "db_id": "network_1",
+  "gold_sql": "SELECT T2.name FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id  =  T2.id GROUP BY T1.student_id HAVING count(*)  >=  3;",
+  "question_ru": "Покажи имена старшеклассников, у которых есть как минимум 3 друга.",
+  "question_en": "Show the names of high schoolers who have at least 3 friends.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Andrew"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT T1.name FROM Highschooler AS T1 JOIN Friend AS T2 ON T1.id  =  T2.student_id WHERE T1.grade  =  12 GROUP BY T1.id HAVING count(*)  >=  3",
+   "explanation": "Запрос возвращает имена старшеклассников, у которых есть как минимум три друга.",
+   "rows": [],
+   "row_count": 0,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "Highschooler",
+    "Friend"
+   ],
+   "attempts": 3,
+   "message": null,
+   "sec": 25
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT T1.name FROM Highschooler AS T1 JOIN Friend AS T2 ON T1.id  =  T2.student_id GROUP BY T2.student_id HAVING count(*)  >=  3",
+   "explanation": "Запрос возвращает имена старшеклассников, у которых есть как минимум три друга.",
+   "rows": [
+    [
+     "Andrew"
+    ]
+   ],
+   "row_count": 1,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Highschooler",
+    "Friend"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 14
+  }
+ },
+ {
+  "id": "D_0470",
+  "db_id": "wta_1",
+  "gold_sql": "SELECT avg(ranking) ,  T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id  =  T2.player_id GROUP BY T1.first_name;",
+  "question_ru": "Найдите средний рейтинг каждого игрока и его имя.",
+  "question_en": "Find the average ranking for each player and their first name.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    1199.8235294117646,
+    "Aastha"
+   ],
+   [
+    1110.0434782608695,
+    "Abbi"
+   ],
+   [
+    808.4545454545455,
+    "Abbie"
+   ],
+   [
+    387.66706161137444,
+    "Abigail"
+   ],
+   [
+    1039.6744186046512,
+    "Abiodun"
+   ],
+   [
+    1228.75,
+    "Abir"
+   ],
+   [
+    790.1538461538462,
+    "Adeliya"
+   ],
+   [
+    1122.4423076923076,
+    "Adnya"
+   ],
+   [
+    619.6814159292036,
+    "Adriana"
+   ],
+   [
+    1213.1666666666667,
+    "Adrienn"
+   ],
+   [
+    627.12,
+    "Adrijana"
+   ],
+   [
+    1255.3333333333333,
+    "Adva"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT avg(T2.ranking) ,  T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id = T2.player_id GROUP BY T1.player_id",
+   "explanation": "Запрос возвращает средний рейтинг и имя каждого игрока.",
+   "rows": [
+    [
+     186.76587795765877,
+     "Mirjana"
+    ],
+    [
+     121.82273948075202,
+     "Tamarine"
+    ],
+    [
+     196.02280912364947,
+     "Katarina"
+    ],
+    [
+     178.44725111441306,
+     "Jana"
+    ],
+    [
+     101.55520833333334,
+     "Lisa"
+    ],
+    [
+     1070.21875,
+     "Maureen"
+    ],
+    [
+     14.654294803817603,
+     "Serena"
+    ],
+    [
+     153.08190476190475,
+     "Nicole"
+    ],
+    [
+     114.47024504084014,
+     "Virginie"
+    ],
+    [
+     385.8135593220339,
+     "Patty"
+    ],
+    [
+     61.8536866359447,
+     "Nadia"
+    ],
+    [
+     236.07412398921832,
+     "Cara"
+    ]
+   ],
+   "row_count": 200,
+   "exec_error": null,
+   "exec_match": false,
+   "tables": [
+    "players",
+    "rankings"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 18
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT avg(T2.ranking) ,  T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id = T2.player_id GROUP BY T1.first_name",
+   "explanation": "Запрос возвращает средний рейтинг для каждого игрока и его имя.",
+   "rows": [
+    [
+     1199.8235294117646,
+     "Aastha"
+    ],
+    [
+     1110.0434782608695,
+     "Abbi"
+    ],
+    [
+     808.4545454545455,
+     "Abbie"
+    ],
+    [
+     387.66706161137444,
+     "Abigail"
+    ],
+    [
+     1039.6744186046512,
+     "Abiodun"
+    ],
+    [
+     1228.75,
+     "Abir"
+    ],
+    [
+     790.1538461538462,
+     "Adeliya"
+    ],
+    [
+     1122.4423076923076,
+     "Adnya"
+    ],
+    [
+     619.6814159292036,
+     "Adriana"
+    ],
+    [
+     1213.1666666666667,
+     "Adrienn"
+    ],
+    [
+     627.12,
+     "Adrijana"
+    ],
+    [
+     1255.3333333333333,
+     "Adva"
+    ]
+   ],
+   "row_count": 200,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "players",
+    "rankings"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 18
+  }
+ },
+ {
+  "id": "D_0929",
+  "db_id": "dog_kennels",
+  "gold_sql": "SELECT professional_id ,  role_code ,  email_address FROM Professionals EXCEPT SELECT T1.professional_id ,  T1.role_code ,  T1.email_address FROM Professionals AS T1 JOIN Treatments AS T2 ON T1.professional_id  =  T2.professional_id;",
+  "question_ru": "Кто из специалистов не проводил лечение собакам? Перечислите id, должность и адрес электронной почты специалиста.",
+  "question_en": "Which professional did not operate any treatment on dogs? List the professional's id, role and email.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    1,
+    "Employee",
+    "deanna.schuster@example.com"
+   ],
+   [
+    2,
+    "Employee",
+    "lucile.shanahan@example.org"
+   ],
+   [
+    3,
+    "Employee",
+    "uboehm@example.org"
+   ],
+   [
+    11,
+    "Employee",
+    "west.eula@example.net"
+   ],
+   [
+    12,
+    "Veterenarian",
+    "marquardt.furman@example.org"
+   ],
+   [
+    13,
+    "Veterenarian",
+    "delphine29@example.com"
+   ],
+   [
+    15,
+    "Employee",
+    "jeichmann@example.com"
+   ],
+   [
+    16,
+    "Главврач",
+    "goyette.roosevelt@example.net"
+   ],
+   [
+    17,
+    "Главврач",
+    "schneider.kathryne@example.org"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT professional_id ,  role_code ,  email_address FROM Professionals WHERE professional_id NOT IN ( SELECT professional_id FROM Treatments )",
+   "explanation": "Запрос возвращает идентификаторы, должности и адреса электронной почты специалистов, которые не оказывали лечение собакам.",
+   "rows": [
+    [
+     1,
+     "Employee",
+     "deanna.schuster@example.com"
+    ],
+    [
+     2,
+     "Employee",
+     "lucile.shanahan@example.org"
+    ],
+    [
+     3,
+     "Employee",
+     "uboehm@example.org"
+    ],
+    [
+     11,
+     "Employee",
+     "west.eula@example.net"
+    ],
+    [
+     12,
+     "Veterenarian",
+     "marquardt.furman@example.org"
+    ],
+    [
+     13,
+     "Veterenarian",
+     "delphine29@example.com"
+    ],
+    [
+     15,
+     "Employee",
+     "jeichmann@example.com"
+    ],
+    [
+     16,
+     "Главврач",
+     "goyette.roosevelt@example.net"
+    ],
+    [
+     17,
+     "Главврач",
+     "schneider.kathryne@example.org"
+    ]
+   ],
+   "row_count": 9,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Professionals",
+    "Treatments"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 25
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT professional_id ,  role_code ,  email_address FROM Professionals WHERE professional_id NOT IN ( SELECT professional_id FROM Treatments )",
+   "explanation": "Запрос возвращает информацию о профессионале, который не проводил никаких процедур для собак.",
+   "rows": [
+    [
+     1,
+     "Employee",
+     "deanna.schuster@example.com"
+    ],
+    [
+     2,
+     "Employee",
+     "lucile.shanahan@example.org"
+    ],
+    [
+     3,
+     "Employee",
+     "uboehm@example.org"
+    ],
+    [
+     11,
+     "Employee",
+     "west.eula@example.net"
+    ],
+    [
+     12,
+     "Veterenarian",
+     "marquardt.furman@example.org"
+    ],
+    [
+     13,
+     "Veterenarian",
+     "delphine29@example.com"
+    ],
+    [
+     15,
+     "Employee",
+     "jeichmann@example.com"
+    ],
+    [
+     16,
+     "Главврач",
+     "goyette.roosevelt@example.net"
+    ],
+    [
+     17,
+     "Главврач",
+     "schneider.kathryne@example.org"
+    ]
+   ],
+   "row_count": 9,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "Professionals",
+    "Treatments"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 23
+  }
+ },
+ {
+  "id": "D_1003",
+  "db_id": "singer",
+  "gold_sql": "SELECT Name FROM singer ORDER BY Net_Worth_Millions ASC;",
+  "question_ru": "Перечислите имена певцов в порядке возрастания их чистых активов.",
+  "question_en": "List the name of singers in ascending order of net worth.",
+  "gold_error": null,
+  "gold_rows": [
+   [
+    "Андрей Пакетов"
+   ],
+   [
+    "Abigail Johnson"
+   ],
+   [
+    "Susanne Klatten"
+   ],
+   [
+    "Gina Rinehart"
+   ],
+   [
+    "Iris Fontbona"
+   ],
+   [
+    "Jacqueline Mars"
+   ],
+   [
+    "Alice Walton"
+   ],
+   [
+    "Christy Walton"
+   ],
+   [
+    "Liliane Bettencourt"
+   ]
+  ],
+  "ru": {
+   "status": "ok",
+   "sql": "SELECT Name FROM singer ORDER BY Net_Worth_Millions ASC",
+   "explanation": "Запрос возвращает список имен певцов, отсортированных по возрастанию их чистых активов.",
+   "rows": [
+    [
+     "Андрей Пакетов"
+    ],
+    [
+     "Abigail Johnson"
+    ],
+    [
+     "Susanne Klatten"
+    ],
+    [
+     "Gina Rinehart"
+    ],
+    [
+     "Iris Fontbona"
+    ],
+    [
+     "Jacqueline Mars"
+    ],
+    [
+     "Alice Walton"
+    ],
+    [
+     "Christy Walton"
+    ],
+    [
+     "Liliane Bettencourt"
+    ]
+   ],
+   "row_count": 9,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "singer"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 13
+  },
+  "en": {
+   "status": "ok",
+   "sql": "SELECT Name FROM singer ORDER BY Net_Worth_Millions ASC",
+   "explanation": "Запрос возвращает список имен исполнителей, отсортированных по возрастанию их стоимости.",
+   "rows": [
+    [
+     "Андрей Пакетов"
+    ],
+    [
+     "Abigail Johnson"
+    ],
+    [
+     "Susanne Klatten"
+    ],
+    [
+     "Gina Rinehart"
+    ],
+    [
+     "Iris Fontbona"
+    ],
+    [
+     "Jacqueline Mars"
+    ],
+    [
+     "Alice Walton"
+    ],
+    [
+     "Christy Walton"
+    ],
+    [
+     "Liliane Bettencourt"
+    ]
+   ],
+   "row_count": 9,
+   "exec_error": null,
+   "exec_match": true,
+   "tables": [
+    "singer"
+   ],
+   "attempts": 1,
+   "message": null,
+   "sec": 11
+  }
+ }
+]

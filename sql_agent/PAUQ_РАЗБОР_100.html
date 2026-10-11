@@ -1,0 +1,1770 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>PAUQ — русский против английского</title><style>
+:root{color-scheme:light;--bg:#f9f9f7;--card:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--muted:#898781;
+--line:rgba(11,11,11,.10);--grid:#e1e0d9;--blue:#2a78d6;--orange:#eb6834;--ok:#0ca30c;--bad:#d03b3b}
+@media(prefers-color-scheme:dark){:root{--bg:#0d0d0d;--card:#1a1a19;--ink:#fff;--ink2:#c3c2b7;
+--line:rgba(255,255,255,.10);--grid:#2c2c2a;--blue:#3987e5;--orange:#d95926}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);
+font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 18px 70px}
+h1{font-size:27px;margin:0 0 6px;letter-spacing:-.02em}h2{font-size:19px;margin:30px 0 12px}
+.sub{color:var(--ink2);max-width:82ch;margin:0 0 20px}
+.stats{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin:18px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.stat .v{font-size:27px;line-height:1;font-variant-numeric:tabular-nums}
+.stat .l{font-size:12px;color:var(--ink2);margin-top:6px}
+.stat.ru{border-left:3px solid var(--blue)}.stat.en{border-left:3px solid var(--orange)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.q{font-size:15.5px;font-weight:620;margin:0 0 2px}
+.qen{font-size:13.5px;color:var(--muted);margin-bottom:10px}
+.gold{font-size:12px;color:var(--muted);margin-bottom:12px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:900px){.pair{grid-template-columns:1fr}}
+.side{border:1px solid var(--line);border-radius:10px;padding:12px}
+.side.ru{border-left:3px solid var(--blue)}.side.en{border-left:3px solid var(--orange)}
+.lbl{font-size:12px;color:var(--muted);margin-bottom:7px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.v{font-size:11px;padding:2px 8px;border-radius:20px}
+.v.y{background:rgba(12,163,12,.14);color:var(--ok)}.v.n{background:rgba(208,59,59,.12);color:var(--bad)}
+.pill{font-size:11px;color:var(--muted)}
+pre{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;line-height:1.5;background:var(--bg);
+border:1px solid var(--line);border-radius:7px;padding:8px 10px;overflow-x:auto;margin:0;
+white-space:pre-wrap;word-break:break-word}
+.meta{font-size:11.5px;color:var(--muted);margin:7px 0}
+.err{color:var(--bad);font-size:12px;margin-top:6px}
+table.rows{border-collapse:collapse;font-size:11.5px;margin-top:6px;width:100%}
+table.rows td{border-bottom:1px solid var(--grid);padding:3px 10px 3px 0}
+.bar{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);
+backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 0;margin-bottom:16px}
+select{font:inherit;font-size:13px;padding:6px 11px;border-radius:8px;border:1px solid var(--line);
+background:var(--card);color:var(--ink)}
+</style></head><body><div class="wrap">
+<h1>PAUQ: русский вопрос против английского</h1>
+<p class="sub">100 параллельных пар из тестового сплита PAUQ — русской адаптации
+Spider. Взяты только пары с <b>дословно одинаковым гольд-SQL</b>: тогда разница
+объясняется языком вопроса, а не переведёнными литералами. Базы — из PAUQ
+(в них дописаны русские значения), а не оригинальные Spider.</p>
+
+<div class="stats">
+<div class="stat ru"><div class="v">68%</div><div class="l">EX по-русски (68/100)</div></div>
+<div class="stat en"><div class="v">76%</div><div class="l">EX по-английски (76/100)</div></div>
+<div class="stat"><div class="v">+8</div><div class="l">разрыв, п.п.</div></div>
+<div class="stat"><div class="v">67</div><div class="l">верно на обоих языках</div></div>
+<div class="stat"><div class="v">9</div><div class="l">только по-английски</div></div>
+<div class="stat"><div class="v">1</div><div class="l">только по-русски</div></div>
+</div>
+
+<div class="bar"><select id="f">
+<option value="*">все пары</option>
+<option value="diff">только расхождения ru/en</option>
+<option value="ruko">русский не справился</option>
+<option value="both">оба не справились</option>
+</select></div>
+<h2>Пары</h2><div class="card" data-state="both ruko">
+  <p class="q">1. Показать имена посетителей, чей уровень членства выше 4, и отсортировать результаты по уровню от высокого к низкому.</p>
+  <div class="qen">Find the names of the visitors whose membership level is higher than 4, and order the results by the level from high to low.</div>
+  <div class="gold">база <b>museum_visit</b> · эталон: <code>SELECT name FROM visitor WHERE Level_of_membership  &gt;  4 ORDER BY Level_of_membership DESC;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.Name FROM visitor AS T1 JOIN visit AS T2 ON T1.ID  =  T2.visitor_ID WHERE T1.Level_of_membership  &gt;  4 ORDER BY T1.Level_of_membership DESC</pre>
+  
+  <div class="meta">строк 2 · попыток критика 1 · 18с</div>
+  <table class="rows"><tbody><tr><td>Fernando Gago</td></tr><tr><td>Fernando Gago</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.name FROM visitor AS T1 JOIN visit AS T2 ON T1.id  =  T2.visitor_id WHERE T1.level_of_membership  &gt;  4 ORDER BY T1.level_of_membership DESC</pre>
+  
+  <div class="meta">строк 2 · попыток критика 1 · 15с</div>
+  <table class="rows"><tbody><tr><td>Fernando Gago</td></tr><tr><td>Fernando Gago</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">2. Какой денежный ранг у игрока в покер с самым высоким заработком?</p>
+  <div class="qen">What is the money rank of the poker player with the highest earnings?</div>
+  <div class="gold">база <b>poker_player</b> · эталон: <code>SELECT Money_Rank FROM poker_player ORDER BY Earnings DESC LIMIT 1;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT money_rank FROM poker_player ORDER BY earnings DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 12с</div>
+  <table class="rows"><tbody><tr><td>58.0</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT money_rank FROM poker_player ORDER BY earnings DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 12с</div>
+  <table class="rows"><tbody><tr><td>58.0</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="diff ruko">
+  <p class="q">3. Как зовут каждого специалиста и как он описывает проведенное лечение?</p>
+  <div class="qen">What are each professional&#x27;s first name and description of the treatment they have performed?</div>
+  <div class="gold">база <b>dog_kennels</b> · эталон: <code>SELECT DISTINCT T1.first_name ,  T3.treatment_type_description FROM professionals AS T1 JOIN Treatments AS T2 ON T1.professional_id  =  T2.professiona</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.first_name ,  T1.last_name ,  T3.treatment_type_description FROM Professionals AS T1 JOIN Treatments AS T2 ON T1.professional_id  =  T2.professional_id JOIN Treatment_Types AS T3 ON T2.treatment_type_code  =  T3.treatment_type_code</pre>
+  
+  <div class="meta">строк 15 · попыток критика 1 · 25с</div>
+  <table class="rows"><tbody><tr><td>Monte</td><td>Kshlerin</td><td>Take for a Walk</td></tr><tr><td>Domenica</td><td>Jacobs</td><td>Vaccination</td></tr><tr><td>Vernice</td><td>Tillman</td><td>Physical examination</td></tr><tr><td>Karley</td><td>Hyatt</td><td>Vaccination</td></tr><tr><td>Sigurd</td><td>Frami</td><td>Vaccination</td></tr><tr><td>Vernice</td><td>Tillman</td><td>Physical examination</td></tr></tbody></table><div class="pill">…из 12</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T1.first_name ,  T3.treatment_type_description FROM Professionals AS T1 JOIN Treatments AS T2 ON T1.professional_id  =  T2.professional_id JOIN Treatment_Types AS T3 ON T2.treatment_type_code  =  T3.treatment_type_code</pre>
+  
+  <div class="meta">строк 15 · попыток критика 1 · 24с</div>
+  <table class="rows"><tbody><tr><td>Monte</td><td>Take for a Walk</td></tr><tr><td>Domenica</td><td>Vaccination</td></tr><tr><td>Vernice</td><td>Physical examination</td></tr><tr><td>Karley</td><td>Vaccination</td></tr><tr><td>Sigurd</td><td>Vaccination</td></tr><tr><td>Vernice</td><td>Physical examination</td></tr></tbody></table><div class="pill">…из 12</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">4. Какие номера рейсов вылетают из аэропорта «APG»?</p>
+  <div class="qen">What are flight numbers of flights departing from Airport &quot;APG&quot;?</div>
+  <div class="gold">база <b>flight_2</b> · эталон: <code>SELECT FlightNo FROM FLIGHTS WHERE SourceAirport  =  &quot;APG&quot;;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT FlightNo FROM flights WHERE SourceAirport  =  &#x27;APG&#x27;</pre>
+  
+  <div class="meta">строк 11 · попыток критика 1 · 12с</div>
+  <table class="rows"><tbody><tr><td>1172</td></tr><tr><td>28</td></tr><tr><td>743</td></tr><tr><td>382</td></tr><tr><td>1377</td></tr><tr><td>1275</td></tr></tbody></table><div class="pill">…из 11</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT FlightNo FROM flights WHERE SourceAirport  =  &quot;APG&quot;</pre>
+  
+  <div class="meta">строк 11 · попыток критика 1 · 11с</div>
+  <table class="rows"><tbody><tr><td>1172</td></tr><tr><td>28</td></tr><tr><td>743</td></tr><tr><td>382</td></tr><tr><td>1377</td></tr><tr><td>1275</td></tr></tbody></table><div class="pill">…из 11</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">5. Отображать имена и площади 5 крупнейших стран.</p>
+  <div class="qen">Return the names and surface areas of the 5 largest countries.</div>
+  <div class="gold">база <b>world_1</b> · эталон: <code>SELECT Name ,  SurfaceArea FROM country ORDER BY SurfaceArea DESC LIMIT 5;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT name ,  surfacearea FROM country ORDER BY surfacearea DESC LIMIT 5</pre>
+  
+  <div class="meta">строк 5 · попыток критика 1 · 16с</div>
+  <table class="rows"><tbody><tr><td>Russian Federation</td><td>17075400.0</td></tr><tr><td>Antarctica</td><td>13120000.0</td></tr><tr><td>Canada</td><td>9970610.0</td></tr><tr><td>China</td><td>9572900.0</td></tr><tr><td>United States</td><td>9363520.0</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT name ,  surfacearea FROM country ORDER BY surfacearea DESC LIMIT 5</pre>
+  
+  <div class="meta">строк 5 · попыток критика 1 · 15с</div>
+  <table class="rows"><tbody><tr><td>Russian Federation</td><td>17075400.0</td></tr><tr><td>Antarctica</td><td>13120000.0</td></tr><tr><td>Canada</td><td>9970610.0</td></tr><tr><td>China</td><td>9572900.0</td></tr><tr><td>United States</td><td>9363520.0</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">6. Какой минимальный вес у автомобиля с 8 цилиндрами 1974 года выпуска?</p>
+  <div class="qen">What is the minimum weight of the car with 8 cylinders produced in 1974 ?</div>
+  <div class="gold">база <b>car_1</b> · эталон: <code>select min(weight) from cars_data where cylinders  =  8 and year  =  1974;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT min(weight) FROM cars_data WHERE cylinders  =  8 AND YEAR  =  1974</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 15с</div>
+  <table class="rows"><tbody><tr><td>4141</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT min(weight) FROM cars_data WHERE cylinders  =  8 AND YEAR  =  1974</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>4141</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">7. Найдите средний и максимальный возраст для каждого типа домашних животных.</p>
+  <div class="qen">Find the average and maximum age for each type of pet.</div>
+  <div class="gold">база <b>pets_1</b> · эталон: <code>SELECT avg(pet_age) ,  max(pet_age) ,  pettype FROM pets GROUP BY pettype;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT avg(pet_age) ,  max(pet_age) ,  pettype FROM Has_Pet AS T1 JOIN Pets AS T2 ON T1.PetID  =  T2.PetID GROUP BY pettype</pre>
+  
+  <div class="meta">строк 4 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>3.0</td><td>3</td><td>cat</td></tr><tr><td>1.8888888888888888</td><td>2</td><td>dog</td></tr><tr><td>3.0</td><td>3</td><td>попугай</td></tr><tr><td>4.0</td><td>4</td><td>черепаха</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT avg(pet_age) ,  max(pet_age) ,  pettype FROM Has_Pet AS T1 JOIN Pets AS T2 ON T1.PetID  =  T2.PetID GROUP BY pettype</pre>
+  
+  <div class="meta">строк 4 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>3.0</td><td>3</td><td>cat</td></tr><tr><td>1.8888888888888888</td><td>2</td><td>dog</td></tr><tr><td>3.0</td><td>3</td><td>попугай</td></tr><tr><td>4.0</td><td>4</td><td>черепаха</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">8. Найдите имя менеджера и район магазина, в котором больше всего товаров.</p>
+  <div class="qen">Find the manager name and district of the shop whose number of products is the largest.</div>
+  <div class="gold">база <b>employee_hire_evaluation</b> · эталон: <code>SELECT manager_name ,  district FROM shop ORDER BY number_products DESC LIMIT 1;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT manager_name ,  district FROM shop ORDER BY number_products DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>Ilkka Mäkelä</td><td>Lahden Stadion</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT manager_name ,  district FROM shop ORDER BY number_products DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>Ilkka Mäkelä</td><td>Lahden Stadion</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">9. Какие названия и описания у всех разделов?</p>
+  <div class="qen">What are the names and descriptions for all the sections?</div>
+  <div class="gold">база <b>student_transcripts_tracking</b> · эталон: <code>SELECT section_name ,  section_description FROM Sections;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT section_name ,  section_description FROM SECTIONS</pre>
+  
+  <div class="meta">строк 15 · попыток критика 2 · 25с</div>
+  <table class="rows"><tbody><tr><td>a</td><td>non</td></tr><tr><td>b</td><td>voluptatem</td></tr><tr><td>c</td><td>qui</td></tr><tr><td>d</td><td>voluptas</td></tr><tr><td>e</td><td>ex</td></tr><tr><td>f</td><td>doloremque</td></tr></tbody></table><div class="pill">…из 12</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT section_name ,  section_description FROM SECTIONS</pre>
+  
+  <div class="meta">строк 15 · попыток критика 2 · 24с</div>
+  <table class="rows"><tbody><tr><td>a</td><td>non</td></tr><tr><td>b</td><td>voluptatem</td></tr><tr><td>c</td><td>qui</td></tr><tr><td>d</td><td>voluptas</td></tr><tr><td>e</td><td>ex</td></tr><tr><td>f</td><td>doloremque</td></tr></tbody></table><div class="pill">…из 12</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">10. Сколько рейсов отправляется из APG?</p>
+  <div class="qen">How many flights depart from &#x27;APG&#x27;?</div>
+  <div class="gold">база <b>flight_2</b> · эталон: <code>SELECT count(*) FROM FLIGHTS WHERE SourceAirport  =  &quot;APG&quot;;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT count(*) FROM flights WHERE SourceAirport  =  &#x27;APG&#x27;</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 11с</div>
+  <table class="rows"><tbody><tr><td>11</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT count(*) FROM flights WHERE sourceairport  =  &#x27;APG&#x27;</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 11с</div>
+  <table class="rows"><tbody><tr><td>11</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">11. Найдите все авиакомпании, у которых есть рейсы из обоих аэропортов &quot;APG&quot; и &quot;CVO&quot;.</p>
+  <div class="qen">Find all airlines that have flights from both airports &#x27;APG&#x27; and &#x27;CVO&#x27;.</div>
+  <div class="gold">база <b>flight_2</b> · эталон: <code>SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  &quot;APG&quot; INTERSECT SELECT T1.Airline FROM AI</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T1.Airline FROM airlines AS T1 JOIN flights AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  &quot;APG&quot; INTERSECT SELECT T1.Airline FROM airlines AS T1 JOIN flights AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  &quot;CVO&quot;</pre>
+  
+  <div class="meta">строк 7 · попыток критика 1 · 17с</div>
+  <table class="rows"><tbody><tr><td>AirTran Airways</td></tr><tr><td>Allegiant Air</td></tr><tr><td>Delta Airlines</td></tr><tr><td>Northwest Airlines</td></tr><tr><td>Southwest Airlines</td></tr><tr><td>US Airways</td></tr></tbody></table><div class="pill">…из 7</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T1.Airline FROM airlines AS T1 JOIN flights AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  &#x27;APG&#x27; INTERSECT SELECT T1.Airline FROM airlines AS T1 JOIN flights AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  &#x27;CVO&#x27;</pre>
+  
+  <div class="meta">строк 7 · попыток критика 1 · 16с</div>
+  <table class="rows"><tbody><tr><td>AirTran Airways</td></tr><tr><td>Allegiant Air</td></tr><tr><td>Delta Airlines</td></tr><tr><td>Northwest Airlines</td></tr><tr><td>Southwest Airlines</td></tr><tr><td>US Airways</td></tr></tbody></table><div class="pill">…из 7</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">12. Какие id различных шаблонов используются для документов и сколько раз каждый из них использовался?</p>
+  <div class="qen">What are all different template ids used for documents, and how many times were each of them used?</div>
+  <div class="gold">база <b>cre_Doc_Template_Mgt</b> · эталон: <code>SELECT template_id ,  count(*) FROM Documents GROUP BY template_id;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT template_id ,  count(*) FROM Documents GROUP BY template_id</pre>
+  
+  <div class="meta">строк 14 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>1</td><td>1</td></tr><tr><td>4</td><td>1</td></tr><tr><td>6</td><td>1</td></tr><tr><td>7</td><td>1</td></tr><tr><td>8</td><td>1</td></tr><tr><td>10</td><td>1</td></tr></tbody></table><div class="pill">…из 12</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT template_id ,  count(*) FROM Documents GROUP BY template_id</pre>
+  
+  <div class="meta">строк 14 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>1</td><td>1</td></tr><tr><td>4</td><td>1</td></tr><tr><td>6</td><td>1</td></tr><tr><td>7</td><td>1</td></tr><tr><td>8</td><td>1</td></tr><tr><td>10</td><td>1</td></tr></tbody></table><div class="pill">…из 12</div>
+</div></div>
+</div><div class="card" data-state="diff ruko">
+  <p class="q">13. Как зовут старшеклассника, у которого больше всего лайков?</p>
+  <div class="qen">What is the name of the high schooler who has the greatest number of likes?</div>
+  <div class="gold">база <b>network_1</b> · эталон: <code>SELECT T2.name FROM Likes AS T1 JOIN Highschooler AS T2 ON T1.student_id  =  T2.id GROUP BY T1.student_id ORDER BY count(*) DESC LIMIT 1;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.name FROM Highschooler AS T1 JOIN Likes AS T2 ON T1.id  =  T2.liked_id WHERE T1.grade  =  12 GROUP BY T2.liked_id ORDER BY count(*) DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>Kyle</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT t1.name FROM highschooler AS t1 JOIN likes AS t2 ON t1.id  =  t2.student_id GROUP BY t2.student_id ORDER BY count(*) DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>Лев</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">14. Каков средний возраст собак, прошедших какое-либо лечение?</p>
+  <div class="qen">What is the average age of the dogs who have gone through any treatments?</div>
+  <div class="gold">база <b>dog_kennels</b> · эталон: <code>SELECT avg(age) FROM Dogs WHERE dog_id IN ( SELECT dog_id FROM Treatments );</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT avg(T1.age) FROM dogs AS T1 JOIN treatments AS T2 ON T1.dog_id  =  T2.dog_id</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 23с</div>
+  <table class="rows"><tbody><tr><td>5.466666666666667</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT avg(T1.age) FROM dogs AS T1 JOIN treatments AS T2 ON T1.dog_id  =  T2.dog_id</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 23с</div>
+  <table class="rows"><tbody><tr><td>5.466666666666667</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">15. Имя и возраст учеников, у которых есть домашнее животное.</p>
+  <div class="qen">Find the first name and age of students who have a pet.</div>
+  <div class="gold">база <b>pets_1</b> · эталон: <code>SELECT DISTINCT T1.fname ,  T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT fname ,  age FROM Student WHERE StuID IN (SELECT StuID FROM Has_Pet)</pre>
+  
+  <div class="meta">строк 5 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>Linda</td><td>18</td></tr><tr><td>Tracy</td><td>19</td></tr><tr><td>Lisa</td><td>21</td></tr><tr><td>Петр</td><td>19</td></tr><tr><td>Лиза</td><td>20</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT fname ,  age FROM Student WHERE StuID IN (SELECT StuID FROM Has_Pet)</pre>
+  
+  <div class="meta">строк 5 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>Linda</td><td>18</td></tr><tr><td>Tracy</td><td>19</td></tr><tr><td>Lisa</td><td>21</td></tr><tr><td>Петр</td><td>19</td></tr><tr><td>Лиза</td><td>20</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">16. Показать все коды типов шаблонов с менее чем тремя шаблонами.</p>
+  <div class="qen">Show all template type codes with less than three templates.</div>
+  <div class="gold">база <b>cre_Doc_Template_Mgt</b> · эталон: <code>SELECT template_type_code FROM Templates GROUP BY template_type_code HAVING count(*)  &lt;  3;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT template_type_code FROM templates GROUP BY template_type_code HAVING count(*)  &lt;  3</pre>
+  
+  <div class="meta">строк 2 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>CV</td></tr><tr><td>INFO</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT template_type_code FROM templates GROUP BY template_type_code HAVING count(*)  &lt;  3</pre>
+  
+  <div class="meta">строк 2 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>CV</td></tr><tr><td>INFO</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">17. Какие авиакомпании имеют рейсы, прибывающие в аэропорт AHD?</p>
+  <div class="qen">What are airlines that have flights arriving at airport &#x27;AHD&#x27;?</div>
+  <div class="gold">база <b>flight_2</b> · эталон: <code>SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline WHERE T2.DestAirport  =  &quot;AHD&quot;;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T1.Airline FROM airlines AS T1 JOIN flights AS T2 ON T1.uid  =  T2.Airline WHERE T2.DestAirport  =  &#x27;AHD&#x27;</pre>
+  
+  <div class="meta">строк 10 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>Delta Airlines</td></tr><tr><td>Northwest Airlines</td></tr><tr><td>AirTran Airways</td></tr><tr><td>Virgin America</td></tr><tr><td>JetBlue Airways</td></tr><tr><td>Frontier Airlines</td></tr></tbody></table><div class="pill">…из 10</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T1.Airline FROM airlines AS T1 JOIN flights AS T2 ON T1.uid  =  T2.Airline WHERE T2.DestAirport  =  &#x27;AHD&#x27;</pre>
+  
+  <div class="meta">строк 10 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>Delta Airlines</td></tr><tr><td>Northwest Airlines</td></tr><tr><td>AirTran Airways</td></tr><tr><td>Virgin America</td></tr><tr><td>JetBlue Airways</td></tr><tr><td>Frontier Airlines</td></tr></tbody></table><div class="pill">…из 10</div>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">18. Сколько стоит самый дорогой тип начисления?</p>
+  <div class="qen">How much does the most expensive charge type costs?</div>
+  <div class="gold">база <b>dog_kennels</b> · эталон: <code>SELECT max(charge_amount) FROM Charges;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT charge_type ,  charge_amount FROM charges ORDER BY charge_amount DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 18с</div>
+  <table class="rows"><tbody><tr><td>Health Check</td><td>640</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT charge_type ,  max(charge_amount) FROM charges</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 18с</div>
+  <table class="rows"><tbody><tr><td>Health Check</td><td>640</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">19. Каков процент людей, говорящих на официальном языке в KAZ?</p>
+  <div class="qen">What is the percentage of people speaking offical language in KAZ?</div>
+  <div class="gold">база <b>world_1</b> · эталон: <code>SELECT Percentage FROM countrylanguage WHERE IsOfficial = &#x27;T&#x27; AND CountryCode = &#x27;KAZ&#x27;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT percentage FROM countrylanguage WHERE countrycode  =  &#x27;KAZ&#x27; AND isofficial  =  &#x27;T&#x27;</pre>
+  
+  <div class="meta">строк 0 · попыток критика 3 · 28с</div>
+  <div class="pill">— пусто —</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT percentage FROM countrylanguage WHERE countrycode  =  &#x27;KAZ&#x27; AND isofficial  =  &#x27;T&#x27;</pre>
+  
+  <div class="meta">строк 0 · попыток критика 3 · 27с</div>
+  <div class="pill">— пусто —</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">20. Перечисли имена учителей, не назначенных для преподавания курсов.</p>
+  <div class="qen">List the names of teachers who have not been arranged to teach courses.</div>
+  <div class="gold">база <b>course_teach</b> · эталон: <code>SELECT Name FROM teacher WHERE Teacher_id NOT IN (SELECT Teacher_id FROM course_arrange);</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT Name FROM teacher WHERE Teacher_ID NOT IN (SELECT Teacher_ID FROM course_arrange)</pre>
+  
+  <div class="meta">строк 3 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>John Deloor</td></tr><tr><td>Сергей Васянин</td></tr><tr><td>Николай Андреев</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT Name FROM teacher WHERE Teacher_ID NOT IN (SELECT Teacher_ID FROM course_arrange)</pre>
+  
+  <div class="meta">строк 3 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>John Deloor</td></tr><tr><td>Сергей Васянин</td></tr><tr><td>Николай Андреев</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">21. Найти коды стран, в которых больше 50 игроков.</p>
+  <div class="qen">Find the codes of countries that have more than 50 players.</div>
+  <div class="gold">база <b>wta_1</b> · эталон: <code>SELECT country_code FROM players GROUP BY country_code HAVING count(*)  &gt;  50;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT country_code FROM players GROUP BY country_code HAVING count(*)  &gt;  50</pre>
+  
+  <div class="meta">строк 65 · попыток критика 1 · 15с</div>
+  <table class="rows"><tbody><tr><td>ALG</td></tr><tr><td>ARG</td></tr><tr><td>AUS</td></tr><tr><td>AUT</td></tr><tr><td>BEL</td></tr><tr><td>BIH</td></tr></tbody></table><div class="pill">…из 12</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT country_code FROM players GROUP BY country_code HAVING count(*)  &gt;  50</pre>
+  
+  <div class="meta">строк 65 · попыток критика 1 · 15с</div>
+  <table class="rows"><tbody><tr><td>ALG</td></tr><tr><td>ARG</td></tr><tr><td>AUS</td></tr><tr><td>AUT</td></tr><tr><td>BEL</td></tr><tr><td>BIH</td></tr></tbody></table><div class="pill">…из 12</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">22. На скольких уникальных языках говорят в мире?</p>
+  <div class="qen">How many unique languages are spoken in the world?</div>
+  <div class="gold">база <b>world_1</b> · эталон: <code>SELECT count(DISTINCT LANGUAGE) FROM countrylanguage;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT count(DISTINCT Language) FROM countrylanguage</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 16с</div>
+  <table class="rows"><tbody><tr><td>462</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT count(DISTINCT Language) FROM countrylanguage</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 16с</div>
+  <table class="rows"><tbody><tr><td>462</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="diff ruko">
+  <p class="q">23. Какое максимальное ускорение для всех цилиндров?</p>
+  <div class="qen">What is the maximum accelerate for all the different cylinders?</div>
+  <div class="gold">база <b>car_1</b> · эталон: <code>SELECT max(Accelerate) ,  Cylinders FROM CARS_DATA GROUP BY Cylinders;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT max(accelerate) FROM cars_data</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>24.8</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT max(accelerate) ,  cylinders FROM cars_data GROUP BY cylinders</pre>
+  
+  <div class="meta">строк 5 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>13.5</td><td>3</td></tr><tr><td>24.8</td><td>4</td></tr><tr><td>20.1</td><td>5</td></tr><tr><td>21.0</td><td>6</td></tr><tr><td>22.2</td><td>8</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">24. Откуда самый молодой учитель?</p>
+  <div class="qen">Where is the youngest teacher from?</div>
+  <div class="gold">база <b>course_teach</b> · эталон: <code>SELECT Hometown FROM teacher ORDER BY Age ASC LIMIT 1;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT Hometown FROM teacher ORDER BY Age ASC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 11с</div>
+  <table class="rows"><tbody><tr><td>Farnworth Municipal Borough</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT Hometown FROM teacher ORDER BY Age ASC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 11с</div>
+  <table class="rows"><tbody><tr><td>Farnworth Municipal Borough</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">25. Найдите общую сумму бонуса, полученного во всех оценках.</p>
+  <div class="qen">Find the total amount of bonus given in all the evaluations.</div>
+  <div class="gold">база <b>employee_hire_evaluation</b> · эталон: <code>SELECT sum(bonus) FROM evaluation;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT sum(Bonus) FROM evaluation</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 12с</div>
+  <table class="rows"><tbody><tr><td>19500.0</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT sum(Bonus) FROM evaluation</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 12с</div>
+  <table class="rows"><tbody><tr><td>19500.0</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">26. У каких авиакомпаний есть не менее 10 рейсов?</p>
+  <div class="qen">Which airlines have at least 10 flights?</div>
+  <div class="gold">база <b>flight_2</b> · эталон: <code>SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline GROUP BY T1.Airline HAVING count(*)  &gt;  10;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T1.Airline FROM airlines AS T1 JOIN flights AS T2 ON T1.uid  =  T2.Airline GROUP BY T2.Airline HAVING count(*)  &gt;=  10</pre>
+  
+  <div class="meta">строк 12 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>United Airlines</td></tr><tr><td>US Airways</td></tr><tr><td>Delta Airlines</td></tr><tr><td>Southwest Airlines</td></tr><tr><td>American Airlines</td></tr><tr><td>Northwest Airlines</td></tr></tbody></table><div class="pill">…из 12</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T1.Airline FROM airlines AS T1 JOIN flights AS T2 ON T1.uid  =  T2.Airline GROUP BY T2.Airline HAVING count(*)  &gt;=  10</pre>
+  
+  <div class="meta">строк 12 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>United Airlines</td></tr><tr><td>US Airways</td></tr><tr><td>Delta Airlines</td></tr><tr><td>Southwest Airlines</td></tr><tr><td>American Airlines</td></tr><tr><td>Northwest Airlines</td></tr></tbody></table><div class="pill">…из 12</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">27. Сколько всего континентов?</p>
+  <div class="qen">How many continents are there?</div>
+  <div class="gold">база <b>car_1</b> · эталон: <code>SELECT count(*) FROM CONTINENTS;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT count(*) FROM continents</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 12с</div>
+  <table class="rows"><tbody><tr><td>6</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT count(*) FROM continents</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 12с</div>
+  <table class="rows"><tbody><tr><td>6</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">28. Подсчитайте количество собак возраста ниже среднего.</p>
+  <div class="qen">Count the number of dogs of an age below the average.</div>
+  <div class="gold">база <b>dog_kennels</b> · эталон: <code>SELECT count(*) FROM Dogs WHERE age  &lt;  ( SELECT avg(age) FROM Dogs );</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT count(*) FROM dogs WHERE age  &lt;  (SELECT avg(age) FROM dogs)</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 20с</div>
+  <table class="rows"><tbody><tr><td>2</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT count(*) FROM dogs WHERE age  &lt;  (SELECT avg(age) FROM dogs)</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 20с</div>
+  <table class="rows"><tbody><tr><td>2</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">29. Какие существуют модели автомобилей, выпущенных после 1980 года?</p>
+  <div class="qen">What are the different models for the cards produced after 1980?</div>
+  <div class="gold">база <b>car_1</b> · эталон: <code>SELECT DISTINCT T1.model FROM MODEL_LIST AS T1 JOIN CAR_NAMES AS T2 ON T1.model  =  T2.model JOIN CARS_DATA AS T3 ON T2.MakeId  =  T3.id WHERE T3.year</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.Make FROM car_names AS T1 JOIN cars_data AS T2 ON T1.MakeId  =  T2.Id WHERE T2.Year  &gt;  1980</pre>
+  
+  <div class="meta">строк 61 · попыток критика 1 · 17с</div>
+  <table class="rows"><tbody><tr><td>plymouth reliant</td></tr><tr><td>buick skylark</td></tr><tr><td>dodge aries wagon (sw)</td></tr><tr><td>chevrolet citation</td></tr><tr><td>plymouth reliant</td></tr><tr><td>toyota starlet</td></tr></tbody></table><div class="pill">…из 12</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT DISTINCT T1.Model FROM model_list AS T1 JOIN cars_data AS T2 ON T1.ModelId  =  T2.Id WHERE T2.Year  &gt;  1980</pre>
+  
+  <div class="meta">строк 0 · попыток критика 3 · 26с</div>
+  <div class="pill">— пусто —</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">30. Найдите штаты, в которых живут и хозяева, и специалисты.</p>
+  <div class="qen">Find the states where both owners and professionals live.</div>
+  <div class="gold">база <b>dog_kennels</b> · эталон: <code>SELECT state FROM Owners INTERSECT SELECT state FROM Professionals;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT state FROM owners INTERSECT SELECT state FROM professionals</pre>
+  
+  <div class="meta">строк 5 · попыток критика 1 · 22с</div>
+  <table class="rows"><tbody><tr><td>Indiana</td></tr><tr><td>Mississippi</td></tr><tr><td>Wisconsin</td></tr><tr><td>Воронежская область</td></tr><tr><td>Московская область</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT state FROM owners INTERSECT SELECT state FROM professionals</pre>
+  
+  <div class="meta">строк 5 · попыток критика 1 · 21с</div>
+  <table class="rows"><tbody><tr><td>Indiana</td></tr><tr><td>Mississippi</td></tr><tr><td>Wisconsin</td></tr><tr><td>Воронежская область</td></tr><tr><td>Московская область</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">31. Какой производственный код и канал у последнего мультфильма?</p>
+  <div class="qen">What is the produdction code and channel of the most recent cartoon ?</div>
+  <div class="gold">база <b>tvshow</b> · эталон: <code>select production_code ,  channel from cartoon order by original_air_date desc limit 1;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT production_code ,  channel FROM Cartoon ORDER BY original_air_date DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>102.0</td><td>701</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT production_code ,  channel FROM Cartoon ORDER BY original_air_date DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>102.0</td><td>701</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">32. Каково количество голосов от штата Нью-Йорк или Калифорния?</p>
+  <div class="qen">What are the number of votes from state &#x27;NY&#x27; or &#x27;CA&#x27;?</div>
+  <div class="gold">база <b>voter_1</b> · эталон: <code>SELECT count(*) FROM votes WHERE state  =  &#x27;NY&#x27; OR state  =  &#x27;CA&#x27;;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT count(*) FROM VOTES WHERE state  =  &#x27;NY&#x27; OR state  =  &#x27;CA&#x27;</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>2</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT count(*) FROM VOTES WHERE state  =  &#x27;NY&#x27; OR state  =  &#x27;CA&#x27;</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>2</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">33. Найти пакет предложений и название сериалов телеканала, на котором есть видео высокой четкости.</p>
+  <div class="qen">Find the package choice and series name of the TV channel that has high definition TV.</div>
+  <div class="gold">база <b>tvshow</b> · эталон: <code>SELECT package_option ,  series_name FROM TV_Channel WHERE hight_definition_TV  =  &quot;yes&quot;;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT Package_Option ,  series_name FROM TV_Channel WHERE Hight_definition_TV  =  &#x27;yes&#x27;</pre>
+  
+  <div class="meta">строк 2 · попыток критика 1 · 15с</div>
+  <table class="rows"><tbody><tr><td>Sky Famiglia</td><td>Пятница</td></tr><tr><td>Sky Famiglia + Sky HD</td><td>MTV Live HD</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT Package_Option ,  series_name FROM TV_Channel WHERE Hight_definition_TV  =  &#x27;yes&#x27;</pre>
+  
+  <div class="meta">строк 2 · попыток критика 1 · 15с</div>
+  <table class="rows"><tbody><tr><td>Sky Famiglia</td><td>Пятница</td></tr><tr><td>Sky Famiglia + Sky HD</td><td>MTV Live HD</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">34. Найдите количество матчей за каждый год.</p>
+  <div class="qen">Find the number of matches happened in each year.</div>
+  <div class="gold">база <b>wta_1</b> · эталон: <code>SELECT count(*) ,  YEAR FROM matches GROUP BY YEAR;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT YEAR ,  COUNT(*) FROM MATCHES GROUP BY YEAR</pre>
+  
+  <div class="meta">строк 3 · попыток критика 1 · 17с</div>
+  <table class="rows"><tbody><tr><td>2013</td><td>12</td></tr><tr><td>2016</td><td>158</td></tr><tr><td>2017</td><td>129</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT YEAR ,  COUNT(*) FROM MATCHES GROUP BY YEAR</pre>
+  
+  <div class="meta">строк 3 · попыток критика 1 · 17с</div>
+  <table class="rows"><tbody><tr><td>2013</td><td>12</td></tr><tr><td>2016</td><td>158</td></tr><tr><td>2017</td><td>129</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">35. Как зовут учителей и сколько курсов они преподают?</p>
+  <div class="qen">What are the names of the teachers and how many courses do they teach?</div>
+  <div class="gold">база <b>course_teach</b> · эталон: <code>SELECT T2.Name ,  COUNT(*) FROM course_arrange AS T1 JOIN teacher AS T2 ON T1.Teacher_ID  =  T2.Teacher_ID GROUP BY T2.Name;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T2.Name ,  COUNT(*) FROM course_arrange AS T1 JOIN teacher AS T2 ON T1.teacher_id  =  T2.teacher_id GROUP BY T1.teacher_id</pre>
+  
+  <div class="meta">строк 6 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>Joseph Huts</td><td>1</td></tr><tr><td>Gustaaf Deloor</td><td>1</td></tr><tr><td>Vicente Carretero</td><td>1</td></tr><tr><td>Kearsley Brown</td><td>1</td></tr><tr><td>Anne Walker</td><td>2</td></tr><tr><td>Lucy Wong</td><td>1</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T2.Name ,  COUNT(*) FROM course_arrange AS T1 JOIN teacher AS T2 ON T1.teacher_id  =  T2.teacher_id GROUP BY T1.teacher_id</pre>
+  
+  <div class="meta">строк 6 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>Joseph Huts</td><td>1</td></tr><tr><td>Gustaaf Deloor</td><td>1</td></tr><tr><td>Vicente Carretero</td><td>1</td></tr><tr><td>Kearsley Brown</td><td>1</td></tr><tr><td>Anne Walker</td><td>2</td></tr><tr><td>Lucy Wong</td><td>1</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">36. Как называется курс, в котором обучается больше всего студентов?</p>
+  <div class="qen">What is the name of the course with the most students enrolled?</div>
+  <div class="gold">база <b>student_transcripts_tracking</b> · эталон: <code>SELECT  T1.course_name FROM Courses AS T1 JOIN Student_Enrolment_Courses AS T2 ON T1.course_id  =  T2.course_id GROUP BY T1.course_name ORDER BY count</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.course_name FROM courses AS T1 JOIN student_enrolment_courses AS T2 ON T1.course_id = T2.course_id GROUP BY T2.course_id ORDER BY count(*) DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 21с</div>
+  <table class="rows"><tbody><tr><td>pl</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.course_name FROM courses AS T1 JOIN student_enrolment_courses AS T2 ON T1.course_id = T2.course_id GROUP BY T2.course_id ORDER BY count(*) DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 21с</div>
+  <table class="rows"><tbody><tr><td>pl</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">37. Каковы id и названия стран, в которых имеется более 3 производителей автомобилей или которые производят модель «Fiat»?</p>
+  <div class="qen">What are the id and names of the countries which have more than 3 car makers or produce the &#x27;fiat&#x27; model?</div>
+  <div class="gold">база <b>car_1</b> · эталон: <code>SELECT T1.countryId ,  T1.CountryName FROM Countries AS T1 JOIN CAR_MAKERS AS T2 ON T1.CountryId  =  T2.Country GROUP BY T1.countryId HAVING count(*) </code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.CountryId ,  T1.CountryName FROM countries AS T1 JOIN car_makers AS T2 ON T1.CountryId  =  T2.Country WHERE T2.Maker  =  &#x27;Fiat&#x27; UNION SELECT countryid ,  countryname FROM countries GROUP BY countryid HAVING count(*)  &gt;  3</pre>
+  
+  <div class="meta">строк 0 · попыток критика 3 · 31с</div>
+  <div class="pill">— пусто —</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.CountryId ,  T1.CountryName FROM countries AS T1 JOIN car_makers AS T2 ON T1.CountryId  =  T2.Country WHERE T2.id IN ( SELECT maker FROM model_list WHERE model  =  &#x27;fiat&#x27; ) UNION SELECT countryid ,  countryname FROM countries GROUP BY countryid HAVING count(*)  &gt;  3</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 18с</div>
+  <table class="rows"><tbody><tr><td>5</td><td>italy</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">38. Покажи все классы, в которых учится не менее 4 учеников.</p>
+  <div class="qen">Show me all grades that have at least 4 students.</div>
+  <div class="gold">база <b>network_1</b> · эталон: <code>SELECT grade FROM Highschooler GROUP BY grade HAVING count(*)  &gt;=  4;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT grade FROM Highschooler GROUP BY grade HAVING count(*)  &gt;=  4</pre>
+  
+  <div class="meta">строк 4 · попыток критика 1 · 11с</div>
+  <table class="rows"><tbody><tr><td>9</td></tr><tr><td>10</td></tr><tr><td>11</td></tr><tr><td>12</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT grade FROM highschooler GROUP BY grade HAVING count(*)  &gt;=  4</pre>
+  
+  <div class="meta">строк 4 · попыток критика 1 · 11с</div>
+  <table class="rows"><tbody><tr><td>9</td></tr><tr><td>10</td></tr><tr><td>11</td></tr><tr><td>12</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">39. Каков общий объем продаж песен каждого певца?</p>
+  <div class="qen">For each singer name, what is the total sales for their songs?</div>
+  <div class="gold">база <b>singer</b> · эталон: <code>SELECT T1.Name ,  sum(T2.Sales) FROM singer AS T1 JOIN song AS T2 ON T1.Singer_ID  =  T2.Singer_ID GROUP BY T1.Name;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT sum(T2.Sales) ,  T1.Name FROM singer AS T1 JOIN song AS T2 ON T1.Singer_ID  =  T2.Singer_ID GROUP BY T1.Name</pre>
+  
+  <div class="meta">строк 6 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>651421.0</td><td>Christy Walton</td></tr><tr><td>292000.0</td><td>Gina Rinehart</td></tr><tr><td>335000.0</td><td>Iris Fontbona</td></tr><tr><td>275000.0</td><td>Jacqueline Mars</td></tr><tr><td>1646407.0</td><td>Liliane Bettencourt</td></tr><tr><td>261000.0</td><td>Susanne Klatten</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT sum(T2.Sales) ,  T1.Name FROM singer AS T1 JOIN song AS T2 ON T1.Singer_ID  =  T2.Singer_ID GROUP BY T1.Name</pre>
+  
+  <div class="meta">строк 6 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>651421.0</td><td>Christy Walton</td></tr><tr><td>292000.0</td><td>Gina Rinehart</td></tr><tr><td>335000.0</td><td>Iris Fontbona</td></tr><tr><td>275000.0</td><td>Jacqueline Mars</td></tr><tr><td>1646407.0</td><td>Liliane Bettencourt</td></tr><tr><td>261000.0</td><td>Susanne Klatten</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">40. Как называется музей, в котором еще не было ни одного посетителя?</p>
+  <div class="qen">What is the name of the museum that had no visitor yet?</div>
+  <div class="gold">база <b>museum_visit</b> · эталон: <code>SELECT name FROM museum WHERE Museum_ID NOT IN (SELECT museum_id FROM visit);</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT name FROM museum WHERE museum_id NOT IN (SELECT museum_id FROM visit)</pre>
+  
+  <div class="meta">строк 5 · попыток критика 1 · 12с</div>
+  <table class="rows"><tbody><tr><td>Jefferson Development Museum</td></tr><tr><td>RiverPark Museum</td></tr><tr><td>Place Tower Museum</td></tr><tr><td>Central City District Residential Museum</td></tr><tr><td>Пушкинский</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT name FROM museum WHERE museum_id NOT IN (SELECT museum_id FROM visit)</pre>
+  
+  <div class="meta">строк 5 · попыток критика 1 · 12с</div>
+  <table class="rows"><tbody><tr><td>Jefferson Development Museum</td></tr><tr><td>RiverPark Museum</td></tr><tr><td>Place Tower Museum</td></tr><tr><td>Central City District Residential Museum</td></tr><tr><td>Пушкинский</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">41. Название и вместимость стадиона с самой высокой средней посещаемостью?</p>
+  <div class="qen">What is the name and capacity for the stadium with highest average attendance?</div>
+  <div class="gold">база <b>concert_singer</b> · эталон: <code>SELECT name ,  capacity FROM stadium ORDER BY average DESC LIMIT 1;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT name ,  capacity FROM stadium ORDER BY average DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>Stark&#x27;s Park</td><td>10104</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT name ,  capacity FROM stadium ORDER BY average DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 12с</div>
+  <table class="rows"><tbody><tr><td>Stark&#x27;s Park</td><td>10104</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">42. Перечислите пары имени владельца и клички собаки.</p>
+  <div class="qen">List pairs of the owner&#x27;s first name and the dogs&#x27;s name.</div>
+  <div class="gold">база <b>dog_kennels</b> · эталон: <code>SELECT T1.first_name ,  T2.name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id  =  T2.owner_id;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT T1.first_name ,  T2.name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id  =  T2.owner_id</pre>
+  
+  <div class="meta">строк 16 · попыток критика 1 · 23с</div>
+  <table class="rows"><tbody><tr><td>Jaclyn</td><td>Kacey</td></tr><tr><td>Gay</td><td>Hipolito</td></tr><tr><td>Nora</td><td>Mavis</td></tr><tr><td>Rachelle</td><td>Houston</td></tr><tr><td>Emelie</td><td>Jeffrey</td></tr><tr><td>Johann</td><td>Merritt</td></tr></tbody></table><div class="pill">…из 12</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT T1.first_name ,  T2.name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id  =  T2.owner_id</pre>
+  
+  <div class="meta">строк 16 · попыток критика 1 · 23с</div>
+  <table class="rows"><tbody><tr><td>Jaclyn</td><td>Kacey</td></tr><tr><td>Gay</td><td>Hipolito</td></tr><tr><td>Nora</td><td>Mavis</td></tr><tr><td>Rachelle</td><td>Houston</td></tr><tr><td>Emelie</td><td>Jeffrey</td></tr><tr><td>Johann</td><td>Merritt</td></tr></tbody></table><div class="pill">…из 12</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">43. Названия и описания всех разделов</p>
+  <div class="qen">What are the names and descriptions of all the sections?</div>
+  <div class="gold">база <b>student_transcripts_tracking</b> · эталон: <code>SELECT section_name ,  section_description FROM Sections;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT section_name ,  section_description FROM SECTIONS</pre>
+  
+  <div class="meta">строк 15 · попыток критика 2 · 24с</div>
+  <table class="rows"><tbody><tr><td>a</td><td>non</td></tr><tr><td>b</td><td>voluptatem</td></tr><tr><td>c</td><td>qui</td></tr><tr><td>d</td><td>voluptas</td></tr><tr><td>e</td><td>ex</td></tr><tr><td>f</td><td>doloremque</td></tr></tbody></table><div class="pill">…из 12</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT section_name ,  section_description FROM SECTIONS</pre>
+  
+  <div class="meta">строк 15 · попыток критика 2 · 23с</div>
+  <table class="rows"><tbody><tr><td>a</td><td>non</td></tr><tr><td>b</td><td>voluptatem</td></tr><tr><td>c</td><td>qui</td></tr><tr><td>d</td><td>voluptas</td></tr><tr><td>e</td><td>ex</td></tr><tr><td>f</td><td>doloremque</td></tr></tbody></table><div class="pill">…из 12</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">44. Найдите города, в которых работает более одного сотрудника младше 30 лет.</p>
+  <div class="qen">Find the cities that have more than one employee under age 30.</div>
+  <div class="gold">база <b>employee_hire_evaluation</b> · эталон: <code>SELECT city FROM employee WHERE age  &lt;  30 GROUP BY city HAVING count(*)  &gt;  1;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT city FROM Employee WHERE age  &lt;  30 GROUP BY city HAVING count(*)  &gt;  1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>Bath</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT city FROM Employee WHERE age  &lt;  30 GROUP BY city HAVING count(*)  &gt;  1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>Bath</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">45. Как называются все стадионы, на которых не было концертов в 2014 году?</p>
+  <div class="qen">What are the names of all stadiums that did not have a concert in 2014?</div>
+  <div class="gold">база <b>concert_singer</b> · эталон: <code>SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id  =  T2.stadium_id WHERE T1.year  =  2014;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert WHERE YEAR  =  2014)</pre>
+  
+  <div class="meta">строк 6 · попыток критика 1 · 15с</div>
+  <table class="rows"><tbody><tr><td>Bayview Stadium</td></tr><tr><td>Hampden Park</td></tr><tr><td>Forthbank Stadium</td></tr><tr><td>Gayfield Park</td></tr><tr><td>Balmoor</td></tr><tr><td>Лужники</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert WHERE YEAR  =  2014)</pre>
+  
+  <div class="meta">строк 6 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>Bayview Stadium</td></tr><tr><td>Hampden Park</td></tr><tr><td>Forthbank Stadium</td></tr><tr><td>Gayfield Park</td></tr><tr><td>Balmoor</td></tr><tr><td>Лужники</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">46. Каковы id и марки машин всех автопроизводителей, которые производят как минимум 2 модели и более 3 автомобилей?</p>
+  <div class="qen">What are the ids and makers of all car makers that produce at least 2 models and make more than 3 cars?</div>
+  <div class="gold">база <b>car_1</b> · эталон: <code>SELECT T1.Id ,  T1.Maker FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id  =  T2.Maker GROUP BY T1.Id HAVING count(*)  &gt;=  2 INTERSECT SELECT T1.I</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.maker ,  T2.make FROM model_list AS T1 JOIN car_names AS T2 ON T1.model  =  T2.model GROUP BY T1.maker HAVING count(*)  &gt;=  2 INTERSECT SELECT T1.maker ,  T2.make FROM model_list AS T1 JOIN car_names AS T2 ON T1.model  =  T2.model GROUP BY T1.maker HAVING count(*)  &gt;  3</pre>
+  
+  <div class="meta">строк 16 · попыток критика 1 · 19с</div>
+  <table class="rows"><tbody><tr><td>1</td><td>amc rebel sst</td></tr><tr><td>2</td><td>volkswagen 1131 deluxe sedan</td></tr><tr><td>4</td><td>chevrolet chevelle malibu</td></tr><tr><td>5</td><td>ford torino</td></tr><tr><td>6</td><td>plymouth satellite</td></tr><tr><td>8</td><td>datsun pl510</td></tr></tbody></table><div class="pill">…из 12</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>— SQL не получен —</pre>
+  <div class="err">нет SQL</div>
+  <div class="meta">строк 0 · попыток критика  · 24с</div>
+  <div class="pill">— пусто —</div>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">47. Какая авиакомпания обслуживает больше всего рейсов?</p>
+  <div class="qen">What airline serves the most flights?</div>
+  <div class="gold">база <b>flight_2</b> · эталон: <code>SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline GROUP BY T1.Airline ORDER BY count(*) DESC LIMIT 1;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.Airline FROM airlines AS T1 JOIN flights AS T2 ON T1.uid  =  T2.Airline GROUP BY T2.Airline ORDER BY count(*) DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>United Airlines</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.Airline FROM airlines AS T1 JOIN flights AS T2 ON T1.uid  =  T2.Airline GROUP BY T2.Airline ORDER BY count(*) DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>United Airlines</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">48. Перечислить номера и имена участников в порядке убывания имен участников.</p>
+  <div class="qen">List the contestant numbers and names, ordered by contestant name descending.</div>
+  <div class="gold">база <b>voter_1</b> · эталон: <code>SELECT contestant_number ,  contestant_name FROM contestants ORDER BY contestant_name DESC;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT contestant_number ,  contestant_name FROM CONTESTANTS ORDER BY contestant_name DESC</pre>
+  
+  <div class="meta">строк 14 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>12</td><td>Павел Нестеров</td></tr><tr><td>13</td><td>Матвей Гончаров</td></tr><tr><td>14</td><td>Арина Филиппова</td></tr><tr><td>2</td><td>Tabatha Gehling</td></tr><tr><td>8</td><td>Nita Coster</td></tr><tr><td>11</td><td>Loraine NygrenTania Mattioli</td></tr></tbody></table><div class="pill">…из 12</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT contestant_number ,  contestant_name FROM CONTESTANTS ORDER BY contestant_name DESC</pre>
+  
+  <div class="meta">строк 14 · попыток критика 1 · 12с</div>
+  <table class="rows"><tbody><tr><td>12</td><td>Павел Нестеров</td></tr><tr><td>13</td><td>Матвей Гончаров</td></tr><tr><td>14</td><td>Арина Филиппова</td></tr><tr><td>2</td><td>Tabatha Gehling</td></tr><tr><td>8</td><td>Nita Coster</td></tr><tr><td>11</td><td>Loraine NygrenTania Mattioli</td></tr></tbody></table><div class="pill">…из 12</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">49. Каково среднее количество травм, причиненных каждый раз?</p>
+  <div class="qen">What is the average number of injuries caused each time?</div>
+  <div class="gold">база <b>battle_death</b> · эталон: <code>SELECT avg(injured) FROM death;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT avg(injured) FROM death</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 11с</div>
+  <table class="rows"><tbody><tr><td>1.8</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT avg(injured) FROM death</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 12с</div>
+  <table class="rows"><tbody><tr><td>1.8</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">50. Каковы различные штаты и время оформления всех голосов?</p>
+  <div class="qen">What are the distinct states and create time of all votes?</div>
+  <div class="gold">база <b>voter_1</b> · эталон: <code>SELECT DISTINCT state ,  created FROM votes;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT DISTINCT state ,  created FROM VOTES</pre>
+  
+  <div class="meta">строк 6 · попыток критика 1 · 12с</div>
+  <table class="rows"><tbody><tr><td>NJ</td><td>2018-03-09 19:03:21</td></tr><tr><td>NY</td><td>2018-03-09 19:03:36</td></tr><tr><td>CA</td><td>2018-03-09 19:03:39</td></tr><tr><td>NJ</td><td>2018-03-09 19:03:40</td></tr><tr><td>ME</td><td>2022-04-18 13:57:55</td></tr><tr><td>ME</td><td>2022-04-18 14:03:06</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT DISTINCT state ,  created FROM VOTES</pre>
+  
+  <div class="meta">строк 6 · попыток критика 1 · 12с</div>
+  <table class="rows"><tbody><tr><td>NJ</td><td>2018-03-09 19:03:21</td></tr><tr><td>NY</td><td>2018-03-09 19:03:36</td></tr><tr><td>CA</td><td>2018-03-09 19:03:39</td></tr><tr><td>NJ</td><td>2018-03-09 19:03:40</td></tr><tr><td>ME</td><td>2022-04-18 13:57:55</td></tr><tr><td>ME</td><td>2022-04-18 14:03:06</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">51. В какой стране больше всего телеканалов и сколько их?</p>
+  <div class="qen">What is the country with the most number of TV Channels and how many does it have?</div>
+  <div class="gold">база <b>tvshow</b> · эталон: <code>SELECT Country ,  count(*) FROM TV_Channel GROUP BY Country ORDER BY count(*) DESC LIMIT 1;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT country ,  count(*) FROM TV_Channel GROUP BY country ORDER BY count(*) DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>Italy</td><td>12</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT country ,  count(*) FROM TV_Channel GROUP BY country ORDER BY count(*) DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>Italy</td><td>12</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">52. Укажите фамилию владельца самой молодой собаки.</p>
+  <div class="qen">List the last name of the owner owning the youngest dog.</div>
+  <div class="gold">база <b>dog_kennels</b> · эталон: <code>SELECT T1.last_name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id  =  T2.owner_id WHERE T2.age  =  ( SELECT max(age) FROM Dogs );</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.last_name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id = T2.owner_id ORDER BY T2.age LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 23с</div>
+  <table class="rows"><tbody><tr><td>Nicolas</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.last_name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id = T2.owner_id ORDER BY T2.age LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 24с</div>
+  <table class="rows"><tbody><tr><td>Nicolas</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">53. Сколько людей каждой национальности?</p>
+  <div class="qen">How many people are there of each nationality?</div>
+  <div class="gold">база <b>poker_player</b> · эталон: <code>SELECT Nationality ,  COUNT(*) FROM people GROUP BY Nationality;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT Nationality ,  COUNT(*) FROM people GROUP BY Nationality</pre>
+  
+  <div class="meta">строк 3 · попыток критика 1 · 11с</div>
+  <table class="rows"><tbody><tr><td>Bulgaria</td><td>1</td></tr><tr><td>Russia</td><td>6</td></tr><tr><td>Украина</td><td>1</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT Nationality ,  COUNT(*) FROM people GROUP BY Nationality</pre>
+  
+  <div class="meta">строк 3 · попыток критика 1 · 11с</div>
+  <table class="rows"><tbody><tr><td>Bulgaria</td><td>1</td></tr><tr><td>Russia</td><td>6</td></tr><tr><td>Украина</td><td>1</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">54. Каково среднее и максимальное количество билетов, купленных за все посещения?</p>
+  <div class="qen">What are the average and maximum number of tickets bought in all visits?</div>
+  <div class="gold">база <b>museum_visit</b> · эталон: <code>SELECT avg(num_of_ticket) ,  max(num_of_ticket) FROM visit;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT avg(num_of_ticket) ,  max(num_of_ticket) FROM visit</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 12с</div>
+  <table class="rows"><tbody><tr><td>10.5</td><td>24</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT avg(num_of_ticket) ,  max(num_of_ticket) FROM visit</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 12с</div>
+  <table class="rows"><tbody><tr><td>10.5</td><td>24</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">55. Найдите различные сочетания типов породы и размера для собак.</p>
+  <div class="qen">Find the distinct breed type and size type combinations for dogs.</div>
+  <div class="gold">база <b>dog_kennels</b> · эталон: <code>SELECT DISTINCT breed_code ,  size_code FROM dogs;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT DISTINCT T1.breed_name ,  T2.size_description FROM Breeds AS T1 JOIN Sizes AS T2 JOIN Dogs AS T3 ON T1.breed_code  =  T3.breed_code AND T2.size_code  =  T3.size_code</pre>
+  
+  <div class="meta">строк 7 · попыток критика 1 · 23с</div>
+  <table class="rows"><tbody><tr><td>Eskimo</td><td>Large</td></tr><tr><td>Bulldog</td><td>Large</td></tr><tr><td>Bulldog</td><td>Medium</td></tr><tr><td>Husky</td><td>Medium</td></tr><tr><td>Eskimo</td><td>Small</td></tr><tr><td>Husky</td><td>Small</td></tr></tbody></table><div class="pill">…из 7</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT DISTINCT T1.breed_name ,  T2.size_description FROM Breeds AS T1 JOIN Sizes AS T2 JOIN Dogs AS T3 ON T1.breed_code  =  T3.breed_code AND T2.size_code  =  T3.size_code</pre>
+  
+  <div class="meta">строк 7 · попыток критика 1 · 23с</div>
+  <table class="rows"><tbody><tr><td>Eskimo</td><td>Large</td></tr><tr><td>Bulldog</td><td>Large</td></tr><tr><td>Bulldog</td><td>Medium</td></tr><tr><td>Husky</td><td>Medium</td></tr><tr><td>Eskimo</td><td>Small</td></tr><tr><td>Husky</td><td>Small</td></tr></tbody></table><div class="pill">…из 7</div>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">56. Найдите количество магазинов в каждом месте.</p>
+  <div class="qen">Find the number of shops in each location.</div>
+  <div class="gold">база <b>employee_hire_evaluation</b> · эталон: <code>SELECT count(*) ,  LOCATION FROM shop GROUP BY LOCATION;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT LOCATION ,  count(*) FROM shop GROUP BY LOCATION</pre>
+  
+  <div class="meta">строк 9 · попыток критика 1 · 12с</div>
+  <table class="rows"><tbody><tr><td>Espoo</td><td>1</td></tr><tr><td>Helsinki</td><td>2</td></tr><tr><td>Jakobstad</td><td>1</td></tr><tr><td>Kotka</td><td>1</td></tr><tr><td>Kuopio</td><td>1</td></tr><tr><td>Lahti</td><td>1</td></tr></tbody></table><div class="pill">…из 9</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT LOCATION ,  count(*) FROM shop GROUP BY LOCATION</pre>
+  
+  <div class="meta">строк 9 · попыток критика 1 · 12с</div>
+  <table class="rows"><tbody><tr><td>Espoo</td><td>1</td></tr><tr><td>Helsinki</td><td>2</td></tr><tr><td>Jakobstad</td><td>1</td></tr><tr><td>Kotka</td><td>1</td></tr><tr><td>Kuopio</td><td>1</td></tr><tr><td>Lahti</td><td>1</td></tr></tbody></table><div class="pill">…из 9</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">57. Найди название турнира, в котором больше 10 матчей.</p>
+  <div class="qen">Find the name of tourney that has more than 10 matches.</div>
+  <div class="gold">база <b>wta_1</b> · эталон: <code>SELECT tourney_name FROM matches GROUP BY tourney_name HAVING count(*)  &gt;  10;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT tourney_name FROM matches GROUP BY tourney_name HAVING count(*)  &gt;  10;</pre>
+  
+  <div class="meta">строк 10 · попыток критика 1 · 20с</div>
+  <table class="rows"><tbody><tr><td>Australian Open</td></tr><tr><td>Cincinnati</td></tr><tr><td>French Open</td></tr><tr><td>Indian Wells</td></tr><tr><td>Miami</td></tr><tr><td>Singapore</td></tr></tbody></table><div class="pill">…из 10</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT tourney_name FROM matches GROUP BY tourney_name HAVING count(*)  &gt;  10;</pre>
+  
+  <div class="meta">строк 10 · попыток критика 1 · 19с</div>
+  <table class="rows"><tbody><tr><td>Australian Open</td></tr><tr><td>Cincinnati</td></tr><tr><td>French Open</td></tr><tr><td>Indian Wells</td></tr><tr><td>Miami</td></tr><tr><td>Singapore</td></tr></tbody></table><div class="pill">…из 10</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">58. Из какого города вылетает больше всего рейсов?</p>
+  <div class="qen">Which city has most number of departing flights?</div>
+  <div class="gold">база <b>flight_2</b> · эталон: <code>SELECT T1.City FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode  =  T2.SourceAirport GROUP BY T1.City ORDER BY count(*) DESC LIMIT 1;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T1.city FROM airports AS T1 JOIN flights AS T2 ON T1.airportcode  =  T2.sourceairport GROUP BY T1.city ORDER BY count(*) DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>Albany</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T1.city FROM airports AS T1 JOIN flights AS T2 ON T1.airportcode  =  T2.sourceairport GROUP BY T1.city ORDER BY count(*) DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>Albany</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">59. Какое количество различных языков используется в мире?</p>
+  <div class="qen">What is the number of distinct languages used around the world?</div>
+  <div class="gold">база <b>world_1</b> · эталон: <code>SELECT count(DISTINCT LANGUAGE) FROM countrylanguage;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT count(DISTINCT Language) FROM countrylanguage</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 16с</div>
+  <table class="rows"><tbody><tr><td>462</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT count(DISTINCT Language) FROM countrylanguage</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 16с</div>
+  <table class="rows"><tbody><tr><td>462</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">60. Как называется магазин, в котором работает больше всего сотрудников?</p>
+  <div class="qen">What is the name of the shop that is hiring the largest number of employees?</div>
+  <div class="gold">база <b>employee_hire_evaluation</b> · эталон: <code>SELECT t2.name FROM hiring AS t1 JOIN shop AS t2 ON t1.shop_id  =  t2.shop_id GROUP BY t1.shop_id ORDER BY count(*) DESC LIMIT 1;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T1.name FROM shop AS T1 JOIN hiring AS T2 ON T1.shop_id  =  T2.shop_id GROUP BY T1.shop_id ORDER BY count(*) DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>FC Haka</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T1.name FROM shop AS T1 JOIN hiring AS T2 ON T1.shop_id  =  T2.shop_id GROUP BY T1.shop_id ORDER BY count(*) DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>FC Haka</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">61. Показать id для всех шаблонов, которые не используются ни в одном документе.</p>
+  <div class="qen">Show ids for all templates not used by any document.</div>
+  <div class="gold">база <b>cre_Doc_Template_Mgt</b> · эталон: <code>SELECT template_id FROM Templates EXCEPT SELECT template_id FROM Documents;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT template_id FROM templates EXCEPT SELECT template_id FROM documents</pre>
+  
+  <div class="meta">строк 7 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>2</td></tr><tr><td>9</td></tr><tr><td>15</td></tr><tr><td>16</td></tr><tr><td>18</td></tr><tr><td>19</td></tr></tbody></table><div class="pill">…из 7</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT template_id FROM templates EXCEPT SELECT template_id FROM documents</pre>
+  
+  <div class="meta">строк 7 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>2</td></tr><tr><td>9</td></tr><tr><td>15</td></tr><tr><td>16</td></tr><tr><td>18</td></tr><tr><td>19</td></tr></tbody></table><div class="pill">…из 7</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">62. Сколько стоит каждый тип начисления? Укажите тип и сумму оплаты.</p>
+  <div class="qen">How much does each charge type costs? List both charge type and amount.</div>
+  <div class="gold">база <b>dog_kennels</b> · эталон: <code>SELECT charge_type ,  charge_amount FROM Charges;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT charge_type ,  charge_amount FROM Charges</pre>
+  
+  <div class="meta">строк 3 · попыток критика 1 · 18с</div>
+  <table class="rows"><tbody><tr><td>Daily Accommodation</td><td>98</td></tr><tr><td>Drugs</td><td>322</td></tr><tr><td>Health Check</td><td>640</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT charge_type ,  charge_amount FROM Charges</pre>
+  
+  <div class="meta">строк 3 · попыток критика 1 · 18с</div>
+  <table class="rows"><tbody><tr><td>Daily Accommodation</td><td>98</td></tr><tr><td>Drugs</td><td>322</td></tr><tr><td>Health Check</td><td>640</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">63. В каких классах учатся 4 или более старшеклассников?</p>
+  <div class="qen">Which grades have 4 or more high schoolers?</div>
+  <div class="gold">база <b>network_1</b> · эталон: <code>SELECT grade FROM Highschooler GROUP BY grade HAVING count(*)  &gt;=  4;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT grade FROM highschooler GROUP BY grade HAVING count(*)  &gt;=  4</pre>
+  
+  <div class="meta">строк 4 · попыток критика 1 · 11с</div>
+  <table class="rows"><tbody><tr><td>9</td></tr><tr><td>10</td></tr><tr><td>11</td></tr><tr><td>12</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT grade FROM highschooler GROUP BY grade HAVING count(*)  &gt;=  4</pre>
+  
+  <div class="meta">строк 4 · попыток критика 1 · 11с</div>
+  <table class="rows"><tbody><tr><td>9</td></tr><tr><td>10</td></tr><tr><td>11</td></tr><tr><td>12</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">64. Каковы id и названия всех стран, в которых либо более трех производителей автомобилей, либо производятся модели Fiat?</p>
+  <div class="qen">What are the ids and names of all countries that either have more than 3 car makers or produce fiat model ?</div>
+  <div class="gold">база <b>car_1</b> · эталон: <code>select t1.countryid ,  t1.countryname from countries as t1 join car_makers as t2 on t1.countryid  =  t2.country group by t1.countryid having count(*) </code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.CountryId ,  T1.CountryName FROM countries AS T1 JOIN car_makers AS T2 ON T1.CountryId  =  T2.Country JOIN model_list AS T3 ON T2.id  =  T3.Maker WHERE T3.Model  =  &#x27;fiat&#x27; UNION SELECT countryid ,  countryname FROM countries GROUP BY countryid HAVING count(*)  &gt;  3</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 18с</div>
+  <table class="rows"><tbody><tr><td>5</td><td>italy</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.CountryId ,  T1.CountryName FROM countries AS T1 JOIN car_makers AS T2 ON T1.CountryId  =  T2.Country WHERE T2.Maker  &gt;  3 UNION SELECT T1.CountryId ,  T1.CountryName FROM countries AS T1 JOIN car_makers AS T2 ON T1.CountryId  =  T2.Country JOIN model_list AS T3 ON T2.id  =  T3.Maker WHERE T3.Model  =  &#x27;fiat&#x27;</pre>
+  
+  <div class="meta">строк 12 · попыток критика 1 · 19с</div>
+  <table class="rows"><tbody><tr><td>1</td><td>usa</td></tr><tr><td>2</td><td>germany</td></tr><tr><td>3</td><td>france</td></tr><tr><td>4</td><td>japan</td></tr><tr><td>5</td><td>italy</td></tr><tr><td>6</td><td>sweden</td></tr></tbody></table><div class="pill">…из 12</div>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">65. Какое название и id для каждого семестра имеет тот, на который зарегистрировано больше всего студентов?</p>
+  <div class="qen">For each semester, what is the name and id of the one with the most students registered?</div>
+  <div class="gold">база <b>student_transcripts_tracking</b> · эталон: <code>SELECT T1.semester_name ,  T1.semester_id FROM Semesters AS T1 JOIN Student_Enrolment AS T2 ON T1.semester_id  =  T2.semester_id GROUP BY T1.semester_</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.semester_id ,  T1.semester_name FROM Semesters AS T1 JOIN Student_Enrolment AS T2 ON T1.semester_id  =  T2.semester_id GROUP BY T1.semester_id ORDER BY count(*) DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 22с</div>
+  <table class="rows"><tbody><tr><td>2</td><td>summer 2010</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.semester_id ,  T1.semester_name FROM semesters AS T1 JOIN student_enrolment AS T2 ON T1.semester_id  =  T2.semester_id GROUP BY T1.semester_id ORDER BY count(*) DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 22с</div>
+  <table class="rows"><tbody><tr><td>2</td><td>summer 2010</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">66. Список эпизодов всех сериалов, отсортированных по рейтингу.</p>
+  <div class="qen">List the Episode of all TV series sorted by rating.</div>
+  <div class="gold">база <b>tvshow</b> · эталон: <code>SELECT Episode FROM TV_series ORDER BY rating;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT Episode FROM TV_series ORDER BY Rating</pre>
+  
+  <div class="meta">строк 13 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>The Hanged Man</td></tr><tr><td>Double Down</td></tr><tr><td>Home By Another Way</td></tr><tr><td>Keepers</td></tr><tr><td>Emily</td></tr><tr><td>Blowback</td></tr></tbody></table><div class="pill">…из 12</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT Episode FROM TV_series ORDER BY Rating</pre>
+  
+  <div class="meta">строк 13 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>The Hanged Man</td></tr><tr><td>Double Down</td></tr><tr><td>Home By Another Way</td></tr><tr><td>Keepers</td></tr><tr><td>Emily</td></tr><tr><td>Blowback</td></tr></tbody></table><div class="pill">…из 12</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">67. Сколько певцов?</p>
+  <div class="qen">What is the count of singers?</div>
+  <div class="gold">база <b>singer</b> · эталон: <code>SELECT count(*) FROM singer;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT count(*) FROM singer</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 10с</div>
+  <table class="rows"><tbody><tr><td>9</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT count(*) FROM singer</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 10с</div>
+  <table class="rows"><tbody><tr><td>9</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="diff ruko">
+  <p class="q">68. найти имена проигравшего и победителя, сыгравшего в матче с наибольшим количеством минут.</p>
+  <div class="qen">find the names of loser and winner who played in the match with greatest number of minutes.</div>
+  <div class="gold">база <b>wta_1</b> · эталон: <code>SELECT winner_name ,  loser_name FROM matches ORDER BY minutes DESC LIMIT 1;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.loser_name ,  T1.winner_name FROM MATCHES AS T1 JOIN players AS T2 ON T1.loser_id  =  T2.player_id JOIN players AS T3 ON T1.winner_id  =  T3.player_id ORDER BY T1.minutes DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 21с</div>
+  <table class="rows"><tbody><tr><td>Angelique Kerber</td><td>Petra Kvitova</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T1.winner_name ,  T1.loser_name FROM MATCHES AS T1 JOIN players AS T2 ON T1.winner_id  =  T2.player_id JOIN players AS T3 ON T1.loser_id  =  T3.player_id ORDER BY T1.minutes DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 20с</div>
+  <table class="rows"><tbody><tr><td>Petra Kvitova</td><td>Angelique Kerber</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="diff">
+  <p class="q">69. Подсчитайте количество рейсов в АТО.</p>
+  <div class="qen">Count the number of flights into ATO.</div>
+  <div class="gold">база <b>flight_2</b> · эталон: <code>SELECT count(*) FROM FLIGHTS WHERE DestAirport  =  &quot;ATO&quot;;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT count(*) FROM flights WHERE destairport  =  &#x27;ATO&#x27;</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 11с</div>
+  <table class="rows"><tbody><tr><td>7</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT count(*) FROM flights AS T1 JOIN airports AS T2 ON T1.DestAirport  =  T2.AirportCode WHERE T2.AirportName  =  &quot;ATO&quot;</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>0</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">70. Найдите вес самой молодой собаки.</p>
+  <div class="qen">Find the weight of the youngest dog.</div>
+  <div class="gold">база <b>pets_1</b> · эталон: <code>SELECT weight FROM pets ORDER BY pet_age LIMIT 1;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT weight FROM pets WHERE pettype  =  &#x27;dog&#x27; ORDER BY pet_age LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 11с</div>
+  <table class="rows"><tbody><tr><td>9.3</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT weight FROM pets WHERE pettype  =  &#x27;dog&#x27; ORDER BY pet_age LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 11с</div>
+  <table class="rows"><tbody><tr><td>9.3</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">71. Самый высокий рейтинг проигравших во всех матчах.</p>
+  <div class="qen">Find the highest rank of losers in all matches.</div>
+  <div class="gold">база <b>wta_1</b> · эталон: <code>SELECT min(loser_rank) FROM matches;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT max(T1.ranking) FROM rankings AS T1 JOIN matches AS T2 ON T1.player_id  =  T2.loser_id</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 19с</div>
+  <table class="rows"><tbody><tr><td>1315</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT max(loser_rank) FROM matches</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 17с</div>
+  <table class="rows"><tbody><tr><td>112</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">72. Какая модель из всех 4-цилиндровых автомобилей имеет наибольшую мощность?</p>
+  <div class="qen">For all of the 4 cylinder cars, which model has the most horsepower?</div>
+  <div class="gold">база <b>car_1</b> · эталон: <code>SELECT T1.Model FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId  =  T2.Id WHERE T2.Cylinders  =  4 ORDER BY T2.horsepower DESC LIMIT 1;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.Model FROM model_list AS T1 JOIN cars_data AS T2 ON T1.ModelId = T2.Id WHERE T2.Cylinders = 4 ORDER BY T2.Horsepower DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 16с</div>
+  <table class="rows"><tbody><tr><td>oldsmobile</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.Model FROM model_list AS T1 JOIN cars_data AS T2 ON T1.ModelId  =  T2.Id WHERE T2.Cylinders  =  4 ORDER BY T2.Horsepower DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 15с</div>
+  <table class="rows"><tbody><tr><td>oldsmobile</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">73. Сколько старшеклассников в каждом классе?</p>
+  <div class="qen">How many high schoolers are in each grade?</div>
+  <div class="gold">база <b>network_1</b> · эталон: <code>SELECT grade ,  count(*) FROM Highschooler GROUP BY grade;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT count(*) ,  grade FROM highschooler GROUP BY grade</pre>
+  
+  <div class="meta">строк 4 · попыток критика 1 · 11с</div>
+  <table class="rows"><tbody><tr><td>5</td><td>9</td></tr><tr><td>5</td><td>10</td></tr><tr><td>4</td><td>11</td></tr><tr><td>4</td><td>12</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT count(*) ,  grade FROM highschooler GROUP BY grade</pre>
+  
+  <div class="meta">строк 4 · попыток критика 1 · 10с</div>
+  <table class="rows"><tbody><tr><td>5</td><td>9</td></tr><tr><td>5</td><td>10</td></tr><tr><td>4</td><td>11</td></tr><tr><td>4</td><td>12</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">74. Как называются и какие id у всех производителей, выпускающих более трех моделей?</p>
+  <div class="qen">What are the names and ids of all makers with more than 3 models?</div>
+  <div class="gold">база <b>car_1</b> · эталон: <code>SELECT T1.FullName ,  T1.Id FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id  =  T2.Maker GROUP BY T1.Id HAVING count(*)  &gt;  3;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.id ,  T1.maker FROM car_makers AS T1 JOIN model_list AS T2 ON T1.id  =  T2.maker GROUP BY T1.id HAVING count(*)  &gt;  3</pre>
+  
+  <div class="meta">строк 2 · попыток критика 1 · 16с</div>
+  <table class="rows"><tbody><tr><td>4</td><td>gm</td></tr><tr><td>6</td><td>chrysler</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.id ,  T1.maker FROM car_makers AS T1 JOIN model_list AS T2 ON T1.id  =  T2.maker GROUP BY T1.id HAVING count(*)  &gt;  3</pre>
+  
+  <div class="meta">строк 2 · попыток критика 1 · 16с</div>
+  <table class="rows"><tbody><tr><td>4</td><td>gm</td></tr><tr><td>6</td><td>chrysler</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">75. Из каких стран есть певцы старше 20 лет?</p>
+  <div class="qen">What are  the different countries with singers above age 20?</div>
+  <div class="gold">база <b>concert_singer</b> · эталон: <code>SELECT DISTINCT country FROM singer WHERE age  &gt;  20;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT DISTINCT Country FROM singer WHERE Age  &gt;  20</pre>
+  
+  <div class="meta">строк 3 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>Netherlands</td></tr><tr><td>United States</td></tr><tr><td>France</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT DISTINCT Country FROM singer WHERE Age  &gt;  20</pre>
+  
+  <div class="meta">строк 3 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>Netherlands</td></tr><tr><td>United States</td></tr><tr><td>France</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">76. Названия и режиссеры всех мультфильмов, сортированных по дате выхода в эфир</p>
+  <div class="qen">What is the name and directors of all the cartoons that are ordered by air date?</div>
+  <div class="gold">база <b>tvshow</b> · эталон: <code>SELECT title ,  Directed_by FROM Cartoon ORDER BY Original_air_date;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT title ,  directed_by FROM Cartoon ORDER BY original_air_date</pre>
+  
+  <div class="meta">строк 16 · попыток критика 1 · 15с</div>
+  <table class="rows"><tbody><tr><td>Invasion of the Secret Santas!</td><td>Brandon Vietti</td></tr><tr><td>Evil Under the Sea!</td><td>Michael Chang</td></tr><tr><td>Return of the Fearsome Fangs!</td><td>Brandon Vietti</td></tr><tr><td>Deep Cover for Batman!</td><td>Michael Chang</td></tr><tr><td>The Eyes of Despero!</td><td>Ben Jones</td></tr><tr><td>Dawn of the Dead Man!</td><td>Ben Jones</td></tr></tbody></table><div class="pill">…из 12</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT title ,  directed_by FROM Cartoon ORDER BY original_air_date</pre>
+  
+  <div class="meta">строк 16 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>Invasion of the Secret Santas!</td><td>Brandon Vietti</td></tr><tr><td>Evil Under the Sea!</td><td>Michael Chang</td></tr><tr><td>Return of the Fearsome Fangs!</td><td>Brandon Vietti</td></tr><tr><td>Deep Cover for Batman!</td><td>Michael Chang</td></tr><tr><td>The Eyes of Despero!</td><td>Ben Jones</td></tr><tr><td>Dawn of the Dead Man!</td><td>Ben Jones</td></tr></tbody></table><div class="pill">…из 12</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">77. Отображать имена и фамилии всех игроков в порядке даты рождения.</p>
+  <div class="qen">List the first and last name of all players in the order of birth date.</div>
+  <div class="gold">база <b>wta_1</b> · эталон: <code>SELECT first_name ,  last_name FROM players ORDER BY birth_date;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT first_name ,  last_name FROM players ORDER BY birth_date</pre>
+  
+  <div class="meta">строк 200 · попыток критика 1 · 16с</div>
+  <table class="rows"><tbody><tr><td>Thelma</td><td>Long</td></tr><tr><td>Pauline</td><td>Addie</td></tr><tr><td>Milly</td><td>Vagn Nielsen</td></tr><tr><td>Vera</td><td>Johansen</td></tr><tr><td>Reiko</td><td>Miyagi</td></tr><tr><td>Louise</td><td>Brown</td></tr></tbody></table><div class="pill">…из 12</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT first_name ,  last_name FROM players ORDER BY birth_date</pre>
+  
+  <div class="meta">строк 200 · попыток критика 1 · 15с</div>
+  <table class="rows"><tbody><tr><td>Thelma</td><td>Long</td></tr><tr><td>Pauline</td><td>Addie</td></tr><tr><td>Milly</td><td>Vagn Nielsen</td></tr><tr><td>Vera</td><td>Johansen</td></tr><tr><td>Reiko</td><td>Miyagi</td></tr><tr><td>Louise</td><td>Brown</td></tr></tbody></table><div class="pill">…из 12</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">78. В каких странах есть хотя бы один производитель автомобилей? Показать название и id.</p>
+  <div class="qen">What are the countries having at least one car maker? List name and id.</div>
+  <div class="gold">база <b>car_1</b> · эталон: <code>SELECT T1.CountryName ,  T1.CountryId FROM COUNTRIES AS T1 JOIN CAR_MAKERS AS T2 ON T1.CountryId  =  T2.Country GROUP BY T1.CountryId HAVING count(*) </code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T1.CountryName ,  T1.CountryId FROM countries AS T1 JOIN car_makers AS T2 ON T1.CountryId  =  T2.Country</pre>
+  
+  <div class="meta">строк 28 · попыток критика 1 · 15с</div>
+  <table class="rows"><tbody><tr><td>usa</td><td>1</td></tr><tr><td>germany</td><td>2</td></tr><tr><td>germany</td><td>2</td></tr><tr><td>usa</td><td>1</td></tr><tr><td>usa</td><td>1</td></tr><tr><td>usa</td><td>1</td></tr></tbody></table><div class="pill">…из 12</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T1.CountryName ,  T1.CountryId FROM countries AS T1 JOIN car_makers AS T2 ON T1.CountryId  =  T2.Country</pre>
+  
+  <div class="meta">строк 28 · попыток критика 1 · 15с</div>
+  <table class="rows"><tbody><tr><td>usa</td><td>1</td></tr><tr><td>germany</td><td>2</td></tr><tr><td>germany</td><td>2</td></tr><tr><td>usa</td><td>1</td></tr><tr><td>usa</td><td>1</td></tr><tr><td>usa</td><td>1</td></tr></tbody></table><div class="pill">…из 12</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">79. Как зовут учителей, которые не ведут курсы?</p>
+  <div class="qen">What are the names of the teachers whose courses have not been arranged?</div>
+  <div class="gold">база <b>course_teach</b> · эталон: <code>SELECT Name FROM teacher WHERE Teacher_id NOT IN (SELECT Teacher_id FROM course_arrange);</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT Name FROM teacher WHERE Teacher_ID NOT IN (SELECT Teacher_ID FROM course_arrange)</pre>
+  
+  <div class="meta">строк 3 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>John Deloor</td></tr><tr><td>Сергей Васянин</td></tr><tr><td>Николай Андреев</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT Name FROM teacher WHERE Teacher_ID NOT IN (SELECT Teacher_ID FROM course_arrange)</pre>
+  
+  <div class="meta">строк 3 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>John Deloor</td></tr><tr><td>Сергей Васянин</td></tr><tr><td>Николай Андреев</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">80. Какие звукозаписывающие компании используются как оркестрами, основанными до 2003 года, так и оркестрами, основанными после 2003 года?</p>
+  <div class="qen">What are the record companies that are used by both orchestras founded before 2003 and those founded after 2003?</div>
+  <div class="gold">база <b>orchestra</b> · эталон: <code>SELECT Record_Company FROM orchestra WHERE Year_of_Founded  &lt;  2003 INTERSECT SELECT Record_Company FROM orchestra WHERE Year_of_Founded  &gt;  2003;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT record_company FROM orchestra WHERE year_of_founded  &lt;  2003 INTERSECT SELECT record_company FROM orchestra WHERE year_of_founded  &gt;  2003</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 17с</div>
+  <table class="rows"><tbody><tr><td>Decca Records</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT record_company FROM orchestra WHERE year_of_founded  &lt;  2003 INTERSECT SELECT record_company FROM orchestra WHERE year_of_founded  &gt;  2003</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 16с</div>
+  <table class="rows"><tbody><tr><td>Decca Records</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="diff ruko">
+  <p class="q">81. Как зовут старшеклассников, у которых есть лайки, и сколько лайков у каждого?</p>
+  <div class="qen">What are the names of high schoolers who have likes, and how many likes does each have?</div>
+  <div class="gold">база <b>network_1</b> · эталон: <code>SELECT T2.name ,  count(*) FROM Likes AS T1 JOIN Highschooler AS T2 ON T1.student_id  =  T2.id GROUP BY T1.student_id;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.name ,  count(*) FROM Highschooler AS T1 JOIN Likes AS T2 ON T1.id  =  T2.student_id WHERE T1.grade  =  12 GROUP BY T1.id</pre>
+  
+  <div class="meta">строк 2 · попыток критика 1 · 15с</div>
+  <table class="rows"><tbody><tr><td>John</td><td>1</td></tr><tr><td>Kyle</td><td>1</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T1.name ,  count(*) FROM Highschooler AS T1 JOIN Likes AS T2 ON T1.id  =  T2.student_id GROUP BY T2.student_id</pre>
+  
+  <div class="meta">строк 12 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>Лев</td><td>4</td></tr><tr><td>Владимир</td><td>1</td></tr><tr><td>John</td><td>1</td></tr><tr><td>Alexis</td><td>1</td></tr><tr><td>Austin</td><td>1</td></tr><tr><td>Jessica</td><td>1</td></tr></tbody></table><div class="pill">…из 12</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">82. Найдите среднее количество сотрудников, работающих в музеях, которые были открыты до 2009 года.</p>
+  <div class="qen">Find the average number of staff working for the museums that were open before 2009.</div>
+  <div class="gold">база <b>museum_visit</b> · эталон: <code>SELECT avg(num_of_staff) FROM museum WHERE open_year  &lt;  2009;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT avg(num_of_staff) FROM museum WHERE open_year  &lt;  2009</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 12с</div>
+  <table class="rows"><tbody><tr><td>27.25</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT avg(num_of_staff) FROM museum WHERE open_year  &lt;  2009</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>27.25</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="diff ruko">
+  <p class="q">83. С каким ускорением разгоняется модель amc hornet sportabout (sw)?</p>
+  <div class="qen">What is the accelerate of the car make amc hornet sportabout (sw)?</div>
+  <div class="gold">база <b>car_1</b> · эталон: <code>SELECT T1.Accelerate FROM CARS_DATA AS T1 JOIN CAR_NAMES AS T2 ON T1.Id  =  T2.MakeId WHERE T2.Make  =  &#x27;amc hornet sportabout (sw)&#x27;;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T2.Accelerate FROM car_names AS T1 JOIN cars_data AS T2 ON T1.MakeId  =  T2.Id WHERE T1.Model  =  &quot;amc hornet sportabout (sw)&quot;</pre>
+  
+  <div class="meta">строк 0 · попыток критика 3 · 26с</div>
+  <div class="pill">— пусто —</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T2.Accelerate FROM car_names AS T1 JOIN cars_data AS T2 ON T1.MakeId  =  T2.Id WHERE T1.Make  =  &quot;amc hornet sportabout (sw)&quot;</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 15с</div>
+  <table class="rows"><tbody><tr><td>13.5</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">84. Какие разные модели выпускает производитель с полным названием General Motors или которые весят более 3500?</p>
+  <div class="qen">Which distinctive models are produced by maker with the full name General Motors or weighing more than 3500?</div>
+  <div class="gold">база <b>car_1</b> · эталон: <code>SELECT DISTINCT T2.Model FROM CAR_NAMES AS T1 JOIN MODEL_LIST AS T2 ON T1.Model  =  T2.Model JOIN CAR_MAKERS AS T3 ON T2.Maker  =  T3.Id JOIN CARS_DAT</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT DISTINCT T2.Model FROM car_makers AS T1 JOIN model_list AS T2 ON T1.Id  =  T2.Maker JOIN cars_data AS T3 ON T2.ModelId  =  T3.Id WHERE T1.FullName  =  &#x27;General Motors&#x27; OR T3.Weight  &gt;  3500</pre>
+  
+  <div class="meta">строк 22 · попыток критика 1 · 19с</div>
+  <table class="rows"><tbody><tr><td>amc</td></tr><tr><td>audi</td></tr><tr><td>buick</td></tr><tr><td>cadillac</td></tr><tr><td>capri</td></tr><tr><td>chevrolet</td></tr></tbody></table><div class="pill">…из 12</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>— SQL не получен —</pre>
+  <div class="err">нет SQL</div>
+  <div class="meta">строк 0 · попыток критика  · 27с</div>
+  <div class="pill">— пусто —</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">85. Какого возраста и из какого города учителя?</p>
+  <div class="qen">What are the age and hometown of teachers?</div>
+  <div class="gold">база <b>course_teach</b> · эталон: <code>SELECT Age ,  Hometown FROM teacher;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT Age ,  Hometown FROM teacher</pre>
+  
+  <div class="meta">строк 9 · попыток критика 1 · 11с</div>
+  <table class="rows"><tbody><tr><td>32</td><td>Blackrod Urban District</td></tr><tr><td>29</td><td>Bolton County Borough</td></tr><tr><td>26</td><td>Farnworth Municipal Borough</td></tr><tr><td>33</td><td>Horwich Urban District</td></tr><tr><td>45</td><td>Kearsley Urban District</td></tr><tr><td>41</td><td>Little Lever Urban District</td></tr></tbody></table><div class="pill">…из 9</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT Age ,  Hometown FROM teacher</pre>
+  
+  <div class="meta">строк 9 · попыток критика 1 · 10с</div>
+  <table class="rows"><tbody><tr><td>32</td><td>Blackrod Urban District</td></tr><tr><td>29</td><td>Bolton County Borough</td></tr><tr><td>26</td><td>Farnworth Municipal Borough</td></tr><tr><td>33</td><td>Horwich Urban District</td></tr><tr><td>45</td><td>Kearsley Urban District</td></tr><tr><td>41</td><td>Little Lever Urban District</td></tr></tbody></table><div class="pill">…из 9</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">86. Сколько всего там игроков?</p>
+  <div class="qen">How many players are there?</div>
+  <div class="gold">база <b>wta_1</b> · эталон: <code>SELECT count(*) FROM players;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT count(*) FROM players</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>20665</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT count(*) FROM players</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 15с</div>
+  <table class="rows"><tbody><tr><td>20665</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">87. Какое минимальное и максимальное количество товаров во всех магазинах?</p>
+  <div class="qen">What are the minimum and maximum number of products across all the shops?</div>
+  <div class="gold">база <b>employee_hire_evaluation</b> · эталон: <code>SELECT min(Number_products) ,  max(Number_products) FROM shop;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT min(Number_products) ,  max(Number_products) FROM shop</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>1600</td><td>15000</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT min(Number_products) ,  max(Number_products) FROM shop</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>1600</td><td>15000</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">88. Как зовутся игроки в покер в порядке возрастания по количеству проведенных ими финальных столов?</p>
+  <div class="qen">What are the names of poker players, ordered ascending by the number of final tables they have made?</div>
+  <div class="gold">база <b>poker_player</b> · эталон: <code>SELECT T1.Name FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID  =  T2.People_ID ORDER BY T2.Final_Table_Made;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T2.Name FROM poker_player AS T1 JOIN people AS T2 ON T1.People_ID  =  T2.People_ID ORDER BY T1.Final_Table_Made ASC</pre>
+  
+  <div class="meta">строк 5 · попыток критика 1 · 16с</div>
+  <table class="rows"><tbody><tr><td>Teodor Salparov</td></tr><tr><td>Maksim Botin</td></tr><tr><td>Yevgeni Sivozhelez</td></tr><tr><td>Semen Poltavskiy</td></tr><tr><td>Aleksey Ostapenko</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T2.Name FROM poker_player AS T1 JOIN people AS T2 ON T1.People_ID  =  T2.People_ID ORDER BY T1.Final_Table_Made ASC</pre>
+  
+  <div class="meta">строк 5 · попыток критика 1 · 15с</div>
+  <table class="rows"><tbody><tr><td>Teodor Salparov</td></tr><tr><td>Maksim Botin</td></tr><tr><td>Yevgeni Sivozhelez</td></tr><tr><td>Semen Poltavskiy</td></tr><tr><td>Aleksey Ostapenko</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">89. Отображать имя и количество очков победителя, который выигрывал больше всего раз.</p>
+  <div class="qen">Find the name and rank points of the winner who won the most times.</div>
+  <div class="gold">база <b>wta_1</b> · эталон: <code>SELECT winner_name ,  winner_rank_points FROM matches GROUP BY winner_name ORDER BY count(*) DESC LIMIT 1;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T1.winner_name ,  T1.winner_rank_points FROM matches AS T1 JOIN players AS T2 ON T1.winner_id  =  T2.player_id GROUP BY T1.winner_id ORDER BY COUNT(*) DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 20с</div>
+  <table class="rows"><tbody><tr><td>Angelique Kerber</td><td>3715</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T1.winner_name ,  T1.winner_rank_points FROM matches AS T1 JOIN players AS T2 ON T1.winner_id  =  T2.player_id GROUP BY T1.winner_id ORDER BY COUNT(*) DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 20с</div>
+  <table class="rows"><tbody><tr><td>Angelique Kerber</td><td>3715</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">90. Найдите общее количество игроков.</p>
+  <div class="qen">Find the total number of players.</div>
+  <div class="gold">база <b>wta_1</b> · эталон: <code>SELECT count(*) FROM players;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT count(*) FROM players</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>20665</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT count(*) FROM players</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>20665</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="diff ruko">
+  <p class="q">91. Как называется каждый континент и сколько производителей автомобилей на каждом из них?</p>
+  <div class="qen">What is the name of each continent and how many car makers are there in each one?</div>
+  <div class="gold">база <b>car_1</b> · эталон: <code>SELECT T1.Continent ,  count(*) FROM CONTINENTS AS T1 JOIN COUNTRIES AS T2 ON T1.ContId  =  T2.continent JOIN car_makers AS T3 ON T2.CountryId  =  T3.</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.Continent ,  COUNT(*) FROM countries AS T1 JOIN car_makers AS T2 ON T1.CountryId  =  T2.Country GROUP BY T1.Continent</pre>
+  
+  <div class="meta">строк 4 · попыток критика 1 · 15с</div>
+  <table class="rows"><tbody><tr><td>1</td><td>4</td></tr><tr><td>2</td><td>13</td></tr><tr><td>3</td><td>8</td></tr><tr><td>6</td><td>3</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T3.Continent ,  count(*) FROM car_makers AS T1 JOIN countries AS T2 ON T1.Country  =  T2.CountryId JOIN continents AS T3 ON T2.Continent  =  T3.ContId GROUP BY T3.Continent</pre>
+  
+  <div class="meta">строк 4 · попыток критика 1 · 16с</div>
+  <table class="rows"><tbody><tr><td>america</td><td>4</td></tr><tr><td>asia</td><td>8</td></tr><tr><td>europe</td><td>13</td></tr><tr><td>Южная Америка</td><td>3</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">92. Для каждого языка укажите количество телеканалов, которые его используют.</p>
+  <div class="qen">For each language, list the number of TV Channels that use it.</div>
+  <div class="gold">база <b>tvshow</b> · эталон: <code>SELECT LANGUAGE ,  count(*) FROM TV_Channel GROUP BY LANGUAGE;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT Language ,  COUNT(*) FROM TV_Channel GROUP BY Language</pre>
+  
+  <div class="meta">строк 3 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>English</td><td>3</td></tr><tr><td>Italian</td><td>12</td></tr><tr><td>Албанский</td><td>1</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT Language ,  COUNT(*) FROM TV_Channel GROUP BY Language</pre>
+  
+  <div class="meta">строк 3 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>English</td><td>3</td></tr><tr><td>Italian</td><td>12</td></tr><tr><td>Албанский</td><td>1</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">93. Количество домашних животных у каждого учащегося и id учащегося.</p>
+  <div class="qen">Find the number of pets for each student who has any pet and student id.</div>
+  <div class="gold">база <b>pets_1</b> · эталон: <code>SELECT count(*) ,  T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid GROUP BY T1.stuid;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT count(*) ,  T1.stuid FROM Has_Pet AS T1 JOIN Student AS T2 ON T1.stuid  =  T2.stuid GROUP BY T1.stuid</pre>
+  
+  <div class="meta">строк 5 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>8</td><td>1001</td></tr><tr><td>2</td><td>1002</td></tr><tr><td>7</td><td>1030</td></tr><tr><td>14</td><td>1036</td></tr><tr><td>7</td><td>1037</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT count(*) ,  StuID FROM Has_Pet GROUP BY StuID</pre>
+  
+  <div class="meta">строк 5 · попыток критика 1 · 12с</div>
+  <table class="rows"><tbody><tr><td>8</td><td>1001</td></tr><tr><td>2</td><td>1002</td></tr><tr><td>7</td><td>1030</td></tr><tr><td>14</td><td>1036</td></tr><tr><td>7</td><td>1037</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">94. Какие собаки самой редкой породы? Показывать их клички и даты лечения.</p>
+  <div class="qen">Which dogs are of the rarest breed? Show their names and treatment dates.</div>
+  <div class="gold">база <b>dog_kennels</b> · эталон: <code>SELECT T1.name ,  T2.date_of_treatment FROM Dogs AS T1 JOIN Treatments AS T2 ON T1.dog_id  =  T2.dog_id WHERE T1.breed_code  =  ( SELECT breed_code FR</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.name ,  T3.date_of_treatment FROM dogs AS T1 JOIN treatments AS T3 ON T1.dog_id  =  T3.dog_id JOIN breeds AS T2 ON T1.breed_code  =  T2.breed_code WHERE T2.breed_name  =  (SELECT breed_name FROM breeds GROUP BY breed_name ORDER BY count(*) ASC LIMIT 1)</pre>
+  
+  <div class="meta">строк 5 · попыток критика 1 · 26с</div>
+  <table class="rows"><tbody><tr><td>Hipolito</td><td>2018-03-01 04:14:46</td></tr><tr><td>Evangeline</td><td>2018-03-10 11:45:58</td></tr><tr><td>Hipolito</td><td>2018-03-24 22:25:58</td></tr><tr><td>Evangeline</td><td>2018-03-13 12:22:58</td></tr><tr><td>Narciso</td><td>2018-02-26 09:08:53</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.name ,  T3.date_of_treatment FROM dogs AS T1 JOIN treatments AS T3 ON T1.dog_id  =  T3.dog_id JOIN breeds AS T2 ON T1.breed_code  =  T2.breed_code WHERE T2.breed_name  =  (SELECT breed_name FROM breeds GROUP BY breed_name ORDER BY count(*) ASC LIMIT 1)</pre>
+  
+  <div class="meta">строк 5 · попыток критика 1 · 25с</div>
+  <table class="rows"><tbody><tr><td>Hipolito</td><td>2018-03-01 04:14:46</td></tr><tr><td>Evangeline</td><td>2018-03-10 11:45:58</td></tr><tr><td>Hipolito</td><td>2018-03-24 22:25:58</td></tr><tr><td>Evangeline</td><td>2018-03-13 12:22:58</td></tr><tr><td>Narciso</td><td>2018-02-26 09:08:53</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">95. Укажите название и вместимость стадиона, на котором будет проведено наибольшее количество концертов в 2014 году или позже.</p>
+  <div class="qen">Show the stadium name and capacity with most number of concerts in year 2014 or after.</div>
+  <div class="gold">база <b>concert_singer</b> · эталон: <code>SELECT T2.name ,  T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id  =  T2.stadium_id WHERE T1.year  &gt;=  2014 GROUP BY T2.stadium_id </code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T1.name ,  T1.capacity FROM stadium AS T1 JOIN concert AS T2 ON T1.stadium_id  =  T2.stadium_id WHERE T2.year  &gt;=  2014 GROUP BY T2.stadium_id ORDER BY count(*) DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 18с</div>
+  <table class="rows"><tbody><tr><td>Recreation Park</td><td>3100</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T1.name ,  T1.capacity FROM stadium AS T1 JOIN concert AS T2 ON T1.stadium_id  =  T2.stadium_id WHERE T2.year  &gt;=  2014 GROUP BY T1.stadium_id ORDER BY count(*) DESC LIMIT 1</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 16с</div>
+  <table class="rows"><tbody><tr><td>Recreation Park</td><td>3100</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="both ruko">
+  <p class="q">96. Найдите количество посетителей, которые не посещали ни один музей, открытый после 2010 года.</p>
+  <div class="qen">Find the number of visitors who did not visit any museum opened after 2010.</div>
+  <div class="gold">база <b>museum_visit</b> · эталон: <code>SELECT count(*) FROM visitor WHERE id NOT IN (SELECT t2.visitor_id FROM museum AS t1 JOIN visit AS t2 ON t1.Museum_ID  =  t2.Museum_ID WHERE t1.open_y</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT count(*) FROM visit WHERE museum_id NOT IN (SELECT museum_id FROM museum WHERE open_year  &gt;  2010)</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>2</td></tr></tbody></table>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v n">не совпал</span> </div>
+  <pre>SELECT count(DISTINCT visitor_ID) FROM visit WHERE museum_ID NOT IN (SELECT museum_ID FROM museum WHERE open_year  &gt;  2010)</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>2</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="diff ruko">
+  <p class="q">97. Покажи имена старшеклассников, у которых есть как минимум 3 друга.</p>
+  <div class="qen">Show the names of high schoolers who have at least 3 friends.</div>
+  <div class="gold">база <b>network_1</b> · эталон: <code>SELECT T2.name FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id  =  T2.id GROUP BY T1.student_id HAVING count(*)  &gt;=  3;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT T1.name FROM Highschooler AS T1 JOIN Friend AS T2 ON T1.id  =  T2.student_id WHERE T1.grade  =  12 GROUP BY T1.id HAVING count(*)  &gt;=  3</pre>
+  
+  <div class="meta">строк 0 · попыток критика 3 · 25с</div>
+  <div class="pill">— пусто —</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT T1.name FROM Highschooler AS T1 JOIN Friend AS T2 ON T1.id  =  T2.student_id GROUP BY T2.student_id HAVING count(*)  &gt;=  3</pre>
+  
+  <div class="meta">строк 1 · попыток критика 1 · 14с</div>
+  <table class="rows"><tbody><tr><td>Andrew</td></tr></tbody></table>
+</div></div>
+</div><div class="card" data-state="diff ruko">
+  <p class="q">98. Найдите средний рейтинг каждого игрока и его имя.</p>
+  <div class="qen">Find the average ranking for each player and their first name.</div>
+  <div class="gold">база <b>wta_1</b> · эталон: <code>SELECT avg(ranking) ,  T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id  =  T2.player_id GROUP BY T1.first_name;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v n">не совпал</span> </div>
+  <pre>SELECT avg(T2.ranking) ,  T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id = T2.player_id GROUP BY T1.player_id</pre>
+  
+  <div class="meta">строк 200 · попыток критика 1 · 18с</div>
+  <table class="rows"><tbody><tr><td>186.76587795765877</td><td>Mirjana</td></tr><tr><td>121.82273948075202</td><td>Tamarine</td></tr><tr><td>196.02280912364947</td><td>Katarina</td></tr><tr><td>178.44725111441306</td><td>Jana</td></tr><tr><td>101.55520833333334</td><td>Lisa</td></tr><tr><td>1070.21875</td><td>Maureen</td></tr></tbody></table><div class="pill">…из 12</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT avg(T2.ranking) ,  T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id = T2.player_id GROUP BY T1.first_name</pre>
+  
+  <div class="meta">строк 200 · попыток критика 1 · 18с</div>
+  <table class="rows"><tbody><tr><td>1199.8235294117646</td><td>Aastha</td></tr><tr><td>1110.0434782608695</td><td>Abbi</td></tr><tr><td>808.4545454545455</td><td>Abbie</td></tr><tr><td>387.66706161137444</td><td>Abigail</td></tr><tr><td>1039.6744186046512</td><td>Abiodun</td></tr><tr><td>1228.75</td><td>Abir</td></tr></tbody></table><div class="pill">…из 12</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">99. Кто из специалистов не проводил лечение собакам? Перечислите id, должность и адрес электронной почты специалиста.</p>
+  <div class="qen">Which professional did not operate any treatment on dogs? List the professional&#x27;s id, role and email.</div>
+  <div class="gold">база <b>dog_kennels</b> · эталон: <code>SELECT professional_id ,  role_code ,  email_address FROM Professionals EXCEPT SELECT T1.professional_id ,  T1.role_code ,  T1.email_address FROM Prof</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT professional_id ,  role_code ,  email_address FROM Professionals WHERE professional_id NOT IN ( SELECT professional_id FROM Treatments )</pre>
+  
+  <div class="meta">строк 9 · попыток критика 1 · 25с</div>
+  <table class="rows"><tbody><tr><td>1</td><td>Employee</td><td>deanna.schuster@example.com</td></tr><tr><td>2</td><td>Employee</td><td>lucile.shanahan@example.org</td></tr><tr><td>3</td><td>Employee</td><td>uboehm@example.org</td></tr><tr><td>11</td><td>Employee</td><td>west.eula@example.net</td></tr><tr><td>12</td><td>Veterenarian</td><td>marquardt.furman@example.org</td></tr><tr><td>13</td><td>Veterenarian</td><td>delphine29@example.com</td></tr></tbody></table><div class="pill">…из 9</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> </div>
+  <pre>SELECT professional_id ,  role_code ,  email_address FROM Professionals WHERE professional_id NOT IN ( SELECT professional_id FROM Treatments )</pre>
+  
+  <div class="meta">строк 9 · попыток критика 1 · 23с</div>
+  <table class="rows"><tbody><tr><td>1</td><td>Employee</td><td>deanna.schuster@example.com</td></tr><tr><td>2</td><td>Employee</td><td>lucile.shanahan@example.org</td></tr><tr><td>3</td><td>Employee</td><td>uboehm@example.org</td></tr><tr><td>11</td><td>Employee</td><td>west.eula@example.net</td></tr><tr><td>12</td><td>Veterenarian</td><td>marquardt.furman@example.org</td></tr><tr><td>13</td><td>Veterenarian</td><td>delphine29@example.com</td></tr></tbody></table><div class="pill">…из 9</div>
+</div></div>
+</div><div class="card" data-state="ok">
+  <p class="q">100. Перечислите имена певцов в порядке возрастания их чистых активов.</p>
+  <div class="qen">List the name of singers in ascending order of net worth.</div>
+  <div class="gold">база <b>singer</b> · эталон: <code>SELECT Name FROM singer ORDER BY Net_Worth_Millions ASC;</code></div>
+  <div class="pair"><div class="side ru">
+  <div class="lbl">Русский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT Name FROM singer ORDER BY Net_Worth_Millions ASC</pre>
+  
+  <div class="meta">строк 9 · попыток критика 1 · 13с</div>
+  <table class="rows"><tbody><tr><td>Андрей Пакетов</td></tr><tr><td>Abigail Johnson</td></tr><tr><td>Susanne Klatten</td></tr><tr><td>Gina Rinehart</td></tr><tr><td>Iris Fontbona</td></tr><tr><td>Jacqueline Mars</td></tr></tbody></table><div class="pill">…из 9</div>
+</div><div class="side en">
+  <div class="lbl">Английский <span class="v y">результат совпал</span> <span class="pill">SQL дословно как эталон</span></div>
+  <pre>SELECT Name FROM singer ORDER BY Net_Worth_Millions ASC</pre>
+  
+  <div class="meta">строк 9 · попыток критика 1 · 11с</div>
+  <table class="rows"><tbody><tr><td>Андрей Пакетов</td></tr><tr><td>Abigail Johnson</td></tr><tr><td>Susanne Klatten</td></tr><tr><td>Gina Rinehart</td></tr><tr><td>Iris Fontbona</td></tr><tr><td>Jacqueline Mars</td></tr></tbody></table><div class="pill">…из 9</div>
+</div></div>
+</div></div><script>
+document.getElementById("f").addEventListener("change", function(e){
+  var v = e.target.value;
+  document.querySelectorAll(".card").forEach(function(c){
+    var s = c.dataset.state || "";
+    c.style.display = (v === "*" || s.indexOf(v) >= 0) ? "" : "none";
+  });
+});
+</script></body></html>
