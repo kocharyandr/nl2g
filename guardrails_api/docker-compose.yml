@@ -1,0 +1,51 @@
+x-api-base: &api-base
+  image: ${IMAGE_TAG}
+  container_name: ${API_CONTAINER_NAME}
+  restart: always
+  env_file:
+    - .env
+  environment:
+    - HF_HOME=/root/.cache/huggingface
+    - HF_HUB_OFFLINE=1
+    - MODEL_NAME
+  ports:
+    - "${API_PORT}:8000"
+  volumes:
+    # Bind-mount the host HF cache so weights are shared with all other HF
+    # tools on the host and survive container rebuilds.
+    - ${HF_CACHE_DIR:-${HOME}/.cache/huggingface}:/root/.cache/huggingface
+    # Bind-mount source code so changes are picked up without rebuilding.
+    - .:/app
+    # Preserve the venv built into the image — host mount would shadow it otherwise.
+    - /app/.venv
+  command: |
+    sh -c "
+      uv run uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    "
+  logging:
+    driver: "json-file"
+    options:
+      max-size: "10m"
+      max-file: "3"
+
+services:
+  api-gpu:
+    <<: *api-base
+    profiles: ["gpu"]
+    build:
+      context: .
+      dockerfile: Dockerfile
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  api-cpu:
+    <<: *api-base
+    profiles: ["cpu"]
+    build:
+      context: .
+      dockerfile: Dockerfile

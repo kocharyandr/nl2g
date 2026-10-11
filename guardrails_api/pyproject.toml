@@ -1,0 +1,81 @@
+[project]
+name = "GuardrailsAPI"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi==0.115.8",
+    "httpx==0.28.1",
+    "ruff==0.14.0",
+    "python-dotenv==1.0.1",
+    "uvicorn==0.34.0",
+    "prometheus-fastapi-instrumentator>=7.1.0",
+    "pydantic-settings>=2.14.1",
+    "gliner2[local]>=1.3.1",
+]
+
+[tool.ruff]
+exclude = [
+    "venv",
+    ".venv", 
+    ".vscode",
+    ".idea",
+    ".git",
+    ".ipynb",
+    ".ipynb_checkpoints",
+    "__pycache__",
+    "migrations",
+    "tests"
+]
+line-length = 88
+indent-width = 4
+
+[tool.ruff.format]
+exclude = ["*.pyi"]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "PLR2004",     # Magic value used in comparison,
+    "INP001",      # is part of an implicit namespace package. Add an `__init__.py
+    "D203",        # docs conflict
+    "D211",        # docs conflict
+    "D212",        # docs conflict
+    "D213",        # docs conflict
+    "DTZ007",      # Naive datetime constructed
+    "DTZ001",      # `datetime.datetime()` called without a `tzinfo` argument
+    "RUF015",      # Prefer `next(...)` over single element slice
+    "PTH123",      # `open()` should be replaced by `Path.open()`
+    "D100",        # Missing docstring in public module
+    "DTZ005",      # `datetime.datetime.now()` called without a `tz` argument
+    "RUF001",      # String contains ambiguous `е` (CYRILLIC SMALL LETTER IE).
+    "BLE001",      # Do not catch blind exception: `Exception`
+    "DTZ002",      # `datetime.datetime.today()` used
+    "EM101",       # Exception must not use a string literal, assign to variable first
+    "TRY003",      # Avoid specifying long messages outside the exception class
+    "RUF003",      # Comment contains ambiguous `с`
+    "EM102",       # Exception must not use an f-string literal, assign to variable first
+    "PERF203",     # `try`-`except` within a loop incurs performance overhead
+    "PLW2901",     # `for` loop variable `df` overwritten by assignment target
+    "SLF001",      # Private member accessed: `_pivots`
+    "TRY002",      # Create your own exception"
+    "FBT002",      # Boolean default positional argument in function definition
+    "FBT001",      # Boolean-typed positional argument in function definition
+    "TRY300",      # Consider moving this statement to an `else` block
+    "TRY301",      # Abstract `raise` to an inner function
+    "PTH110",      # `os.path.exists()` should be replaced by `Path.exists()`
+    "PTH118",      # `os.path.join()` should be replaced by `Path` with `/` operator
+    "PLR0913",     # Too many arguments in function definition (7 > 5)
+    "RUF012",      # Mutable class attributes should be annotated with `typing.ClassVar`
+    "COM812",
+    "B008",        # Do not perform function call in argument defaults (False positive for FastAPI Depends)
+    "TC001",       # Move first-party import into a type-checking block (breaks FastAPI runtime type resolution)
+    "TC002",       # Move third-party import into a type-checking block
+    "D",           # Missing docstring
+]
+
+[tool.ruff.lint.flake8-quotes]
+docstring-quotes = "double"
