@@ -4,7 +4,7 @@
 Объединение двух дипломных систем: NL2SQL-агент с LoRA-ролями (`sql_agent/`) и агентная
 генерация и правка графиков (`chart_agent/`, `diffusion_service/`, `guardrails_api/`, `chat/`).
 
-Быстрый старт — `QUICKSTART.md`, сценарий показа — `DEMO.md`, как устроена интеграция —
+**Запуск из репозитория — `docs/ЗАПУСК.md`.** Быстрый старт — `QUICKSTART.md`, сценарий показа — `DEMO.md`, как устроена интеграция —
 `INTEGRATION_SQL_SOURCE.md`. Конфигурация: скопируйте `*/.env.example` в `*/.env`.
 Замеры на русских данных PAUQ и отчёты — в `sql_agent/` (см. `sql_agent/README.md`).
 
