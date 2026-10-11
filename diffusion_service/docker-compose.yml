@@ -1,0 +1,44 @@
+services:
+  diffusion-edit:
+    image: chart-diffusion-edit:latest
+    container_name: chart-diffusion-edit
+    build: .
+    init: true
+    ports:
+      - "${HOST_PORT:-8888}:8001"
+    environment:
+      # Итоговая модель системы + обученный LoRA-адаптер (rank 16, step 2000).
+      FLUX_MODEL_ID: ${FLUX_MODEL_ID:-black-forest-labs/FLUX.2-klein-9B}
+      FLUX_LORA_DIR: ${FLUX_LORA_DIR:-lora/flux2_klein_chart_edit_rank16_step2000}
+      FLUX_LORA_WEIGHT_NAME: ${FLUX_LORA_WEIGHT_NAME:-pytorch_lora_weights.safetensors}
+      # Альтернативная модель сравнения (model=qwen в запросе).
+      MODEL_ID: ${MODEL_ID:-ovedrive/Qwen-Image-Edit-2511-4bit}
+      LORA_REPO: ${LORA_REPO:-lightx2v/Qwen-Image-Edit-2511-Lightning}
+      LORA_WEIGHT_NAME: ${LORA_WEIGHT_NAME:-Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors}
+      PORT: 8001
+      HF_TOKEN: ${HF_TOKEN:-}
+      HF_HOME: /root/.cache/huggingface
+    volumes:
+      - ${HF_CACHE_DIR:-${HOME}/.cache/huggingface}:/root/.cache/huggingface
+      # Монтирование кода: изменения применяются без пересборки (uvicorn --reload)
+      - .:/app
+    command: ["sh", "-c", "exec python -m uvicorn app:app --host 0.0.0.0 --port 8001 --reload"]
+    shm_size: "2gb"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/health', timeout=2)"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 180s
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped

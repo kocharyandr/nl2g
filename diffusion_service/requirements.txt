@@ -1,0 +1,11 @@
+fastapi>=0.100.0
+uvicorn[standard]>=0.22.0
+python-multipart>=0.0.6
+# torch ставится в Dockerfile из index cu128
+transformers==4.57.1
+diffusers==0.37.1
+accelerate
+bitsandbytes
+peft
+Pillow
+tqdm
