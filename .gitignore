@@ -25,3 +25,6 @@ sql_agent/PAUQ_ГРАФИКИ_ПРОГОН.html
 sql_agent/ГРАФИКИ_PAUQ_ОТЧЁТ_один_файл.html
 sql_agent/МТС_ПРАВКИ.html
 sql_agent/МТС_ПРАВКИ/ПРОГРЕСС.html
+
+# адаптеры SQL-агента (по 21 МБ) нужны для запуска — исключение из *.gguf
+!sql_agent/adapters/*.gguf
