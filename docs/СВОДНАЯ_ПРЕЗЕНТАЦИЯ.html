@@ -1,0 +1,481 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><title>Объединение дипломов: NL2SQL и графики</title>
+<style>
+html,body{margin:0;background:#0e1219;font-family:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif}
+#stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+.frame{width:1920px;height:1080px;transform-origin:center center;position:relative;flex:none;box-shadow:0 20px 80px rgba(0,0,0,.5)}
+section{position:absolute;inset:0;box-sizing:border-box;display:none}section.on{display:flex}
+section *{box-sizing:border-box;margin:0}
+h1,h2,h3,p,ul,ol{margin:0}ul,ol{padding-left:36px}li{margin:4px 0}
+table{border-collapse:collapse}td,th{border:1px solid rgba(0,0,0,.12);padding:9px 14px;text-align:left}
+.conn{height:4px;background:currentColor;position:relative;flex:none;align-self:center}
+.conn::after{content:"";position:absolute;right:-2px;top:-9px;border-left:16px solid currentColor;border-top:11px solid transparent;border-bottom:11px solid transparent}
+.arrdown{clip-path:polygon(30% 0,70% 0,70% 55%,100% 55%,50% 100%,0 55%,30% 55%)}
+.notes{display:none}
+#hud{position:fixed;left:16px;bottom:12px;color:#8a93a3;font:14px/1.4 ui-monospace,Menlo,monospace;user-select:none}
+#notes{position:fixed;right:16px;bottom:12px;width:520px;max-height:40vh;overflow:auto;background:rgba(20,26,36,.95);color:#dbe3ee;font:16px/1.45 "IBM Plex Sans",Arial,sans-serif;padding:14px 16px;border-radius:10px;display:none}
+body.shownotes #notes{display:block}
+@media print{html,body{background:#fff}#stage{position:static;display:block}.frame{transform:none!important;box-shadow:none;page-break-after:always;width:1920px;height:1080px;overflow:hidden}section{display:flex!important}#hud,#notes{display:none!important}}
+@page{size:1920px 1080px;margin:0}
+</style></head><body>
+<div id="stage"><div class="frame"><section id="cover" style="background:#1b2432;color:#f5f4ef;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;color:#8fb6ea;letter-spacing:2px;text-transform:uppercase">Сводная презентация · октябрь 2026</p>
+<h1 style="font-size:104px;font-weight:600;line-height:1.05;width:1500px">NL2SQL + генеративные графики: одна система из двух дипломов</h1>
+</div>
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:36px;line-height:1.35;color:#bfd0e6;width:1400px">Вопрос на русском → SQL к базе → график → правка «нейросетью» → автоматическая оценка. Схемы агентов, замеры на PAUQ, ресурсы и план масштабирования.</p>
+<div style="display:flex;gap:16px">
+<p style="font-size:26px;padding:10px 22px;border-radius:999px;background:#2a3a52;color:#dbe6f4">Диплом 1 · NL2SQL с LoRA-ролями</p>
+<p style="font-size:26px;padding:10px 22px;border-radius:999px;background:#2a3a52;color:#dbe6f4">Диплом 2 · агентная генерация и правка графиков</p>
+</div>
+</div>
+<div class="notes">Одна система: NL2SQL-агент из первого диплома стал третьим источником данных в оркестраторе второго. Презентация: архитектура, метрики на русских данных PAUQ, ресурсы и масштабирование.</div>
+</section>
+</div><div class="frame"><section id="two-theses" style="background:#f5f4ef;color:#1b2432;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">Два диплома и точка стыка</h2>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:18px;background:#ffffff;padding:40px;border:1px solid #dcdad2;border-radius:16px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#2a78d6;letter-spacing:1px">ДИПЛОМ 1 · NL2SQL</p>
+<h3 style="font-size:36px;font-weight:600;line-height:1.2">Вопрос на естественном языке → SQL</h3>
+<ul style="font-size:28px;line-height:1.45;color:#4a5568">
+<li>Три роли с LoRA-адаптерами: схема → SQL → критик</li>
+<li>Критик выполняет запрос и возвращает на доработку</li>
+<li>Schema Profile и RAG-сужение схемы</li>
+<li>57.3% EX на KaggleDBQA; запуск через Ollama</li>
+</ul>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:18px;background:#ffffff;padding:40px;border:1px solid #dcdad2;border-radius:16px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#e3651d;letter-spacing:1px">ДИПЛОМ 2 · ГРАФИКИ</p>
+<h3 style="font-size:36px;font-weight:600;line-height:1.2">Данные → график → генеративная правка</h3>
+<ul style="font-size:28px;line-height:1.45;color:#4a5568">
+<li>Оркестратор на LangGraph, человек подтверждает график</li>
+<li>Код matplotlib исполняется в изолированном процессе</li>
+<li>Правка картинки: FLUX.2 Klein 9B + LoRA</li>
+<li>LLM-судья по 10 критериям (A1–5, P1–5), κ 0.59–0.67</li>
+</ul>
+</div>
+</div>
+<div style="display:flex;align-items:center;gap:24px;background:#1b2432;color:#f5f4ef;padding:28px 40px;border-radius:16px">
+<div style="width:48px;height:48px;color:#8fb6ea;font-size:40px;line-height:48px;text-align:center">⇄</div>
+<p style="font-size:30px;line-height:1.35">Стык: NL2SQL-агент стал <b>третьим источником данных</b> оркестратора — рядом с текстом и CSV. Галочка «Данные из базы» в чате отправляет вопрос SQL-агенту, таблица идёт дальше по обычному пути.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#7b8794">Объединение дипломов · 2</p>
+<div class="notes">Первый диплом отвечает за данные, второй — за визуализацию и правки. Интеграция минимальна: новый узел sql_source в графе оркестратора и переключатель в интерфейсе.</div>
+</section>
+</div><div class="frame"><section id="architecture" style="background:#f5f4ef;color:#1b2432;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">Сервисы объединённой системы</h2>
+<div style="display:flex;justify-content:center">
+<div style="width:560px;display:flex;flex-direction:column;gap:4px;background:#ffffff;padding:20px 28px;border:1px solid #dcdad2;border-radius:14px;align-items:center">
+<h3 style="font-size:30px;font-weight:600">Чат (Gradio)</h3>
+<p style="font-size:24px;color:#4a5568">текст, CSV, картинка, галочка «Данные из базы»</p>
+</div>
+</div>
+<div style="display:flex;justify-content:center"><div class="arrdown" style="width:40px;height:56px;background:#2a78d6"></div></div>
+<div style="display:flex;justify-content:center">
+<div style="width:1100px;display:flex;flex-direction:column;gap:4px;background:#1b2432;color:#f5f4ef;padding:22px 32px;border-radius:14px;align-items:center">
+<h3 style="font-size:32px;font-weight:600">chart_agent — оркестратор (FastAPI + LangGraph)</h3>
+<p style="font-size:24px;color:#bfd0e6">граф состояний, маршрутизация намерений, подтверждение человеком, состояние сессий в Redis</p>
+</div>
+</div>
+<div style="display:flex;justify-content:center"><div class="arrdown" style="width:40px;height:56px;background:#2a78d6"></div></div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#ffffff;padding:22px 26px;border:2px solid #2a78d6;border-radius:14px">
+<h3 style="font-size:28px;font-weight:600;color:#2a78d6">sql_agent</h3>
+<p style="font-size:24px;line-height:1.35;color:#4a5568">NL2SQL из диплома 1: схема → SQL → критик; только SELECT, read-only</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#ffffff;padding:22px 26px;border:1px solid #dcdad2;border-radius:14px">
+<h3 style="font-size:28px;font-weight:600">code_executor</h3>
+<p style="font-size:24px;line-height:1.35;color:#4a5568">pandas и matplotlib в отдельном процессе с таймаутом</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#ffffff;padding:22px 26px;border:1px solid #dcdad2;border-radius:14px">
+<h3 style="font-size:28px;font-weight:600">diffusion_service</h3>
+<p style="font-size:24px;line-height:1.35;color:#4a5568">FLUX.2 Klein 9B + LoRA: правка картинки по промпту</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#ffffff;padding:22px 26px;border:1px solid #dcdad2;border-radius:14px">
+<h3 style="font-size:28px;font-weight:600">guardrails_api</h3>
+<p style="font-size:24px;line-height:1.35;color:#4a5568">GLiNER2: фильтр безопасности и быстрая маршрутизация</p>
+</div>
+</div>
+<div style="display:flex;gap:24px;align-items:center;background:#e9e7df;padding:18px 28px;border-radius:14px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#1b2432;white-space:nowrap">Ollama: 3 LoRA-роли NL2SQL · qwen2.5-coder:14b · qwen2.5vl:7b (судья)</p>
+<div style="flex:1"></div>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#1b2432;white-space:nowrap">Redis — сессии</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#7b8794">Объединение дипломов · 3</p>
+<div class="notes">Все LLM-роли живут в одном Ollama и обращаются к нему по OpenAI-совместимому протоколу. Диффузия и судья — отдельные тяжёлые сервисы; на одной машине их приходится включать по очереди.</div>
+</section>
+</div><div class="frame"><section id="sql-agent" style="background:#f5f4ef;color:#1b2432;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">SQL-агент: три роли и цикл критики</h2>
+<div style="display:flex;align-items:center;gap:0">
+<div style="width:380px;display:flex;flex-direction:column;gap:10px;background:#ffffff;padding:28px;border:1px solid #dcdad2;border-radius:16px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#2a78d6">1 · СХЕМА</p>
+<h3 style="font-size:30px;font-weight:600;line-height:1.2">Выбирает таблицы</h3>
+<p style="font-size:24px;line-height:1.35;color:#4a5568">Schema Profile базы + RAG-сужение; на выход — нужные таблицы и колонки</p>
+</div>
+<div class="conn" style="width:64px;color:#2a78d6"></div>
+<div style="width:380px;display:flex;flex-direction:column;gap:10px;background:#ffffff;padding:28px;border:1px solid #dcdad2;border-radius:16px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#2a78d6">2 · SQL</p>
+<h3 style="font-size:30px;font-weight:600;line-height:1.2">Пишет запрос</h3>
+<p style="font-size:24px;line-height:1.35;color:#4a5568">Один SELECT по суженной схеме; валидация: без DDL/DML, лимит строк</p>
+</div>
+<div class="conn" style="width:64px;color:#2a78d6"></div>
+<div style="width:380px;display:flex;flex-direction:column;gap:10px;background:#ffffff;padding:28px;border:2px solid #e3651d;border-radius:16px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#e3651d">3 · КРИТИК</p>
+<h3 style="font-size:30px;font-weight:600;line-height:1.2">Выполняет и проверяет</h3>
+<p style="font-size:24px;line-height:1.35;color:#4a5568">Запускает SQL, смотрит ошибку и результат; до 3 попыток, возврат к роли 2</p>
+</div>
+<div class="conn" style="width:64px;color:#2a78d6"></div>
+<div style="width:300px;display:flex;flex-direction:column;gap:10px;background:#1b2432;color:#f5f4ef;padding:28px;border-radius:16px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#8fb6ea">ОТВЕТ</p>
+<p style="font-size:24px;line-height:1.35">таблица + SQL + пояснение на русском</p>
+</div>
+</div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#ffffff;padding:24px 28px;border:1px solid #dcdad2;border-radius:14px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#7b8794">Модели</p>
+<p style="font-size:28px;line-height:1.35">Qwen 14B + LoRA (ранг 8, слои 32–47), по адаптеру на роль; MLX → PEFT → GGUF → Ollama</p>
+</div>
+<div style="flex:1;background:#ffffff;padding:24px 28px;border:1px solid #dcdad2;border-radius:14px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#7b8794">Измерено на PAUQ, 100 пар</p>
+<p style="font-size:28px;line-height:1.35">Медиана ответа 14 с; попыток критика в среднем 1.1; отказов на русском 0</p>
+</div>
+<div style="flex:1;background:#ffffff;padding:24px 28px;border:1px solid #dcdad2;border-radius:14px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#7b8794">Базы</p>
+<p style="font-size:28px;line-height:1.35">Реестр SQLite: KaggleDBQA, Spider, BIRD, PAUQ (167 баз), демо «РозничнаяСеть»</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#7b8794">Объединение дипломов · 4</p>
+<div class="notes">Ключевая идея диплома 1 — критик с исполнением: модель видит реальную ошибку SQLite и реальный результат, а не угадывает. Три адаптера грузятся в Ollama как три модели.</div>
+</section>
+</div><div class="frame"><section id="orchestrator" style="background:#f5f4ef;color:#1b2432;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">Оркестратор: граф состояний одного диалога</h2>
+<p style="font-size:26px;color:#7b8794">Построение графика</p>
+<div style="display:flex;align-items:center">
+<div style="width:280px;background:#ffffff;padding:20px 22px;border:1px solid #dcdad2;border-radius:14px;display:flex;flex-direction:column;gap:6px"><h3 style="font-size:26px;font-weight:600">interaction</h3><p style="font-size:24px;line-height:1.3;color:#4a5568">намерение: текст, CSV, база, картинка</p></div>
+<div class="conn" style="width:52px;color:#2a78d6"></div>
+<div style="width:280px;background:#ffffff;padding:20px 22px;border:2px solid #2a78d6;border-radius:14px;display:flex;flex-direction:column;gap:6px"><h3 style="font-size:26px;font-weight:600;color:#2a78d6">sql_source</h3><p style="font-size:24px;line-height:1.3;color:#4a5568">новый узел: вопрос → sql_agent → таблица</p></div>
+<div class="conn" style="width:52px;color:#2a78d6"></div>
+<div style="width:280px;background:#ffffff;padding:20px 22px;border:1px solid #dcdad2;border-radius:14px;display:flex;flex-direction:column;gap:6px"><h3 style="font-size:26px;font-weight:600">table_node</h3><p style="font-size:24px;line-height:1.3;color:#4a5568">LLM пишет pandas-план: оси, серии, агрегация</p></div>
+<div class="conn" style="width:52px;color:#2a78d6"></div>
+<div style="width:280px;background:#ffffff;padding:20px 22px;border:1px solid #dcdad2;border-radius:14px;display:flex;flex-direction:column;gap:6px"><h3 style="font-size:26px;font-weight:600">plot_node</h3><p style="font-size:24px;line-height:1.3;color:#4a5568">код matplotlib → code_executor, до 3 попыток</p></div>
+<div class="conn" style="width:52px;color:#2a78d6"></div>
+<div style="width:280px;background:#1b2432;color:#f5f4ef;padding:20px 22px;border-radius:14px;display:flex;flex-direction:column;gap:6px"><h3 style="font-size:26px;font-weight:600">approval</h3><p style="font-size:24px;line-height:1.3;color:#bfd0e6">человек: «Подтвердить», «Отмена» или правка текстом</p></div>
+</div>
+<p style="font-size:26px;color:#7b8794">После подтверждения — правка</p>
+<div style="display:flex;align-items:center">
+<div style="width:280px;background:#ffffff;padding:20px 22px;border:1px solid #dcdad2;border-radius:14px;display:flex;flex-direction:column;gap:6px"><h3 style="font-size:26px;font-weight:600">edit_router</h3><p style="font-size:24px;line-height:1.3;color:#4a5568">кодовая правка (цвет, тип) или диффузия (стиль, текстура)</p></div>
+<div class="conn" style="width:52px;color:#e3651d"></div>
+<div style="width:280px;background:#ffffff;padding:20px 22px;border:1px solid #dcdad2;border-radius:14px;display:flex;flex-direction:column;gap:6px"><h3 style="font-size:26px;font-weight:600">prompt_enhancer</h3><p style="font-size:24px;line-height:1.3;color:#4a5568">LLM переводит правку в промпт для FLUX</p></div>
+<div class="conn" style="width:52px;color:#e3651d"></div>
+<div style="width:280px;background:#ffffff;padding:20px 22px;border:2px solid #e3651d;border-radius:14px;display:flex;flex-direction:column;gap:6px"><h3 style="font-size:26px;font-weight:600;color:#e3651d">image_diffusion</h3><p style="font-size:24px;line-height:1.3;color:#4a5568">FLUX.2 Klein 9B + LoRA, 4 шага, seed фиксирован</p></div>
+<div class="conn" style="width:52px;color:#e3651d"></div>
+<div style="width:280px;background:#ffffff;padding:20px 22px;border:1px solid #dcdad2;border-radius:14px;display:flex;flex-direction:column;gap:6px"><h3 style="font-size:26px;font-weight:600">validation</h3><p style="font-size:24px;line-height:1.3;color:#4a5568">VL-судья: 10 критериев, до 3 итераций, лучшая по score</p></div>
+<div class="conn" style="width:52px;color:#e3651d"></div>
+<div style="width:280px;background:#1b2432;color:#f5f4ef;padding:20px 22px;border-radius:14px;display:flex;flex-direction:column;gap:6px"><h3 style="font-size:26px;font-weight:600">ответ</h3><p style="font-size:24px;line-height:1.3;color:#bfd0e6">картинка + использованный SQL под графиком</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#7b8794">Объединение дипломов · 5</p>
+<div class="notes">Синяя цепочка — путь до графика, оранжевая — после подтверждения. Единственное изменение в графе Матвея — узел sql_source и маршрут к нему по галочке в интерфейсе; остальные узлы его дипломные.</div>
+</section>
+</div><div class="frame"><section id="request-path" style="background:#f5f4ef;color:#1b2432;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">Сколько живёт один запрос на одной машине</h2>
+<p style="font-size:28px;color:#4a5568;width:1500px">Медианы по прогону 100 вопросов PAUQ на Mac с 51.5 ГБ общей памяти; модели в Ollama на CPU/GPU Apple, FLUX на MPS.</p>
+<div style="display:flex;align-items:stretch;gap:0">
+<div style="width:300px;background:#ffffff;padding:26px;border:1px solid #dcdad2;border-radius:16px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;color:#7b8794">SQL-агент</p>
+<p style="font-size:56px;font-weight:600;line-height:1;color:#2a78d6">14 с</p>
+<p style="font-size:24px;line-height:1.3;color:#4a5568">три роли, в среднем 1.1 попытки критика</p>
+</div>
+<div class="conn" style="width:48px;color:#7b8794"></div>
+<div style="width:300px;background:#ffffff;padding:26px;border:1px solid #dcdad2;border-radius:16px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;color:#7b8794">план + код + рендер</p>
+<p style="font-size:56px;font-weight:600;line-height:1;color:#2a78d6">≈ 40 с</p>
+<p style="font-size:24px;line-height:1.3;color:#4a5568">график готов через 52–66 с после вопроса</p>
+</div>
+<div class="conn" style="width:48px;color:#7b8794"></div>
+<div style="width:300px;background:#1b2432;color:#f5f4ef;padding:26px;border-radius:16px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;color:#bfd0e6">человек</p>
+<p style="font-size:56px;font-weight:600;line-height:1">«ОК»</p>
+<p style="font-size:24px;line-height:1.3;color:#bfd0e6">подтверждение или правка текстом</p>
+</div>
+<div class="conn" style="width:48px;color:#7b8794"></div>
+<div style="width:300px;background:#ffffff;padding:26px;border:1px solid #dcdad2;border-radius:16px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;color:#7b8794">правка диффузией</p>
+<p style="font-size:56px;font-weight:600;line-height:1;color:#e3651d">3–4.5 мин</p>
+<p style="font-size:24px;line-height:1.3;color:#4a5568">одна итерация FLUX; ×3 при автовалидации</p>
+</div>
+<div class="conn" style="width:48px;color:#7b8794"></div>
+<div style="width:280px;background:#ffffff;padding:26px;border:1px solid #dcdad2;border-radius:16px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;color:#7b8794">судья</p>
+<p style="font-size:56px;font-weight:600;line-height:1;color:#e3651d">≈ 1 мин</p>
+<p style="font-size:24px;line-height:1.3;color:#4a5568">Qwen2.5-VL-7b, три вызова на пару картинок</p>
+</div>
+</div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#fff4ec;padding:24px 28px;border:1px solid #f0c9ae;border-radius:14px"><p style="font-size:28px;line-height:1.4"><b>Полный цикл на 100 вопросов ≈ 9 часов</b> — почти всё время уходит на диффузию: 97 правок × 3–4.5 мин.</p></div>
+<div style="flex:1;background:#fff4ec;padding:24px 28px;border:1px solid #f0c9ae;border-radius:14px"><p style="font-size:28px;line-height:1.4">Без правок картинок система отвечает за <b>≈ 1 минуту</b>; этого достаточно для интерактивного чата.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#7b8794">Объединение дипломов · 6</p>
+<div class="notes">Время диффузии на Mac — это MPS без оптимизаций и постоянное вытеснение в swap. На GPU-сервере этот шаг укорачивается сильнее всего.</div>
+</section>
+</div><div class="frame"><section id="pauq-sql" style="background:#f5f4ef;color:#1b2432;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">NL2SQL на русском: PAUQ, 100 пар вопросов</h2>
+<p style="font-size:28px;color:#4a5568;width:1560px">Одни и те же эталонные SQL, вопрос по-русски и по-английски; EX — совпадение строк результата с эталоном.</p>
+<div style="display:flex;gap:28px">
+<div style="width:380px;background:#ffffff;padding:28px;border:1px solid #dcdad2;border-radius:16px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#7b8794">EX по-русски</p>
+<p style="font-size:88px;font-weight:600;line-height:1;color:#2a78d6">68%</p>
+<p style="font-size:24px;color:#4a5568">ДИ 58–76%</p>
+</div>
+<div style="width:380px;background:#ffffff;padding:28px;border:1px solid #dcdad2;border-radius:16px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#7b8794">EX по-английски</p>
+<p style="font-size:88px;font-weight:600;line-height:1;color:#1b2432">76%</p>
+<p style="font-size:24px;color:#4a5568">ДИ 67–83%</p>
+</div>
+<div style="flex:1;background:#1b2432;color:#f5f4ef;padding:28px 32px;border-radius:16px;display:flex;flex-direction:column;gap:10px">
+<p style="font-size:24px;color:#bfd0e6">Разрыв</p>
+<p style="font-size:40px;font-weight:600;line-height:1.2">8 п.п., значим: Макнемар p = 0.021</p>
+<p style="font-size:26px;line-height:1.4;color:#bfd0e6">оба верно 67 · только en 9 · только ru 1 · одинаковый SQL на двух языках 73/100. На 50 парах разрыв ещё не был значим (p = 0.25).</p>
+</div>
+</div>
+<div style="display:flex;gap:28px">
+<table style="width:900px;font-size:26px;border:1px solid #dcdad2;background:#ffffff">
+<tr style="background:#e9e7df"><th style="width:40%;text-align:left">конструкция gold-SQL</th><th style="width:15%">n</th><th style="width:22%">EX ru</th><th style="width:23%">EX en</th></tr>
+<tr><td>JOIN</td><td style="text-align:center">35</td><td style="text-align:center;color:#c8332d">40%</td><td style="text-align:center">60%</td></tr>
+<tr><td>GROUP BY</td><td style="text-align:center">37</td><td style="text-align:center;color:#c8332d">49%</td><td style="text-align:center">65%</td></tr>
+<tr><td>ORDER BY</td><td style="text-align:center">26</td><td style="text-align:center">69%</td><td style="text-align:center">77%</td></tr>
+<tr><td>WHERE</td><td style="text-align:center">30</td><td style="text-align:center">63%</td><td style="text-align:center">63%</td></tr>
+<tr><td>вложенный SELECT</td><td style="text-align:center">17</td><td style="text-align:center">59%</td><td style="text-align:center">59%</td></tr>
+</table>
+<div style="flex:1;background:#ffffff;padding:28px;border:1px solid #dcdad2;border-radius:16px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-size:30px;font-weight:600">Где русский проседает</h3>
+<p style="font-size:26px;line-height:1.4;color:#4a5568">Соединения и группировки. Типовой сбой — лексика: «старшеклассник» превращается в лишний фильтр <b>grade = 12</b> (3 из 9 ошибок только на русском).</p>
+<p style="font-size:26px;line-height:1.4;color:#4a5568">Простые выборки и условия WHERE на двух языках решаются одинаково.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#7b8794">Объединение дипломов · 7 · PAUQ_РАЗБОР_100.html, pauq_stats_100.txt</p>
+<div class="notes">PAUQ — русская адаптация Spider с изменёнными значениями в базах (Атлантида, Гиперборея, певец из России), поэтому эталон нельзя заменить оригинальными базами Spider.</div>
+</section>
+</div><div class="frame"><section id="pauq-charts" style="background:#f5f4ef;color:#1b2432;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">Весь путь до графика: 100 русских вопросов PAUQ</h2>
+<p style="font-size:28px;color:#4a5568;width:1560px">Из 9 874 вопросов PAUQ отобрано 959 пригодных для графика, из них 780 «сильных» (агрегат по группам, топ-N, динамика); взяты 91 из test и 9 из train.</p>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#ffffff;padding:24px 28px;border:1px solid #dcdad2;border-radius:16px;display:flex;flex-direction:column;gap:4px"><p style="font-size:24px;color:#7b8794">график построен</p><p style="font-size:72px;font-weight:600;line-height:1;color:#2a78d6">97</p><p style="font-size:24px;color:#4a5568">0 повторных рендеров</p></div>
+<div style="flex:1;background:#ffffff;padding:24px 28px;border:1px solid #dcdad2;border-radius:16px;display:flex;flex-direction:column;gap:4px"><p style="font-size:24px;color:#7b8794">SQL-EX</p><p style="font-size:72px;font-weight:600;line-height:1;color:#2a78d6">79</p><p style="font-size:24px;color:#4a5568">верный результат SQL</p></div>
+<div style="flex:1;background:#ffffff;padding:24px 28px;border:1px solid #dcdad2;border-radius:16px;display:flex;flex-direction:column;gap:4px"><p style="font-size:24px;color:#7b8794">Chart-EX</p><p style="font-size:72px;font-weight:600;line-height:1;color:#2a78d6">80</p><p style="font-size:24px;color:#4a5568">данные на графике = эталон</p></div>
+<div style="flex:1;background:#ffffff;padding:24px 28px;border:1px solid #dcdad2;border-radius:16px;display:flex;flex-direction:column;gap:4px"><p style="font-size:24px;color:#7b8794">потери на стыке</p><p style="font-size:72px;font-weight:600;line-height:1;color:#c8332d">3</p><p style="font-size:24px;color:#4a5568">SQL верный, график нет</p></div>
+</div>
+<div style="display:flex;gap:28px">
+<table style="width:760px;font-size:28px;border:1px solid #dcdad2;background:#ffffff">
+<tr style="background:#e9e7df"><th style="width:40%;text-align:left">верный SQL → ?</th><th style="width:30%">график верен</th><th style="width:30%">график неверен</th></tr>
+<tr><td>SQL верный</td><td style="text-align:center;color:#0c8a3e"><b>76</b></td><td style="text-align:center;color:#c8332d"><b>3</b></td></tr>
+<tr><td>SQL неверный</td><td style="text-align:center;color:#b26b00">4</td><td style="text-align:center;color:#c8332d">14</td></tr>
+</table>
+<div style="flex:1;background:#ffffff;padding:26px 30px;border:1px solid #dcdad2;border-radius:16px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-size:30px;font-weight:600">Chart-EX — новая метрика стыка</h3>
+<p style="font-size:26px;line-height:1.4;color:#4a5568">Числа каждой серии и подписи на графике сверяются с эталонным ответом. Ловит то, чего не видит EX: потерю строк при перегенерации pandas-кода.</p>
+<p style="font-size:26px;line-height:1.4;color:#4a5568">Три потери: дата-число 19870119 прочитана как наносекунды (×2) и перепутанные оси в двухсерийном графике.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#7b8794">Объединение дипломов · 8 · ГРАФИКИ_PAUQ_ОТЧЁТ.html</p>
+<div class="notes">Жёлтая клетка — SQL отличается от эталона лишней колонкой id, а числа на графике те же. Три вопроса без графика: ошибка 500 внутри plot_node, ответ одним числом, неоднозначная колонка в SQL.</div>
+</section>
+</div><div class="frame"><section id="mts-edits" style="background:#1b2432;color:#f5f4ef;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">Правки «в стиле МТС» диффузией: судья по уровням сложности</h2>
+<p style="font-size:28px;color:#bfd0e6;width:1600px">Промпты трёх уровней из диплома 2 (цвет → форма элементов → реализм), 59 из 100 — с «яйцом»; бренд описан признаками (красный, белый, яйцо), т.к. диффузия бренда не знает. Оценено 82 правки, ещё 15 упали из-за памяти.</p>
+<div style="display:flex;gap:28px">
+<table style="width:1000px;font-size:28px;color:#f5f4ef;border:1px solid #3a4a62;background:#223049">
+<tr style="background:#2a3a52"><th style="width:40%;text-align:left">срез</th><th style="width:15%">правок</th><th style="width:15%">A</th><th style="width:15%">P</th><th style="width:15%">AP</th></tr>
+<tr><td>уровень 1 · цвет</td><td style="text-align:center">34</td><td style="text-align:center">88%</td><td style="text-align:center">100%</td><td style="text-align:center"><b>88%</b></td></tr>
+<tr><td>уровень 2 · форма</td><td style="text-align:center">32</td><td style="text-align:center">75%</td><td style="text-align:center">91%</td><td style="text-align:center"><b>72%</b></td></tr>
+<tr><td>уровень 3 · реализм</td><td style="text-align:center">16</td><td style="text-align:center">81%</td><td style="text-align:center">75%</td><td style="text-align:center"><b>62%</b></td></tr>
+<tr style="background:#2a3a52"><td>с яйцом</td><td style="text-align:center">48</td><td style="text-align:center">77%</td><td style="text-align:center">85%</td><td style="text-align:center"><b>69%</b></td></tr>
+<tr style="background:#2a3a52"><td>без яйца</td><td style="text-align:center">34</td><td style="text-align:center">88%</td><td style="text-align:center">100%</td><td style="text-align:center"><b>88%</b></td></tr>
+<tr><td><b>всего</b></td><td style="text-align:center">82</td><td style="text-align:center">82%</td><td style="text-align:center">91%</td><td style="text-align:center"><b>77%</b></td></tr>
+</table>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="background:#223049;padding:24px 28px;border:1px solid #3a4a62;border-radius:16px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:28px;font-weight:600">Та же картина, что в дипломе 2</h3>
+<p style="font-size:26px;line-height:1.4;color:#bfd0e6">Чем сложнее промпт, тем ниже AP; реализм чаще всего ломает данные (P 75%).</p>
+</div>
+<div style="background:#4a2a2a;padding:24px 28px;border:1px solid #7a3a3a;border-radius:16px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:28px;font-weight:600">Судья смещён в плюс</h3>
+<p style="font-size:26px;line-height:1.4;color:#f0d0d0">«Яйца одного размера при разных значениях» получили P3 «пропорции сохранены». Это известно из диплома (κ ≈ 0.6); цифры AP — верхняя оценка.</p>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#8fb6ea">Объединение дипломов · 9 · судья Qwen2.5-VL-7b, A/P/AP = все критерии группы пройдены</p>
+<div class="notes">A — правка выполнена (A1–A5), P — аналитика сохранена (P1–P5), AP — обе группы. Судья тот же, что в дипломе 2, с теми же промптами и temperature 0.</div>
+</section>
+</div><div class="frame"><section id="fixes" style="background:#f5f4ef;color:#1b2432;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">Что пришлось чинить на стыке</h2>
+<table style="width:100%;font-size:26px;border:1px solid #dcdad2;background:#ffffff">
+<tr style="background:#e9e7df"><th style="width:30%;text-align:left">Симптом</th><th style="width:40%;text-align:left">Причина</th><th style="width:30%;text-align:left">Исправление</th></tr>
+<tr><td>График из одной точки: SQL-агент отвечает count(*) или AVG</td><td>В Spider/PAUQ числа объявлены как TEXT (MPG, Horsepower, строки «null»); узел не видел «меры» и просил добавить агрегат</td><td>sql_source: мера определяется по значениям, «null» — пропуск</td></tr>
+<tr><td>Круговая диаграмма без подписей секторов</td><td>Планировщик читал «без оси X» буквально и выбрасывал колонку категорий</td><td>table_node: круговая без категорий → повторный план; подпись из индекса</td></tr>
+<tr><td>Запрос к базе после ошибки идёт как новый вопрос</td><td>Любой текст при включённой галочке уходит SQL-агенту; роутер игнорирует состояние</td><td>Описано как ограничение; план — учитывать стадию при маршрутизации</td></tr>
+<tr><td>Ответ в чате зависает, ошибок нет</td><td>code_executor: результат больше 64 КБ блокировал канал процесса</td><td>Чтение очереди до join; 5 тестов</td></tr>
+<tr><td>Судья ставит всем 1.0</td><td>Валидатор работал на текстовой модели — картинки он не видел</td><td>VL-модель Qwen2.5-VL-7b, как в дипломе; парсер вердикта понимает строки</td></tr>
+<tr><td>Цветовые правки не доходят до диффузии</td><td>Роутер правок по дизайну уводит «цвет, тип» в код matplotlib</td><td>Сигнальные слова в промпте («нарисуй нейросетью»)</td></tr>
+</table>
+<p style="font-size:26px;color:#4a5568">Покрытие: 61 тест в chart_agent (в т.ч. 44 на источник SQL), 72 — в sql_agent.</p>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#7b8794">Объединение дипломов · 10</p>
+<div class="notes">Ни одна из проблем не была в моделях: все — на границах сервисов, в типах данных и маршрутизации. Это аргумент в пользу интеграционных метрик вроде Chart-EX.</div>
+</section>
+</div><div class="frame"><section id="resources-memory" style="background:#f5f4ef;color:#1b2432;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">Ресурсы: модели не помещаются в память вместе</h2>
+<table style="width:100%;font-size:26px;border:1px solid #dcdad2;background:#ffffff">
+<tr style="background:#e9e7df"><th style="width:34%;text-align:left">Компонент</th><th style="width:30%;text-align:left">Модель</th><th style="width:16%">Память</th><th style="width:20%;text-align:left">Где</th></tr>
+<tr><td>SQL-агент, 3 роли</td><td>Qwen 14B + LoRA, GGUF q4 × 3</td><td style="text-align:center">3 × 9 ГБ</td><td>Ollama</td></tr>
+<tr><td>Оркестратор: намерение, план, код, промпт</td><td>qwen2.5-coder:14b</td><td style="text-align:center">9 ГБ</td><td>Ollama</td></tr>
+<tr><td>Судья правок</td><td>qwen2.5vl:7b</td><td style="text-align:center">6 ГБ</td><td>Ollama</td></tr>
+<tr><td>Правка картинок</td><td>FLUX.2 Klein 9B + LoRA, bf16</td><td style="text-align:center">≈ 33 ГБ</td><td>diffusion_service, MPS</td></tr>
+<tr><td>Безопасность и маршрутизация</td><td>GLiNER2</td><td style="text-align:center">небольшая</td><td>guardrails_api</td></tr>
+<tr><td>Оркестратор, executor, чат, Redis</td><td>—</td><td style="text-align:center">&lt; 2 ГБ</td><td>CPU</td></tr>
+</table>
+<div style="display:flex;flex-direction:column;gap:10px">
+<p style="font-size:26px;color:#4a5568">Если загрузить всё сразу — около 75 ГБ против 51.5 ГБ общей памяти Mac:</p>
+<div style="position:relative;height:56px;display:flex;border-radius:10px;overflow:hidden">
+<div style="width:599px;background:#2a78d6;display:flex;align-items:center;justify-content:center"><p style="font-size:24px;color:#f5f4ef">3 LoRA-роли · 27</p></div>
+<div style="width:200px;background:#5b95de;display:flex;align-items:center;justify-content:center"><p style="font-size:24px;color:#f5f4ef">coder · 9</p></div>
+<div style="width:133px;background:#8fb6ea;display:flex;align-items:center;justify-content:center"><p style="font-size:24px;color:#1b2432">VL · 6</p></div>
+<div style="width:732px;background:#e3651d;display:flex;align-items:center;justify-content:center"><p style="font-size:24px;color:#f5f4ef">FLUX · 33</p></div>
+<div style="position:absolute;left:1143px;top:0;width:6px;height:56px;background:#1b2432"></div>
+</div>
+<p style="font-size:24px;color:#1b2432;width:1664px;text-align:right">▲ граница 51.5 ГБ: FLUX и LoRA-роли одновременно уходят в swap — отсюда 503 и 4.5 минуты на правку</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#7b8794">Объединение дипломов · 11 · размеры по ollama list и логам diffusion_service</p>
+<div class="notes">Три LoRA-роли в GGUF — это три полные копии базовой модели: Ollama не умеет делить базу между адаптерами. На сервере с vLLM multi-LoRA это одна база и три маленьких адаптера.</div>
+</section>
+</div><div class="frame"><section id="resources-time" style="background:#f5f4ef;color:#1b2432;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">Как это работает на одной машине: три фазы</h2>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#ffffff;padding:30px;border:2px solid #2a78d6;border-radius:16px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#2a78d6">ФАЗА 1 · ДАННЫЕ И ГРАФИК</p>
+<p style="font-size:40px;font-weight:600;line-height:1.1">36 ГБ</p>
+<p style="font-size:26px;line-height:1.4;color:#4a5568">3 LoRA-роли + coder, модели держатся в памяти (KEEP_ALIVE 30 мин). Ответ ≈ 1 мин. Это рабочий режим демо без правок картинок.</p>
+</div>
+<div style="flex:1;background:#ffffff;padding:30px;border:2px solid #e3651d;border-radius:16px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#e3651d">ФАЗА 2 · ПРАВКА ДИФФУЗИЕЙ</p>
+<p style="font-size:40px;font-weight:600;line-height:1.1">42 ГБ</p>
+<p style="font-size:26px;line-height:1.4;color:#4a5568">LoRA-роли выгружены, остаются coder + FLUX. 3–4.5 мин на картинку; при автовалидации ×3 и ещё VL-модель → swap.</p>
+</div>
+<div style="flex:1;background:#ffffff;padding:30px;border:1px solid #dcdad2;border-radius:16px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#7b8794">ФАЗА 3 · СУДЬЯ</p>
+<p style="font-size:40px;font-weight:600;line-height:1.1">6 ГБ</p>
+<p style="font-size:26px;line-height:1.4;color:#4a5568">Диффузия остановлена, работает только Qwen2.5-VL. ≈ 1 мин на пару картинок.</p>
+</div>
+</div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#1b2432;color:#f5f4ef;padding:26px 30px;border-radius:16px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:28px;font-weight:600">Диск</h3>
+<p style="font-size:26px;line-height:1.4;color:#bfd0e6">GGUF-модели 42 ГБ + веса FLUX (трансформер 17 ГБ и текстовый энкодер) ≈ 80 ГБ; базы PAUQ, Spider, BIRD, KaggleDBQA — ещё несколько ГБ.</p>
+</div>
+<div style="flex:1;background:#1b2432;color:#f5f4ef;padding:26px 30px;border-radius:16px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:28px;font-weight:600">Цена одной машины</h3>
+<p style="font-size:26px;line-height:1.4;color:#bfd0e6">Один пользователь за раз; фазы переключаются скриптом; стек не переживает перезагрузку без ручного запуска; полный замер на 100 вопросов — рабочая ночь.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#7b8794">Объединение дипломов · 12</p>
+<div class="notes">Фазы — не архитектурное решение, а следствие одной машины. На сервере с двумя GPU все три работают одновременно.</div>
+</section>
+</div><div class="frame"><section id="scaling" style="background:#f5f4ef;color:#1b2432;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">Масштабирование: что меняется при переезде на GPU</h2>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#ffffff;padding:26px 28px;border:1px solid #dcdad2;border-radius:16px;display:flex;flex-direction:column;gap:10px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#7b8794">СЕЙЧАС</p>
+<h3 style="font-size:30px;font-weight:600;line-height:1.2">Одна рабочая станция</h3>
+<ul style="font-size:25px;line-height:1.4;color:#4a5568">
+<li>1 пользователь, сервисы по фазам</li>
+<li>LoRA = 3 копии базы по 9 ГБ</li>
+<li>правка картинки 3–4.5 мин</li>
+<li>100 вопросов с правками ≈ 9 ч</li>
+</ul>
+</div>
+<div style="flex:1;background:#ffffff;padding:26px 28px;border:2px solid #2a78d6;border-radius:16px;display:flex;flex-direction:column;gap:10px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#2a78d6">ШАГ 1</p>
+<h3 style="font-size:30px;font-weight:600;line-height:1.2">Сервер с двумя GPU</h3>
+<ul style="font-size:25px;line-height:1.4;color:#4a5568">
+<li>GPU A: vLLM, одна база Qwen 14B + 3 LoRA-адаптера + VL-судья</li>
+<li>GPU B: FLUX.2 Klein 9B (bf16 ≈ 18 ГБ трансформер)</li>
+<li>все фазы одновременно, батчинг запросов</li>
+<li>правка — [__ с] вместо минут; [__] пользователей параллельно</li>
+</ul>
+</div>
+<div style="flex:1;background:#ffffff;padding:26px 28px;border:1px solid #dcdad2;border-radius:16px;display:flex;flex-direction:column;gap:10px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#7b8794">ШАГ 2</p>
+<h3 style="font-size:30px;font-weight:600;line-height:1.2">Кластер</h3>
+<ul style="font-size:25px;line-height:1.4;color:#4a5568">
+<li>оркестратор, executor, guardrails — реплики за балансировщиком, состояние в Redis</li>
+<li>диффузия — очередь задач и автоскейл по её длине</li>
+<li>LLM-пул отдельно от диффузионного</li>
+<li>судья — асинхронно, после ответа</li>
+</ul>
+</div>
+</div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#1b2432;color:#f5f4ef;padding:24px 28px;border-radius:16px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-size:26px;font-weight:600">Почему делится именно так</h3>
+<p style="font-size:25px;line-height:1.4;color:#bfd0e6">Узкое место — диффузия: 97% времени цикла. LLM-часть отвечает за минуту и масштабируется батчингом; диффузию масштабируют числом GPU.</p>
+</div>
+<div style="flex:1;background:#1b2432;color:#f5f4ef;padding:24px 28px;border-radius:16px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-size:26px;font-weight:600">Что уже готово к переезду</h3>
+<p style="font-size:25px;line-height:1.4;color:#bfd0e6">Dockerfile и compose у каждого сервиса, OpenAI-совместимый протокол (Ollama → vLLM без правок кода), адреса сервисов в .env, диффузия уже работала на GPU-хосте Матвея.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#7b8794">Объединение дипломов · 13 · [__] — требует замера на целевом GPU</p>
+<div class="notes">Оценки для GPU не измерены: в скобках оставлены места под цифры после первого запуска на сервере. Память для шага 1 посчитана из размеров весов, а не замерена.</div>
+</section>
+</div><div class="frame"><section id="limits" style="background:#f5f4ef;color:#1b2432;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">Ограничения и следующие шаги</h2>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#ffffff;padding:36px;border:1px solid #dcdad2;border-radius:16px">
+<h3 style="font-size:32px;font-weight:600;color:#c8332d">Что ограничивает выводы</h3>
+<ul style="font-size:26px;line-height:1.45;color:#4a5568">
+<li>Судья завышает P: AP — верхняя оценка; нужна ручная разметка части русских правок</li>
+<li>82 из 97 правок оценены: 15 упали из-за памяти, не из-за модели</li>
+<li>В PAUQ почти нет динамики и рассеяний: 31 линия и 2 scatter из 780 сильных</li>
+<li>Состояние чата: вопрос к базе во время ожидания «Подтвердить» уходит как правка</li>
+<li>Все замеры — на одной машине, без GPU; цифры для сервера не измерены</li>
+</ul>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;background:#ffffff;padding:36px;border:1px solid #dcdad2;border-radius:16px">
+<h3 style="font-size:32px;font-weight:600;color:#2a78d6">Следующие шаги</h3>
+<ul style="font-size:26px;line-height:1.45;color:#4a5568">
+<li>Починить дату-число на стыке SQL → pandas (2 из 3 потерь)</li>
+<li>Маршрутизация «вопрос к базе» по намерению, а не только по галочке</li>
+<li>Переезд на GPU: vLLM multi-LoRA + отдельная GPU под FLUX, замер [__]</li>
+<li>PAUQ на 300 парах и повтор правок на 3–5 seed — статистика вместо иллюстрации</li>
+<li>Git-репозиторий и автозапуск стека: сейчас всё поднимается вручную</li>
+</ul>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#7b8794">Объединение дипломов · 14</p>
+<div class="notes">Самое дешёвое улучшение — исправить приведение типов на стыке: оно даёт 2 из 3 потерь Chart-EX. Самое дорогое — ручная валидация судьи на русских правках.</div>
+</section>
+</div><div class="frame"><section id="summary" style="background:#1b2432;color:#f5f4ef;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between">
+<h2 style="font-size:64px;font-weight:600;line-height:1.1">Итог в пяти числах</h2>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#223049;padding:28px;border-radius:16px;display:flex;flex-direction:column;gap:8px"><p style="font-size:72px;font-weight:600;line-height:1;color:#8fb6ea">68%</p><p style="font-size:25px;line-height:1.35;color:#bfd0e6">EX на русском PAUQ, 100 пар; на английском 76%</p></div>
+<div style="flex:1;background:#223049;padding:28px;border-radius:16px;display:flex;flex-direction:column;gap:8px"><p style="font-size:72px;font-weight:600;line-height:1;color:#8fb6ea">80</p><p style="font-size:25px;line-height:1.35;color:#bfd0e6">из 100 графиков с верными данными; 3 потери на стыке</p></div>
+<div style="flex:1;background:#223049;padding:28px;border-radius:16px;display:flex;flex-direction:column;gap:8px"><p style="font-size:72px;font-weight:600;line-height:1;color:#f0a07a">77%</p><p style="font-size:25px;line-height:1.35;color:#bfd0e6">AP правок «в стиле МТС» по судье; 88% → 62% от цвета к реализму</p></div>
+<div style="flex:1;background:#223049;padding:28px;border-radius:16px;display:flex;flex-direction:column;gap:8px"><p style="font-size:72px;font-weight:600;line-height:1;color:#f0a07a">≈ 1 мин</p><p style="font-size:25px;line-height:1.35;color:#bfd0e6">от вопроса до графика на одной машине; правка картинки 3–4.5 мин</p></div>
+<div style="flex:1;background:#223049;padding:28px;border-radius:16px;display:flex;flex-direction:column;gap:8px"><p style="font-size:72px;font-weight:600;line-height:1;color:#f0a07a">75 ГБ</p><p style="font-size:25px;line-height:1.35;color:#bfd0e6">нужно всем моделям сразу; есть 51.5 — отсюда фазы и план на 2 GPU</p></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:30px;line-height:1.4;color:#f5f4ef;width:1600px">Интеграция свелась к одному узлу графа и переключателю в чате; всё, что пришлось чинить, лежало на границах сервисов, а не в моделях. Метрика Chart-EX закрывает именно этот слой.</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#8fb6ea">отчёты: PAUQ_РАЗБОР_100 · ГРАФИКИ_PAUQ_ОТЧЁТ · МТС_ПРАВКИ · PAUQ_ГРАФИКИ_ОТБОР</p>
+</div>
+<div class="notes">Закрывающий слайд: пять чисел, по одному на каждую часть работы, и ссылка на отчёты, где каждое число можно проверить по карточкам.</div>
+</section>
+</div></div>
+<div id="hud">← → листать · N заметки · P печать/PDF · <span id="pos"></span></div>
+<div id="notes"></div>
+<script>
+const frames=[...document.querySelectorAll('.frame')],secs=frames.map(f=>f.querySelector('section'));let i=0;
+function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080)*0.96;frames.forEach(f=>f.style.transform='scale('+s+')')}
+function show(k){i=Math.max(0,Math.min(secs.length-1,k));frames.forEach((f,j)=>f.style.display=j===i?'block':'none');secs.forEach((s,j)=>s.classList.toggle('on',j===i));
+document.getElementById('pos').textContent=(i+1)+' / '+secs.length;const nt=secs[i].querySelector('.notes');document.getElementById('notes').textContent=nt?nt.textContent:'';location.hash=i+1}
+addEventListener('resize',fit);addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key))show(i+1);else if(['ArrowLeft','PageUp'].includes(e.key))show(i-1);else if(e.key==='Home')show(0);else if(e.key==='End')show(secs.length-1);else if(e.key.toLowerCase()==='n')document.body.classList.toggle('shownotes');else if(e.key.toLowerCase()==='p')print()});
+addEventListener('click',e=>{if(e.clientX>innerWidth/2)show(i+1);else show(i-1)});
+fit();show(parseInt(location.hash.slice(1)||'1')-1);
+</script></body></html>
