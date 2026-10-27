@@ -15,6 +15,8 @@ from __future__ import annotations
 import logging
 import traceback
 
+import pandas as pd
+
 from app.api.schemas import (
     DataArtefacts,
     DataUnderstandingResult,
@@ -140,12 +142,7 @@ async def table_data_extractor_node(state: AppState, agents) -> dict:
                 # planner sometimes reads "без оси X" literally and drops the
                 # labels; send it back with the requirement spelled out.
                 chart_type_value = getattr(spec.chart_type, "value", spec.chart_type)
-                if str(chart_type_value or "").lower() == "pie" and not spec.x_col:
-                    execution_error = (
-                        "Для круговой диаграммы обязательна колонка категорий: укажи x_col "
-                        "(названия долей) и оставь её в результирующем DataFrame рядом с y_col."
-                    )
-                    continue
+                pie_without_labels = str(chart_type_value or "").lower() == "pie" and not spec.x_col
 
                 publish_ephemeral_status(
                     state,
@@ -157,6 +154,30 @@ async def table_data_extractor_node(state: AppState, agents) -> dict:
                     tb_lines = traceback.format_exc().strip().splitlines()
                     execution_error = "\n".join(tb_lines[-3:])
                     continue
+
+                if pie_without_labels and spec.series_col:
+                    # The planner parked the categories in series_col; a pie has
+                    # one series, so that column is the labels.
+                    spec = spec.model_copy(update={"x_col": spec.series_col, "series_col": None})
+                    pie_without_labels = False
+                if pie_without_labels:
+                    # Recover the category column instead of re-asking: the
+                    # planner keeps reading "без оси X" literally. Take it from
+                    # the result if the code kept it, else from the source table
+                    # when the rows line up one to one.
+                    cat = next((c for c in df.columns if c != spec.y_col and not pd.api.types.is_numeric_dtype(df[c])), None)
+                    if cat is not None:
+                        if cat not in result_df.columns and len(result_df) == len(df):
+                            result_df = result_df.copy()
+                            result_df[cat] = df[cat].values
+                        if cat in result_df.columns:
+                            spec = spec.model_copy(update={"x_col": cat})
+                    if not spec.x_col:
+                        execution_error = (
+                            "Для круговой диаграммы обязательна колонка категорий: укажи x_col "
+                            "(названия долей) и оставь её в результирующем DataFrame рядом с y_col."
+                        )
+                        continue
 
                 validation_errors = validate_result_dataframe(result_df, spec)
                 # A declared-but-missing series column is a cosmetic slip, not
