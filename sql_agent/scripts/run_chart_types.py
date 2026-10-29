@@ -26,6 +26,7 @@ EDITS = {
     "barh": "сделай горизонтальные столбцы",
     "bar": "сделай обычные вертикальные столбцы",
     "histogram": "построй гистограмму распределения значений",
+    "box": "построй ящик с усами по значениям",
     "stacked_bar": "сделай столбцы с накоплением: серии друг на друге",
     "scatter": "сделай диаграмму рассеяния: по оси X первая числовая колонка, по оси Y вторая, подпиши точки",
 }
@@ -47,22 +48,17 @@ def numeric_columns(table: dict | None) -> int:
 
 
 def plan_types(item: dict, n_rows: int, n_numeric: int) -> list[str]:
-    """Набор целевых типов для вопроса: по форме данных, 4 правки на вопрос."""
+    """Целевые типы — всё, кроме столбцов (их и так большинство среди исходных)."""
     src = item.get("chart_type") or "bar"
     small = n_rows <= 8
-    types = []
-    if src != "line":
-        types.append("line")
-    types.append("area")
-    types.append("doughnut" if small else "histogram")
+    types = [t for t in ("line", "area") if t != src]
+    types.append(("doughnut" if src != "doughnut" else "pie") if small else "histogram")
     if n_numeric >= 2:
         types.append("stacked_bar")
-    elif src == "pie":
-        types.append("bar")
+    elif small:
+        types.append("pie" if src != "pie" else "doughnut")
     else:
-        types.append("pie" if small else "barh")
-    if src == "line":
-        types.insert(0, "bar")
+        types.append("box")
     return types[:4]
 
 
@@ -73,23 +69,32 @@ def snapshot(sid: str, gold):
     return st, pts, plot, base.chart_matches(pts, gold or [])
 
 
+def build_base(item: dict, out: Path, rec: dict, gold):
+    """Новая сессия → вопрос → исходный график. Возвращает (sid, plot_b64) или (None, None)."""
+    sid = base.call("POST", "/sessions")["session_id"]
+    t0 = time.time()
+    r1 = base.message(sid, item["question"], use_sql_source=True, sql_datasource_id=f"pauq_{item['db_id']}")
+    rec.setdefault("t_chart", round(time.time() - t0))
+    art = r1.get("artefacts") or {}
+    src = ((art.get("data") or {}).get("sql_source") or {})
+    rec.setdefault("pred_sql", src.get("sql")); rec.setdefault("pred_n", src.get("row_count"))
+    plot_b64 = (art.get("plot") or {}).get("image_base64")
+    if "base_png" not in rec:
+        rec["base_png"] = base.save_png(plot_b64, out / f"{item['id']}_base.png")
+    if not plot_b64 or not r1.get("show_approve_cancel"):
+        rec["message"] = r1.get("assistant_message")
+        return None, None
+    return sid, plot_b64
+
+
 def run_item(item: dict, out: Path) -> dict:
     rec = {k: item[k] for k in ("id", "split", "db_id", "question", "chart_type")}
     gold, _ = base.run_sql(item["db_id"], item["sql"])
     rec["gold_n"] = len(gold or [])
-    sid = base.call("POST", "/sessions")["session_id"]
+    sid, plot_b64 = build_base(item, out, rec, gold)
     rec["session_id"] = sid
-    t0 = time.time()
-    r1 = base.message(sid, item["question"], use_sql_source=True, sql_datasource_id=f"pauq_{item['db_id']}")
-    rec["t_chart"] = round(time.time() - t0)
-    art = r1.get("artefacts") or {}
-    src = ((art.get("data") or {}).get("sql_source") or {})
-    rec["pred_sql"], rec["pred_n"] = src.get("sql"), src.get("row_count")
-    plot_b64 = (art.get("plot") or {}).get("image_base64")
-    rec["base_png"] = base.save_png(plot_b64, out / f"{item['id']}_base.png")
-    if not plot_b64 or not r1.get("show_approve_cancel"):
+    if not sid:
         rec["outcome"] = "no_chart"
-        rec["message"] = r1.get("assistant_message")
         return rec
     rec["outcome"] = "chart"
     st, pts, plot, ce = snapshot(sid, gold)
@@ -97,6 +102,7 @@ def run_item(item: dict, out: Path) -> dict:
     rec["base_code"] = plot.get("code")
     rec["n_numeric"] = numeric_columns(st.get("sql_result_table") or st.get("persisted_sql_result"))
     rec["edits"] = []
+    rec["rebuilds"] = 0
     for typ in plan_types(item, rec["pred_n"] or 0, rec["n_numeric"]):
         e = {"type": typ, "prompt": EDITS[typ]}
         t1 = time.time()
@@ -112,8 +118,17 @@ def run_item(item: dict, out: Path) -> dict:
         e["code"] = plot.get("code")
         e["stage"] = r.get("current_stage")
         e["ok"] = bool(e["png"]) and r.get("show_approve_cancel", False)
-        plot_b64 = png or plot_b64
         rec["edits"].append(e)
+        if e["ok"]:
+            plot_b64 = png
+        else:
+            # После неудачной правки сессия в стадии ошибки, и следующее сообщение
+            # ушло бы как новый вопрос. Строим исходный график заново в новой сессии
+            # и продолжаем остальные типы от него.
+            sid, plot_b64 = build_base(item, out, rec, gold)
+            rec["rebuilds"] += 1
+            if not sid:
+                break
     return rec
 
 
@@ -159,8 +174,9 @@ def main() -> None:
     for i, item in enumerate(items, 1):
         if only and item["id"] not in only:
             continue
-        if item["id"] in runs and runs[item["id"]].get("outcome") != "transport_error":
-            continue
+        done = runs.get(item["id"])
+        if done and done.get("outcome") == "chart" and all(e["ok"] for e in done.get("edits", [])):
+            continue  # повторяем только вопросы со сбоями
         try:
             rec = run_item(item, out)
         except (urllib.error.URLError, TimeoutError, OSError) as exc:
