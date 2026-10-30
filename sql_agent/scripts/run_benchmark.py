@@ -21,7 +21,7 @@ import time
 import urllib.error
 import urllib.request
 
-KAGGLE = os.path.expanduser("~/education/KaggleDBQA")
+KAGGLE = os.path.expanduser("~/education/datasets/KaggleDBQA")
 SERVICE = os.environ.get("SQL_AGENT_URL", "http://localhost:8500")
 
 

@@ -14,7 +14,7 @@ set -euo pipefail
 EDU_ROOT="${EDU_ROOT:-$HOME/education}"
 GROUP="${GROUP:-Qwen2.5-Coder-14B}"
 BASE_MODEL="${BASE_MODEL:-qwen2.5-coder:14b}"
-HF_BASE="${HF_BASE:-$EDU_ROOT/local_models/Qwen2.5-Coder-14B-Instruct-4bit}"
+HF_BASE="${HF_BASE:-$EDU_ROOT/models/local_models/Qwen2.5-Coder-14B-Instruct-4bit}"
 WORK_DIR="${WORK_DIR:-$HOME/.cache/sql_agent_lora}"
 PREFIX="${PREFIX:-nl2sql}"
 
@@ -25,9 +25,9 @@ PY="$WORK_DIR/venv/bin/python"
 adapter_for () {
   case "$1" in
     critic)
-      local v2="$EDU_ROOT/spider_experiments_v2/$GROUP/4bit/critic_adapter"
-      [ -d "$v2" ] && echo "$v2" || echo "$EDU_ROOT/spider_experiments/$GROUP/4bit/critic_adapter" ;;
-    *) echo "$EDU_ROOT/spider_experiments/$GROUP/4bit/${1}_adapter" ;;
+      local v2="$EDU_ROOT/nl2sql/experiments/spider_experiments_v2/$GROUP/4bit/critic_adapter"
+      [ -d "$v2" ] && echo "$v2" || echo "$EDU_ROOT/nl2sql/experiments/spider_experiments/$GROUP/4bit/critic_adapter" ;;
+    *) echo "$EDU_ROOT/nl2sql/experiments/spider_experiments/$GROUP/4bit/${1}_adapter" ;;
   esac
 }
 
